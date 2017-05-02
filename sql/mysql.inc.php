@@ -20,7 +20,7 @@ $sql_create = array(
     ,first_seen DATETIME NOT NULL default '0000-00-00 00:00:00'
     ,last_seen DATETIME NOT NULL default '0000-00-00 00:00:00'
     ,PRIMARY KEY  (playerID)
-  ) TYPE=MyISAM DEFAULT CHARSET=utf8"
+  ) ENGINE=MyISAM DEFAULT CHARSET=utf8"
 //endchange
   ,"
   CREATE TABLE IF NOT EXISTS {$GLOBALS['cfg']['db']['table_prefix']}playerdata (
@@ -32,7 +32,7 @@ $sql_create = array(
     ,KEY (playerID,gameID)
     ,KEY (dataName,dataNo)
     ,PRIMARY KEY (playerID,gameID,dataName,dataNo)
-  ) TYPE=MyISAM DEFAULT CHARSET=utf8"
+  ) ENGINE=MyISAM DEFAULT CHARSET=utf8"
 
   ,"
   CREATE TABLE IF NOT EXISTS {$GLOBALS['cfg']['db']['table_prefix']}eventdata1d (
@@ -47,7 +47,7 @@ $sql_create = array(
     ,KEY (playerID)
     ,KEY (gameID)
     ,KEY (eventName)
-  ) TYPE=MyISAM DEFAULT CHARSET=utf8"
+  ) ENGINE=MyISAM DEFAULT CHARSET=utf8"
 
   ,"
   CREATE TABLE IF NOT EXISTS {$GLOBALS['cfg']['db']['table_prefix']}eventdata2d (
@@ -66,14 +66,14 @@ $sql_create = array(
     ,KEY (gameID)
     ,KEY (eventName)
     ,KEY (player2ID)
-  ) TYPE=MyISAM DEFAULT CHARSET=utf8"
+  ) ENGINE=MyISAM DEFAULT CHARSET=utf8"
 
   ,"
   CREATE TABLE IF NOT EXISTS {$GLOBALS['cfg']['db']['table_prefix']}gameprofile (
     gameID bigint(20) unsigned NOT NULL default '0'
     ,timeStart datetime NOT NULL default '0000-00-00 00:00:00'
     ,PRIMARY KEY (gameID)
-  ) TYPE=MyISAM DEFAULT CHARSET=utf8"
+  ) ENGINE=MyISAM DEFAULT CHARSET=utf8"
 
   ,"
   CREATE TABLE IF NOT EXISTS {$GLOBALS['cfg']['db']['table_prefix']}gamedata (
@@ -81,7 +81,7 @@ $sql_create = array(
     ,name varchar(50) CHARSET 'latin1' NOT NULL default ''
     ,value varchar(255) default ''
     ,PRIMARY KEY (gameID,name)
-  ) TYPE=MyISAM DEFAULT CHARSET=utf8"
+  ) ENGINE=MyISAM DEFAULT CHARSET=utf8"
 
   ,"
   CREATE TABLE IF NOT EXISTS {$GLOBALS['cfg']['db']['table_prefix']}awards (
@@ -92,14 +92,14 @@ $sql_create = array(
     ,playerID varchar(100) CHARSET 'latin1' default ''
     ,`sql` TEXT NOT NULL
     ,PRIMARY KEY (awardID)
-  ) TYPE=MyISAM DEFAULT CHARSET=utf8"
+  ) ENGINE=MyISAM DEFAULT CHARSET=utf8"
 
   ,"
   CREATE TABLE IF NOT EXISTS {$GLOBALS['cfg']['db']['table_prefix']}savestate (
     logfile varchar(250) NOT NULL
     ,value TEXT NOT NULL
     ,PRIMARY KEY (logfile)
-  ) TYPE=MyISAM DEFAULT CHARSET=utf8"
+  ) ENGINE=MyISAM DEFAULT CHARSET=utf8"
 //change: ip2country table
   ,"
   CREATE TABLE IF NOT EXISTS {$GLOBALS['cfg']['db']['table_prefix']}ip2country (
@@ -109,7 +109,7 @@ $sql_create = array(
     ,country_name varchar(250) NOT NULL
     ,KEY (country_code2)
     ,PRIMARY KEY (ip_from, ip_to)
-  ) TYPE=MyISAM DEFAULT CHARSET=utf8"
+  ) ENGINE=MyISAM DEFAULT CHARSET=utf8"
 //endchange
 //change: total tables
   ,"
@@ -119,7 +119,7 @@ $sql_create = array(
     ,dataValue varchar(255) NOT NULL default ''
     ,dataCount INT unsigned NOT NULL default '0'
     ,PRIMARY KEY (playerID, dataName, dataValue)
-  ) TYPE=MyISAM DEFAULT CHARSET=utf8"
+  ) ENGINE=MyISAM DEFAULT CHARSET=utf8"
   
   ,"
   CREATE TABLE IF NOT EXISTS {$GLOBALS['cfg']['db']['table_prefix']}eventdata1d_total (
@@ -128,7 +128,7 @@ $sql_create = array(
     ,eventName varchar(50) CHARSET 'latin1' NOT NULL default ''
     ,eventValue varchar(50) NOT NULL default ''
     ,PRIMARY KEY (playerID, eventCategory, eventName)
-  ) TYPE=MyISAM DEFAULT CHARSET=utf8"
+  ) ENGINE=MyISAM DEFAULT CHARSET=utf8"
 
   ,"
   CREATE TABLE IF NOT EXISTS {$GLOBALS['cfg']['db']['table_prefix']}eventdata2d_total (
@@ -138,7 +138,7 @@ $sql_create = array(
     ,eventName varchar(50) CHARSET 'latin1' NOT NULL default ''
     ,eventValue varchar(50) NOT NULL default ''
     ,PRIMARY KEY (playerID, player2ID, eventCategory, eventName)
-  ) TYPE=MyISAM DEFAULT CHARSET=utf8"
+  ) ENGINE=MyISAM DEFAULT CHARSET=utf8"
 //endchange
 );
 
