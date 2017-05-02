@@ -1,0 +1,20 @@
+$Id: BUGS 1578 2004-11-12 23:53:54Z dallen $
+These are the known bugs/issues in the DOM Tooltip library:
+
+- Events start firing long before scripts have been loaded...can lead to script
+  errors...this is really hard to get around, but if you are concerned, just
+  check that page has loaded before each event
+
+- Opera7 popups up a native tooltip title for the link, which goes over the custom tooltip
+  (all you need to do is disable tooltips in the opera preferences)
+
+- you cannot use the margin style on the body in Opera7, you have to use padding instead
+  you can read over at opera.com why they don't support this...apparently not a legit style
+
+- offset* properties do not account for margins, so styles with margins could lead to issues
+
+- fading in and fading out in mozilla is somewhat flaky...it works but has flickering...this
+  flickering is NOT the tooltip code, it is the rendering of the styles in mozilla...only time
+  will help us here (this seems to be resolved in Firefox 1.0)
+
+- inframe tips do not appear over top of the iframe in Opera and Konqueror

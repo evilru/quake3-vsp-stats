@@ -1,0 +1,185 @@
+$Id: TODO 1575 2004-11-12 03:33:54Z dallen $
+
+TODO
+----
+[+] for right edge bleed, IE/Opera resizes box after giving height, but before moving...so it looks like
+	we are giving a ton of padding on the right...so there are issues here
+[+] Konq and Opera don't allow tip to flow over IFRAME in example11...but the code is working
+
+[+] maxWidth handling is a bit ugly
+[+] make correct edge bleed optional setting
+[+] minimize and maximize for sticky tooltip?
+[+] maybe not show contents when dragging? (also resize of sticky tooltips)
+[+] drag API
+[+] add drag grid
+
+THOUGHTS
+--------
+Should the lifetime be reset on each movement if we are trailing the mouse?
+
+NOTES
+-----
+onload can be set for each element
+[1,2,3] array object
+{'one' : 1, 'two' : 2} object
+cannot use setTimeout() with anonymous function in IE 5.0 since it crashes the browser when you execute clearTimeout() following this call
+in compliance mode, IE measures use document.documentElement for many of the document.body functions
+Text node cannot have an event in IE, but it can in mozilla
+IE bubbles by default, which means that the child nodes get the event before the offsetParent nodes
+setting an event to null in mozilla does not remove events registered using addEventListener...but it does in IE.
+IE 5.0* does not have the .*? functionality in regexp
+bug in linux onmousedown causes onmouseout beforehand
+on IE, if there is an onmousemove and onmouseover, both will fire onmouseover
+
+// innerHTML the DOM way
+var range = document.createRange();
+range.selectNodeContents(document.body);
+var fragment = range.createContextualFragment('<b>test</b>');
+var tooltip = document.createElement('div');
+tooltip.appendChild(fragment);
+
+WHAT I AM NOT THRILLED ABOUT
+----------------------------
+- (mozilla keeps firing events after javascript functions have been unloaded
+- when appending a tooltip to a table cell, the table seems to get stretched out
+
+DONE
+----
+[@] mousemove makes konqueror flip the tip up (was a konqueror bug, fixed in 3.2)
+[@] IE not detecting bottom edge of browser
+[@] created global constant for standards mode detection
+[@] if position relative, don't append to parent until tip is done creating or else parent get's all screwed up
+[@] show should not set left and top style if position relative
+[@] incorrect use of pending...pending should be between inactive and active
+[@] fade fails when mouseout while fading when fading in 'in' only
+[@] fade in is VERY slow
+[@] domTT_isActive awkward
+[@] velcro not working right
+[@] strange stuff going on when doing click to stick
+[@] mouseover then mouseout still has issues (sticky tips)
+[@] what if tooltip is inactive and domTT_activate() fires again
+[@] fix the FIXME's
+[@] change domTT_true and domTT_false to makeTrue() and makeFalse()
+[@] fix fades
+[@] drag not working
+[@] put delay back in for IE 5.0/Konq
+[@] mousemove update is overridden by the mouseover placement, firing at wrong time
+[@] cut the use of writing onmouseout() if is specified, same with onmousemove (make automatic)
+[@] get rid of the float and go with tables instead so we can cut code
+[@] try to speed it up a bit
+[@] create lite version for simpler cases
+[@] make a domTT_deactivate() that the user can use to make his/her own onmouseout()
+[@] check for standards compliance mode, make it work either way
+[@] problem if select box is inside tooltip
+[@] infinite recursion bug in konqueror when using onmouseover
+[@] be able to specify unique id as option
+[@] use callTimeout
+[@] problem with the setTimeout calls when using mousemove...before the tooltip activates, many setTimeouts can be registered, but only one can be cancelled
+[@] have domTT_deactivate take a tip id or a tip object
+[@] possibly make use of 'this' in the drag functions
+[@] fix onmouseout to work as expected
+[@] show off the preserving of the onmouseout
+[@] talk about the auto width in the demo (which overlib does not have)
+[@] select detection does not account for visible sticky tooltips...for this we have to have a global hash of the open tips...then, when we are going to change the style of a select element to visible, we check the open tips and make sure it is not conflicting with any of them
+[@] some demos not working in Konqueror
+[@] maxWidth handling is a bit awkward
+[@] velcro having a rough time in IE, and in mozilla linux, cannot mousedown before it closes
+[@] use typeof() instead of this.undefined
+[@] strip out the javascript code for reporting errors in the packaged file
+[@] store onmouseout function in the eventTarget attribute?
+[@] common function for placing the tip (show and create do this stuff)
+[@] be able to specify the width
+[@] make function for domTT_mouseout()
+[@] think about window.status on Example 4, right link
+[@] few places where I get the mouse_x/mouse_y when I don't need it (relative position)
+[@] when doing onmouseout for a greasy, make sure we are not entering a child...hmmm
+[@] make example for relative position
+[@] make maxWidth of 0 ignored
+[@] since we can specify parent, be able to specify relative position or something so that we can just have the tooltip expand into the container
+[@] have makefile fill in the version
+[@] if event target is documentElement, coax it to document.body
+[@] cursor errors in IE 5.5
+[@] we don't need domTT_defaultStatus, just use window.defaultStatus
+[@] add option for lifetime to tip
+[@] create demo for velcro
+[@] snap to grid tooltip (problem is we need to determine the difference from where the tip is located now, and where we would put it next, not just the mouse position)
+[@] be able to fade out on close
+[@] mouseover tip functionality...be able to keep it open when you mouseover, maybe another type...velcro
+[@] don't kill the onmouseout the existed on tip...try to just add the close (see foo.html)
+[@] fixed position tooltip (maybe pass in coordinates)
+[@] change domTT_deactivate attribute to domTT_destroy
+[@] tip lifetime for onmouseover
+[@] set prefix for each tooltip in example pages
+[@] maybe creat a domTT_writeStatus() function to be used for onmouseover
+[@] added domTT_false() for onclick events on links that open IFRAMES
+[@] remove hardcoded -1000px for a setting
+[@] make fade a passed in option
+[@] fading tooltip
+[@] check for valid browser and don't execute if not meet requirements
+[@] opera7 does not hide contents of IFRAME when tooltip is hidden
+[@] make domTT_defaultStatus option
+[@] prevent dragging close element
+[@] drag bug in Opera 7
+[@] full Opera 7 support!
+[@] try Opera 7
+[@] function for detect screen edge?
+[@] edge detection not account for scroll (messes up placement bigtime when scroll is in effect)
+[@] if content is empty, need to bail on creating tip
+[@] why oncontextmenu no deliver onclick
+[@] add domTT_isActive()
+[@] add option 'deactivate' to be 'hide' or 'destroy', important for embedded IFRAMES
+[@] option not to have X for sticky, but put onclick on document
+[@] maybe remove the restriction for onmouseover and let it happen as it will
+[@] more options for predefined can come over to tip definition, overridden by those passed in
+[@] release to dynamic drive ddsubmit@yahoo.com
+[@] if you have onmouseover sticky, and you mouseover then leave, it doesn't kill tip
+[@] variable for tipObj visibility state to prevent all the lookups
+[@] be able to specify style prefix for different styles on different tips
+[@] add addPredefined() function
+[@] make only draggable from caption
+[@] be able to turn off dragging of sticky tips
+[@] cleaner call to domTT_show()
+[@] screenshot for freshmeat
+[@] custom close text
+[@] full screen edge detection
+[@] handle the mouse cursor height automatically
+[@] prettier way to handle default options
+[@] support for directional tips (extending west from mouse action instead of east)
+[@] eventDelay should be set to 0 if onmousemove and visible so it updates right away
+[@] make function for reappear, domTT_show()
+[@] when mouseover, use most recent location of mouse position
+[@] perhaps do type instead of 'sticky' true or false?
+[@] collision detection shouldn't delay when doing mousemove/click and tip is visible
+[@] adjustable delay for tip in options
+[@] change in_options to options in domTT_activate
+[@] drag in IE jumps when select domTTContent area
+[@] mouseout in IE when sticky active makes select boxes come back, event when tooptip is over it
+[@] X should not be a dragable part of tooltip
+[@] function for get mouse event position
+[@] domTT_detectCollisions should do the lines just above it
+[@] be able to drag sticky
+[@] have getPosition return all 4 coordinates
+[@] konqueror support
+[@] browser variables
+[@] code for x and y is twice in the activate function
+[@] when you fly in and then click on the object while the tip is being created, it bugs out
+[@] another paramater to domTT_activate() whether to unhide selects
+[@] domTT_deactivate to take object instead of id
+[@] fix problem with onmousemove after onclick beating setTimeout(...,0) on windows
+[@] after we use a sticky, and it is closed, mousemove no longer works
+[@] if we are sticky, all events on the same object should be cancelled
+[@] be able to do sticky on click when onmousemove is used for non-sticky
+[@] hiding of select boxes is not subject to the delay that the tooltip is subject to
+[@] do internal hash, from the arguments after event
+[@] itemExists to hash
+[@] account for scroll offset of page
+[@] fix max-width for IE
+[@] fix broken float right for IE
+[@] fix e.target to event.srcElement for IE
+[@] need delay on reappear from cache
+[@] no delay for onclick
+[@] implement zIndex so new tips can go over old tips
+[@] cache tooltips created by using visibility style
+[@] pass in options as Hash
+[@] auto-assign onmouseout
+[@] add ability to have sticky (x in caption...what if we don't have caption?)

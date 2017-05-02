@@ -1,0 +1,30 @@
+/* <author>coldblooded</author> <email></email> */
+BODY                   { padding: 0px 0px 0px 0px; margin: 0px 10px 0px 10px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; color: #000000; background-color: #8c8c8c;}
+TABLE                  { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; color: #000000; border-color: #9c9c9c; border-style: solid; border-width: 0;}
+TR                     { height: 15; }
+TD                     { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; white-space: NOWRAP; border-color: #4a4a4a #4a4a4a #4a4a4a #4a4a4a; border-style: solid; border-width: 0px; vertical-align: middle; padding-left: 3; padding-right: 3; }
+
+A:link                 { color: #ffffff; }
+A:visited              { color: #ffffff; }
+A:active               { color: #ffffff; }
+A:hover                { color: #ff4500; }
+
+.cell1                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; background-color: #9e9e9e; border-color: #4a4a4a #000000 #000000 #4a4a4a; color: #000000}
+.cell2                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; background-color: #8a8a8a; border-color: #5B5B2F #353509 #353509 #5B5B2F; color: #000000}
+.cellBG                { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; color: #000000; background-color: #565658; border-color: #4a4a4a #4a4a4a #4a4a4a #4a4a4a; }
+.cellHeading           { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 8pt; text-align: right; color: #dcdcdc; background-color: #9c9c9c; border-color: #cccccc #303032 #303032 #cccccc; border-width: 2px; }
+.cellSubHeading        { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; color: #000000; background-color: #777777; border-color: #4a4a4a #4a4a4a #4a4a4a #4a4a4a; border-width: 0px; }
+.cellHeadingTeam1      { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; color: #000000; background-color: #5B4923; border-width: 0; }
+.cellHeadingTeam2      { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; color: #000000; background-color: #383424; border-width: 0; }
+.rowNormal             { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; color: #000000; }
+.rowHighlight          { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; color: #ff0000; background-color: #23230B;}
+
+.role1                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; background-color: #082746; border-color: #455C74 #061D35 #061D35 #455C74; color: #000000}
+.role2                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; background-color: #082746; border-color: #455C74 #061D35 #061D35 #455C74; color: #000000}
+.role3                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; background-color: #082746; border-color: #455C74 #061D35 #061D35 #455C74; color: #000000}
+.role4                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; background-color: #082746; border-color: #455C74 #061D35 #061D35 #455C74; color: #000000}
+
+.team1                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; background-color: #67512E; border-color: #4a4a4a #4a4a4a #4a4a4a #4a4a4a; color: #000000}
+.team2                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; background-color: #504D3E; border-color: #4a4a4a #4a4a4a #4a4a4a #4a4a4a; color: #000000}
+.team3                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; background-color: #67512E; border-color: #4a4a4a #4a4a4a #4a4a4a #4a4a4a; color: #000000}
+.team4                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; background-color: #504D3E; border-color: #4a4a4a #4a4a4a #4a4a4a #4a4a4a; color: #000000}

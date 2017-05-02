@@ -1,0 +1,29 @@
+/* <author>myrddin</author> <email>myrddin8 <AT> gmail <DOT> com</email> */
+BODY                   { padding: 0 0 0 0; margin: 0 0 0 0; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; color: #CCCCCC; background-color: #0A2646; }
+TABLE                  { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; color: #CCCCCC; border-color: #0A2646; border-style: solid; border-width: 0; }
+TR                     { height: 15; }
+TD                     { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; white-space: NOWRAP; border-color: #245979 #063B5B #063B5B #245979; border-style: solid; border-width: 0; padding-left: 3; padding-right: 3; }
+
+A:link                 { color: #66FFFF; }
+A:visited              { color: #66FFFF; }
+A:active               { color: #66FFFF; }
+A:hover                { color: #FFFFFF; }
+
+.cell1                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; background-color: #384E63; border-color: #455C74 #061D35 #061D35 #455C74; }
+.cell2                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; background-color: #384E63; border-color: #50687F #001D3C #001D3C #50687F; }
+.cellBG                { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; color: #66FFFF; background-color: #6D6E82; border-color: #496E96 #0A2F57 #0A2F57 #496E96; }
+
+.cellSubHeading        { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; color: #66FFFF; background-color: #173655; border-color: #245979 #063B5B #063B5B #245979; }
+.cellHeading           { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; color: #CECECE; background-color: #1F5B7F; border-color: #2E6A8E #104C70 #104C70 #2E6A8E; }
+
+.rowNormal             { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; color: #CCCCCC; }
+.rowHighlight          { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; color: #66FFFF; background-color: #082746; }
+
+.roles                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; background-color: #082746; border-color: #455C74 #061D35 #061D35 #455C74; }
+.role1                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; background-color: #082746; border-color: #455C74 #061D35 #061D35 #455C74; }
+.role2                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; background-color: #082746; border-color: #455C74 #061D35 #061D35 #455C74; }
+.role3                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; background-color: #082746; border-color: #455C74 #061D35 #061D35 #455C74; }
+.role4                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; background-color: #082746; border-color: #455C74 #061D35 #061D35 #455C74; }
+
+.team1                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; background-color: #6A0000; border-color: #2E6A8E #104C70 #104C70 #2E6A8E;}
+.team2                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; background-color: #00005D; border-color: #2E6A8E #104C70 #104C70 #2E6A8E;}

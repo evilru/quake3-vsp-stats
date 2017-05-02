@@ -1,0 +1,29 @@
+/* <author>myrddin</author> <email>myrddin8 <AT> gmail <DOT> com</email> */
+BODY                   { padding: 0px 0px 0px 0px; margin: 0px 10px 0px 10px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; color: #AEAE94; background-color: #4A4D3A;}
+TABLE                  { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; color: #AEAE94; border-color: #655E08; border-style: solid; border-width: 0;}
+TD                     { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; white-space: NOWRAP; border-color: #5A5A34 #41411B #41411B #5A5A34; border-style: solid; border-width: 1px; vertical-align: middle; padding-left: 3; padding-right: 3; }
+
+A:link                 { color: #C7B37C; }
+A:visited              { color: #C7B37C; }
+A:active               { color: #C7B37C; }
+A:hover                { color: #00DD00; }
+
+.cell1                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; background-color: #353501; border-color: #535327 #2D2D01 #2D2D01 #535327; color: #AEAE94}
+.cell2                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; background-color: #3E3E0A; border-color: #5B5B2F #353509 #353509 #5B5B2F; color: #AEAE94}
+.cellBG                { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; color: #AEAE94; background-color: #33330F; border-color: #5A5A34 #41411B #41411B #5A5A34; }
+.cellHeading           { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 8pt; text-align: right; color: #E7E7C5; background-color: #655E08; border-color: #7C762D #565007 #565007 #7C762D; border-width: 2px; }
+.cellSubHeading        { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; color: #AEAE94; background-color: #685D29; border-color: #5A5A34 #41411B #41411B #5A5A34; border-width: 1px; }
+.cellHeadingTeam1      { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; color: #AEAE94; background-color: #5B4923; border-width: 0; }
+.cellHeadingTeam2      { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; color: #AEAE94; background-color: #383424; border-width: 0; }
+.rowNormal             { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; color: #AEAE94; }
+.rowHighlight          { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; color: #00DD00; background-color: #23230B;}
+
+.role1                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; background-color: #082746; border-color: #455C74 #061D35 #061D35 #455C74; color: #AEAE94}
+.role2                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; background-color: #082746; border-color: #455C74 #061D35 #061D35 #455C74; color: #AEAE94}
+.role3                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; background-color: #082746; border-color: #455C74 #061D35 #061D35 #455C74; color: #AEAE94}
+.role4                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; background-color: #082746; border-color: #455C74 #061D35 #061D35 #455C74; color: #AEAE94}
+
+.team1                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; background-color: #67512E; border-color: #5A5A34 #41411B #41411B #5A5A34; color: #AEAE94}
+.team2                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; background-color: #504D3E; border-color: #5A5A34 #41411B #41411B #5A5A34; color: #AEAE94}
+.team3                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; background-color: #67512E; border-color: #5A5A34 #41411B #41411B #5A5A34; color: #AEAE94}
+.team4                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; background-color: #504D3E; border-color: #5A5A34 #41411B #41411B #5A5A34; color: #AEAE94}

@@ -1,0 +1,107 @@
+/* <author>fest</author> <email>ifest <AT> hotmail <DOT> com</email> */
+
+body {
+  padding: 0px;
+  margin: 0px;
+  font: 10px Verdana, Geneva, Arial, Helvetica, sans-serif;
+  text-align: right;
+  color: #333;
+  margin-top:30px;
+  margin-left:40px;
+  margin-bottom:0px;
+  margin-right:40px;
+  background:url(bg.jpg) repeat-x #111;
+}
+
+table {
+  font: 10px Verdana, Geneva, Arial, Helvetica, sans-serif;
+  text-align: right;
+  color: #BFBFBF;
+  border: 0px solid #111111;
+  
+}
+
+td {
+  font: 10px Verdana, Geneva, Arial, Helvetica, sans-serif;
+  text-align: right;
+  white-space: nowrap;
+  border: 0px;
+  padding-left: 3; 
+  padding-right: 3;
+}
+
+
+
+input, select {
+  font: 10px Verdana, Geneva, Arial, Helvetica, sans-serif;
+}
+
+
+
+a { text-decoration: none; }
+a:link { color: #FFF; padding-left:5px; padding-right:5px; margin-top:2px;  margin-top:2px; }
+a:visited { color: #FFF; padding-left:5px; padding-right:5px;  margin-top:2px;  margin-top:2px;}
+a:active { color: #BFBFBF; background:#000000;padding-left:5px; padding-right:5px; margin-top:2px;}
+a:hover { color: #BFBFBF; background:#000000; padding-left:5px; padding-right:5px;  margin-top:2px;}
+
+
+
+.cell1 {
+  background-color: #191919;
+  border-color: #296FA5;
+  border:0px;
+  padding:5px;
+  margin:10px;
+}
+.cell2 {
+  background-color: #222222;
+  border-color: #1F537B;
+  border:0px;
+   padding:5px;
+    margin:10px;
+}
+.cellBG {
+  color: #66FFFF;
+  background: url(bg2.jpg) repeat-x #151515;
+  border: 0px solid black;
+  border:0px;
+   padding:5px;
+}
+
+.cellSubHeading {
+  color: #FFFFFF;
+  background-color; background: #323232;
+  background:url(sub.jpg) repeat-x;
+  border-width: 0px;
+}
+.cellHeading {
+  color: #fff;
+  background-color: #004679;
+  background:url(celdaarriba.jpg);
+  border-color: #69758C #252B38 #252B38 #69758C;
+  border-width: 0px;
+}
+
+.rowNormal             { color: #BFBFBF; }
+.rowHighlight          { color: #FFFFFF; background-color: #111111 }
+
+.roles                 { background-color: #222222; border-color: #455C74 #061D35 #061D35 #455C74; border:0px; }
+.role1                 { background-color: #222222; border-color: #455C74 #061D35 #061D35 #455C74; border:0px; }
+.role2                 { background-color: #222222; border-color: #455C74 #061D35 #061D35 #455C74; border:0px; }
+.role3                 { background-color: #222222; border-color: #455C74 #061D35 #061D35 #455C74; border:0px; }
+.role4                 { background-color: #222222; border-color: #455C74 #061D35 #061D35 #455C74; border:0px; }
+
+.team1 {
+  background-color: #004679;
+  background:url(teamred.jpg);
+  padding:3px;
+  margin-top:2px;
+  border-color: #000000;
+}
+.team2 {
+  background-color: #800000;
+  background:url(teamblue.jpg);
+  padding:3px;
+  margin-top:2px;
+  border-color: #9B0000;
+}

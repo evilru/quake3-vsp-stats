@@ -1,0 +1,263 @@
+$Id: Changelog 1581 2004-11-13 00:08:47Z dallen $
+DOM Tootip: Javascript tooltip generator
+
+version SVN HEAD:
+
+version 0.7.0 (2004/11/10):
+		* Create tip on parent specified instead on document.body and then moving the tip in the DOM
+		* Added a standards mode detection, which was the root of edge bleed issues
+		* Added info in README about how to make the program smaller using jsmin
+		* Fixed memory leaks in IE caused by using inner functions
+		* Now works in Mac IE
+		* Tooltips can be created from a child iframe element
+		* IE 5.0 (Windows) removed from supported list of browsers
+
+version 0.6.0 (2003/02/13):
+		* major rewrite (please consult this changelog and example for new requirements)
+		* made fading modular using alphaAPI (seperate file, alphaAPI.js)
+		* large gains in speed and compliance (fix Konq and IE 5 bugs)
+		* eliminate need for domTT_activate() in the mousemove event handler!!!
+		* new option 'trail' to specify tip to follow mouse movement (only for absolute)
+		* changed domTT_true/false() functions to makeTrue/false()!!!
+		* changed option 'status' option to 'statusText'!!!
+		* changed 'prefix' option to 'classPrefix'!!!
+		* changed 'close' option to 'closeAction'!!!
+		* made dragging of tips loadable (seperate file, domTT_drag.js)
+		* divided out common functions from domTT functions (seperate file, domLib.js)
+		* browser detection variables now prefixed with domLib_is*!!!
+		* to create an onload window, first option is unique id (no longer have 'id' option)
+
+version 0.5.5 (2003/02/09):
+		* fixed major crashes in IE 5.0 (cannot use delays since setTimeout is buggy)
+		* fixed hideList error in all browsers
+		* fixed a bug on example10.html when using a popup
+
+version 0.5.4 (2003/02/05):
+		* fixed a scroll offset problem when IE is in compatibility mode
+		* fixed problem where select box detection nixed element inside tooltip
+
+version 0.5.3 (2003/01/29):
+		* fix misspelled document on like 971 in domTT.js
+
+version 0.5.2 (2003/01/17):
+		* fix for document.documentElement.scrollTop for IE in standards compliance mode
+
+version 0.5.1 (2002/12/19):
+		* implemented callTimeout() as an wrapper for setTimeout() for variable persistence
+		* konqueror can now implement delays for tips!!!
+		* konqueror can now handle tip lifetime!!!
+		* added workaround for some konqueror quirks
+
+version 0.5.0 (2002/12/19):
+		* fixed invalid variable name tmp_offsetX...regression from fixes in 0.4.9
+
+version 0.4.9 (2002/12/18):
+		* reworked domTT_deactivate() a bit
+		* can now specify an 'id' option on each tip to have multiple tips on one trigger
+		* fixed the activateTimeout process to rid of lingering bugs
+		* updated demos
+
+version 0.4.8 (2002/12/11):
+		* fixed recursion bug
+
+version 0.4.7 (2002/12/08):
+		* dragging of sticky tips in konqueror!!
+		* cleaned up the mouseout code a great deal and now it actually works as expected
+		* selects only appear again when all tooltips which hid them are cleared away!!!
+		* fixed IE javascript error caused by global onmousemove operating before page load
+		* simplified deactivate by putting code for unhide selects in detectCollisions()
+		* updated demos
+
+version 0.4.6 (2002/12/07):
+		* eliminated unnecessary code in domTT_show()
+		* konqueror fixes (checks in wrong place, clientHeight problem)
+		* fixed onclick x, y measurement in konqueror
+
+version 0.4.5 (2002/12/06):
+		* added maxWidth option (false to disable) and width option now independent
+		* added workaround for maxWidth bug in Opera
+		* switch to toggling display property to hide rather than using visibility hidden
+		* fixed error in IE 5.5 bypassing a safeguard and causing a javascript error
+		* fixed compliance error with IE 5.5 when executing IE hack for float
+		* fixed height calculation with IE 5.5 vs IE 6 (compliance difference)
+		* fixed case when hack IE code was executing under the wrong circumstances
+		* fixing small javascript errors
+		* totally block IE 5.0 until I can get to testing it
+		* demo fixes and cleanups
+		* fixed missing check for tip object existance in mouseout function
+
+version 0.4.4 (2002/12/06):
+		* fixed onload problem in IE
+
+version 0.4.3 (2002/12/05):
+		* code cleanups with strict compliance mozilla
+		* fixed so that using domTT_activate() can be used as an onload event
+		* closeLink will be interpreted as html (but note the link is automatically created)
+
+version 0.4.2 (2002/12/05):
+		* fixed missing units in drag update
+		* fixed width calculation in IE in strict mode
+		* fix document.body.clientHeight -> document.documentElement.clientHeight (IE strict.dtd)
+		* catch permission errors in mozilla to write status text
+
+version 0.4.1 (2002/12/05):
+		* forget to add contentEditable when made changed to domTT_create() in 0.4.0
+		* fixes to the domTT_isDescendantOf to exclude absolute elements
+		* fixed error in mozilla (tip was trying to be destroyed twice)
+		* fixed regexp bug in IE 5.01
+		* fixed link in demo for opera (example8.html)
+		* fixed javascript error in IE when triggerObj was #document
+		* fixed IE bug when contentEditable property was screwing up the height
+		* demo fixes
+
+version 0.4.0 (2002/12/02):
+		* add required 'this' add the beginning of every domTT_activate() call
+		* prevent tip from disappearing when mouseout goes to child of target element
+		* tons of code cleanup dealing with onmouseout
+		* 'status' now clears after each mouseout, even if tip is sticky or velcro
+		* added 'width' option, which overides the global domTT_maxWidth (and the style)
+		* merged logic in create() and show() so that create() can use show() (normalize)
+
+version 0.3.2 (2002/12/01):
+		* changed 'close' to 'closeLink' since it was confusing what it was
+		* added relative positioned tips (inline), added option 'position'
+		* maxWidth of 0 will be ignored
+		* fixed a fade bug when tooltip object exists (domTT_show())
+		* several other fade bugs fixed
+
+version 0.3.1 (2002/12/01):
+		* 'caption' can be set to false to force it not to show, even when using 'type' sticky
+		* fixed error "Could not get cursor property" in IE5 because must use 'hand' not 'pointer'
+		* misspelled descendant
+		* cleaned up the preserving of onmouseout a ton
+		* 'caption' only has to be set to false if type is 'sticky', otherwise it can be left off
+		* updated demos
+
+version 0.3.0 (2002/11/30):
+		* added global domTT_lifetime to set how long the tip stays alive when mouse is stationary
+		* added option 'lifetime' for each individual tip (0 for infinite)
+		* added fixed position tooltip option by passing in 'x' and 'y' as options
+		* changed hash method itemExists to hasItem to be DOM compliant
+		* perserve the onmouseout that existed on the target rather than just overwriting
+		* new type 'velcro', which disappears when you mouseout of the tooltip instead of target
+		* added ability to fade out and changed 'fade' option from boolean to in/out/both/neither
+		* added fade direction to the domTT_doFade() function to hande fade in both directions
+		* made a global variable for domTT_onClose, either 'hide' or 'remove'
+		* changed 'deactivate' option to 'onClose' which can be 'hide' or 'remove'
+		* added 'grid' option and domTT_grid global to snap to a grid on updates (0 for no grid)
+		* got rid of domTT_defaultStatus, just use window.defaultStatus for this value
+		* code cleanups
+		* demo addition and cleanups
+
+version 0.2.3 (2002/11/27):
+		* added domTT_false() as a wrapper for links that make IFRAME tooltips to cancel click
+		* fixed case when domTT_isGecko was not deteting select-multiple with size=1
+		* can specify only 'status' to domTT_activate, and will change status and register clear
+		* made demo pages for library
+		* removed a hack width setting width because I was confused before...and didn't need it
+		* made global setting variable for domTT_prefix
+
+version 0.2.2 (2002/11/21):
+		* fade-in on tips!!! (mozilla and IE only)
+		* global option for fade on or off (click events don't use fade ever)
+		* added option to domTT_activate for fade
+
+version 0.2.1 (2002/11/21):
+		* perfect support for Opera7 !!! (what a great browser as far as standards go!)
+		* no need for select collision detection in opera (again, tremendous)
+		* prevented the close element from being draggable in all browsers (works this time)
+		* fixed bug that opera does not hide IFRAME children when tip is hidden or destroyed
+		* added domTT_defaultStatus to be used when clearing status bar
+		* for opera, you will want to disable all opera tooltips except 'element titles'
+		* added 'mousedown' as a trigger to set delay to 0 (3 types of mouse depress possible)
+
+version 0.2.0 (2002/11/20):
+		* domTT_activate returns the id of the tip if it needs to be referenced externally
+		* added domTT_isActive() to check for an activated tip, returns tip object if active
+		* create domTT_true() function, which should be used to wrap domTT_activate for onmouseover
+		* second option to domTT_deactivate is optional (default to true)
+		* domTT_predefined now takes all the options domTT_activate takes
+		* domTT_activate loads in predefined options if predefined is the first option
+		* domTT_activate uses options from domTT_activate call to override predefined options
+		* take off restriction for status of onmouseover and just let it happen as it will
+		* caption now not used if empty, even if it is sticky (can externally close tip)
+		* added 'contextmenu' event type alongside 'click' for auto changing delay to 0
+		* if content is empty, bail on creating the tip (hmmm...still thinking on this)
+		* Gecko always makes the tip 4px too wide, for some unknown reason (maybe gecko bug?)
+		* bug in right edge detection (was giving the width the padding instead of taking away)
+		* fixed bug in global onmousemove (wasn't passing event to function for mozilla)
+		* fixed edge detection, which was not accounting for scroll offset
+		* made function domTT_correctEdgeBleed() for edge bleeding (since I used it twice)
+		* code cleanups, added docs and another example page
+
+version 0.1.7 (2002/11/18):
+		* domTT_close can be an object, hence an image for an 'X' for close
+		* drag limited to the caption bar for sticky tips
+		* added domTT_addPredefined function for caching tip definitions
+		* added ability to pass in custom prefix for class styles, other than domTT
+		* can pass in 'close' option for text/image to be used as close markup
+		* fixed bug for onmouseover sticky tip which prevented cancel of tip creation onmouseout
+		* added a new example.html file
+
+version 0.1.6 (2002/11/17):
+		* added option for directionality in tips (southeast, southwest, northeast, northwest)
+		* set default options at beginning of domTT_activate() instead of checking for each
+		* global setting for mouse height so that offset is from edge of mouse cursor
+		* added LICENSE, README to package
+		* finished screen edge detection and correction
+		* custom close text for sticky
+		* can globally turn off dragging of sticky tips
+
+version 0.1.5 (2002/11/16):
+		* ability to grab current mouse position when tip is created on delay
+		* option for not using current mouse position when tip is created on delay (use passed in)
+		* changed mouseover to mousemove for event on the tooltip (prevent artifact tooltips)
+		* added delay as option (will use global if not passed in)
+		* added status as an option, which will change the status bar text
+		* eliminated collision detection delay when tip is already visible
+		* 'sticky' option changed to 'type' and can be 'greasy' or 'sticky'
+		* fixed some serious bugs in setTimout logic when destroying tips
+		* created function domTT_show() for showing hidden tip (previously created)
+
+version 0.1.4 (2002/11/15):
+		* ability to drag sticky tooltips (lots of work here)
+		* change domTT_getPosition to domTT_getOffsets
+		* return more information from domTT_getOffsets
+		* simplify domTT_detectCollisions (now requires only one argument)
+		* made function for getting mouse position (since browsers do crazy things)
+		* the 'X' part of the tip is not draggable
+
+version 0.1.3 (2002/11/14):
+		* konqueror support (lots of fixes for this) (onclick is somewhate hacked)
+		* browser variables instead of using javascript objects to differentiate
+		* eliminated duplicate mouse_x and mouse_y code
+		* changed lamda function calls in setTimeout to support konqueror
+		* getPosition returns right and bottom as well
+
+version 0.1.2 (2002/11/13):
+		* fixed case when you flew over object and then clicked fast to create sticky and it failed
+		* domTT_deactivate now takes an object instead of id (avoids lookup)
+		* fixed problem with onmousemove after onclick beating setTimeout(...,0) on windows
+		* fixed the e.target to e.currentTarget for mozilla (which is the registered target)
+		* sticky tips now work correctly
+		* fixed domTT_detectCollisions to be subject to the activate delay on tip unhide
+		* no longer dependent on global Hash() function...arguments become hash internally
+		* account for the scroll offset when working with event coordinates
+		* compensated for lack of max-width for IE
+		* fixed broken float right for IE (cannot assign through DOM)
+		* float right causes tooltip to stretch to widht of page, fixed that
+		* fixed javascript error because IE doesn't have e.target (event.srcElement instead)
+
+version 0.1.1 (2002/11/10):
+		* pass in options as Hash
+		* cache created tips to reuse via visibility style
+		* auto-assign onmouseout to deactivate
+		* add ability to have sticky
+		* implemented zIndex so new tips can go over old tips
+		* no delay for onclick tips
+		* implemented delay when toggling visibility of cached tips
+		* ability to pass in html content
+
+version 0.1.0 (2002/10/30):
+		* Initial release
+

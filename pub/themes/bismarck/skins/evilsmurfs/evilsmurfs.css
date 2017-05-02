@@ -1,0 +1,35 @@
+/* <author>GaD</author> <email>gad <AT> evilsmurfs <DOT> com</email> */
+BODY                   { padding: 0px 0px 0px 0px; margin: 0px 10px 0px 10px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; color: #ffffff; background-color: #222222;}
+TABLE                  { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; color: #ffffff; border-color: #555555; border-style: solid; border-width: 0;}
+TD                     { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; white-space: NOWRAP; border-color: #555555 #666666 #666666 #555555; border-style: solid; border-width: 1px; vertical-align: middle; padding-left: 3; padding-right: 3; }
+
+
+A:link                 { color: #31c2ff; }
+A:visited              { color: #31c2ff; }
+A:active               { color: #ffff00; }
+A:hover                { color: #ffff00; }
+
+.cell1                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; background-color: #333333; border-color: #555555 #222222 #222222 #555555; color: #AEAE94}
+.cell2                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right;background-color: #222222; border-color: #55555 #222222 #222222 #555555; color: #AEAE94}
+
+.cellBG                { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; 
+color: #333333; background-color: #333333; border-color: #555555 #444444 #444444 #555555; }
+
+
+
+.cellHeading           { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 8pt; text-align: right; color: #E7E7C5; background-color: #222222; border-color: #444444 #555555 #555555 #444444; border-width: 2px; }
+.cellSubHeading        { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; color: #AEAE94; background-color: #444444; border-color: #444444 #555555 #555555 #444444; border-width: 1px; }
+.cellHeadingTeam1      { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; color: #AEAE94; background-color: #333333; border-width: 0; }
+.cellHeadingTeam2      { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; color: #AEAE94; background-color: #333333; border-width: 0; }
+.rowNormal             { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; color: #AEAE94; }
+.rowHighlight          { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; color: #00DD00; background-color: #444444;}
+
+.role1                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; background-color: #222222; border-color: #455C74 #061D35 #061D35 #455C74; color: #AEAE94}
+.role2                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; background-color: #222222; border-color: #455C74 #061D35 #061D35 #455C74; color: #AEAE94}
+.role3                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; background-color: #222222; border-color: #455C74 #061D35 #061D35 #455C74; color: #AEAE94}
+.role4                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; text-align: right; background-color: #222222; border-color: #455C74 #061D35 #061D35 #455C74; color: #AEAE94}
+
+.team1                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; background-color: #222222; border-color: #555555 #41411B #41411B #555555; color: #AEAE94}
+.team2                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; background-color: #333333; border-color: #555555 #41411B #41411B #555555; color: #AEAE94}
+.team3                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; background-color: #67512E; border-color: #555555 #41411B #41411B #555555; color: #AEAE94}
+.team4                 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 7pt; background-color: #504D3E; border-color: #555555 #41411B #41411B #555555; color: #AEAE94}

@@ -1,0 +1,98 @@
+$Id: README 1578 2004-11-12 23:53:54Z dallen $
+
+Project: DOM Tooltip
+Author:  Dan Allen (Mojavelinux) <dan.allen@mojavelinux.com>
+License: LGPL
+
+What is it?
+-----------
+This javascript library will allow you to have dynamic and configurable
+tooltips on your html pages. Yes, there is a library called overlib that does
+this, but I don't like it for several reasons. First of all, that code is ugly
+and I hate ugly code...and second it supports Netscape 4...this library does
+not. Netscape 4 is no longer a browser and it is time to move forward. That is
+why I prefixed the project title with DOM. If your browser doesn't support the
+DOM standard, then this library won't work.
+
+How does it work?
+-----------------
+This library supports Gecko (Mozilla/Netscape6+,Firefox, etc), IE 5.5+, IE on
+Mac, Safari, Konqueror and Opera 7 (which includes full DOM and CSS2 support).
+The tooltips are configured through 3 class definitions in your stylesheet and
+the rest is up to javascript. The tooltips consist of two parts, the caption
+and the content. The caption is optional. The tips can either be greasy or
+sticky...or both as a combination.  Greasy means that they move around when you
+move the mouse around and go away when you leave the element. Sticky means that
+they stick around after you leave the element and are otherwise stationary.
+The tooltips also have directionality, so you can have tips that are
+'northeast', 'northwest', 'southeast' or 'southwest' of the mouse.
+
+Be sure to include the file 'domLib.js' whereever you use 'domTT.js' and if you
+want to have draggable tips or opacity fading, include the 'domTT_drag.js' and
+'alphaAPI.js' files as well. **Some of these libraries are available under the
+domLib project.**
+
+Why is this program so big?
+---------------------------
+Partly because it is feature rich and thus there is lots of code, partly
+because we try to use comments where ever necessary to clarify issues, and
+partly because our coding style is one which makes liberal use of whitespace.
+However, to save your users the trouble of downloading 50k of JavaScript every
+time they come to your page you can use Douglas Crockford's excellent jsmin
+program to strip all non-essentials from the code, reducing it's size by as
+much as 50%.  This program has been verified to work with his program, located at:
+http://www.crockford.com/javascript/jsmin.html  
+An example usage would be: 
+bash# ./jsmin domTT.js domTT_min.js \
+"domTT is Copyright Dan Allen (dan.allen@mojavelinux.com) (2004).  Licensed under the LGPL"
+
+Anything I should know?
+-----------------------
+Additionally, this tooltip library autodetects select boxes in IE and the
+scrollbar on multiple selects in mozilla (the only issue mozilla has) and
+HIDES them whenever the tooltip collides with them.  Hence, it has full
+collision detection with components which cannot use the zIndex propery!!
+
+In order for it to work correctly you'll want to follow the example stylesheet
+pretty closely.  It has been crafted to work well on all the supported
+browsers.  Note the body { margin: 0; } style which is needed if you want it to
+work decently on Mac IE and Opera.  (According the W3C standard, a body cannot
+have a margin anyway).
+
+Why did you write it?
+---------------------
+The reason I wrote this library is because I wanted a library which used 100%
+DOM to do the tooltips, was easy to configure, was fast, and which was freely
+distributable.  You may use this library in personal or company, open source or
+proprietry projects.  I wrote it for you, so enjoy it.  All I ask is that you
+spread the word and please give me credit by leaving in my comments.  If you
+do make patches, please let me know about them on my forums.  Viva Open Source!!
+
+Important Changes in 0.70
+-----------------------------
+IE 5.0 is no longer supported because its DOM implementation is just too
+crippled.  Many of the complaints about the positioning of the tips and
+the screen edge detecting are now fixed.
+
+Important API Changes in 0.60
+------------------------------
+The release is 0.60 and it introduced several significant changes over the
+0.55 release.  Several of the options have changed names.  The following is a
+list:
+
+'status' -> 'statusText'
+'close'  -> 'closeAction'
+'prefix' -> 'classPrefix'
+'id'     -> *no longer an option*
+
+There is also a new option 'trail' which is used in place of mousemove.  Do not
+use domTT_activate() in the onmousemove event handler any longer!!!  It was far
+too slow to parse the same options all over again from onmouseover, so now just
+specify the domTT_activate() in onmouseover with the option trail.
+
+Also to note, the functions domTT_true() and domTT_false() have been changed to
+makeTrue() and makeFalse() respectively to make them more understandable.
+
+Be sure to include the file 'domLib.js' whereever you use 'domTT.js'
+and if you want to have draggable tips or opacity fading, include the
+'domTT_drag.js' and 'alphaAPI.js' files as well.

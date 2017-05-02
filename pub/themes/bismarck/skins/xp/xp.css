@@ -1,0 +1,89 @@
+/* <author>easy</author> <email>easy, excessiveplus.net</email> */
+
+body {
+  padding: 0px;
+  margin: 0px;
+  font: 10px Verdana, Geneva, Arial, Helvetica, sans-serif;
+  text-align: right;
+  color: #BFBFBF;
+  background-color: #606B80;
+}
+
+table {
+  font: 10px Verdana, Geneva, Arial, Helvetica, sans-serif;
+  text-align: right;
+  color: #BFBFBF;
+  border: 0px solid #000000;
+}
+
+td {
+  font: 10px Verdana, Geneva, Arial, Helvetica, sans-serif;
+  text-align: right;
+  white-space: nowrap;
+  border-color: black black transparent transparent;
+  border-style: solid;
+  border-width: 1px;
+  padding-left: 3; 
+  padding-right: 3; 
+}
+
+
+
+input, select {
+  font: 10px Verdana, Geneva, Arial, Helvetica, sans-serif;
+}
+
+
+
+a { text-decoration: none; }
+a:link { color: #BFBFBF; }
+a:visited { color: #BFBFBF; }
+a:active { color: #FFFFFF; }
+a:hover { color: #FFFFFF; }
+
+
+
+.cell1 {
+  background-color: #2B333D;
+  border-color: #6B6E79 #1F2535 #1F2535 #6B6E79;
+}
+.cell2 {
+  background-color: #3A424C;
+  border-color: #6B6E79 #1F2535 #1F2535 #6B6E79;
+}
+.cellBG {
+  color: #66FFFF;
+  background-color: #435066;
+  border: 1px solid black;
+}
+
+.cellSubHeading {
+  color: #FFFFFF;
+  background-color: #1F252C;
+  border-color: #3A424C #0D1014 #0D1014 #3A424C;
+  border-width: 1px;
+}
+.cellHeading {
+  color: #BFBFBF;
+  background-color: #435066;
+  border-color: #69758C #252B38 #252B38 #69758C;
+  border-width: 2px;
+}
+
+.rowNormal             { color: #BFBFBF; }
+.rowHighlight          { color: #FFFFFF; background-color: #435066; }
+
+.roles                 { background-color: #082746; border-color: #455C74 #061D35 #061D35 #455C74; }
+.role1                 { background-color: #082746; border-color: #455C74 #061D35 #061D35 #455C74; }
+.role2                 { background-color: #082746; border-color: #455C74 #061D35 #061D35 #455C74; }
+.role3                 { background-color: #082746; border-color: #455C74 #061D35 #061D35 #455C74; }
+.role4                 { background-color: #082746; border-color: #455C74 #061D35 #061D35 #455C74; }
+
+.team1 {
+  background-color: #5A3131;
+  border-color: #3A424C #0D1014 #0D1014 #3A424C;
+}
+.team2 {
+  background-color: #1B3D63;
+  border-color: #3A424C #0D1014 #0D1014 #3A424C;
+}
