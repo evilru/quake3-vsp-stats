@@ -1,11 +1,13 @@
 <?php
 /*
 
-  V4.54 5 Nov 2004  (c) 2000-2004 John Lim (jlim@natsoft.com.my). All rights reserved.
-  Released under both BSD license and Lesser GPL library license. 
-  Whenever there is any discrepancy between the two licenses, 
+  @version   v5.21.0-dev  ??-???-2016
+  @copyright (c) 2000-2013 John Lim (jlim#natsoft.com). All rights reserved.
+  @copyright (c) 2014      Damien Regad, Mark Newnham and the ADOdb community
+  Released under both BSD license and Lesser GPL library license.
+  Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence.
-	
+
   Set tabs to 4 for best viewing.
 
 */
@@ -13,70 +15,72 @@
 error_reporting(E_ALL);
 include_once('../adodb.inc.php');
 
-foreach(array('sapdb','sybase','mysqlt','access','oci8','postgres','odbc_mssql','odbc','db2','firebird','informix') as $dbType) {
+foreach(array('sapdb','sybase','mysql','access','oci8po','odbc_mssql','odbc','db2','firebird','postgres','informix') as $dbType) {
 	echo "<h3>$dbType</h3><p>";
 	$db = NewADOConnection($dbType);
 	$dict = NewDataDictionary($db);
 
 	if (!$dict) continue;
 	$dict->debug = 1;
-	
-	$opts = array('REPLACE','mysql' => 'TYPE=INNODB', 'oci8' => 'TABLESPACE USERS');
-	
+
+	$opts = array('REPLACE','mysql' => 'ENGINE=INNODB', 'oci8' => 'TABLESPACE USERS');
+
 /*	$flds = array(
-		array('id',	'I',								
+		array('id',	'I',
 							'AUTO','KEY'),
-							
+
 		array('name' => 'firstname', 'type' => 'varchar','size' => 30,
 							'DEFAULT'=>'Joan'),
-							
+
 		array('lastname','varchar',28,
 							'DEFAULT'=>'Chen','key'),
-							
+
 		array('averylonglongfieldname','X',1024,
 							'NOTNULL','default' => 'test'),
-							
+
 		array('price','N','7.2',
 							'NOTNULL','default' => '0.00'),
-							
-		array('MYDATE', 'D', 
+
+		array('MYDATE', 'D',
 							'DEFDATE'),
 		array('TS','T',
 							'DEFTIMESTAMP')
 	);*/
-	
+
 	$flds = "
 ID            I           AUTO KEY,
-FIRSTNAME     VARCHAR(30) DEFAULT 'Joan',
-LASTNAME      VARCHAR(28) DEFAULT 'Chen' key,
+FIRSTNAME     VARCHAR(30) DEFAULT 'Joan' INDEX idx_name,
+LASTNAME      VARCHAR(28) DEFAULT 'Chen' key INDEX idx_name INDEX idx_lastname,
 averylonglongfieldname X(1024) DEFAULT 'test',
 price         N(7.2)  DEFAULT '0.00',
-MYDATE        D      DEFDATE,
+MYDATE        D      DEFDATE INDEX idx_date,
 BIGFELLOW     X      NOTNULL,
-TS            T      DEFTIMESTAMP";
+TS_SECS            T      DEFTIMESTAMP,
+TS_SUBSEC   TS DEFTIMESTAMP
+";
 
 
 	$sqla = $dict->CreateDatabase('KUTU',array('postgres'=>"LOCATION='/u01/postdata'"));
 	$dict->SetSchema('KUTU');
-	
+
 	$sqli = ($dict->CreateTableSQL('testtable',$flds, $opts));
-	$sqla =& array_merge($sqla,$sqli);
-	
-	$sqli = $dict->CreateIndexSQL('idx','testtable','firstname,lastname',array('BITMAP','FULLTEXT','CLUSTERED','HASH'));
-	$sqla =& array_merge($sqla,$sqli);
+	$sqla = array_merge($sqla,$sqli);
+
+	$sqli = $dict->CreateIndexSQL('idx','testtable','price,firstname,lastname',array('BITMAP','FULLTEXT','CLUSTERED','HASH'));
+	$sqla = array_merge($sqla,$sqli);
 	$sqli = $dict->CreateIndexSQL('idx2','testtable','price,lastname');//,array('BITMAP','FULLTEXT','CLUSTERED'));
-	$sqla =& array_merge($sqla,$sqli);
-	
+	$sqla = array_merge($sqla,$sqli);
+
 	$addflds = array(array('height', 'F'),array('weight','F'));
 	$sqli = $dict->AddColumnSQL('testtable',$addflds);
-	$sqla =& array_merge($sqla,$sqli);
+	$sqla = array_merge($sqla,$sqli);
 	$addflds = array(array('height', 'F','NOTNULL'),array('weight','F','NOTNULL'));
 	$sqli = $dict->AlterColumnSQL('testtable',$addflds);
-	$sqla =& array_merge($sqla,$sqli);
-	
-	
+	$sqla = array_merge($sqla,$sqli);
+
+
 	printsqla($dbType,$sqla);
-	
+
 	if (file_exists('d:\inetpub\wwwroot\php\phplens\adodb\adodb.inc.php'))
 	if ($dbType == 'mysqlt') {
 		$db->Connect('localhost', "root", "", "test");
@@ -90,7 +94,7 @@ TS            T      DEFTIMESTAMP";
 		$sqla2 = $dict->ChangeTableSQL('adoxyz',$flds);
 		if ($sqla2) printsqla($dbType,$sqla2);
 	}
-	
+
 	if ($dbType == 'odbc_mssql') {
 		$dsn = $dsn = "PROVIDER=MSDASQL;Driver={SQL Server};Server=localhost;Database=northwind;";
 		if (@$db->Connect($dsn, "sa", "natsoft", "test"));
@@ -98,13 +102,13 @@ TS            T      DEFTIMESTAMP";
 		$sqla2 = $dict->ChangeTableSQL('adoxyz',$flds);
 		if ($sqla2) printsqla($dbType,$sqla2);
 	}
-	
-	
-	
+
+
+
 	adodb_pr($dict->databaseType);
-	printsqla($dbType, $dict->DropColumnSQL('table',array('`col`','col2')));
+	printsqla($dbType, $dict->DropColumnSQL('table',array('my col','`col2_with_Quotes`','A_col3','col3(10)')));
 	printsqla($dbType, $dict->ChangeTableSQL('adoxyz','LASTNAME varchar(32)'));
-	
+
 }
 
 function printsqla($dbType,$sqla)
@@ -116,7 +120,7 @@ function printsqla($dbType,$sqla)
 		print "$s;\n";
 		if ($dbType == 'oci8') print "/\n";
 	}
-	print "</pre><hr>";
+	print "</pre><hr />";
 }
 
 /***
@@ -168,7 +172,7 @@ DROP SEQUENCE KUTU.SEQ_testtable;
 /
 CREATE SEQUENCE KUTU.SEQ_testtable;
 /
-CREATE OR REPLACE TRIGGER KUTU.TRIG_SEQ_testtable BEFORE insert ON KUTU.testtable 
+CREATE OR REPLACE TRIGGER KUTU.TRIG_SEQ_testtable BEFORE insert ON KUTU.testtable
 		FOR EACH ROW
 		BEGIN
 		  select KUTU.SEQ_testtable.nextval into :new.id from dual;
@@ -245,4 +249,3 @@ echo "<pre>";
 foreach($ff as $xml) echo htmlspecialchars($xml);
 echo "</pre>";
 include_once('test-xmlschema.php');
-?>

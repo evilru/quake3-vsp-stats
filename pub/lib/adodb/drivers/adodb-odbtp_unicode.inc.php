@@ -1,6 +1,8 @@
 <?php
 /*
-	V4.54 5 Nov 2004  (c) 2000-2004 John Lim (jlim@natsoft.com.my). All rights reserved.
+	@version   v5.21.0-dev  ??-???-2016
+	@copyright (c) 2000-2013 John Lim (jlim#natsoft.com). All rights reserved.
+	@copyright (c) 2014      Damien Regad, Mark Newnham and the ADOdb community
   Released under both BSD license and Lesser GPL library license.
   Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence. See License.txt.
@@ -24,16 +26,10 @@ if (!defined('ADODB_DIR')) die();
 */
 
 if (!defined('_ADODB_ODBTP_LAYER')) {
-	include(ADODB_DIR."/drivers/adodb-odbtp.inc.php");
+	include_once(ADODB_DIR."/drivers/adodb-odbtp.inc.php");
 }
 
 class ADODB_odbtp_unicode extends ADODB_odbtp {
 	var $databaseType = 'odbtp';
 	var $_useUnicodeSQL = true;
-
-	function ADODB_odbtp_unicode()
-	{
-		$this->ADODB_odbtp();
-	}
 }
-?>

@@ -1,18 +1,20 @@
 <?php
 
-/** 
- * @version V4.50 6 July 2004 (c) 2000-2004 John Lim (jlim@natsoft.com.my). All rights reserved.
- * Released under both BSD license and Lesser GPL library license. 
- * Whenever there is any discrepancy between the two licenses, 
- * the BSD license will take precedence. 
+/**
+ * @version   v5.21.0-dev  ??-???-2016
+ * @copyright (c) 2000-2013 John Lim (jlim#natsoft.com). All rights reserved.
+ * @copyright (c) 2014      Damien Regad, Mark Newnham and the ADOdb community
+ * Released under both BSD license and Lesser GPL library license.
+ * Whenever there is any discrepancy between the two licenses,
+ * the BSD license will take precedence.
  *
  * Set tabs to 4 for best viewing.
- * 
+ *
  * Latest version is available at http://php.weblogs.com
  *
  * Test GetUpdateSQL and GetInsertSQL.
  */
- 
+
 error_reporting(E_ALL);
 
 
@@ -24,8 +26,8 @@ include('../tohtml.inc.php');
 
 
 
-$conn = &ADONewConnection("mssql");  // create a connection
-$conn->Connect('localhost','sa','natsoft','northwind') or die('Fail');
+$conn = ADONewConnection("mssql");  // create a connection
+$conn->Connect('127.0.0.1','adodb','natsoft','northwind') or die('Fail');
 
 $conn->debug =1;
 $query = 'select * from products';
@@ -53,7 +55,7 @@ $arr = $conn->getarray($p,array('V%'));
 print_r($arr);
 die();
 
-//$conn = &ADONewConnection("mssql");
+//$conn = ADONewConnection("mssql");
 //$conn->Connect('mangrove','sa','natsoft','ai');
 
 //$conn->Connect('mangrove','sa','natsoft','ai');
@@ -64,13 +66,12 @@ $conn->Execute('insert into blobtest (id) values(1)');
 $conn->UpdateBlobFile('blobtest','b1','../cute_icons_for_site/adodb.gif','id=1');
 $rs = $conn->Execute('select b1 from blobtest where id=1');
 
-$output = "c:\\temp\\test_out-".date('H-i-s').".gif"; 
+$output = "c:\\temp\\test_out-".date('H-i-s').".gif";
 print "Saving file <b>$output</b>, size=".strlen($rs->fields[0])."<p>";
-$fd = fopen($output, "wb"); 
-fwrite($fd, $rs->fields[0]); 
-fclose($fd); 
+$fd = fopen($output, "wb");
+fwrite($fd, $rs->fields[0]);
+fclose($fd);
 
 print " <a href=file://$output>View Image</a>";
 //$rs = $conn->Execute('SELECT id,SUBSTRING(b1, 1, 10) FROM blobtest');
 //rs2html($rs);
-?>
