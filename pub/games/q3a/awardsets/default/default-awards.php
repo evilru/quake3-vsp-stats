@@ -344,7 +344,7 @@ $awardset['accuracy_set_table']['sql'][1]    = "CREATE TABLE {$tp}awardsweaponsh
                                                 ,weaponID varchar(100) NOT NULL default ''
                                                 ,shots int(10) unsigned default '0'
                                                 ,PRIMARY KEY  (playerID,weaponID)
-                                              ) TYPE=MyISAM
+                                              ) ENGINE=MyISAM
                                               ";
 
 $awardset['accuracy_set_table']['sql'][2]    = "insert into {$tp}awardsweaponshots
