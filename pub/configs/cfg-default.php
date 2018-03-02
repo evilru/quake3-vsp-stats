@@ -22,7 +22,7 @@ global $cfg;
     //$cfg['db']['adodb_path']= "C:/php/lib/adodb/"; // Uncomment/Enable this only if you have and want to use your own adodb libraries.
                                                      // Must specify it as an absolute path! ie:- "../../adodb" etc. are *NOT ALLOWED*
     
-    $cfg['db']['adodb_driver']= 'mysql'; 
+    $cfg['db']['adodb_driver']= 'mysqli'; 
     
     $cfg['db']['table_prefix'] = "vsp_";           // use only lower case to minimize windows/linux portability problems
     
