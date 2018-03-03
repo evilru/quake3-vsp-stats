@@ -1,18 +1,18 @@
 <?php
 error_reporting(E_ALL);
-ini_set('mssql.datetimeconvert',0); 
+ini_set('mssql.datetimeconvert',0);
 
 function tmssql()
 {
 	print "<h3>mssql</h3>";
 	$db = mssql_connect('JAGUAR\vsdotnet','adodb','natsoft') or die('No Connection');
 	mssql_select_db('northwind',$db);
-	
+
 	$rs = mssql_query('select getdate() as date',$db);
 	$o = mssql_fetch_row($rs);
 	print_r($o);
 	mssql_free_result($rs);
-	
+
 	print "<p>Delete</p>"; flush();
 	$rs2 = mssql_query('delete from adoxyz',$db);
 	$p = mssql_num_rows($rs2);
@@ -29,9 +29,9 @@ include_once('DB.php');
 	$password = 'natsoft';
 	$hostname = 'JAGUAR\vsdotnet';
 	$databasename = 'northwind';
-	
+
 	$dsn = "mssql://$username:$password@$hostname/$databasename";
-	$conn = &DB::connect($dsn);
+	$conn = DB::connect($dsn);
 	print "date=".$conn->GetOne('select getdate()')."<br>";
 	@$conn->query('create table tester (id integer)');
 	print "<p>Delete</p>"; flush();
@@ -53,6 +53,16 @@ include_once('../adodb.inc.php');
 	$rs = $conn->Execute('delete from tester');
 	print "date=".$conn->GetOne('select getdate()')."<br>";
 }
+
+
+$ACCEPTIP = '127.0.0.1';
+
+$remote = $_SERVER["REMOTE_ADDR"];
+
+if (!empty($ACCEPTIP))
+ if ($remote != '127.0.0.1' && $remote != $ACCEPTIP)
+ 	die("Unauthorised client: '$remote'");
+
 ?>
 <a href=tmssql.php?do=tmssql>mssql</a>
 <a href=tmssql.php?do=tpear>pear</a>
@@ -60,6 +70,10 @@ include_once('../adodb.inc.php');
 <?php
 if (!empty($_GET['do'])) {
 	$do = $_GET['do'];
-	$do();
+	switch($do) {
+	case 'tpear':
+	case 'tadodb':
+	case 'tmssql':
+		$do();
+	}
 }
-?>
