@@ -1,4 +1,4 @@
-# ExcessivePlus Community version 0.45-xp-1.1.2
+# VSP Stats Processor - ExcessivePlus Community version 0.45-xp-1.1.2
 
 The Purpose of this repository is to provide a working version of the ExcessivePlus Community version 0.45-xp-1.1.2 of the VSP Stats Processor © 2004-2005 by Myrddin.
 
