@@ -1,6 +1,6 @@
 # VSP Stats Processor - ExcessivePlus Community version 0.45-xp-1.1.2
 
-The Purpose of this repository is to provide a working version of the ExcessivePlus Community version 0.45-xp-1.1.2 which is based on the VSP Stats Processor 0.45 by Myrddin.
+The Purpose of this repository is to fix php/mysql compatibility issues of the ExcessivePlus Community version 0.45-xp-1.1.2 which is based on the VSP Stats Processor 0.45 by Myrddin.
 
 It might not work with the most recent versions of php/mysql as I don't test it on a regulary basis. If you find a bug, you are welcome to contribute and keep this version in a working state.
 
