@@ -1,6 +1,6 @@
 # VSP Stats Processor - ExcessivePlus Community version 0.45-xp-1.1.2
 
-The Purpose of this repository is to fix php/mysql compatibility issues of the ExcessivePlus Community version 0.45-xp-1.1.2 which is based on the VSP Stats Processor 0.45 by Myrddin.
+The Purpose of this repository is to fix php/mysql compatibility issues of the Quake 3 ExcessivePlus Community version 0.45-xp-1.1.2 which is based on the VSP Stats Processor 0.45 by Myrddin.
 
 Right now, it works with:
 
