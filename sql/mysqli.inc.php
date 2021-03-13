@@ -17,8 +17,8 @@ $sql_create = array(
     ,kill_streak INT DEFAULT 0
     ,death_streak INT DEFAULT 0
     ,games int(10) unsigned default '0'
-    ,first_seen DATETIME NOT NULL default '0000-00-00 00:00:00'
-    ,last_seen DATETIME NOT NULL default '0000-00-00 00:00:00'
+    ,first_seen DATETIME NOT NULL default '1000-01-01 00:00:00'
+    ,last_seen DATETIME NOT NULL default '1000-01-01 00:00:00'
     ,PRIMARY KEY  (playerID)
   ) ENGINE=MyISAM DEFAULT CHARSET=utf8"
 //endchange
@@ -71,7 +71,7 @@ $sql_create = array(
   ,"
   CREATE TABLE IF NOT EXISTS {$GLOBALS['cfg']['db']['table_prefix']}gameprofile (
     gameID bigint(20) unsigned NOT NULL default '0'
-    ,timeStart datetime NOT NULL default '0000-00-00 00:00:00'
+    ,timeStart datetime NOT NULL default '1000-01-01 00:00:00'
     ,PRIMARY KEY (gameID)
   ) ENGINE=MyISAM DEFAULT CHARSET=utf8"
 

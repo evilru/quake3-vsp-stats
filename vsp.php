@@ -907,7 +907,7 @@
           if (!isset($this->Vf273a653['_v_game_type']))
               $this->Vf273a653['_v_game_type'] = "?";
           if (!isset($this->Vf273a653['_v_time_start']))
-              $this->Vf273a653['_v_time_start'] = "0000-00-00 00:00:00";
+              $this->Vf273a653['_v_time_start'] = "1000-01-01 00:00:00";
 //change: check for duplicated games
           do {
               preg_match("/^0\\.(\d+) (\d+)/", microtime(), $Vc7e009b7);
@@ -1352,7 +1352,7 @@
       }
       global $V0f14082c;
 
-      $V0f14082c['parser-options'] = "";
+      $V0f14082c['parser-options'] = [];
       $V0f14082c['prompt'] = 1;
       if ($V51d3ee44['argc'] > 1) {
           for ($V865c0c0b = 1; $V865c0c0b < $V51d3ee44['argc'] - 1; $V865c0c0b++) {
