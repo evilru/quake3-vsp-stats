@@ -4,8 +4,8 @@ The Purpose of this repository is to fix php/mysql compatibility issues of the E
 
 Right now, it works with:
 
-* PHP 7.4.16
-* MySQL 8.0.23 / MariaDB 10.5.9
+* **PHP 7.4.16**
+* **MySQL 8.0.23** / **MariaDB 10.5.9**
 
  If you find a bug, you are welcome to contribute and keep this version in a working state.
 
