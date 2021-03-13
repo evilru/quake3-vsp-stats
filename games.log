@@ -1,188 +1,1616 @@
-  0:00 ------------------------------------------------------------
-  0:00 InitGame: \g_blueTeam\Pagans\g_redTeam\Stroggs\sv_maxPing\0\sv_minPing\0\sv_punkbuster\0\dmflags\0\fraglimit\20\timelimit\0\sv_hostname\noname\sv_maxclients\8\sv_maxRate\0\sv_floodProtect\1\g_maxGameClients\0\capturelimit\0\version\Q3 1.32 win-x86 Oct  7 2002\g_gametype\0\protocol\68\mapname\Q3DM6\sv_privateClients\0\sv_allowDownload\0\gamename\baseq3\g_needpass\0
-  0:00 ClientConnect: 0
-  0:00 ClientUserinfoChanged: 0 n\UnnamedPlayer\t\0\model\sarge\hmodel\sarge\g_redteam\\g_blueteam\\c1\4\c2\5\hc\100\w\0\l\0\tt\0\tl\0
-  0:00 ClientConnect: 1
-  0:00 ClientUserinfoChanged: 1 n\Orbb\t\0\model\orbb\hmodel\orbb\c1\4\c2\5\hc\70\w\0\l\0\skill\    2.00\tt\0\tl\0
-  0:00 ClientBegin: 1
-  0:00 ClientConnect: 2
-  0:00 ClientUserinfoChanged: 2 n\Hossman\t\0\model\biker/hossman\hmodel\biker/hossman\c1\4\c2\5\hc\70\w\0\l\0\skill\    2.00\tt\0\tl\0
-  0:00 ClientBegin: 2
-  0:00 ClientConnect: 3
-  0:00 ClientUserinfoChanged: 3 n\Daemia\t\0\model\major/daemia\hmodel\major/daemia\c1\4\c2\5\hc\70\w\0\l\0\skill\    2.00\tt\0\tl\0
-  0:00 ClientBegin: 3
-  0:00 ClientUserinfoChanged: 0 n\UnnamedPlayer\t\0\model\sarge\hmodel\sarge\g_redteam\\g_blueteam\\c1\4\c2\5\hc\100\w\0\l\0\tt\0\tl\0
-  0:00 ClientBegin: 0
-  0:01 Item: 2 ammo_slugs
-  0:01 Item: 1 ammo_shells
-  0:01 Item: 1 ammo_rockets
-  0:02 Item: 3 ammo_bullets
-  0:02 Item: 2 ammo_bullets
-  0:02 Item: 3 ammo_cells
-  0:03 Item: 0 ammo_cells
-  0:03 Item: 0 ammo_bullets
-  0:06 Item: 3 item_health
-  0:07 Item: 1 item_armor_combat
-  0:07 Item: 3 weapon_shotgun
-  0:09 Item: 1 ammo_cells
-  0:09 Item: 1 ammo_bullets
-  0:09 Item: 1 ammo_rockets
-  0:10 Item: 1 ammo_slugs
-  0:12 Kill: 3 2 1: Daemia killed Hossman by MOD_SHOTGUN
-  0:13 Item: 1 ammo_rockets
-  0:14 Item: 2 ammo_cells
-  0:14 Item: 2 ammo_rockets
-  0:15 Item: 1 item_health_small
-  0:15 Item: 1 item_health_small
-  0:15 Item: 3 weapon_rocketlauncher
-  0:16 Item: 1 item_health_small
-  0:16 Item: 1 item_health_small
-  0:16 Item: 1 item_health_small
-  0:17 Item: 3 item_health
-  0:18 Kill: 0 1 3: UnnamedPlayer killed Orbb by MOD_MACHINEGUN
-  0:19 Item: 2 weapon_plasmagun
-  0:22 Item: 1 weapon_rocketlauncher
-  0:24 Item: 0 ammo_shells
-  0:24 Item: 3 item_health
-  0:26 Kill: 1 2 7: Orbb killed Hossman by MOD_ROCKET_SPLASH
-  0:26 Item: 0 item_health
-  0:27 Item: 1 weapon_plasmagun
-  0:32 Item: 0 item_armor_combat
-  0:34 Item: 2 weapon_plasmagun
-  0:40 Item: 2 weapon_rocketlauncher
-  0:40 Kill: 2 1 8: Hossman killed Orbb by MOD_PLASMA
-  0:42 say: Orbb: You make this unit die good, hossman!
-  0:43 Item: 0 ammo_slugs
-  0:43 Item: 0 weapon_railgun
-  0:45 Item: 2 weapon_plasmagun
-  0:45 Item: 2 weapon_rocketlauncher
-  0:46 Item: 3 item_quad
-  0:50 Kill: 2 1 6: Hossman killed Orbb by MOD_ROCKET
-  0:50 Item: 0 item_health_small
-  0:50 Item: 0 item_health_small
-  0:52 Item: 2 item_health
-  0:55 Kill: 2 3 7: Hossman killed Daemia by MOD_ROCKET_SPLASH
-  0:56 Item: 1 weapon_plasmagun
-  0:56 Item: 0 weapon_rocketlauncher
-  0:58 say: Daemia: Te veo en el infierno!
-  0:58 Item: 0 item_quad
-  0:58 Item: 3 ammo_cells
-  0:58 Item: 0 item_health
-  0:58 Kill: 0 2 7: UnnamedPlayer killed Hossman by MOD_ROCKET_SPLASH
-  1:00 Item: 0 weapon_rocketlauncher
-  1:01 Item: 2 ammo_bullets
-  1:02 Item: 2 ammo_cells
-  1:02 Item: 0 weapon_rocketlauncher
-  1:05 Item: 2 weapon_plasmagun
-  1:07 Item: 0 ammo_bullets
-  1:07 Item: 0 ammo_shells
-  1:07 Item: 0 ammo_rockets
-  1:08 Item: 0 item_health_mega
-  1:10 Item: 0 item_armor_body
-  1:10 Kill: 2 3 8: Hossman killed Daemia by MOD_PLASMA
-  1:11 Item: 2 weapon_rocketlauncher
-  1:12 Item: 0 ammo_cells
-  1:13 Item: 3 weapon_plasmagun
-  1:14 Kill: 2 1 6: Hossman killed Orbb by MOD_ROCKET
-  1:14 Item: 2 weapon_plasmagun
-  1:18 Kill: 0 2 7: UnnamedPlayer killed Hossman by MOD_ROCKET_SPLASH
-  1:20 Item: 2 weapon_plasmagun
-  1:20 Item: 0 item_armor_combat
-  1:21 Item: 0 weapon_rocketlauncher
-  1:21 Item: 3 weapon_rocketlauncher
-  1:22 Item: 0 ammo_cells
-  1:22 Item: 0 ammo_slugs
-  1:22 Item: 0 ammo_bullets
-  1:22 Item: 0 ammo_rockets
-  1:25 Kill: 3 3 7: Daemia killed Daemia by MOD_ROCKET_SPLASH
-  1:25 Item: 0 item_health_small
-  1:25 Item: 0 item_health_small
-  1:26 Item: 2 ammo_shells
-  1:26 Item: 2 ammo_rockets
-  1:27 Item: 0 weapon_plasmagun
-  1:27 say: Daemia: Someone had to do it. I was getting tired of you being last every time, .
-  1:28 Item: 1 weapon_rocketlauncher
-  1:30 Item: 1 weapon_rocketlauncher
-  1:30 Item: 0 ammo_bullets
-  1:31 Item: 0 ammo_slugs
-  1:34 Kill: 1 1 7: Orbb killed Orbb by MOD_ROCKET_SPLASH
-  1:40 Item: 2 item_health
-  1:41 Item: 1 weapon_plasmagun
-  1:43 Kill: 2 3 8: Hossman killed Daemia by MOD_PLASMA
-  1:43 Item: 0 weapon_rocketlauncher
-  1:44 Item: 0 weapon_rocketlauncher
-  1:45 Item: 3 ammo_bullets
-  1:46 Item: 3 ammo_cells
-  1:49 Item: 0 item_armor_combat
-  1:49 Item: 3 weapon_plasmagun
-  1:51 Item: 2 weapon_rocketlauncher
-  1:53 Item: 2 item_health
-  1:53 Item: 2 item_health
-  1:54 Item: 0 item_health_small
-  1:54 Item: 0 item_health_small
-  1:54 Item: 0 item_health_small
-  1:55 Item: 1 item_health
-  1:56 Item: 0 weapon_plasmagun
-  1:59 Kill: 2 2 7: Hossman killed Hossman by MOD_ROCKET_SPLASH
-  1:59 Item: 3 weapon_rocketlauncher
-  1:59 Item: 1 ammo_rockets
-  1:59 Item: 1 ammo_shells
-  2:05 Item: 2 weapon_plasmagun
-  2:06 Item: 3 weapon_shotgun
-  2:06 Item: 1 weapon_rocketlauncher
-  2:07 Item: 3 item_health
-  2:12 Item: 2 item_health_small
-  2:12 Item: 2 item_health_small
-  2:12 Item: 1 ammo_bullets
-  2:13 Item: 0 weapon_rocketlauncher
-  2:13 Item: 1 ammo_slugs
-  2:14 Item: 2 ammo_rockets
-  2:15 Item: 2 ammo_shells
-  2:15 Item: 3 item_armor_body
-  2:17 Item: 1 weapon_plasmagun
-  2:21 Kill: 3 1 1: Daemia killed Orbb by MOD_SHOTGUN
-  2:21 Item: 2 weapon_rocketlauncher
-  2:22 Item: 3 weapon_plasmagun
-  2:24 Item: 1 item_armor_combat
-  2:26 Item: 1 ammo_cells
-  2:27 Item: 1 ammo_slugs
-  2:27 Item: 1 ammo_bullets
-  2:27 Item: 1 ammo_rockets
-  2:28 Item: 0 ammo_shells
-  2:29 Item: 0 ammo_rockets
-  2:29 Item: 2 ammo_bullets
-  2:29 Item: 0 item_health_mega
-  2:33 Item: 2 ammo_cells
-  2:33 Item: 3 weapon_plasmagun
-  2:33 Item: 0 ammo_cells
-  2:34 Kill: 3 1 1: Daemia killed Orbb by MOD_SHOTGUN
-  2:36 Item: 2 weapon_shotgun
-  2:37 Item: 1 ammo_cells
-  2:37 Item: 1 ammo_bullets
-  2:37 Item: 0 weapon_rocketlauncher
-  2:42 Item: 1 ammo_rockets
-  2:42 Item: 1 ammo_shells
-  2:43 say: Daemia: El que rie de ultimo rie mejor.
-  2:43 Item: 2 weapon_plasmagun
-  2:46 Item: 0 item_health_small
-  2:46 Item: 3 weapon_rocketlauncher
-  2:46 Item: 0 item_health_small
-  2:46 Item: 0 item_health_small
-  2:49 Item: 2 item_quad
-  2:50 Kill: 3 1 1: Daemia killed Orbb by MOD_SHOTGUN
-  2:50 Kill: 0 2 6: UnnamedPlayer killed Hossman by MOD_ROCKET
-  2:52 Item: 0 weapon_rocketlauncher
-  2:52 Item: 0 item_quad
-  2:52 say: Orbb: You make this unit die good, daemia!
-  2:52 Item: 1 weapon_plasmagun
-  2:53 Item: 3 item_health
-  2:53 Item: 3 item_health
-  2:55 Item: 0 weapon_rocketlauncher
-  2:56 Kill: 1 2 8: Orbb killed Hossman by MOD_PLASMA
-  2:58 say: Hossman: You better have eyes in the back of your head, orbb.
-  2:59 Item: 3 item_armor_combat
-  3:01 Item: 0 item_armor_body
-  3:03 Item: 1 weapon_rocketlauncher
-  3:03 Item: 2 item_health
-  3:04 ShutdownGame:
-  3:04 ------------------------------------------------------------
+0.0 ------------------------------------------------------------
+0.0 InitGame: \sv_allowDownload\1\capturelimit\8\sv_floodProtect\0\sv_maxPing\0\sv_minPing\0\sv_dlRate\100\sv_maxRate\0\sv_minRate\0\sv_maxclients\14\sv_hostname\OSP Tourney DM/CA/CTF\timelimit\0\fraglimit\20\dmflags\0\version\ioq3 1.36_GIT_c7ebe821-2018-08-02 linux-x86_64 Aug 16 2018\com_gamename\Quake3Arena\com_protocol\71\g_gametype\0\mapname\ospdm1\sv_privateClients\0\server_ospauth\1\gamename\osp\gameversion\OSP v1.03a\server_promode\0\g_needpass\0\server_freezetag\0
+0.0 ServerTime:	20180816162623	16:26:23 (16 Aug 2018)
+0.0 Warmup:
+2.5 ShutdownGame:
+2.5 ------------------------------------------------------------
+2.5 ------------------------------------------------------------
+2.5 InitGame: \sv_allowDownload\1\capturelimit\8\sv_floodProtect\0\sv_maxPing\0\sv_minPing\0\sv_dlRate\100\sv_maxRate\0\sv_minRate\0\sv_maxclients\14\sv_hostname\OSP Tourney DM/CA/CTF\timelimit\20\fraglimit\30\dmflags\0\version\ioq3 1.36_GIT_c7ebe821-2018-08-02 linux-x86_64 Aug 16 2018\com_gamename\Quake3Arena\com_protocol\71\g_gametype\0\mapname\ospdm1\sv_privateClients\0\server_ospauth\1\gamename\osp\gameversion\OSP v1.03a\server_promode\0\g_needpass\0\server_freezetag\0
+2.5 ServerTime:	20180816162625	16:26:25 (16 Aug 2018)
+2.5 Warmup:
+206.9 ClientConnect: 0
+206.9 ClientUserinfoChanged: 0 n\ru\t\0\model\crash/default\hmodel\crash/default\c1\2\c2\5\hc\100\w\0\l\0\rt\0\st\0
+214.3 ClientUserinfoChanged: 0 n\ru\t\0\model\crash/default\hmodel\crash/default\c1\3\c2\5\hc\100\w\0\l\0\rt\0\st\0
+214.3 ClientBegin: 0
+227.4 ClientDisconnect: 0
+227.4 Weapon_Stats: 0 Given:0 Recvd:0 Armor:0 Health:0
+251.9 ShutdownGame:
+251.9 ------------------------------------------------------------
+0.0 ------------------------------------------------------------
+0.0 InitGame: \dmflags\0\fraglimit\30\timelimit\20\sv_hostname\OSP Tourney DM/CA/CTF\sv_maxclients\14\sv_minRate\0\sv_maxRate\0\sv_dlRate\100\sv_minPing\0\sv_maxPing\0\sv_floodProtect\0\capturelimit\8\version\ioq3 1.36_GIT_c7ebe821-2018-08-02 linux-x86_64 Aug 16 2018\com_gamename\Quake3Arena\com_protocol\71\g_gametype\0\mapname\ospdm1\sv_privateClients\0\sv_allowDownload\1\server_ospauth\1\gamename\osp\gameversion\OSP v1.03a\server_promode\0\g_needpass\0\server_freezetag\0
+0.0 ServerTime:	20180816165616	16:56:16 (16 Aug 2018)
+0.0 Warmup:
+2.5 ShutdownGame:
+2.5 ------------------------------------------------------------
+2.5 ------------------------------------------------------------
+2.5 InitGame: \dmflags\0\fraglimit\30\timelimit\20\sv_hostname\OSP Tourney DM/CA/CTF\sv_maxclients\14\sv_minRate\0\sv_maxRate\0\sv_dlRate\100\sv_minPing\0\sv_maxPing\0\sv_floodProtect\0\capturelimit\8\version\ioq3 1.36_GIT_c7ebe821-2018-08-02 linux-x86_64 Aug 16 2018\com_gamename\Quake3Arena\com_protocol\71\g_gametype\0\mapname\ospdm1\sv_privateClients\0\sv_allowDownload\1\server_ospauth\1\gamename\osp\gameversion\OSP v1.03a\server_promode\0\g_needpass\0\server_freezetag\0
+2.5 ServerTime:	20180816165618	16:56:18 (16 Aug 2018)
+2.5 Warmup:
+377.5 ShutdownGame:
+377.5 ------------------------------------------------------------
+0.0 ------------------------------------------------------------
+0.0 InitGame: \capturelimit\8\sv_floodProtect\0\sv_maxPing\0\sv_minPing\0\sv_dlRate\100\sv_maxRate\0\sv_minRate\0\sv_maxclients\14\sv_hostname\StrikeNet.com - OSP Tourney DM/CA/CTF\timelimit\20\fraglimit\30\dmflags\0\version\ioq3 1.36_GIT_c7ebe821-2018-08-02 linux-x86_64 Aug 16 2018\com_gamename\Quake3Arena\com_protocol\71\g_gametype\0\mapname\ospdm1\sv_privateClients\0\sv_allowDownload\1\server_ospauth\1\gamename\osp\gameversion\OSP v1.03a\server_promode\0\g_needpass\0\server_freezetag\0
+0.0 ServerTime:	20180816170233	17:02:33 (16 Aug 2018)
+0.0 Warmup:
+2.5 ShutdownGame:
+2.5 ------------------------------------------------------------
+2.5 ------------------------------------------------------------
+2.5 InitGame: \capturelimit\8\sv_floodProtect\0\sv_maxPing\0\sv_minPing\0\sv_dlRate\100\sv_maxRate\0\sv_minRate\0\sv_maxclients\14\sv_hostname\StrikeNet.com - OSP Tourney DM/CA/CTF\timelimit\20\fraglimit\30\dmflags\0\version\ioq3 1.36_GIT_c7ebe821-2018-08-02 linux-x86_64 Aug 16 2018\com_gamename\Quake3Arena\com_protocol\71\g_gametype\0\mapname\ospdm1\sv_privateClients\0\sv_allowDownload\1\server_ospauth\1\gamename\osp\gameversion\OSP v1.03a\server_promode\0\g_needpass\0\server_freezetag\0
+2.5 ServerTime:	20180816170234	17:02:34 (16 Aug 2018)
+2.5 Warmup:
+252.5 ClientConnect: 0
+252.5 ClientUserinfoChanged: 0 n\ru\t\0\model\crash/default\hmodel\crash/default\c1\2\c2\5\hc\100\w\0\l\0\rt\0\st\0
+259.1 ClientUserinfoChanged: 0 n\ru\t\0\model\crash/default\hmodel\crash/default\c1\3\c2\5\hc\100\w\0\l\0\rt\0\st\0
+259.1 ClientBegin: 0
+281.7 say: ru: ping
+285.0 say: ru: ping 195.201.30.139
+300.8 ClientDisconnect: 0
+300.8 Weapon_Stats: 0 Given:0 Recvd:0 Armor:0 Health:0
+653.7 ClientConnect: 0
+653.7 ClientUserinfoChanged: 0 n\ru\t\0\model\crash/default\hmodel\crash/default\c1\2\c2\5\hc\100\w\0\l\0\rt\0\st\0
+662.5 ClientUserinfoChanged: 0 n\ru\t\0\model\crash/default\hmodel\crash/default\c1\3\c2\5\hc\100\w\0\l\0\rt\0\st\0
+662.5 ClientBegin: 0
+676.7 say: ru: callvote mode
+696.3 Vote Passed: ALLOW Railgun-only Instagib
+707.1 Vote Passed: map q3dm17
+707.1 Exit: Voted: map q3dm17
+707.1 score: 0  ping: 50  client: 0 ru
+715.9 ShutdownGame:
+715.9 ------------------------------------------------------------
+0.0 ------------------------------------------------------------
+0.0 InitGame: \capturelimit\8\sv_floodProtect\0\sv_maxPing\0\sv_minPing\0\sv_dlRate\100\sv_maxRate\0\sv_minRate\0\sv_maxclients\14\sv_hostname\StrikeNet.com - OSP Tourney DM/CA/CTF\timelimit\20\fraglimit\30\dmflags\0\version\ioq3 1.36_GIT_c7ebe821-2018-08-02 linux-x86_64 Aug 16 2018\com_gamename\Quake3Arena\com_protocol\71\g_gametype\0\mapname\q3dm17\sv_privateClients\0\sv_allowDownload\1\server_ospauth\1\gamename\osp\gameversion\OSP v1.03a\Players_Active\1 \server_promode\0\g_needpass\0\server_freezetag\0
+0.0 ServerTime:	20180816171428	17:14:28 (16 Aug 2018)
+0.0 Warmup:
+0.2 ClientConnect: 0
+0.2 ClientUserinfoChanged: 0 n\ru\t\0\model\crash/default\hmodel\crash/default\c1\3\c2\5\hc\100\w\0\l\0\rt\0\st\0
+4.9 ClientUserinfoChanged: 0 n\ru\t\0\model\crash/default\hmodel\crash/default\c1\3\c2\5\hc\100\w\0\l\0\rt\0\st\0
+4.9 ClientBegin: 0
+29.1 ClientDisconnect: 0
+29.1 Weapon_Stats: 0 Given:0 Recvd:0 Armor:0 Health:0
+10309.2 ClientConnect: 0
+10309.2 ClientUserinfoChanged: 0 n\Varolf\t\0\model\doom/default\hmodel\doom/default\c1\2\c2\5\hc\100\w\0\l\0\rt\0\st\0
+10310.5 ClientUserinfoChanged: 0 n\Varolf\t\0\model\doom/default\hmodel\doom/default\c1\2\c2\5\hc\100\w\0\l\0\rt\0\st\0
+10310.5 ClientDisconnect: 0
+10310.5 Weapon_Stats: 0 Given:0 Recvd:0 Armor:0 Health:0
+77792.8 ShutdownGame:
+77792.8 ------------------------------------------------------------
+0.0 ------------------------------------------------------------
+0.0 InitGame: \dmflags\0\fraglimit\30\timelimit\20\sv_hostname\StrikeNet.com - OSP Tourney DM/CA/CTF\sv_maxclients\14\sv_minRate\0\sv_maxRate\0\sv_dlRate\100\sv_minPing\0\sv_maxPing\0\sv_floodProtect\0\capturelimit\8\version\ioq3 1.36_GIT_c7ebe821-2018-08-02 linux-x86_64 Aug 16 2018\com_gamename\Quake3Arena\com_protocol\71\g_gametype\0\mapname\ospdm1\sv_privateClients\0\sv_allowDownload\1\server_ospauth\1\gamename\osp\gameversion\OSP v1.03a\server_promode\0\g_needpass\0\server_freezetag\0
+0.0 ServerTime:	20180817145106	14:51:06 (17 Aug 2018)
+0.0 Warmup:
+2.5 ShutdownGame:
+2.5 ------------------------------------------------------------
+2.5 ------------------------------------------------------------
+2.5 InitGame: \dmflags\0\fraglimit\30\timelimit\20\sv_hostname\StrikeNet.com - OSP Tourney DM/CA/CTF\sv_maxclients\14\sv_minRate\0\sv_maxRate\0\sv_dlRate\100\sv_minPing\0\sv_maxPing\0\sv_floodProtect\0\capturelimit\8\version\ioq3 1.36_GIT_c7ebe821-2018-08-02 linux-x86_64 Aug 16 2018\com_gamename\Quake3Arena\com_protocol\71\g_gametype\0\mapname\ospdm1\sv_privateClients\0\sv_allowDownload\1\server_ospauth\1\gamename\osp\gameversion\OSP v1.03a\server_promode\0\g_needpass\0\server_freezetag\0
+2.5 ServerTime:	20180817145107	14:51:07 (17 Aug 2018)
+2.5 Warmup:
+107.1 ClientConnect: 0
+107.1 ClientUserinfoChanged: 0 n\ru\t\0\model\crash/default\hmodel\crash/default\c1\2\c2\5\hc\100\w\0\l\0\rt\0\st\0
+119.2 ClientUserinfoChanged: 0 n\ru\t\0\model\crash/default\hmodel\crash/default\c1\3\c2\5\hc\100\w\0\l\0\rt\0\st\0
+119.2 ClientBegin: 0
+128.6 say: ru: rcon map q3dm17
+132.4 ShutdownGame:
+132.4 ------------------------------------------------------------
+0.0 ------------------------------------------------------------
+0.0 InitGame: \dmflags\0\fraglimit\30\timelimit\20\sv_hostname\StrikeNet.com - OSP Tourney DM/CA/CTF\sv_maxclients\14\sv_minRate\0\sv_maxRate\0\sv_dlRate\100\sv_minPing\0\sv_maxPing\0\sv_floodProtect\0\capturelimit\8\version\ioq3 1.36_GIT_c7ebe821-2018-08-02 linux-x86_64 Aug 16 2018\com_gamename\Quake3Arena\com_protocol\71\g_gametype\0\mapname\q3dm17\sv_privateClients\0\sv_allowDownload\1\server_ospauth\1\gamename\osp\gameversion\OSP v1.03a\Players_Active\1 \server_promode\0\g_needpass\0\server_freezetag\0
+0.0 ServerTime:	20180817145317	14:53:17 (17 Aug 2018)
+0.0 Warmup:
+0.2 ClientConnect: 0
+0.2 ClientUserinfoChanged: 0 n\ru\t\0\model\crash/default\hmodel\crash/default\c1\3\c2\5\hc\100\w\0\l\0\rt\0\st\0
+4.6 ClientUserinfoChanged: 0 n\ru\t\0\model\crash/default\hmodel\crash/default\c1\3\c2\5\hc\100\w\0\l\0\rt\0\st\0
+4.6 ClientBegin: 0
+11.3 ClientConnect: 1
+11.3 ClientUserinfoChanged: 1 n\Orbb\t\0\model\orbb\hmodel\orbb\c1\\c2\\hc\100\w\0\l\0\skill\ 4.00\rt\0
+11.3 ClientBegin: 1
+15.7 ClientConnect: 2
+15.7 ClientUserinfoChanged: 2 n\Mynx\t\0\model\mynx\hmodel\mynx\c1\\c2\\hc\100\w\0\l\0\skill\ 4.00\rt\0
+15.7 ClientBegin: 2
+21.3 ClientConnect: 3
+21.3 ClientUserinfoChanged: 3 n\^1A^2n^3a^4r^5k^6i\t\0\model\anarki\hmodel\anarki\c1\\c2\\hc\100\w\0\l\0\skill\ 4.00\rt\0
+21.3 ClientBegin: 3
+27.1 ClientConnect: 4
+27.1 ClientUserinfoChanged: 4 n\Xaero\t\0\model\xaero\hmodel\xaero\c1\\c2\\hc\100\w\0\l\0\skill\ 4.00\rt\0
+27.1 ClientBegin: 4
+30.4 ShutdownGame:
+30.4 ------------------------------------------------------------
+30.4 ------------------------------------------------------------
+30.4 InitGame: \dmflags\0\fraglimit\30\timelimit\20\sv_hostname\StrikeNet.com - OSP Tourney DM/CA/CTF\sv_maxclients\14\sv_minRate\0\sv_maxRate\0\sv_dlRate\100\sv_minPing\0\sv_maxPing\0\sv_floodProtect\0\capturelimit\8\version\ioq3 1.36_GIT_c7ebe821-2018-08-02 linux-x86_64 Aug 16 2018\com_gamename\Quake3Arena\com_protocol\71\g_gametype\0\mapname\q3dm17\sv_privateClients\0\sv_allowDownload\1\server_ospauth\1\gamename\osp\gameversion\OSP v1.03a\Players_Active\1 2 3 4 5 \server_promode\0\g_needpass\0\server_freezetag\0
+30.4 ServerTime:	20180817145347	14:53:47 (17 Aug 2018)
+30.4 Game_Start:
+30.6 ClientConnect: 0
+30.6 ClientUserinfoChanged: 0 n\ru\t\0\model\crash/default\hmodel\crash/default\c1\3\c2\5\hc\100\w\0\l\0\rt\0\st\0
+30.6 ClientBegin: 0
+30.6 ClientConnect: 1
+30.6 ClientUserinfoChanged: 1 n\Orbb\t\0\model\orbb\hmodel\orbb\c1\\c2\\hc\100\w\0\l\0\skill\ 4.00\rt\0
+30.6 ClientBegin: 1
+30.6 ClientConnect: 2
+30.6 ClientUserinfoChanged: 2 n\Mynx\t\0\model\mynx\hmodel\mynx\c1\\c2\\hc\100\w\0\l\0\skill\ 4.00\rt\0
+30.6 ClientBegin: 2
+30.6 ClientConnect: 3
+30.6 ClientUserinfoChanged: 3 n\^1A^2n^3a^4r^5k^6i\t\0\model\anarki\hmodel\anarki\c1\\c2\\hc\100\w\0\l\0\skill\ 4.00\rt\0
+30.6 ClientBegin: 3
+30.6 ClientConnect: 4
+30.6 ClientUserinfoChanged: 4 n\Xaero\t\0\model\xaero\hmodel\xaero\c1\\c2\\hc\100\w\0\l\0\skill\ 4.00\rt\0
+30.6 ClientBegin: 4
+32.8 Item: 4 ammo_rockets
+33.1 Item: 1 weapon_rocketlauncher
+33.3 Item: 2 weapon_rocketlauncher
+35.5 Item: 4 item_armor_body
+37.2 Kill: 0 0 24: ru killed ru by MOD_SWITCHTEAM 2
+37.2 ClientUserinfoChanged: 0 n\ru\t\3\model\crash/default\hmodel\crash/default\c1\3\c2\5\hc\100\w\0\l\0\rt\3\st\0
+37.2 ClientBegin: 0
+38.0 Item: 3 ammo_slugs
+38.7 Item: 3 ammo_slugs
+38.9 Item: 2 ammo_shells
+39.3 Item: 4 item_health_large
+39.6 Item: 2 weapon_shotgun
+41.1 Item: 1 ammo_bullets
+41.3 Item: 3 weapon_railgun
+42.6 Item: 2 item_health_large
+42.8 Item: 3 item_health
+43.8 Item: 4 item_health_large
+44.9 Item: 3 item_health
+45.1 Kill: 3 4 10: ^1A^2n^3a^4r^5k^6i killed Xaero by MOD_RAILGUN 2
+45.5 Item: 1 ammo_shells
+46.1 Item: 1 weapon_shotgun
+47.5 Kill: 1022 3 22: <world> killed ^1A^2n^3a^4r^5k^6i by MOD_TRIGGER_HURT 7
+49.3 Item: 4 weapon_rocketlauncher
+49.6 say: ^1A^2n^3a^4r^5k^6i: There's a report card I am not taking home, d00d.
+51.0 Item: 1 item_armor_shard
+51.1 Item: 1 item_armor_shard
+51.2 Item: 1 item_armor_shard
+51.4 Item: 1 item_armor_combat
+52.1 ClientDisconnect: 0
+52.1 Weapon_Stats: 0 Given:0 Recvd:0 Armor:0 Health:0
+53.5 Item: 4 ammo_bullets
+53.8 Item: 1 item_armor_shard
+54.0 Item: 1 item_armor_shard
+54.1 Item: 1 item_armor_shard
+56.1 Item: 3 ammo_rockets
+57.5 Kill: 1 2 1: Orbb killed Mynx by MOD_SHOTGUN 3
+57.9 Item: 1 weapon_shotgun
+57.9 Kill: 4 3 6: Xaero killed ^1A^2n^3a^4r^5k^6i by MOD_ROCKET 2
+58.3 Item: 1 item_health_large
+59.7 say: Mynx: Let's dance that tune again ... but this time I lead.
+60.6 Item: 4 weapon_railgun
+61.8 ClientConnect: 0
+61.8 ClientUserinfoChanged: 0 n\Billy Hardy\t\0\model\uriel/default\hmodel\uriel/default\c1\1\c2\5\hc\100\w\0\l\0\rt\0\st\0
+62.2 Item: 3 weapon_rocketlauncher
+64.1 ClientDisconnect: 0
+64.1 Weapon_Stats: 0 Given:0 Recvd:0 Armor:0 Health:0
+65.6 Item: 4 weapon_rocketlauncher
+65.7 Kill: 3 2 7: ^1A^2n^3a^4r^5k^6i killed Mynx by MOD_ROCKET_SPLASH 2
+71.2 Item: 1 weapon_rocketlauncher
+74.0 Kill: 4 3 10: Xaero killed ^1A^2n^3a^4r^5k^6i by MOD_RAILGUN 5
+75.6 Item: 2 weapon_shotgun
+76.1 Item: 4 weapon_rocketlauncher
+76.1 say: ^1A^2n^3a^4r^5k^6i: who is the Man? who is the Man?
+78.5 Kill: 1 4 6: Orbb killed Xaero by MOD_ROCKET 5
+80.4 Item: 2 item_armor_body
+80.6 say: Xaero: there's no trophy greater. I pray you are worthy, orbb.
+81.1 Item: 3 weapon_rocketlauncher
+82.8 Item: 4 weapon_rocketlauncher
+84.6 Item: 2 weapon_rocketlauncher
+85.2 Kill: 4 3 6: Xaero killed ^1A^2n^3a^4r^5k^6i by MOD_ROCKET 5
+85.4 Kill: 1 2 1: Orbb killed Mynx by MOD_SHOTGUN 3
+85.8 Kill: 4 1 7: Xaero killed Orbb by MOD_ROCKET_SPLASH 3
+88.0 say: Orbb: That was fun, xaero. Let us do it again.
+88.1 Item: 4 ammo_rockets
+90.3 Item: 2 weapon_shotgun
+90.8 Item: 2 weapon_shotgun
+92.0 Item: 2 weapon_rocketlauncher
+92.6 Kill: 4 3 6: Xaero killed ^1A^2n^3a^4r^5k^6i by MOD_ROCKET 2
+93.9 Item: 1 weapon_rocketlauncher
+98.9 Item: 3 weapon_rocketlauncher
+99.3 Item: 2 ammo_rockets
+101.8 Item: 1 item_quad
+102.1 Item: 2 ammo_bullets
+103.1 Item: 4 ammo_slugs
+104.0 Item: 4 ammo_slugs
+106.5 Item: 4 weapon_railgun
+107.0 Kill: 4 2 6: Xaero killed Mynx by MOD_ROCKET 5
+107.2 Kill: 4 1 10: Xaero killed Orbb by MOD_RAILGUN 2
+107.8 Item: 4 item_health
+109.2 say: Mynx: Let's dance that tune again ... but this time I lead.
+109.8 Item: 3 item_armor_body
+109.8 Item: 4 item_health
+111.1 Item: 1 weapon_rocketlauncher
+112.4 Kill: 1022 4 22: <world> killed Xaero by MOD_TRIGGER_HURT 7
+113.7 Item: 3 item_quad
+114.5 say: Xaero: I err. This is a new experience.
+115.0 Item: 2 weapon_rocketlauncher
+116.2 Kill: 1022 3 22: <world> killed ^1A^2n^3a^4r^5k^6i by MOD_TRIGGER_HURT 2
+120.2 Item: 3 weapon_rocketlauncher
+120.2 Item: 1 item_health_large
+122.7 Item: 2 ammo_shells
+123.3 Item: 2 weapon_shotgun
+125.1 Kill: 1022 3 22: <world> killed ^1A^2n^3a^4r^5k^6i by MOD_TRIGGER_HURT 2
+128.9 Item: 3 weapon_rocketlauncher
+129.8 Item: 2 item_armor_shard
+129.9 Item: 2 item_armor_shard
+130.0 Item: 2 item_armor_shard
+130.1 Item: 4 weapon_railgun
+130.2 Item: 2 item_armor_combat
+132.5 Item: 2 item_armor_shard
+132.7 Item: 2 item_armor_shard
+132.8 Item: 2 item_armor_shard
+133.7 Kill: 1022 4 22: <world> killed Xaero by MOD_TRIGGER_HURT 7
+137.7 Item: 4 weapon_rocketlauncher
+138.9 Item: 2 item_health_large
+139.0 Kill: 4 1 6: Xaero killed Orbb by MOD_ROCKET 1
+141.1 Kill: 1022 3 22: <world> killed ^1A^2n^3a^4r^5k^6i by MOD_TRIGGER_HURT 2
+141.2 say: Orbb: Yeah, Baby, YEAH!
+141.7 Kill: 1022 2 22: <world> killed Mynx by MOD_TRIGGER_HURT 2
+143.2 say: ^1A^2n^3a^4r^5k^6i: There's a report card I am not taking home, d00d.
+143.5 Item: 1 weapon_rocketlauncher
+143.8 say: Mynx: Well, orbb, you said you like to watch...
+144.0 Item: 4 item_armor_body
+145.6 Item: 3 weapon_rocketlauncher
+146.2 Item: 3 ammo_rockets
+147.3 Item: 4 ammo_slugs
+148.8 Item: 4 ammo_slugs
+153.0 Item: 3 weapon_rocketlauncher
+153.6 Kill: 3 2 7: ^1A^2n^3a^4r^5k^6i killed Mynx by MOD_ROCKET_SPLASH 2
+155.5 Kill: 1022 4 22: <world> killed Xaero by MOD_TRIGGER_HURT 2
+158.1 Kill: 3 1 7: ^1A^2n^3a^4r^5k^6i killed Orbb by MOD_ROCKET_SPLASH 2
+158.4 Item: 3 item_armor_shard
+158.5 Item: 3 item_armor_shard
+158.6 Item: 3 item_armor_shard
+161.5 Item: 2 ammo_bullets
+162.0 Item: 1 ammo_rockets
+162.4 Item: 3 item_health_large
+163.3 Item: 1 weapon_rocketlauncher
+164.8 Item: 3 ammo_shells
+165.5 Item: 3 weapon_shotgun
+168.7 Item: 2 item_armor_shard
+168.9 Item: 2 item_armor_shard
+168.9 Kill: 3 2 1: ^1A^2n^3a^4r^5k^6i killed Mynx by MOD_SHOTGUN 2
+169.2 Item: 3 item_armor_shard
+169.4 Item: 3 item_armor_combat
+170.6 Kill: 1022 4 22: <world> killed Xaero by MOD_TRIGGER_HURT 2
+171.0 say: Mynx: Figures. Fragged on the day I don't wear clean underwear.
+172.7 say: Xaero: A true warrior controls the fight, from beginning to end.
+174.7 Kill: 1022 1 22: <world> killed Orbb by MOD_TRIGGER_HURT 2
+175.2 Item: 4 weapon_rocketlauncher
+176.0 Kill: 1022 3 22: <world> killed ^1A^2n^3a^4r^5k^6i by MOD_TRIGGER_HURT 2
+177.3 Item: 4 item_armor_body
+180.8 Kill: 1 4 3: Orbb killed Xaero by MOD_MACHINEGUN 5
+181.7 Item: 3 weapon_rocketlauncher
+184.4 Item: 2 weapon_shotgun
+187.3 Kill: 1 4 3: Orbb killed Xaero by MOD_MACHINEGUN 2
+190.6 Kill: 2 3 1: Mynx killed ^1A^2n^3a^4r^5k^6i by MOD_SHOTGUN 5
+190.9 Item: 2 weapon_rocketlauncher
+192.1 Item: 2 weapon_rocketlauncher
+192.7 Item: 2 item_health_large
+192.7 say: ^1A^2n^3a^4r^5k^6i: Bow to the Mynxie d00d, king of the tube!
+195.3 Item: 3 weapon_rocketlauncher
+195.5 Item: 1 item_quad
+195.6 Item: 4 ammo_slugs
+197.3 Kill: 1022 2 22: <world> killed Mynx by MOD_TRIGGER_HURT 5
+198.4 Item: 4 weapon_railgun
+199.4 Kill: 3 1 6: ^1A^2n^3a^4r^5k^6i killed Orbb by MOD_ROCKET 1
+201.4 Kill: 2 3 3: Mynx killed ^1A^2n^3a^4r^5k^6i by MOD_MACHINEGUN 2
+201.6 say: Orbb: Ow! anarki hit this unit in blind side.
+202.2 Item: 2 ammo_rockets
+206.9 Item: 2 item_armor_body
+207.2 Item: 3 weapon_rocketlauncher
+208.2 Item: 3 ammo_rockets
+209.0 Kill: 1 2 3: Orbb killed Mynx by MOD_MACHINEGUN 2
+211.2 say: Mynx: Don't pity me. It's better than having to keep looking at Eyeball.
+211.8 Kill: 4 1 3: Xaero killed Orbb by MOD_MACHINEGUN 2
+213.3 Item: 3 ammo_bullets
+213.8 Item: 2 ammo_shells
+214.0 Item: 4 item_quad
+214.4 Item: 2 weapon_shotgun
+216.6 Item: 1 weapon_rocketlauncher
+217.4 Item: 3 item_health_large
+220.0 Item: 3 ammo_shells
+220.6 Item: 3 weapon_shotgun
+220.7 Item: 4 weapon_rocketlauncher
+223.8 Item: 3 item_armor_shard
+223.9 Item: 3 item_armor_shard
+224.0 Item: 3 item_armor_shard
+224.2 Item: 3 item_armor_combat
+226.3 Kill: 3 2 1: ^1A^2n^3a^4r^5k^6i killed Mynx by MOD_SHOTGUN 3
+228.2 Item: 3 weapon_shotgun
+228.7 Kill: 1 4 6: Orbb killed Xaero by MOD_ROCKET 5
+229.8 Item: 1 item_health_large
+230.0 Item: 2 weapon_rocketlauncher
+230.3 Item: 3 item_health_large
+230.8 say: Xaero: You are my peer, orbb. We are rare.
+233.2 Item: 1 weapon_rocketlauncher
+233.4 Item: 1 item_quad
+238.1 Item: 3 weapon_rocketlauncher
+239.2 Item: 2 weapon_shotgun
+242.5 Item: 1 item_quad
+243.1 Kill: 4 2 3: Xaero killed Mynx by MOD_MACHINEGUN 3
+245.2 say: Mynx: When I said, 'Over my dead body,' this wasn't what I meant.
+246.7 Item: 1 item_armor_body
+248.4 Kill: 1022 4 19: <world> killed Xaero by MOD_FALLING 2
+248.9 Kill: 1022 3 22: <world> killed ^1A^2n^3a^4r^5k^6i by MOD_TRIGGER_HURT 5
+250.3 Item: 2 weapon_shotgun
+252.2 Item: 4 ammo_rockets
+253.3 Item: 4 weapon_rocketlauncher
+253.4 Item: 1 item_health_large
+253.4 Kill: 2 4 1: Mynx killed Xaero by MOD_SHOTGUN 2
+253.8 Item: 3 weapon_rocketlauncher
+254.4 Kill: 3 2 6: ^1A^2n^3a^4r^5k^6i killed Mynx by MOD_ROCKET 3
+258.2 Item: 2 weapon_rocketlauncher
+259.6 Item: 3 weapon_shotgun
+263.0 Item: 4 weapon_rocketlauncher
+263.3 Item: 2 ammo_bullets
+263.9 Item: 1 ammo_bullets
+265.7 Kill: 1 4 3: Orbb killed Xaero by MOD_MACHINEGUN 5
+267.3 Item: 3 item_armor_shard
+267.5 Item: 3 item_armor_shard
+267.6 Item: 3 item_armor_shard
+267.7 Item: 3 item_armor_combat
+267.9 Item: 2 ammo_shells
+268.5 Item: 2 weapon_shotgun
+270.3 Item: 3 item_armor_shard
+270.4 Item: 3 item_armor_shard
+270.5 Item: 3 item_armor_shard
+271.9 Kill: 1022 2 22: <world> killed Mynx by MOD_TRIGGER_HURT 2
+273.7 Item: 3 item_health_large
+274.7 Item: 4 weapon_rocketlauncher
+274.9 Kill: 1022 1 22: <world> killed Orbb by MOD_TRIGGER_HURT 1
+275.8 Item: 2 weapon_rocketlauncher
+276.4 Item: 3 item_armor_body
+278.8 Item: 1 ammo_rockets
+279.3 Item: 2 ammo_shells
+280.0 Item: 2 weapon_shotgun
+280.3 Item: 1 weapon_rocketlauncher
+282.2 Item: 3 item_health_large
+282.6 Kill: 1 4 7: Orbb killed Xaero by MOD_ROCKET_SPLASH 5
+282.6 Item: 2 item_health_large
+287.6 Item: 3 weapon_rocketlauncher
+288.6 Kill: 1 3 6: Orbb killed ^1A^2n^3a^4r^5k^6i by MOD_ROCKET 5
+290.7 say: ^1A^2n^3a^4r^5k^6i: Who's the Man? Who's the Man?
+292.2 Item: 4 weapon_rocketlauncher
+293.3 Item: 3 weapon_rocketlauncher
+293.9 Item: 3 ammo_rockets
+294.5 Item: 1 item_quad
+298.0 Kill: 1022 2 19: <world> killed Mynx by MOD_FALLING 3
+299.1 Kill: 1 3 3: Orbb killed ^1A^2n^3a^4r^5k^6i by MOD_MACHINEGUN 5
+303.0 Item: 3 weapon_rocketlauncher
+303.2 Item: 1 weapon_rocketlauncher
+304.7 Item: 4 weapon_railgun
+306.8 Kill: 4 1 10: Xaero killed Orbb by MOD_RAILGUN 5
+308.3 Kill: 4 2 10: Xaero killed Mynx by MOD_RAILGUN 2
+309.1 Item: 4 item_health
+311.9 Item: 4 weapon_shotgun
+312.8 Kill: 4 3 10: Xaero killed ^1A^2n^3a^4r^5k^6i by MOD_RAILGUN 5
+312.9 Item: 2 item_armor_body
+313.1 Item: 4 weapon_rocketlauncher
+315.7 Item: 1 ammo_bullets
+316.6 Item: 3 weapon_rocketlauncher
+317.5 Item: 2 weapon_rocketlauncher
+318.4 Kill: 2 4 6: Mynx killed Xaero by MOD_ROCKET 3
+320.5 say: Xaero: My corpse is my shrine. Build well your own, mynx.
+320.9 Kill: 1022 2 22: <world> killed Mynx by MOD_TRIGGER_HURT 2
+322.0 Item: 3 weapon_shotgun
+323.6 Item: 1 item_armor_shard
+323.7 Item: 1 item_armor_shard
+323.8 Item: 1 item_armor_shard
+324.0 Item: 1 item_armor_combat
+325.3 Item: 2 weapon_rocketlauncher
+326.1 Kill: 2 3 7: Mynx killed ^1A^2n^3a^4r^5k^6i by MOD_ROCKET_SPLASH 5
+326.6 Item: 2 weapon_rocketlauncher
+327.5 Item: 1 item_health_large
+328.2 say: ^1A^2n^3a^4r^5k^6i: Catch some air, o' worthy old one, and hold your fists up high!
+329.3 Item: 4 weapon_rocketlauncher
+332.8 Kill: 1022 4 19: <world> killed Xaero by MOD_FALLING 5
+334.6 Item: 1 weapon_rocketlauncher
+336.7 Kill: 1 2 7: Orbb killed Mynx by MOD_ROCKET_SPLASH 5
+337.9 Item: 1 weapon_rocketlauncher
+338.3 Item: 3 ammo_rockets
+338.6 Item: 1 item_health_large
+341.0 Kill: 2 4 3: Mynx killed Xaero by MOD_MACHINEGUN 2
+344.2 Item: 3 ammo_bullets
+346.7 Item: 2 item_armor_body
+348.6 Item: 4 ammo_slugs
+349.2 Item: 3 ammo_shells
+349.9 Item: 3 weapon_shotgun
+350.1 Item: 4 ammo_slugs
+350.7 Item: 1 item_quad
+351.8 Item: 2 ammo_rockets
+352.9 Item: 4 weapon_railgun
+353.2 Kill: 2 1 3: Mynx killed Orbb by MOD_MACHINEGUN 5
+353.2 Item: 2 weapon_rocketlauncher
+354.0 Kill: 1022 3 22: <world> killed ^1A^2n^3a^4r^5k^6i by MOD_TRIGGER_HURT 2
+356.0 Kill: 1022 4 22: <world> killed Xaero by MOD_TRIGGER_HURT 7
+357.5 Item: 2 ammo_shells
+358.1 Item: 2 weapon_shotgun
+358.5 Item: 1 weapon_rocketlauncher
+360.1 Kill: 1 3 7: Orbb killed ^1A^2n^3a^4r^5k^6i by MOD_ROCKET_SPLASH 2
+362.0 Item: 1 item_health_large
+364.7 Kill: 3 2 3: ^1A^2n^3a^4r^5k^6i killed Mynx by MOD_MACHINEGUN 5
+365.8 Item: 1 item_quad
+365.9 Item: 3 weapon_rocketlauncher
+369.5 Item: 2 weapon_shotgun
+370.4 Kill: 1 3 3: Orbb killed ^1A^2n^3a^4r^5k^6i by MOD_MACHINEGUN 5
+373.9 Item: 4 weapon_rocketlauncher
+374.2 Item: 3 weapon_rocketlauncher
+376.0 Item: 2 weapon_rocketlauncher
+376.9 Kill: 2 1 1: Mynx killed Orbb by MOD_SHOTGUN 2
+377.3 Kill: 4 2 7: Xaero killed Mynx by MOD_ROCKET_SPLASH 3
+377.4 Kill: 1022 4 19: <world> killed Xaero by MOD_FALLING 5
+379.1 say: Orbb: You win the prize for that one.
+379.4 say: Mynx: Finally, someone who knows how to handle their weapon!
+381.2 Item: 2 ammo_rockets
+381.4 Item: 4 weapon_rocketlauncher
+384.3 Kill: 3 1 7: ^1A^2n^3a^4r^5k^6i killed Orbb by MOD_ROCKET_SPLASH 2
+385.1 Item: 2 weapon_rocketlauncher
+385.3 Item: 3 weapon_rocketlauncher
+387.5 Kill: 4 3 7: Xaero killed ^1A^2n^3a^4r^5k^6i by MOD_ROCKET_SPLASH 5
+389.3 Item: 2 item_armor_body
+389.4 Item: 1 weapon_rocketlauncher
+389.6 say: ^1A^2n^3a^4r^5k^6i: You must have, like, gone to church this morning, right xaero?
+391.6 Kill: 1 2 6: Orbb killed Mynx by MOD_ROCKET 5
+394.5 Item: 1 weapon_rocketlauncher
+395.8 Item: 2 weapon_rocketlauncher
+396.4 Item: 4 weapon_railgun
+399.0 Kill: 1022 4 22: <world> killed Xaero by MOD_TRIGGER_HURT 7
+400.6 Item: 3 weapon_rocketlauncher
+401.1 say: Xaero: there's honor in dying ... sometimes.
+401.5 Kill: 3 1 6: ^1A^2n^3a^4r^5k^6i killed Orbb by MOD_ROCKET 5
+405.5 Kill: 2 4 7: Mynx killed Xaero by MOD_ROCKET_SPLASH 2
+405.7 Item: 2 weapon_rocketlauncher
+410.6 Kill: 1022 2 19: <world> killed Mynx by MOD_FALLING 5
+410.8 Kill: 2 1 7: Mynx killed Orbb by MOD_ROCKET_SPLASH 2
+412.9 say: Orbb: You had me dead to rights with that one mynx.
+415.1 Item: 1 weapon_rocketlauncher
+415.7 Kill: 1 2 7: Orbb killed Mynx by MOD_ROCKET_SPLASH 2
+416.1 Item: 1 ammo_rockets
+417.6 Kill: 1022 4 22: <world> killed Xaero by MOD_TRIGGER_HURT 2
+418.3 Item: 3 item_armor_shard
+418.5 Item: 3 item_armor_shard
+418.6 Item: 3 item_armor_shard
+418.7 Item: 3 item_armor_combat
+419.4 Item: 1 item_health_large
+419.4 Item: 2 weapon_rocketlauncher
+419.8 Item: 2 weapon_rocketlauncher
+426.2 Item: 4 item_armor_body
+429.8 Item: 4 item_health_large
+432.2 Kill: 2 2 7: Mynx killed Mynx by MOD_ROCKET_SPLASH 5
+432.6 Item: 1 item_quad
+433.6 Item: 4 ammo_slugs
+434.4 say: Mynx: I hate it when that happens.
+435.7 Kill: 1 3 3: Orbb killed ^1A^2n^3a^4r^5k^6i by MOD_MACHINEGUN 1
+436.3 Item: 2 ammo_rockets
+436.5 Item: 4 weapon_railgun
+437.1 Kill: 4 1 10: Xaero killed Orbb by MOD_RAILGUN 2
+437.8 say: ^1A^2n^3a^4r^5k^6i: orbb! D00d, you have obviously been at this for a long time.
+438.4 Item: 4 item_health
+439.0 Item: 2 weapon_rocketlauncher
+439.2 say: Orbb: Camping Punk!
+440.0 Kill: 3 2 3: ^1A^2n^3a^4r^5k^6i killed Mynx by MOD_MACHINEGUN 2
+441.4 Item: 1 weapon_rocketlauncher
+443.7 Item: 3 weapon_rocketlauncher
+447.3 Item: 1 ammo_bullets
+447.4 Kill: 1022 4 22: <world> killed Xaero by MOD_TRIGGER_HURT 7
+447.5 Kill: 1022 3 22: <world> killed ^1A^2n^3a^4r^5k^6i by MOD_TRIGGER_HURT 5
+447.6 Item: 2 weapon_rocketlauncher
+448.1 Item: 2 weapon_rocketlauncher
+449.5 say: Xaero: It would seem that I have to do for you that which you can't do for yourselves.
+451.4 Kill: 2 1 7: Mynx killed Orbb by MOD_ROCKET_SPLASH 5
+451.9 Item: 3 item_armor_body
+453.2 Item: 4 weapon_rocketlauncher
+456.4 Item: 3 weapon_rocketlauncher
+457.8 Kill: 4 1 7: Xaero killed Orbb by MOD_ROCKET_SPLASH 2
+459.2 Item: 2 ammo_shells
+459.8 Item: 2 weapon_shotgun
+459.9 Kill: 3 4 6: ^1A^2n^3a^4r^5k^6i killed Xaero by MOD_ROCKET 5
+461.4 Item: 3 weapon_rocketlauncher
+461.5 Item: 1 ammo_rockets
+462.8 Item: 2 item_health_large
+463.5 Item: 1 weapon_rocketlauncher
+463.5 Item: 3 item_health_large
+464.8 Kill: 2 4 6: Mynx killed Xaero by MOD_ROCKET 2
+467.0 Item: 2 item_armor_shard
+468.4 Kill: 3 4 6: ^1A^2n^3a^4r^5k^6i killed Xaero by MOD_ROCKET 2
+471.0 Item: 2 item_armor_shard
+471.1 Kill: 4 1 3: Xaero killed Orbb by MOD_MACHINEGUN 5
+471.2 Item: 2 item_armor_shard
+471.3 Item: 2 item_armor_shard
+471.4 Item: 2 item_armor_combat
+473.0 Item: 4 weapon_rocketlauncher
+473.5 Item: 3 item_health_large
+474.0 Item: 2 item_armor_shard
+474.1 Item: 2 item_armor_shard
+475.8 Kill: 4 1 7: Xaero killed Orbb by MOD_ROCKET_SPLASH 2
+477.9 say: Orbb: Some mighty fine shooting there, amigo.
+478.9 Item: 3 item_armor_body
+482.8 Item: 3 ammo_slugs
+483.3 Kill: 2 4 1: Mynx killed Xaero by MOD_SHOTGUN 5
+483.6 Item: 3 ammo_slugs
+486.4 Item: 3 weapon_railgun
+488.1 Item: 4 weapon_rocketlauncher
+490.7 Kill: 3 2 10: ^1A^2n^3a^4r^5k^6i killed Mynx by MOD_RAILGUN 2
+492.2 Kill: 3 4 10: ^1A^2n^3a^4r^5k^6i killed Xaero by MOD_RAILGUN 5
+494.9 Item: 1 item_quad
+496.3 Item: 4 weapon_rocketlauncher
+496.4 Item: 3 ammo_bullets
+499.0 Kill: 4 3 6: Xaero killed ^1A^2n^3a^4r^5k^6i by MOD_ROCKET 2
+501.1 say: ^1A^2n^3a^4r^5k^6i: I can't believe a lamer like you got me, xaero.
+502.3 Item: 1 ammo_bullets
+502.8 Item: 2 weapon_shotgun
+504.3 Kill: 4 4 7: Xaero killed Xaero by MOD_ROCKET_SPLASH 5
+505.2 Item: 2 weapon_rocketlauncher
+506.2 Kill: 3 2 3: ^1A^2n^3a^4r^5k^6i killed Mynx by MOD_MACHINEGUN 3
+506.3 Item: 3 weapon_shotgun
+506.5 Kill: 1 3 3: Orbb killed ^1A^2n^3a^4r^5k^6i by MOD_MACHINEGUN 2
+508.3 say: Mynx: Finally, someone who knows how to handle their weapon!
+509.0 Item: 1 weapon_rocketlauncher
+509.2 Item: 1 weapon_shotgun
+510.3 Item: 3 weapon_rocketlauncher
+511.0 Item: 1 item_armor_shard
+511.1 Item: 1 item_armor_shard
+511.2 Item: 1 item_armor_shard
+511.4 Item: 1 item_armor_combat
+512.9 Item: 4 weapon_rocketlauncher
+513.5 Item: 4 ammo_rockets
+515.3 Kill: 1022 3 22: <world> killed ^1A^2n^3a^4r^5k^6i by MOD_TRIGGER_HURT 2
+516.3 Kill: 1022 1 22: <world> killed Orbb by MOD_TRIGGER_HURT 2
+518.4 say: Orbb: Error. Error.
+519.0 Item: 2 ammo_shells
+519.6 Item: 4 item_armor_body
+519.7 Item: 2 weapon_shotgun
+520.7 Kill: 3 2 3: ^1A^2n^3a^4r^5k^6i killed Mynx by MOD_MACHINEGUN 3
+520.9 Item: 3 weapon_shotgun
+522.9 Item: 3 item_health_large
+524.7 Item: 2 weapon_rocketlauncher
+526.3 Kill: 3 4 1: ^1A^2n^3a^4r^5k^6i killed Xaero by MOD_SHOTGUN 5
+528.4 say: Xaero: There is no trophy greater. I pray you are worthy, anarki.
+530.4 Item: 4 ammo_rockets
+532.7 Item: 4 weapon_rocketlauncher
+532.8 Item: 2 ammo_shells
+533.5 Item: 2 weapon_shotgun
+536.4 Item: 2 item_health_large
+537.9 Item: 1 weapon_rocketlauncher
+539.5 Item: 3 weapon_railgun
+544.1 Kill: 3 4 10: ^1A^2n^3a^4r^5k^6i killed Xaero by MOD_RAILGUN 5
+544.7 Kill: 1022 2 19: <world> killed Mynx by MOD_FALLING 3
+545.9 Item: 3 weapon_railgun
+546.9 say: Mynx: I wanted a suntan, not a windburn.
+547.9 Item: 4 weapon_rocketlauncher
+549.6 Item: 1 item_quad
+550.5 Item: 1 item_armor_body
+551.6 Item: 3 weapon_shotgun
+553.3 Kill: 2 3 3: Mynx killed ^1A^2n^3a^4r^5k^6i by MOD_MACHINEGUN 3
+554.1 Item: 1 item_health_large
+556.0 Item: 4 weapon_shotgun
+556.1 Item: 1 weapon_shotgun
+556.6 Kill: 1 2 1: Orbb killed Mynx by MOD_SHOTGUN 2
+557.5 Item: 3 weapon_rocketlauncher
+564.1 Item: 3 item_health_large
+564.6 Kill: 1 4 1: Orbb killed Xaero by MOD_SHOTGUN 3
+564.8 Item: 2 weapon_rocketlauncher
+566.0 Item: 3 weapon_shotgun
+566.6 Kill: 1022 1 22: <world> killed Orbb by MOD_TRIGGER_HURT 3
+566.7 say: Xaero: My corpse is my shrine. Build well your own, orbb.
+568.7 say: Orbb: Oops.
+569.8 Item: 4 ammo_rockets
+572.2 Item: 2 ammo_shells
+572.7 Item: 2 weapon_shotgun
+574.9 Item: 4 ammo_slugs
+575.6 Kill: 4 3 3: Xaero killed ^1A^2n^3a^4r^5k^6i by MOD_MACHINEGUN 3
+575.7 Item: 2 item_armor_shard
+575.7 Item: 4 ammo_slugs
+575.9 Item: 2 item_armor_shard
+576.0 Item: 2 item_armor_shard
+576.2 Item: 2 item_armor_combat
+578.6 Item: 4 weapon_railgun
+580.1 Item: 4 item_health
+582.3 Kill: 2 3 1: Mynx killed ^1A^2n^3a^4r^5k^6i by MOD_SHOTGUN 2
+582.4 Item: 1 weapon_shotgun
+584.4 say: ^1A^2n^3a^4r^5k^6i: Catch some air, o' worthy old one, and hold your fists up high!
+586.2 Item: 1 weapon_railgun
+586.2 Item: 2 item_armor_body
+587.1 Item: 3 weapon_rocketlauncher
+588.5 Kill: 4 3 10: Xaero killed ^1A^2n^3a^4r^5k^6i by MOD_RAILGUN 5
+589.9 Kill: 1022 1 22: <world> killed Orbb by MOD_TRIGGER_HURT 7
+590.6 Kill: 2 4 1: Mynx killed Xaero by MOD_SHOTGUN 7
+592.4 Item: 3 weapon_rocketlauncher
+592.7 say: Xaero: It must be true: fate is a path of many unforeseeable twists and turns.
+594.3 Item: 2 weapon_rocketlauncher
+596.2 Item: 2 weapon_rocketlauncher
+598.1 Kill: 1022 4 19: <world> killed Xaero by MOD_FALLING 2
+598.2 Item: 2 ammo_bullets
+598.9 Item: 1 weapon_railgun
+601.6 Item: 2 item_health_large
+601.9 Item: 3 ammo_bullets
+603.7 Kill: 2 1 1: Mynx killed Orbb by MOD_SHOTGUN 7
+606.4 Item: 3 ammo_shells
+607.0 Item: 3 weapon_shotgun
+607.6 Kill: 1 4 3: Orbb killed Xaero by MOD_MACHINEGUN 2
+609.7 Item: 3 item_health_large
+611.0 Item: 4 weapon_railgun
+611.1 Item: 4 weapon_rocketlauncher
+612.4 Item: 3 item_armor_body
+615.1 Kill: 1 2 3: Orbb killed Mynx by MOD_MACHINEGUN 2
+615.1 Item: 4 ammo_rockets
+617.3 say: Mynx: Finally, someone who knows how to handle their weapon!
+618.1 Item: 3 weapon_railgun
+618.3 Item: 4 item_health_large
+618.9 Kill: 3 4 10: ^1A^2n^3a^4r^5k^6i killed Xaero by MOD_RAILGUN 5
+619.4 Item: 2 weapon_rocketlauncher
+621.0 say: Xaero: I feel the sting of an insignificant wasp, and yet, I fear I am allergic.
+621.7 Kill: 1022 3 22: <world> killed ^1A^2n^3a^4r^5k^6i by MOD_TRIGGER_HURT 7
+626.1 Kill: 1022 2 22: <world> killed Mynx by MOD_TRIGGER_HURT 5
+626.5 Item: 4 weapon_rocketlauncher
+630.0 Item: 2 weapon_rocketlauncher
+630.3 Kill: 1022 3 22: <world> killed ^1A^2n^3a^4r^5k^6i by MOD_TRIGGER_HURT 2
+631.9 Item: 1 item_quad
+632.1 Item: 4 item_health_large
+632.4 say: ^1A^2n^3a^4r^5k^6i: There's a report card I am not taking home, d00d.
+636.5 Kill: 1022 2 22: <world> killed Mynx by MOD_TRIGGER_HURT 5
+637.9 Kill: 3 1 3: ^1A^2n^3a^4r^5k^6i killed Orbb by MOD_MACHINEGUN 1
+641.0 Item: 2 ammo_shells
+641.1 Item: 3 ammo_rockets
+641.3 Item: 4 ammo_slugs
+641.7 Item: 2 weapon_shotgun
+642.7 Item: 1 item_armor_body
+643.1 Item: 3 item_quad
+645.8 Kill: 4 3 3: Xaero killed ^1A^2n^3a^4r^5k^6i by MOD_MACHINEGUN 2
+647.5 Item: 4 weapon_rocketlauncher
+649.6 Item: 4 ammo_bullets
+650.6 Kill: 2 1 1: Mynx killed Orbb by MOD_SHOTGUN 2
+650.6 Item: 2 item_quad
+652.8 say: Orbb: Ow! mynx hit this unit in blind side.
+653.5 Item: 4 item_health_large
+654.7 Item: 1 weapon_rocketlauncher
+655.8 Item: 1 ammo_rockets
+656.2 Kill: 4 2 6: Xaero killed Mynx by MOD_ROCKET 3
+658.3 say: Mynx: Don't pity me. It's better than having to keep looking at Honored Master.
+659.6 Item: 2 ammo_bullets
+660.5 Item: 3 item_quad
+663.8 Kill: 1022 3 22: <world> killed ^1A^2n^3a^4r^5k^6i by MOD_TRIGGER_HURT 2
+664.3 Item: 2 weapon_shotgun
+665.9 say: ^1A^2n^3a^4r^5k^6i: Permanently kicked.
+668.6 Item: 2 item_armor_shard
+668.7 Item: 2 item_armor_shard
+668.8 Item: 2 item_armor_shard
+669.0 Item: 2 item_armor_combat
+670.4 Item: 4 item_armor_body
+671.8 Item: 3 weapon_rocketlauncher
+673.8 Item: 4 item_health_large
+674.8 Item: 1 item_health_large
+677.9 Kill: 3 1 6: ^1A^2n^3a^4r^5k^6i killed Orbb by MOD_ROCKET 2
+678.5 Kill: 1022 2 22: <world> killed Mynx by MOD_TRIGGER_HURT 2
+678.9 Kill: 3 4 7: ^1A^2n^3a^4r^5k^6i killed Xaero by MOD_ROCKET_SPLASH 1
+680.1 say: Orbb: Your female parental unit.
+680.8 Item: 3 ammo_slugs
+681.0 say: Xaero: It must be true: fate is a path of many unforeseeable twists and turns.
+682.2 Item: 1 weapon_rocketlauncher
+683.3 Kill: 1 2 7: Orbb killed Mynx by MOD_ROCKET_SPLASH 2
+683.4 Kill: 1022 3 19: <world> killed ^1A^2n^3a^4r^5k^6i by MOD_FALLING 2
+685.4 say: Mynx: I like a man that shoots hard and shoots straight.
+687.4 Item: 2 ammo_rockets
+688.1 Item: 3 ammo_shells
+688.7 Item: 3 weapon_shotgun
+688.7 Item: 2 weapon_rocketlauncher
+688.9 Item: 4 weapon_railgun
+690.4 Item: 4 item_health
+691.2 Kill: 4 1 10: Xaero killed Orbb by MOD_RAILGUN 5
+692.5 Item: 4 item_health
+696.0 Item: 3 item_armor_shard
+696.1 Item: 3 item_armor_shard
+696.2 Item: 3 item_armor_shard
+697.0 Item: 4 ammo_bullets
+698.8 Item: 3 item_armor_shard
+698.9 Item: 3 item_armor_shard
+699.0 Item: 3 item_armor_shard
+699.2 Item: 3 item_armor_combat
+700.1 Kill: 4 2 3: Xaero killed Mynx by MOD_MACHINEGUN 5
+700.1 Item: 4 weapon_rocketlauncher
+700.9 Item: 4 item_health_large
+703.5 Item: 1 item_quad
+704.0 Item: 2 weapon_rocketlauncher
+704.3 Item: 2 ammo_rockets
+704.3 Item: 3 item_armor_body
+707.8 Kill: 1022 1 22: <world> killed Orbb by MOD_TRIGGER_HURT 2
+711.6 Item: 1 weapon_rocketlauncher
+712.3 Item: 3 ammo_bullets
+712.5 Kill: 1 2 7: Orbb killed Mynx by MOD_ROCKET_SPLASH 5
+714.7 say: Mynx: OK Ol' One Eye let's dance one more time!
+715.7 Item: 3 item_health_large
+716.7 Item: 2 weapon_rocketlauncher
+718.0 Item: 4 item_health_large
+722.7 Item: 3 weapon_rocketlauncher
+723.5 Item: 3 weapon_rocketlauncher
+723.7 Kill: 4 1 10: Xaero killed Orbb by MOD_RAILGUN 2
+725.1 Kill: 2 3 6: Mynx killed ^1A^2n^3a^4r^5k^6i by MOD_ROCKET 5
+727.2 say: ^1A^2n^3a^4r^5k^6i: Chaos theory in action, mynx.
+728.1 Kill: 2 4 6: Mynx killed Xaero by MOD_ROCKET 2
+728.4 Item: 2 weapon_rocketlauncher
+728.5 Kill: 1 2 3: Orbb killed Mynx by MOD_MACHINEGUN 5
+729.2 Item: 3 weapon_rocketlauncher
+730.2 say: Xaero: It must be true: fate is a path of many unforeseeable twists and turns.
+732.0 Item: 1 ammo_rockets
+732.4 Item: 4 weapon_rocketlauncher
+733.3 Item: 1 weapon_rocketlauncher
+735.9 Item: 2 item_armor_body
+740.2 Item: 1 ammo_bullets
+740.6 Item: 2 weapon_rocketlauncher
+741.2 Item: 3 ammo_shells
+742.3 Item: 3 weapon_shotgun
+744.2 Item: 4 weapon_railgun
+744.5 Kill: 2 1 7: Mynx killed Orbb by MOD_ROCKET_SPLASH 5
+745.6 Item: 4 item_health
+746.6 say: Orbb: Very inefficient Mynxie. Too much ammo wasted.
+750.5 Item: 2 ammo_shells
+752.1 Item: 4 weapon_rocketlauncher
+752.8 Kill: 1022 1 19: <world> killed Orbb by MOD_FALLING 2
+753.4 Item: 2 item_armor_shard
+753.5 Item: 2 item_armor_shard
+753.6 Item: 2 item_armor_shard
+753.8 Item: 2 item_armor_combat
+756.1 Item: 2 item_armor_shard
+756.2 Item: 2 item_armor_shard
+756.3 Item: 2 item_armor_shard
+756.4 Kill: 2 4 7: Mynx killed Xaero by MOD_ROCKET_SPLASH 7
+757.2 Item: 3 weapon_railgun
+758.5 say: Xaero: You have taken a great step along the road to perfection.
+759.3 Item: 3 item_health
+759.8 Item: 2 weapon_railgun
+759.9 Item: 4 ammo_bullets
+760.3 Kill: 3 1 10: ^1A^2n^3a^4r^5k^6i killed Orbb by MOD_RAILGUN 2
+761.9 Item: 3 weapon_rocketlauncher
+763.9 Item: 1 ammo_rockets
+765.6 Kill: 4 1 3: Xaero killed Orbb by MOD_MACHINEGUN 2
+765.7 Item: 4 weapon_rocketlauncher
+766.4 Item: 2 item_health_large
+767.0 Kill: 2 4 10: Mynx killed Xaero by MOD_RAILGUN 5
+770.0 Kill: 1022 3 22: <world> killed ^1A^2n^3a^4r^5k^6i by MOD_TRIGGER_HURT 7
+771.5 Item: 4 weapon_rocketlauncher
+771.7 Item: 1 weapon_rocketlauncher
+772.1 say: ^1A^2n^3a^4r^5k^6i: Is there, like, a make-up quiz?
+774.0 Item: 2 weapon_shotgun
+774.0 Item: 1 ammo_rockets
+774.4 Item: 3 weapon_rocketlauncher
+779.7 Item: 3 weapon_shotgun
+781.2 Item: 1 item_armor_body
+784.0 Item: 2 ammo_bullets
+784.1 Item: 3 item_armor_shard
+784.2 Item: 3 item_armor_shard
+784.3 Item: 3 item_armor_shard
+784.5 Item: 3 item_armor_combat
+786.0 Kill: 2 1 1: Mynx killed Orbb by MOD_SHOTGUN 2
+787.4 Kill: 3 2 1: ^1A^2n^3a^4r^5k^6i killed Mynx by MOD_SHOTGUN 3
+787.4 Item: 3 weapon_shotgun
+787.9 Item: 3 item_health_large
+789.5 say: Mynx: Let's dance that tune again ... but this time I lead.
+790.4 Item: 1 weapon_rocketlauncher
+791.5 Item: 4 weapon_railgun
+794.1 Kill: 1022 4 22: <world> killed Xaero by MOD_TRIGGER_HURT 7
+794.6 Kill: 1022 3 22: <world> killed ^1A^2n^3a^4r^5k^6i by MOD_TRIGGER_HURT 2
+794.8 Item: 1 item_health_large
+795.4 Item: 2 ammo_shells
+795.9 Item: 2 weapon_shotgun
+798.5 Item: 4 weapon_rocketlauncher
+799.8 Kill: 2 4 1: Mynx killed Xaero by MOD_SHOTGUN 5
+801.9 say: Xaero: Boast of this kill, mynx. It is the one mask to hide the fool that is you.
+802.5 Kill: 2 3 1: Mynx killed ^1A^2n^3a^4r^5k^6i by MOD_SHOTGUN 2
+802.8 Item: 1 weapon_rocketlauncher
+804.6 say: ^1A^2n^3a^4r^5k^6i: Bow to the Hotstuff d00d, king of the tube!
+806.7 Item: 3 weapon_rocketlauncher
+806.7 Item: 2 weapon_rocketlauncher
+807.5 Kill: 3 1 6: ^1A^2n^3a^4r^5k^6i killed Orbb by MOD_ROCKET 5
+807.5 Kill: 3 4 7: ^1A^2n^3a^4r^5k^6i killed Xaero by MOD_ROCKET_SPLASH 2
+807.7 Item: 3 ammo_rockets
+809.6 say: Orbb: you go, dude!
+811.1 Item: 1 weapon_rocketlauncher
+811.6 Item: 4 item_armor_body
+811.9 Kill: 1 3 6: Orbb killed ^1A^2n^3a^4r^5k^6i by MOD_ROCKET 5
+814.5 Item: 4 ammo_slugs
+815.0 Item: 1 weapon_rocketlauncher
+816.7 Item: 3 weapon_rocketlauncher
+817.8 Kill: 2 3 6: Mynx killed ^1A^2n^3a^4r^5k^6i by MOD_ROCKET 5
+820.7 Item: 2 weapon_rocketlauncher
+821.9 Item: 3 weapon_rocketlauncher
+824.0 Item: 3 ammo_bullets
+825.3 Item: 1 item_quad
+827.8 Item: 2 item_health_large
+828.6 Item: 3 item_health_large
+829.7 Item: 4 weapon_railgun
+831.2 Item: 4 item_health
+832.6 Item: 2 weapon_rocketlauncher
+832.7 Item: 3 weapon_shotgun
+834.7 Item: 2 ammo_bullets
+836.3 Kill: 4 1 10: Xaero killed Orbb by MOD_RAILGUN 2
+836.4 Item: 4 weapon_rocketlauncher
+838.1 Item: 3 item_armor_shard
+838.3 Item: 3 item_armor_shard
+838.4 Item: 3 item_armor_shard
+838.4 say: Orbb: Number 1!! You ... CAMPER!
+838.5 Item: 3 item_armor_combat
+840.4 Item: 1 weapon_rocketlauncher
+840.8 Item: 3 item_armor_shard
+841.0 Item: 3 item_armor_shard
+841.1 Item: 3 item_armor_shard
+843.8 Kill: 2 4 1: Mynx killed Xaero by MOD_SHOTGUN 7
+843.9 Item: 2 weapon_railgun
+844.8 Item: 2 item_quad
+846.1 Item: 1 weapon_rocketlauncher
+847.2 Item: 2 weapon_rocketlauncher
+847.6 Kill: 1 4 6: Orbb killed Xaero by MOD_ROCKET 2
+849.1 Item: 1 ammo_rockets
+852.1 Item: 1 item_armor_body
+852.2 Kill: 4 2 3: Xaero killed Mynx by MOD_MACHINEGUN 5
+853.3 Item: 4 weapon_rocketlauncher
+854.1 Item: 3 ammo_rockets
+854.3 Item: 3 weapon_rocketlauncher
+854.7 Item: 3 item_quad
+855.8 Kill: 1022 1 22: <world> killed Orbb by MOD_TRIGGER_HURT 2
+857.6 Kill: 1022 3 22: <world> killed ^1A^2n^3a^4r^5k^6i by MOD_TRIGGER_HURT 5
+859.5 Item: 1 weapon_rocketlauncher
+860.8 Item: 2 weapon_rocketlauncher
+867.1 Item: 3 ammo_shells
+867.7 Item: 3 weapon_shotgun
+868.1 Item: 1 weapon_rocketlauncher
+868.6 Item: 4 item_health_large
+874.6 Kill: 4 1 3: Xaero killed Orbb by MOD_MACHINEGUN 5
+876.4 Item: 2 item_quad
+877.1 Kill: 4 2 18: Xaero killed Mynx by MOD_TELEFRAG 2
+877.2 Item: 4 item_quad
+877.4 Item: 4 item_armor_body
+878.8 Item: 1 weapon_rocketlauncher
+879.3 say: Mynx: Dag-nabbit!
+880.3 Item: 3 item_armor_shard
+880.4 Item: 3 item_armor_shard
+880.5 Item: 3 item_armor_shard
+880.7 Item: 3 item_armor_combat
+880.9 Item: 1 ammo_bullets
+881.2 Item: 2 weapon_rocketlauncher
+887.4 Kill: 1 2 7: Orbb killed Mynx by MOD_ROCKET_SPLASH 5
+888.3 Kill: 1022 3 22: <world> killed ^1A^2n^3a^4r^5k^6i by MOD_TRIGGER_HURT 2
+888.4 Item: 4 weapon_rocketlauncher
+888.7 Item: 4 weapon_rocketlauncher
+889.2 Kill: 1022 1 22: <world> killed Orbb by MOD_TRIGGER_HURT 5
+892.2 Item: 3 weapon_rocketlauncher
+893.1 Item: 1 ammo_rockets
+896.5 Item: 3 item_health_large
+897.2 Kill: 1022 4 22: <world> killed Xaero by MOD_TRIGGER_HURT 5
+899.2 Item: 2 weapon_shotgun
+900.3 Item: 1 ammo_rockets
+902.9 Item: 1 weapon_rocketlauncher
+906.6 Item: 2 item_armor_shard
+906.7 Item: 2 item_armor_shard
+906.8 Item: 2 item_armor_shard
+907.0 Item: 4 item_health_large
+907.2 Item: 3 item_armor_body
+908.5 Kill: 4 1 3: Xaero killed Orbb by MOD_MACHINEGUN 5
+909.3 Item: 2 item_armor_shard
+909.5 Item: 2 item_armor_shard
+909.6 Item: 2 item_armor_shard
+910.6 say: Orbb: Nice style!
+910.9 Item: 4 ammo_slugs
+911.6 Item: 3 weapon_railgun
+913.7 Item: 3 item_health
+915.0 Kill: 3 4 10: ^1A^2n^3a^4r^5k^6i killed Xaero by MOD_RAILGUN 2
+915.7 Kill: 1022 3 22: <world> killed ^1A^2n^3a^4r^5k^6i by MOD_TRIGGER_HURT 7
+916.3 Item: 2 weapon_rocketlauncher
+919.3 Kill: 1022 2 22: <world> killed Mynx by MOD_TRIGGER_HURT 2
+919.4 Item: 3 weapon_rocketlauncher
+924.0 Kill: 1022 4 22: <world> killed Xaero by MOD_TRIGGER_HURT 2
+926.1 say: Xaero: there's honor in dying ... sometimes.
+926.7 Item: 1 weapon_rocketlauncher
+928.1 Item: 4 weapon_rocketlauncher
+932.9 Kill: 1 3 7: Orbb killed ^1A^2n^3a^4r^5k^6i by MOD_ROCKET_SPLASH 2
+932.9 Kill: 4 2 6: Xaero killed Mynx by MOD_ROCKET 2
+935.0 say: ^1A^2n^3a^4r^5k^6i: Bow to the orbb d00d, king of the tube!
+935.6 Item: 4 item_armor_shard
+935.7 Item: 4 item_armor_shard
+935.8 Item: 4 item_armor_shard
+936.0 Item: 4 item_armor_combat
+936.8 Item: 2 weapon_rocketlauncher
+937.4 Item: 3 weapon_rocketlauncher
+938.4 Item: 4 item_armor_shard
+938.5 Item: 4 item_armor_shard
+938.6 Kill: 1022 1 19: <world> killed Orbb by MOD_FALLING 2
+938.6 Item: 4 item_armor_shard
+939.0 Item: 2 ammo_bullets
+942.1 Item: 2 ammo_rockets
+942.3 Item: 4 ammo_shells
+943.8 Kill: 2 1 6: Mynx killed Orbb by MOD_ROCKET 2
+944.8 Item: 4 item_health_large
+947.8 Item: 4 weapon_shotgun
+953.0 Item: 4 ammo_bullets
+953.7 Item: 1 item_quad
+955.3 Item: 3 item_health_large
+957.6 Item: 3 ammo_shells
+957.8 Kill: 4 1 18: Xaero killed Orbb by MOD_TELEFRAG 2
+957.9 Item: 4 item_quad
+958.3 Item: 3 weapon_shotgun
+958.4 Kill: 4 2 1: Xaero killed Mynx by MOD_SHOTGUN 2
+963.0 Item: 3 item_armor_body
+966.8 Item: 3 item_health_large
+969.4 Kill: 1 4 3: Orbb killed Xaero by MOD_MACHINEGUN 3
+971.4 Kill: 1022 3 22: <world> killed ^1A^2n^3a^4r^5k^6i by MOD_TRIGGER_HURT 2
+972.4 Item: 2 weapon_shotgun
+973.4 Item: 1 weapon_rocketlauncher
+974.0 Kill: 1 4 6: Orbb killed Xaero by MOD_ROCKET 2
+975.4 Item: 3 weapon_rocketlauncher
+975.9 Kill: 1 2 7: Orbb killed Mynx by MOD_ROCKET_SPLASH 3
+976.4 Kill: 1 1 7: Orbb killed Orbb by MOD_ROCKET_SPLASH 5
+977.5 Item: 4 item_quad
+979.9 Item: 3 weapon_shotgun
+980.5 Item: 2 weapon_shotgun
+981.8 Item: 1 ammo_rockets
+983.5 Item: 2 item_armor_shard
+983.7 Item: 2 item_armor_shard
+983.8 Item: 2 item_armor_shard
+984.0 Item: 2 item_armor_combat
+984.5 Kill: 1022 3 19: <world> killed ^1A^2n^3a^4r^5k^6i by MOD_FALLING 5
+986.5 Item: 2 weapon_rocketlauncher
+986.6 say: ^1A^2n^3a^4r^5k^6i: Woaaaah, Take a load off granny.
+988.5 Item: 3 weapon_rocketlauncher
+989.8 Item: 4 item_armor_body
+990.5 Item: 1 weapon_rocketlauncher
+991.2 Item: 1 weapon_rocketlauncher
+991.2 Kill: 3 4 7: ^1A^2n^3a^4r^5k^6i killed Xaero by MOD_ROCKET_SPLASH 2
+992.6 Item: 1 ammo_bullets
+993.3 say: Xaero: you're my peer, anarki. We are rare.
+994.8 Item: 2 ammo_rockets
+996.8 Item: 2 weapon_rocketlauncher
+998.3 Kill: 1 2 6: Orbb killed Mynx by MOD_ROCKET 5
+998.8 Item: 3 ammo_shells
+1000.5 say: Mynx: I don't do the dance with losers like you, orbb.
+1002.9 Item: 2 weapon_rocketlauncher
+1005.0 Item: 4 item_health_large
+1005.2 Kill: 1 4 6: Orbb killed Xaero by MOD_ROCKET 2
+1007.2 Kill: 1 3 6: Orbb killed ^1A^2n^3a^4r^5k^6i by MOD_ROCKET 2
+1009.0 Kill: 1 4 6: Orbb killed Xaero by MOD_ROCKET 2
+1010.5 Item: 1 weapon_rocketlauncher
+1012.8 Item: 4 weapon_rocketlauncher
+1013.2 Item: 2 weapon_shotgun
+1013.5 Kill: 4 3 6: Xaero killed ^1A^2n^3a^4r^5k^6i by MOD_ROCKET 2
+1013.6 Kill: 1022 1 19: <world> killed Orbb by MOD_FALLING 5
+1015.6 say: ^1A^2n^3a^4r^5k^6i: I did not know you could still move like that, xaero!
+1015.8 say: Orbb: Feel the beat!
+1015.8 Item: 2 item_armor_shard
+1016.0 Item: 2 item_armor_shard
+1016.1 Item: 2 item_armor_shard
+1016.2 Item: 2 item_armor_combat
+1017.9 Item: 1 item_armor_body
+1019.1 Item: 3 weapon_rocketlauncher
+1021.6 Item: 4 ammo_bullets
+1023.2 Kill: 3 4 6: ^1A^2n^3a^4r^5k^6i killed Xaero by MOD_ROCKET 5
+1025.3 say: Xaero: You have taken a great step along the road to perfection.
+1025.8 Item: 3 item_health_large
+1026.2 Item: 2 item_armor_shard
+1026.4 Item: 2 item_armor_shard
+1026.5 Item: 2 item_armor_shard
+1029.3 Item: 4 weapon_rocketlauncher
+1032.9 Item: 2 item_health_large
+1036.3 Item: 4 ammo_bullets
+1036.8 Item: 2 ammo_rockets
+1037.0 Item: 3 weapon_railgun
+1038.0 Kill: 2 4 7: Mynx killed Xaero by MOD_ROCKET_SPLASH 5
+1038.1 Item: 2 weapon_rocketlauncher
+1038.3 Item: 3 item_health
+1040.4 Item: 1 item_quad
+1040.8 Item: 3 item_health
+1044.8 Item: 2 item_health_large
+1045.8 Item: 4 ammo_slugs
+1045.9 Kill: 1022 1 22: <world> killed Orbb by MOD_TRIGGER_HURT 1
+1048.1 say: Orbb: This unit's mistake.
+1048.5 Item: 4 weapon_railgun
+1049.0 Item: 3 ammo_shells
+1049.7 Item: 3 weapon_shotgun
+1049.8 Item: 2 item_armor_body
+1050.5 Item: 1 weapon_rocketlauncher
+1052.8 Item: 4 weapon_rocketlauncher
+1053.7 Kill: 3 2 10: ^1A^2n^3a^4r^5k^6i killed Mynx by MOD_RAILGUN 5
+1054.0 Item: 4 ammo_rockets
+1054.1 Kill: 4 3 10: Xaero killed ^1A^2n^3a^4r^5k^6i by MOD_RAILGUN 7
+1055.8 say: Mynx: you have been practicing alone, haven't you, anarki?
+1056.2 say: ^1A^2n^3a^4r^5k^6i: Now there is one happy camper.
+1057.2 Kill: 2 4 3: Mynx killed Xaero by MOD_MACHINEGUN 5
+1058.5 Item: 2 weapon_shotgun
+1059.7 Item: 2 ammo_shells
+1059.8 Item: 4 weapon_rocketlauncher
+1060.5 Kill: 1 3 7: Orbb killed ^1A^2n^3a^4r^5k^6i by MOD_ROCKET_SPLASH 2
+1061.6 Kill: 4 1 7: Xaero killed Orbb by MOD_ROCKET_SPLASH 2
+1061.7 Item: 2 weapon_rocketlauncher
+1063.5 Item: 4 weapon_rocketlauncher
+1065.4 Item: 3 weapon_rocketlauncher
+1066.9 Item: 2 weapon_railgun
+1067.4 Kill: 4 2 7: Xaero killed Mynx by MOD_ROCKET_SPLASH 5
+1067.8 Item: 4 weapon_rocketlauncher
+1069.4 Kill: 1 4 3: Orbb killed Xaero by MOD_MACHINEGUN 5
+1071.5 say: Xaero: The weak can win ... once.
+1073.7 Item: 3 ammo_bullets
+1074.3 Item: 1 weapon_rocketlauncher
+1078.8 Item: 4 weapon_rocketlauncher
+1083.6 Item: 3 item_armor_body
+1084.0 Item: 1 item_health_large
+1086.2 Kill: 2 4 3: Mynx killed Xaero by MOD_MACHINEGUN 5
+1088.4 Item: 2 weapon_rocketlauncher
+1088.5 Item: 3 item_health_large
+1092.4 Item: 4 weapon_rocketlauncher
+1095.4 Item: 2 weapon_rocketlauncher
+1096.7 Item: 2 ammo_rockets
+1099.3 Item: 3 weapon_shotgun
+1099.8 Item: 2 ammo_bullets
+1101.6 Kill: 4 2 6: Xaero killed Mynx by MOD_ROCKET 5
+1102.2 Item: 3 item_armor_shard
+1102.3 Item: 1 item_quad
+1102.3 Item: 3 item_armor_shard
+1102.4 Item: 3 item_armor_shard
+1102.6 Item: 3 item_armor_combat
+1103.7 say: Mynx: you have been practicing alone, haven't you, xaero?
+1104.2 Kill: 3 1 1: ^1A^2n^3a^4r^5k^6i killed Orbb by MOD_SHOTGUN 1
+1105.7 Item: 2 weapon_rocketlauncher
+1106.8 Item: 2 ammo_rockets
+1107.1 Item: 4 weapon_rocketlauncher
+1107.7 Kill: 2 4 7: Mynx killed Xaero by MOD_ROCKET_SPLASH 5
+1108.5 Item: 3 weapon_rocketlauncher
+1109.8 Item: 1 item_quad
+1112.0 Kill: 1 4 3: Orbb killed Xaero by MOD_MACHINEGUN 2
+1114.4 Item: 3 item_armor_body
+1115.8 Item: 4 weapon_rocketlauncher
+1116.2 Kill: 2 3 7: Mynx killed ^1A^2n^3a^4r^5k^6i by MOD_ROCKET_SPLASH 5
+1118.2 Kill: 1 4 3: Orbb killed Xaero by MOD_MACHINEGUN 5
+1118.3 say: ^1A^2n^3a^4r^5k^6i: who is the Man? who is the Man?
+1119.5 Item: 2 weapon_rocketlauncher
+1119.8 Kill: 1022 1 19: <world> killed Orbb by MOD_FALLING 2
+1120.7 Item: 3 weapon_rocketlauncher
+1123.7 Item: 2 weapon_rocketlauncher
+1125.7 Kill: 3 1 7: ^1A^2n^3a^4r^5k^6i killed Orbb by MOD_ROCKET_SPLASH 2
+1126.8 Item: 4 weapon_rocketlauncher
+1127.7 Item: 3 item_health_large
+1128.4 Item: 4 item_quad
+1128.6 Kill: 3 4 6: ^1A^2n^3a^4r^5k^6i killed Xaero by MOD_ROCKET 5
+1130.4 Item: 3 item_quad
+1130.5 Item: 3 weapon_rocketlauncher
+1131.7 Kill: 2 3 7: Mynx killed ^1A^2n^3a^4r^5k^6i by MOD_ROCKET_SPLASH 5
+1132.2 Item: 1 weapon_rocketlauncher
+1133.9 Item: 1 item_quad
+1136.2 Item: 4 ammo_slugs
+1137.0 Item: 4 ammo_slugs
+1140.0 Item: 4 weapon_railgun
+1140.8 Item: 2 ammo_shells
+1141.5 Item: 2 weapon_shotgun
+1142.6 Kill: 1022 1 22: <world> killed Orbb by MOD_TRIGGER_HURT 2
+1144.1 Item: 2 item_health_large
+1145.0 Item: 3 weapon_rocketlauncher
+1145.9 Kill: 3 4 7: ^1A^2n^3a^4r^5k^6i killed Xaero by MOD_ROCKET_SPLASH 2
+1146.3 Item: 1 weapon_rocketlauncher
+1147.3 Item: 1 ammo_rockets
+1148.0 say: Xaero: There is no trophy greater. I pray you are worthy, anarki.
+1148.7 Kill: 1022 3 22: <world> killed ^1A^2n^3a^4r^5k^6i by MOD_TRIGGER_HURT 2
+1151.1 Item: 4 ammo_bullets
+1152.3 Item: 3 ammo_rockets
+1153.7 Item: 3 weapon_rocketlauncher
+1155.9 Kill: 1 2 7: Orbb killed Mynx by MOD_ROCKET_SPLASH 3
+1155.9 Item: 4 item_armor_body
+1158.0 say: Mynx: you have been practicing alone, haven't you, orbb?
+1158.6 Item: 1 item_quad
+1160.2 Item: 4 item_health_large
+1160.7 Item: 2 weapon_shotgun
+1162.2 Kill: 1 3 7: Orbb killed ^1A^2n^3a^4r^5k^6i by MOD_ROCKET_SPLASH 5
+1163.8 Item: 1 weapon_rocketlauncher
+1164.6 Kill: 2 1 1: Mynx killed Orbb by MOD_SHOTGUN 5
+1165.1 Item: 2 weapon_rocketlauncher
+1166.8 say: Orbb: Ow! mynx hit this unit in blind side.
+1167.0 Kill: 3 2 3: ^1A^2n^3a^4r^5k^6i killed Mynx by MOD_MACHINEGUN 5
+1168.1 Item: 3 weapon_rocketlauncher
+1168.3 Item: 3 item_quad
+1170.0 Kill: 3 4 6: ^1A^2n^3a^4r^5k^6i killed Xaero by MOD_ROCKET 2
+1174.5 Item: 4 weapon_rocketlauncher
+1174.7 Kill: 3 2 7: ^1A^2n^3a^4r^5k^6i killed Mynx by MOD_ROCKET_SPLASH 2
+1178.1 Kill: 4 1 6: Xaero killed Orbb by MOD_ROCKET 2
+1178.1 Kill: 4 4 7: Xaero killed Xaero by MOD_ROCKET_SPLASH 5
+1179.9 Kill: 3 2 7: ^1A^2n^3a^4r^5k^6i killed Mynx by MOD_ROCKET_SPLASH 2
+1180.2 say: Xaero: In facing you, I have dishonored my sacred oath, and so I have fallen on my sword.
+1181.5 Kill: 3 1 7: ^1A^2n^3a^4r^5k^6i killed Orbb by MOD_ROCKET_SPLASH 2
+1182.4 Item: 4 item_armor_body
+1184.1 Kill: 1022 3 22: <world> killed ^1A^2n^3a^4r^5k^6i by MOD_TRIGGER_HURT 5
+1185.3 Item: 1 weapon_rocketlauncher
+1188.0 Item: 4 weapon_rocketlauncher
+1188.8 Item: 4 ammo_rockets
+1191.8 Kill: 1022 2 22: <world> killed Mynx by MOD_TRIGGER_HURT 2
+1194.4 Item: 3 weapon_rocketlauncher
+1195.4 Item: 3 weapon_rocketlauncher
+1195.4 Kill: 3 1 6: ^1A^2n^3a^4r^5k^6i killed Orbb by MOD_ROCKET 2
+1195.7 Kill: 1022 4 22: <world> killed Xaero by MOD_TRIGGER_HURT 2
+1195.8 Item: 3 weapon_rocketlauncher
+1197.6 say: Orbb: Some mighty fine shooting there, baby.
+1203.9 Item: 4 weapon_rocketlauncher
+1204.3 Kill: 1 4 3: Orbb killed Xaero by MOD_MACHINEGUN 5
+1204.6 Item: 1 weapon_rocketlauncher
+1205.2 Item: 2 weapon_rocketlauncher
+1207.0 Item: 3 ammo_shells
+1207.6 Item: 3 weapon_shotgun
+1210.1 Item: 1 ammo_bullets
+1212.2 Item: 4 weapon_rocketlauncher
+1212.5 Item: 3 item_armor_body
+1216.0 Item: 3 item_health_large
+1217.9 Item: 2 item_armor_shard
+1218.0 Item: 2 item_armor_shard
+1218.1 Item: 2 item_armor_shard
+1218.3 Item: 2 item_armor_combat
+1218.9 Kill: 1022 4 22: <world> killed Xaero by MOD_TRIGGER_HURT 5
+1220.0 Item: 1 item_quad
+1220.5 Item: 2 item_armor_shard
+1220.7 Item: 2 item_armor_shard
+1220.8 Item: 2 item_armor_shard
+1221.0 say: Xaero: I err. This is a new experience.
+1222.2 Item: 3 item_health_large
+1223.2 Item: 4 weapon_rocketlauncher
+1224.4 Item: 2 item_health_large
+1225.4 Item: 4 ammo_bullets
+1225.4 Kill: 1 4 3: Orbb killed Xaero by MOD_MACHINEGUN 5
+1226.3 Item: 3 ammo_slugs
+1227.7 Item: 3 ammo_slugs
+1229.4 Item: 4 weapon_rocketlauncher
+1230.3 Item: 4 ammo_rockets
+1230.4 Game_End: Timelimit
+1230.4 Exit: Timelimit hit.
+1230.4 score: 29  ping: 0  client: 1 Orbb
+1230.4 score: 23  ping: 0  client: 2 Mynx
+1230.4 score: 23  ping: 0  client: 4 Xaero
+1230.4 score: 20  ping: 0  client: 3 ^1A^2n^3a^4r^5k^6i
+1231.4 say: Orbb: Win ... lose. All the same.
+1231.4 say: Mynx: Definitely fun ... let's do it again sometime.
+1232.6 Weapon_Stats: 1 None:1:0:0:0 MachineGun:2947:409:0:0 Shotgun:253:48:5:2 R.Launcher:405:71:47:12 Railgun:5:1:2:2 Given:9374 Recvd:7378 Armor:810 Health:600
+1232.6 Weapon_Stats: 2 MachineGun:1601:180:0:0 Shotgun:1540:156:29:13 R.Launcher:328:43:54:20 Railgun:11:2:3:0 Given:5899 Recvd:7831 Armor:1435 Health:650
+1232.6 Weapon_Stats: 3 MachineGun:1756:183:0:0 Shotgun:1056:102:22:3 R.Launcher:347:64:53:21 Railgun:36:16:8:5 Given:8475 Recvd:7849 Armor:1735 Health:1200
+1232.6 Weapon_Stats: 4 MachineGun:2435:369:0:0 Shotgun:132:21:3:2 R.Launcher:290:55:53:28 Railgun:74:24:16:9 Given:9049 Recvd:9632 Armor:1180 Health:925
+1236.4 ShutdownGame:
+1236.4 ------------------------------------------------------------
+0.0 ------------------------------------------------------------
+0.0 InitGame: \dmflags\0\fraglimit\25\timelimit\20\sv_hostname\StrikeNet.com - OSP Tourney DM/CA/CTF\sv_maxclients\14\sv_minRate\0\sv_maxRate\0\sv_dlRate\100\sv_minPing\0\sv_maxPing\0\sv_floodProtect\0\capturelimit\0\version\ioq3 1.36_GIT_c7ebe821-2018-08-02 linux-x86_64 Aug 16 2018\com_gamename\Quake3Arena\com_protocol\71\g_gametype\0\mapname\q3dm2\sv_privateClients\0\sv_allowDownload\1\server_ospauth\1\gamename\osp\gameversion\OSP v1.03a\Players_Active\1 2 3 4 \server_promode\0\g_needpass\0\server_freezetag\0
+0.0 ServerTime:	20180817151353	15:13:53 (17 Aug 2018)
+0.0 Warmup:
+0.2 ClientConnect: 1
+0.2 ClientUserinfoChanged: 1 n\Orbb\t\0\model\orbb\hmodel\orbb\c1\\c2\\hc\100\w\0\l\0\skill\ 4.00\rt\0
+0.2 ClientBegin: 1
+0.2 ClientConnect: 2
+0.2 ClientUserinfoChanged: 2 n\Mynx\t\0\model\mynx\hmodel\mynx\c1\\c2\\hc\100\w\0\l\0\skill\ 4.00\rt\0
+0.2 ClientBegin: 2
+0.2 ClientConnect: 3
+0.2 ClientUserinfoChanged: 3 n\^1A^2n^3a^4r^5k^6i\t\0\model\anarki\hmodel\anarki\c1\\c2\\hc\100\w\0\l\0\skill\ 4.00\rt\0
+0.2 ClientBegin: 3
+0.2 ClientConnect: 4
+0.2 ClientUserinfoChanged: 4 n\Xaero\t\0\model\xaero\hmodel\xaero\c1\\c2\\hc\100\w\0\l\0\skill\ 4.00\rt\0
+0.2 ClientBegin: 4
+19.3 ShutdownGame:
+19.3 ------------------------------------------------------------
+19.3 ------------------------------------------------------------
+19.3 InitGame: \dmflags\0\fraglimit\25\timelimit\20\sv_hostname\StrikeNet.com - OSP Tourney DM/CA/CTF\sv_maxclients\14\sv_minRate\0\sv_maxRate\0\sv_dlRate\100\sv_minPing\0\sv_maxPing\0\sv_floodProtect\0\capturelimit\0\version\ioq3 1.36_GIT_c7ebe821-2018-08-02 linux-x86_64 Aug 16 2018\com_gamename\Quake3Arena\com_protocol\71\g_gametype\0\mapname\q3dm2\sv_privateClients\0\sv_allowDownload\1\server_ospauth\1\gamename\osp\gameversion\OSP v1.03a\Players_Active\1 2 3 4 \server_promode\0\g_needpass\0\server_freezetag\0
+19.3 ServerTime:	20180817151412	15:14:12 (17 Aug 2018)
+19.3 Game_Start:
+19.5 ClientConnect: 1
+19.5 ClientUserinfoChanged: 1 n\Orbb\t\0\model\orbb\hmodel\orbb\c1\\c2\\hc\100\w\0\l\0\skill\ 4.00\rt\0
+19.5 ClientBegin: 1
+19.5 ClientConnect: 2
+19.5 ClientUserinfoChanged: 2 n\Mynx\t\0\model\mynx\hmodel\mynx\c1\\c2\\hc\100\w\0\l\0\skill\ 4.00\rt\0
+19.5 ClientBegin: 2
+19.5 ClientConnect: 3
+19.5 ClientUserinfoChanged: 3 n\^1A^2n^3a^4r^5k^6i\t\0\model\anarki\hmodel\anarki\c1\\c2\\hc\100\w\0\l\0\skill\ 4.00\rt\0
+19.5 ClientBegin: 3
+19.5 ClientConnect: 4
+19.5 ClientUserinfoChanged: 4 n\Xaero\t\0\model\xaero\hmodel\xaero\c1\\c2\\hc\100\w\0\l\0\skill\ 4.00\rt\0
+19.5 ClientBegin: 4
+20.3 Item: 4 item_armor_shard
+20.6 Item: 4 item_armor_shard
+21.0 Item: 4 item_armor_shard
+21.1 Item: 2 weapon_shotgun
+21.2 Item: 4 item_armor_shard
+21.7 Item: 4 item_armor_shard
+23.2 Kill: 4 3 3: Xaero killed ^1A^2n^3a^4r^5k^6i by MOD_MACHINEGUN 2
+24.5 Item: 1 ammo_cells
+24.7 Item: 1 item_armor_combat
+26.3 Item: 2 item_armor_body
+27.1 Item: 1 weapon_plasmagun
+28.3 Kill: 2 4 1: Mynx killed Xaero by MOD_SHOTGUN 2
+28.3 Item: 3 ammo_bullets
+28.3 Item: 3 ammo_bullets
+29.9 Item: 3 weapon_rocketlauncher
+30.4 Item: 2 ammo_shells
+30.4 say: Xaero: My corpse is my shrine. Build well your own, mynx.
+32.4 Kill: 1 2 8: Orbb killed Mynx by MOD_PLASMA 3
+32.5 Item: 1 weapon_shotgun
+34.8 Item: 4 item_health
+34.8 Item: 4 item_health
+36.6 Item: 4 weapon_shotgun
+37.1 Item: 1 item_health_large
+38.6 Item: 1 item_armor_shard
+38.6 Item: 1 item_armor_shard
+40.0 Item: 4 item_health
+40.2 Item: 4 item_health
+40.7 Item: 1 ammo_bullets
+41.4 Kill: 3 2 6: ^1A^2n^3a^4r^5k^6i killed Mynx by MOD_ROCKET 2
+43.5 say: Mynx: When I said, 'Over my dead body,' this wasn't what I meant.
+45.8 Item: 1 weapon_plasmagun
+46.8 Kill: 2 3 3: Mynx killed ^1A^2n^3a^4r^5k^6i by MOD_MACHINEGUN 5
+47.9 Item: 2 item_armor_shard
+48.1 Item: 2 item_armor_shard
+48.3 Item: 2 item_armor_shard
+48.5 Item: 2 item_armor_shard
+48.7 Item: 2 item_armor_shard
+48.9 say: ^1A^2n^3a^4r^5k^6i: Bow to the mynx d00d, king of the tube!
+50.0 Item: 1 weapon_rocketlauncher
+50.6 Item: 2 weapon_shotgun
+52.2 say: Xaero: what is new in Seattle?
+56.3 Kill: 1 2 1: Orbb killed Mynx by MOD_SHOTGUN 3
+59.6 Kill: 1 3 1: Orbb killed ^1A^2n^3a^4r^5k^6i by MOD_SHOTGUN 2
+61.4 Item: 4 item_armor_body
+62.5 Item: 3 weapon_shotgun
+62.8 Item: 2 weapon_plasmagun
+64.4 Kill: 4 2 1: Xaero killed Mynx by MOD_SHOTGUN 8
+66.8 Item: 4 weapon_plasmagun
+67.2 Kill: 4 1 1: Xaero killed Orbb by MOD_SHOTGUN 3
+67.8 Item: 3 weapon_shotgun
+69.3 say: Orbb: That was fun, xaero. Let us do it again.
+70.1 Item: 4 weapon_shotgun
+70.6 Item: 1 weapon_shotgun
+72.3 Kill: 4 2 1: Xaero killed Mynx by MOD_SHOTGUN 2
+73.0 Item: 3 ammo_cells
+74.4 say: Mynx: I like a man that shoots hard and shoots straight.
+74.9 Item: 2 item_armor_shard
+75.3 Item: 2 item_armor_shard
+76.0 Kill: 1 4 1: Orbb killed Xaero by MOD_SHOTGUN 3
+76.0 Item: 3 weapon_shotgun
+77.7 Item: 3 ammo_shells
+78.5 Item: 1 item_armor_combat
+79.4 Item: 3 weapon_plasmagun
+81.3 Item: 3 item_health_large
+84.6 Item: 2 item_health
+85.1 Kill: 3 4 8: ^1A^2n^3a^4r^5k^6i killed Xaero by MOD_PLASMA 2
+86.3 Item: 2 weapon_shotgun
+87.0 Item: 1 item_health
+87.2 say: Xaero: I will see you on the higher level, anarki.
+88.9 Item: 2 item_armor_shard
+89.0 Item: 2 item_armor_shard
+89.2 Item: 2 item_armor_shard
+91.1 Kill: 2 4 1: Mynx killed Xaero by MOD_SHOTGUN 2
+91.3 Kill: 1 3 1: Orbb killed ^1A^2n^3a^4r^5k^6i by MOD_SHOTGUN 8
+91.8 Item: 1 weapon_plasmagun
+92.3 Kill: 2 1 1: Mynx killed Orbb by MOD_SHOTGUN 3
+93.4 say: ^1A^2n^3a^4r^5k^6i: Whoa! Stretch that old arm, orbb, and pat yourself on the back.
+94.6 Item: 3 weapon_shotgun
+96.3 Item: 4 weapon_plasmagun
+99.4 Item: 1 item_armor_shard
+99.7 Item: 1 item_armor_shard
+101.2 Item: 2 item_haste
+101.5 Item: 1 ammo_bullets
+103.2 Item: 2 item_armor_body
+104.9 Item: 3 ammo_bullets
+105.1 Item: 3 ammo_bullets
+105.3 Item: 2 item_health
+105.5 Item: 2 item_health
+106.4 Kill: 4 1 8: Xaero killed Orbb by MOD_PLASMA 2
+106.6 Item: 3 weapon_rocketlauncher
+108.5 say: Orbb: Nice style!
+109.6 Item: 4 weapon_shotgun
+111.8 Item: 4 item_armor_shard
+111.9 Item: 4 item_armor_shard
+112.3 Item: 2 item_armor_combat
+113.5 Item: 1 ammo_cells
+114.2 Item: 2 weapon_plasmagun
+117.0 Item: 4 ammo_bullets
+118.4 Item: 4 weapon_rocketlauncher
+118.8 Item: 3 ammo_shells
+122.3 Item: 2 item_health
+123.9 Item: 2 weapon_shotgun
+124.4 Item: 1 ammo_rockets
+125.0 Item: 1 ammo_shells
+125.6 Item: 2 item_armor_shard
+125.7 Item: 2 item_armor_shard
+126.1 Item: 2 item_armor_shard
+128.0 Item: 3 weapon_plasmagun
+130.1 Item: 1 item_health
+130.1 Item: 3 item_health_large
+131.6 Item: 2 item_armor_shard
+131.6 Item: 3 item_armor_shard
+134.4 Item: 4 item_armor_body
+139.0 Kill: 3 2 8: ^1A^2n^3a^4r^5k^6i killed Mynx by MOD_PLASMA 8
+139.5 Item: 4 weapon_plasmagun
+140.6 Item: 3 weapon_plasmagun
+141.4 Item: 2 item_armor_shard
+141.6 Item: 2 item_armor_shard
+141.8 Item: 4 item_armor_combat
+142.7 Item: 3 item_health
+142.9 Kill: 4 1 1: Xaero killed Orbb by MOD_SHOTGUN 1
+143.0 Item: 3 item_health
+143.9 Item: 2 weapon_shotgun
+145.0 say: Orbb: You win the prize for that one.
+148.8 Item: 1 ammo_bullets
+157.8 Item: 2 weapon_rocketlauncher
+158.7 Item: 4 item_armor_shard
+158.7 Kill: 4 1 1: Xaero killed Orbb by MOD_SHOTGUN 2
+158.9 Item: 4 item_armor_shard
+159.3 Item: 2 ammo_bullets
+159.3 Item: 2 ammo_bullets
+160.1 Kill: 4 3 1: Xaero killed ^1A^2n^3a^4r^5k^6i by MOD_SHOTGUN 3
+162.0 Item: 4 weapon_shotgun
+162.3 say: ^1A^2n^3a^4r^5k^6i: Bow to the xaero d00d, king of the tube!
+163.0 Item: 3 item_armor_shard
+163.3 Item: 3 item_armor_shard
+163.5 Item: 3 item_armor_shard
+165.4 Item: 3 weapon_shotgun
+166.5 Item: 4 item_health_large
+166.9 Kill: 3 1 1: ^1A^2n^3a^4r^5k^6i killed Orbb by MOD_SHOTGUN 2
+167.1 Item: 2 item_health
+167.1 Item: 2 item_health
+169.9 Kill: 2 3 7: Mynx killed ^1A^2n^3a^4r^5k^6i by MOD_ROCKET_SPLASH 3
+172.1 Item: 3 item_armor_shard
+172.3 Item: 3 item_armor_shard
+172.4 Item: 2 item_armor_body
+174.5 Item: 3 weapon_shotgun
+175.5 Kill: 1 3 3: Orbb killed ^1A^2n^3a^4r^5k^6i by MOD_MACHINEGUN 3
+176.4 Item: 2 ammo_shells
+177.7 Item: 4 weapon_shotgun
+177.8 Item: 2 weapon_plasmagun
+178.3 Item: 1 weapon_shotgun
+180.9 Item: 4 item_health
+181.2 Item: 4 item_health
+184.1 Item: 3 weapon_shotgun
+185.8 Item: 1 item_armor_shard
+186.1 Item: 1 item_armor_shard
+186.7 Kill: 2 4 8: Mynx killed Xaero by MOD_PLASMA 8
+187.4 Item: 2 weapon_plasmagun
+188.8 say: Xaero: My corpse is my shrine. Build well your own, mynx.
+190.5 Item: 3 item_armor_shard
+190.7 Item: 3 item_armor_shard
+191.0 Item: 3 item_armor_shard
+191.7 Item: 1 ammo_rockets
+192.4 Item: 1 ammo_shells
+194.7 Item: 4 weapon_shotgun
+196.8 Kill: 1 4 1: Orbb killed Xaero by MOD_SHOTGUN 3
+198.0 Item: 3 weapon_rocketlauncher
+199.2 Item: 1 weapon_shotgun
+201.1 Item: 1 item_armor_shard
+201.3 Item: 1 item_armor_shard
+202.5 Item: 4 ammo_bullets
+205.6 Item: 4 item_armor_body
+207.1 Item: 1 ammo_cells
+207.4 Item: 1 item_armor_combat
+209.1 Kill: 2 1 8: Mynx killed Orbb by MOD_PLASMA 3
+210.9 Item: 4 weapon_plasmagun
+211.3 Item: 3 item_health_large
+212.1 Item: 2 item_health
+215.1 Item: 4 weapon_shotgun
+215.5 Item: 1 weapon_shotgun
+215.9 Kill: 3 4 6: ^1A^2n^3a^4r^5k^6i killed Xaero by MOD_ROCKET 8
+217.4 Item: 1 item_armor_shard
+217.6 Item: 1 item_armor_shard
+217.8 Item: 3 weapon_plasmagun
+217.9 Item: 1 item_armor_shard
+218.3 say: Mynx: it's time to stop letting mother dress you.
+219.1 Kill: 3 2 1: ^1A^2n^3a^4r^5k^6i killed Mynx by MOD_SHOTGUN 8
+219.6 Item: 4 weapon_plasmagun
+220.1 Kill: 1 3 1: Orbb killed ^1A^2n^3a^4r^5k^6i by MOD_SHOTGUN 3
+220.1 Item: 1 weapon_shotgun
+221.9 Item: 1 weapon_plasmagun
+222.2 say: ^1A^2n^3a^4r^5k^6i: who is the Man? who is the Man?
+222.4 Item: 2 item_armor_shard
+222.7 Item: 2 item_armor_shard
+224.9 Item: 3 item_haste
+225.4 Kill: 1 4 1: Orbb killed Xaero by MOD_SHOTGUN 8
+226.7 Item: 3 weapon_shotgun
+227.0 Item: 2 ammo_shells
+227.2 Item: 1 weapon_plasmagun
+227.5 say: Xaero: Thrice cursed Shotgun armadillo! You will learn your manners.
+230.3 Item: 4 item_armor_shard
+230.4 Item: 1 item_health
+230.5 Item: 4 item_armor_shard
+232.3 Item: 3 ammo_bullets
+233.6 Item: 3 weapon_rocketlauncher
+235.3 Item: 2 weapon_shotgun
+235.4 Item: 1 item_armor_body
+237.5 Item: 4 item_armor_combat
+239.4 Kill: 3 4 1: ^1A^2n^3a^4r^5k^6i killed Xaero by MOD_SHOTGUN 2
+240.3 Item: 1 weapon_plasmagun
+241.3 Kill: 1 3 1: Orbb killed ^1A^2n^3a^4r^5k^6i by MOD_SHOTGUN 3
+241.4 Item: 1 item_haste
+241.4 Item: 1 weapon_shotgun
+244.6 Item: 4 ammo_bullets
+244.8 Item: 4 ammo_bullets
+246.1 Kill: 1 4 1: Orbb killed Xaero by MOD_SHOTGUN 2
+246.6 Item: 2 item_health
+246.6 Item: 1 weapon_rocketlauncher
+249.4 Kill: 1 3 1: Orbb killed ^1A^2n^3a^4r^5k^6i by MOD_SHOTGUN 2
+250.0 Item: 4 weapon_plasmagun
+252.3 Item: 1 item_armor_shard
+252.4 Item: 1 item_armor_shard
+252.6 Item: 1 item_armor_shard
+252.9 Item: 4 ammo_cells
+254.3 Item: 1 weapon_shotgun
+254.4 Kill: 4 2 8: Xaero killed Mynx by MOD_PLASMA 3
+255.3 Item: 4 weapon_shotgun
+256.5 Kill: 4 3 1: Xaero killed ^1A^2n^3a^4r^5k^6i by MOD_SHOTGUN 2
+256.5 say: Mynx: When I said, 'Over my dead body,' this wasn't what I meant.
+257.4 Item: 2 ammo_bullets
+257.5 Item: 4 weapon_plasmagun
+257.6 Item: 1 item_health
+259.3 Item: 4 item_health_large
+260.7 Item: 4 item_armor_shard
+260.8 Item: 4 item_armor_shard
+262.4 Item: 3 weapon_rocketlauncher
+264.3 Item: 2 item_armor_shard
+264.5 Item: 2 item_armor_shard
+264.9 Item: 4 item_armor_body
+265.9 Item: 1 item_armor_combat
+267.6 Kill: 3 1 6: ^1A^2n^3a^4r^5k^6i killed Orbb by MOD_ROCKET 8
+267.8 Item: 3 weapon_plasmagun
+268.8 Item: 4 ammo_shells
+271.2 Item: 2 weapon_rocketlauncher
+272.2 Item: 1 weapon_plasmagun
+272.6 Item: 3 item_health
+272.6 Item: 3 item_health
+273.2 Item: 2 ammo_bullets
+275.9 Kill: 4 3 1: Xaero killed ^1A^2n^3a^4r^5k^6i by MOD_SHOTGUN 8
+276.5 Kill: 2 4 7: Mynx killed Xaero by MOD_ROCKET_SPLASH 3
+277.7 Item: 2 weapon_shotgun
+278.6 say: Xaero: You have taken a great step along the road to perfection.
+278.7 Item: 2 weapon_plasmagun
+278.7 Kill: 1 2 8: Orbb killed Mynx by MOD_PLASMA 3
+279.1 Item: 1 weapon_shotgun
+280.8 Item: 1 item_armor_shard
+280.8 Item: 1 item_armor_shard
+281.2 Item: 1 item_armor_shard
+281.9 Item: 3 weapon_rocketlauncher
+283.3 Item: 1 weapon_shotgun
+286.1 Kill: 1 2 1: Orbb killed Mynx by MOD_SHOTGUN 2
+288.2 say: Mynx: you have been practicing alone, haven't you, orbb?
+288.9 Kill: 3 4 7: ^1A^2n^3a^4r^5k^6i killed Xaero by MOD_ROCKET_SPLASH 2
+288.9 Kill: 3 1 7: ^1A^2n^3a^4r^5k^6i killed Orbb by MOD_ROCKET_SPLASH 3
+291.0 Item: 2 weapon_shotgun
+291.0 say: Orbb: Ow! anarki hit this unit in blind side.
+291.8 Kill: 3 2 7: ^1A^2n^3a^4r^5k^6i killed Mynx by MOD_ROCKET_SPLASH 3
+293.9 Item: 1 weapon_plasmagun
+294.8 Item: 3 weapon_shotgun
+295.2 Item: 4 weapon_shotgun
+296.1 Item: 1 ammo_cells
+296.1 Item: 1 item_armor_combat
+297.5 Kill: 1 3 8: Orbb killed ^1A^2n^3a^4r^5k^6i by MOD_PLASMA 5
+299.1 Item: 1 weapon_rocketlauncher
+301.4 Item: 3 weapon_plasmagun
+302.0 Kill: 1 4 8: Orbb killed Xaero by MOD_PLASMA 3
+304.3 Kill: 1 2 8: Orbb killed Mynx by MOD_PLASMA 2
+305.2 Item: 4 ammo_bullets
+306.7 Item: 1 ammo_bullets
+307.6 Item: 1 weapon_shotgun
+308.1 Item: 2 weapon_plasmagun
+308.2 Kill: 3 1 8: ^1A^2n^3a^4r^5k^6i killed Orbb by MOD_PLASMA 8
+308.9 Item: 4 weapon_shotgun
+310.9 Item: 4 item_armor_shard
+311.2 Item: 4 item_armor_shard
+311.5 Item: 4 item_armor_shard
+313.7 Kill: 4 2 1: Xaero killed Mynx by MOD_SHOTGUN 8
+314.1 Item: 4 weapon_plasmagun
+314.5 Item: 3 ammo_bullets
+314.7 Kill: 4 1 1: Xaero killed Orbb by MOD_SHOTGUN 2
+315.0 Item: 3 ammo_bullets
+315.3 Item: 4 weapon_plasmagun
+316.4 Item: 3 weapon_rocketlauncher
+316.8 say: Orbb: WOW! This unit not see that one coming, xaero!
+318.6 Item: 2 weapon_plasmagun
+319.0 Item: 4 item_health
+319.0 Item: 4 item_health
+319.8 Item: 2 ammo_shells
+321.6 Item: 1 weapon_shotgun
+322.3 Item: 2 item_armor_combat
+323.2 Kill: 1 3 1: Orbb killed ^1A^2n^3a^4r^5k^6i by MOD_SHOTGUN 8
+323.8 Item: 4 item_health
+326.9 Item: 1 weapon_plasmagun
+329.2 Item: 1 item_armor_shard
+329.5 Item: 1 item_armor_shard
+330.3 Item: 3 weapon_shotgun
+330.8 Kill: 2 1 8: Mynx killed Orbb by MOD_PLASMA 3
+331.2 Item: 4 weapon_plasmagun
+334.2 Item: 3 item_armor_body
+334.6 Item: 2 weapon_shotgun
+337.8 Item: 1 weapon_shotgun
+338.7 Item: 4 item_armor_shard
+338.9 Item: 3 weapon_plasmagun
+339.0 Item: 4 item_armor_shard
+339.3 Item: 2 weapon_rocketlauncher
+339.3 Item: 4 item_armor_shard
+341.3 Kill: 1 4 1: Orbb killed Xaero by MOD_SHOTGUN 3
+341.3 Item: 3 ammo_cells
+341.5 Item: 1 weapon_shotgun
+345.1 Item: 4 item_armor_shard
+345.3 Item: 4 item_armor_shard
+347.1 Item: 4 ammo_bullets
+348.3 Item: 2 item_health
+348.6 Kill: 2 1 8: Mynx killed Orbb by MOD_PLASMA 3
+349.1 Item: 4 item_haste
+350.7 Item: 2 weapon_shotgun
+350.7 say: Orbb: Very inefficient mynx. Too much ammo wasted.
+351.0 Item: 4 weapon_shotgun
+353.6 Item: 3 ammo_bullets
+354.2 Kill: 4 1 1: Xaero killed Orbb by MOD_SHOTGUN 2
+354.3 say: Mynx: Really?
+355.2 Item: 3 weapon_rocketlauncher
+356.9 Item: 3 ammo_bullets
+357.0 Item: 4 item_health
+357.2 Item: 3 ammo_bullets
+357.2 Item: 4 item_health
+357.4 say: Mynx: If looks could kill, orbb, your face would be a serial murderer.
+359.5 Item: 2 weapon_plasmagun
+361.2 Item: 1 weapon_shotgun
+361.8 Item: 2 item_armor_combat
+363.3 Item: 1 item_armor_shard
+363.5 Item: 1 item_armor_shard
+363.9 Item: 1 item_armor_shard
+364.1 Item: 1 item_armor_shard
+364.5 Kill: 3 2 1: ^1A^2n^3a^4r^5k^6i killed Mynx by MOD_SHOTGUN 3
+364.5 Item: 3 weapon_shotgun
+365.5 Item: 4 ammo_shells
+366.3 Item: 1 weapon_shotgun
+368.4 Item: 3 item_armor_shard
+368.9 Item: 1 item_armor_body
+369.7 Item: 4 item_health_large
+374.0 Item: 2 item_armor_shard
+374.2 Item: 2 item_armor_shard
+376.3 Item: 4 ammo_shells
+377.0 Kill: 3 4 8: ^1A^2n^3a^4r^5k^6i killed Xaero by MOD_PLASMA 3
+378.1 Kill: 3 2 1: ^1A^2n^3a^4r^5k^6i killed Mynx by MOD_SHOTGUN 2
+378.1 Item: 3 ammo_rockets
+378.9 Item: 3 item_haste
+379.2 Item: 3 weapon_shotgun
+380.5 Item: 3 item_health
+382.7 Item: 2 weapon_shotgun
+385.5 Item: 1 weapon_rocketlauncher
+387.1 Item: 3 weapon_plasmagun
+390.9 Item: 2 ammo_cells
+391.0 Item: 2 item_armor_combat
+391.5 Kill: 1 2 6: Orbb killed Mynx by MOD_ROCKET 3
+393.6 say: Mynx: Finally, someone who knows how to handle their weapon!
+394.8 Item: 2 weapon_shotgun
+394.8 Item: 4 weapon_plasmagun
+395.5 Kill: 1 4 7: Orbb killed Xaero by MOD_ROCKET_SPLASH 8
+396.6 Item: 3 weapon_plasmagun
+396.7 Item: 2 item_armor_shard
+396.8 Item: 2 item_armor_shard
+397.1 Item: 2 item_armor_shard
+397.2 Item: 2 item_armor_shard
+397.5 Item: 2 item_armor_shard
+397.6 say: Xaero: There is no trophy greater. I pray you're worthy, orbb.
+398.8 Item: 3 weapon_shotgun
+399.4 Kill: 1 4 7: Orbb killed Xaero by MOD_ROCKET_SPLASH 2
+399.6 Item: 1 item_health
+401.5 Item: 1 weapon_shotgun
+405.1 Item: 3 item_health
+405.3 Item: 1 item_armor_body
+406.9 Kill: 2 3 1: Mynx killed ^1A^2n^3a^4r^5k^6i by MOD_SHOTGUN 8
+408.7 Kill: 2 4 1: Mynx killed Xaero by MOD_SHOTGUN 2
+409.0 Item: 2 weapon_plasmagun
+409.7 Item: 3 item_health_large
+410.2 Item: 1 weapon_plasmagun
+413.5 Item: 3 ammo_shells
+413.7 Kill: 1 3 1: Orbb killed ^1A^2n^3a^4r^5k^6i by MOD_SHOTGUN 2
+415.8 say: ^1A^2n^3a^4r^5k^6i: Eyeball! D00d, you have obviously been at this for a long time.
+417.4 Kill: 3 2 3: ^1A^2n^3a^4r^5k^6i killed Mynx by MOD_MACHINEGUN 3
+417.7 Kill: 1 4 1: Orbb killed Xaero by MOD_SHOTGUN 2
+419.5 say: Mynx: Finally, someone who knows how to handle their weapon!
+420.1 Item: 1 weapon_shotgun
+420.7 Item: 2 weapon_shotgun
+422.2 Item: 4 weapon_plasmagun
+424.7 Item: 4 item_armor_combat
+427.1 Kill: 2 3 1: Mynx killed ^1A^2n^3a^4r^5k^6i by MOD_SHOTGUN 2
+427.2 Kill: 4 2 8: Xaero killed Mynx by MOD_PLASMA 3
+428.0 Item: 4 weapon_shotgun
+430.1 Item: 3 item_armor_shard
+430.2 Kill: 1 4 1: Orbb killed Xaero by MOD_SHOTGUN 3
+430.2 Game_End: Fraglimit
+430.2 Exit: Fraglimit hit.
+430.2 score: 25  ping: 0  client: 1 Orbb
+430.2 score: 16  ping: 0  client: 3 ^1A^2n^3a^4r^5k^6i
+430.2 score: 15  ping: 0  client: 4 Xaero
+430.2 score: 13  ping: 0  client: 2 Mynx
+431.2 say: Orbb: This unit is so very happy. It feels tear welling up in it is eye.
+431.2 say: Mynx: Hmmm ... flat on my back and everybody above me. I've been here before.
+432.0 say: Xaero: At last the slate has been put to the chalk.
+432.4 Weapon_Stats: 1 MachineGun:254:100:0:0 Shotgun:715:193:18:5 R.Launcher:12:5:4:0 Plasmagun:131:49:10:2 Given:3869 Recvd:2387 Armor:665 Health:175
+432.4 Weapon_Stats: 2 MachineGun:213:59:0:0 Shotgun:462:126:13:9 R.Launcher:20:4:3:0 Plasmagun:131:26:9:4 Given:2387 Recvd:3161 Armor:635 Health:225
+432.4 Weapon_Stats: 3 MachineGun:180:40:0:0 Shotgun:352:95:13:5 R.Launcher:42:18:8:2 Plasmagun:124:25:9:4 Given:2820 Recvd:2411 Armor:155 Health:350
+432.4 Weapon_Stats: 4 MachineGun:236:58:0:0 Shotgun:462:127:12:7 R.Launcher:10:1:1:0 Plasmagun:203:38:12:4 Given:2435 Recvd:3552 Armor:655 Health:425
+436.2 ShutdownGame:
+436.2 ------------------------------------------------------------
