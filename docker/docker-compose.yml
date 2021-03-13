@@ -1,0 +1,27 @@
+# docker-compose -p vsp up -d --build
+
+version: '3'
+
+services:
+  db:
+    # image: mysql:8.0.23
+    image: mariadb:10.5.9
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_DATABASE: vsp
+      MYSQL_USER: devuser
+      MYSQL_PASSWORD: devpass
+    ports:
+      - "3306:3306"
+  web:
+    build: .
+    depends_on:
+      - db
+    volumes:
+      - ./..:/var/www/html/
+    ports:
+      - 80:80
+    #environment:
+      #start_with_request=yes remote_log=/tmp/xdebug.log
+      #XDEBUG_CONFIG: remote_enable=1 remote_autostart=1 default_enable=1 remote_host=host.docker.internal idekey=VSCODE remote_port=9000
+      

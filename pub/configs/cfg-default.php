@@ -26,10 +26,10 @@ global $cfg;
     
     $cfg['db']['table_prefix'] = "vsp_";           // use only lower case to minimize windows/linux portability problems
     
-    $cfg['db']['hostname'] = "localhost";
+    $cfg['db']['hostname'] = "host.docker.internal";
     $cfg['db']['dbname']   = "vsp";      // use only lower case to minimize windows/linux portability problems
-    $cfg['db']['username'] = "root";
-    $cfg['db']['password'] = "123456";
+    $cfg['db']['username'] = "devuser";
+    $cfg['db']['password'] = "devpass";
 
 //================================================
 // Ip2Country table
