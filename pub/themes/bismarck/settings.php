@@ -28,7 +28,7 @@
   $settings['display']['javascript_tooltips']=1;
 
   //change: display/hide country flags
-  $settings['display']['no_country_flags']=0;
+  $settings['display']['no_country_flags']=1;
   //endchange
   
   //------------------------------------------------
