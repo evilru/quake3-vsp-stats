@@ -26,7 +26,7 @@ and displays various game statistics. vsp also supports both server logs (ex:-
 games.log for Q3A) and client logs (ex:- qconsole.log for Q3A).
 ```
 
-For more details I suggest to take a look at the readme files:
+For more details I suggest to take a look into the readme files:
 
 * [readme.txt](./readme.txt)
 * [readme-xp.txt](./readme-xp.txt)
