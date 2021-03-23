@@ -16,8 +16,6 @@ if(!$db->Connect($GLOBALS['cfg']['db']['hostname'], $GLOBALS['cfg']['db']['usern
 $db->SetFetchMode(ADODB_FETCH_NUM);
 
 $playerID=$_GET['playerID'];
-if (get_magic_quotes_gpc())
-  $playerID=stripslashes($playerID);
 
 $qplayerID=$db->qstr($playerID); // playerID quoted for sql
 

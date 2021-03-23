@@ -20,8 +20,6 @@ $db->SetFetchMode(ADODB_FETCH_NUM);
 if (isset($_GET['awardID']))
 {
   $awardID=$_GET['awardID'];
-  if (get_magic_quotes_gpc())
-    $awardID=stripslashes($awardID);
 }
 else
 {

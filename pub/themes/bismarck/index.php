@@ -136,8 +136,6 @@ function drawPlayersList()
   {
 
     $search_txt=$_POST['search_txt'];
-    if (get_magic_quotes_gpc())
-      $search_txt=stripslashes($search_txt);
 
      
 
