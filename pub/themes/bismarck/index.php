@@ -693,7 +693,7 @@ function setupVars()
             ".($GLOBALS['excluded_players'] ? "and playerID not in {$GLOBALS['excluded_players']}" : "")."
        ";
   $rs=$db->Execute($sql);
-  $total_records=$rs->fields[0];
+  $total_records=$rs?$rs->fields[0]:0;
 
   
 
