@@ -21,7 +21,9 @@ services:
       - ./..:/var/www/html/
     ports:
       - 80:80
-    #environment:
-      #start_with_request=yes remote_log=/tmp/xdebug.log
-      #XDEBUG_CONFIG: remote_enable=1 remote_autostart=1 default_enable=1 remote_host=host.docker.internal idekey=VSCODE remote_port=9000
-      
+    environment:
+      #xdebug 2
+      # XDEBUG_CONFIG: remote_enable=1 remote_autostart=1 default_enable=1 remote_host=host.docker.internal idekey=VSCODE remote_port=9000
+      #xdebug 3
+      XDEBUG_MODE: debug
+      XDEBUG_CONFIG: start_width_request=yes client_port=9000 idekey=VSCODE  discover_client_host=true
