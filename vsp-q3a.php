@@ -16,7 +16,7 @@
       var $logdata;
       var $Va733fe6b;
       var $Vb3b1075a;
-      function VSPParserQ3A($Ve0d85fdc, &$V4f00ff2f, &$V495c39bf)
+      function __construct($Ve0d85fdc, &$V4f00ff2f, &$V495c39bf)
       {
           define("C7e731e80", 1024);
           $this->Fcda1c5ae($Ve0d85fdc);
