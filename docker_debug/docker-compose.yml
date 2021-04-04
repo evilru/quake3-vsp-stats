@@ -25,5 +25,6 @@ services:
       #xdebug 2
       # XDEBUG_CONFIG: remote_enable=1 remote_autostart=1 default_enable=1 remote_host=host.docker.internal idekey=VSCODE remote_port=9000
       #xdebug 3
+      # discover_client_host=true
       XDEBUG_MODE: debug
-      XDEBUG_CONFIG: start_width_request=yes client_port=9000 idekey=VSCODE  discover_client_host=true
+      XDEBUG_CONFIG: start_with_request=yes client_port=9003 idekey=VSCODE client_host=host.docker.internal
