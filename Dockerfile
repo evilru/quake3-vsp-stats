@@ -6,23 +6,23 @@ FROM php:7.4.16-apache
 
 ENV LOGTYPE q3a-osp
 
-RUN docker-php-ext-install mysqli &&\
-    mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" &&\
-    apt-get update &&\
-    apt-get -y install cron &&\
-    apt-get -y install supervisor &&\
-    apt-get -y install vim &&\
-    apt-get clean
+RUN docker-php-ext-install mysqli \
+ && mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
+ && apt-get update && apt-get -y install \
+    cron \
+    supervisor \
+    vim \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
 
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY . /vsp
 
 WORKDIR /vsp
 
-RUN chmod +x import.sh &&\
-    touch /vsp/logdata/import.log &&\
-    crontab /vsp/import-cron &&\
-    sed -ri -e 's!/var/www/html!/vsp/pub!g' /etc/apache2/sites-available/*.conf &&\
-    sed -ri -e 's!/var/www/!/vsp/pub!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+RUN chmod +x docker/import.sh \
+ && mv docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf \
+ && crontab docker/import-cron \
+ && sed -ri -e 's!/var/www/html!/vsp/pub!g' /etc/apache2/sites-available/*.conf \
+ && sed -ri -e 's!/var/www/!/vsp/pub!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 CMD /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
