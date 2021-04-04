@@ -24,12 +24,12 @@ global $cfg;
     
     $cfg['db']['adodb_driver']= 'mysqli'; 
     
-    $cfg['db']['table_prefix'] = "vsp_";           // use only lower case to minimize windows/linux portability problems
+    $cfg['db']['table_prefix'] = getenv("TABLE_PREFIX");           // use only lower case to minimize windows/linux portability problems
     
-    $cfg['db']['hostname'] = "host.docker.internal";
-    $cfg['db']['dbname']   = "vsp";      // use only lower case to minimize windows/linux portability problems
-    $cfg['db']['username'] = "devuser";
-    $cfg['db']['password'] = "devpass";
+    $cfg['db']['hostname'] = getenv("HOSTNAME");
+    $cfg['db']['dbname']   = getenv("DBNAME");      // use only lower case to minimize windows/linux portability problems
+    $cfg['db']['username'] = getenv("USERNAME");
+    $cfg['db']['password'] = getenv("PASSWORD");
 
 //================================================
 // Ip2Country table
