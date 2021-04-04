@@ -25,9 +25,9 @@ RUN chmod +x docker/import.sh \
  && sed -ri -e 's!/var/www/html!/vsp/pub!g' /etc/apache2/sites-available/*.conf \
  && sed -ri -e 's!/var/www/!/vsp/pub!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf \
  && sed -ri -e 's!(\['\''table_prefix'\''\]\s*=\s*)"vsp_"(;)!\1getenv("TABLE_PREFIX")\2!g' pub/configs/cfg-default.php \
- && sed -ri -e 's!(\['\''hostname'\''\]\s*=\s*)"localhost"(;)!\1getenv("HOSTNAME")\2!g' pub/configs/cfg-default.php \
- && sed -ri -e 's!(\['\''dbname'\''\]\s*=\s*)"vsp"(;)!\1getenv("DBNAME")\2!g' pub/configs/cfg-default.php \
- && sed -ri -e 's!(\['\''username'\''\]\s*=\s*)"root"(;)!\1getenv("USERNAME")\2!g' pub/configs/cfg-default.php \
- && sed -ri -e 's!(\['\''password'\''\]\s*=\s*)"secretPassword"(;)!\1getenv("PASSWORD")\2!g' pub/configs/cfg-default.php
+ && sed -ri -e 's!(\['\''hostname'\''\]\s*=\s*)"localhost"(;)!\1getenv("DB_HOSTNAME")\2!g' pub/configs/cfg-default.php \
+ && sed -ri -e 's!(\['\''dbname'\''\]\s*=\s*)"vsp"(;)!\1getenv("DB_NAME")\2!g' pub/configs/cfg-default.php \
+ && sed -ri -e 's!(\['\''username'\''\]\s*=\s*)"root"(;)!\1getenv("DB_USERNAME")\2!g' pub/configs/cfg-default.php \
+ && sed -ri -e 's!(\['\''password'\''\]\s*=\s*)"secretPassword"(;)!\1getenv("DB_PASSWORD")\2!g' pub/configs/cfg-default.php
 
 CMD /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf

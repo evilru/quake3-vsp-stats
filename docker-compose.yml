@@ -27,10 +27,10 @@ services:
       TIME_ZONE: Europe/Vienna
       LOGTYPE: q3a-osp
       TABLE_PREFIX: vsp_
-      HOSTNAME: host.docker.internal
-      DBNAME: vsp
-      USERNAME: devuser
-      PASSWORD: devpass
+      DB_HOSTNAME: host.docker.internal
+      DB_NAME: vsp
+      DB_USERNAME: devuser
+      DB_PASSWORD: devpass
       #xdebug 2
       # XDEBUG_CONFIG: remote_enable=1 remote_autostart=1 default_enable=1 remote_host=host.docker.internal idekey=VSCODE remote_port=9000
       #xdebug 3
