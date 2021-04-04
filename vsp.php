@@ -1346,8 +1346,6 @@
           $V51d3ee44['argc'] = $_SERVER['argc'];
       } else {
           $V4f96c5a0 = $_POST['V70e78261'];
-          if (get_magic_quotes_gpc())
-              $V4f96c5a0 = stripslashes($V4f96c5a0);
           $V51d3ee44 = F126ba7b1("vsp.php " . $V4f96c5a0);
       }
       global $V0f14082c;
@@ -1696,8 +1694,6 @@
           exit();
       }
       $V42c71341 = $_POST['password'];
-      if (get_magic_quotes_gpc())
-          $V42c71341 = stripslashes($V42c71341);
       if (md5($V42c71341) != md5($vsp['password'])) {
           echo "<HTML><BODY><PRE>Invalid password.\nFor the correct password, Look in password.inc.php under your vsp folder using a text editor(notepad).";
           F56fd05e9();

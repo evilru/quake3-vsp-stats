@@ -1,6 +1,6 @@
 <?php
 /*
-@version   v5.21.0-dev  ??-???-2016
+@version   v5.21.0  2021-02-27
 @copyright (c) 2000-2013 John Lim (jlim#natsoft.com). All rights reserved.
 @copyright (c) 2014      Damien Regad, Mark Newnham and the ADOdb community
    Set tabs to 4.
@@ -255,8 +255,7 @@ class ADODB_text extends ADOConnection {
 					$projtypes = array($this->_types[$i]);
 					$projnames = array($n);
 
-					reset($where_arr);
-					while (list($k_a,$a) = each($where_arr)) {
+					foreach ($where_arr as $a) {
 						if ($i == 0 && $this->_skiprow1) {
 							$projarray[] = array($n);
 							continue;
@@ -322,7 +321,7 @@ class ADODB_text extends ADOConnection {
 
 		// check for desc sort
 		$orderby = substr($orderby,strlen($col)+1);
-		$arr == array();
+		$arr = array();
 		preg_match('/([A-Z_0-9]*)/i',$orderby,$arr);
 
 		if (trim($arr[1]) == 'DESC') $sortf = 'adodb_cmpr';
@@ -372,7 +371,7 @@ class ADORecordSet_text extends ADORecordSet_array
 
 	var $databaseType = "text";
 
-	function __construct(&$conn,$mode=false)
+	function __construct( $conn,$mode=false)
 	{
 		parent::__construct();
 		$this->InitArray($conn->_rezarray,$conn->_reztypes,$conn->_reznames);

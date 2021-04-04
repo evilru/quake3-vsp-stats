@@ -20,8 +20,6 @@ $db->SetFetchMode(ADODB_FETCH_NUM);
 if (isset($_GET['awardID']))
 {
   $awardID=$_GET['awardID'];
-  if (get_magic_quotes_gpc())
-    $awardID=stripslashes($awardID);
 }
 else
 {
@@ -193,7 +191,7 @@ function drawAwardList()
   
   $rs=$db->SelectLimit($rs->fields[0],$GLOBALS['cfg']['display']['record_limit'],$GLOBALS['start_from']);
   
-  $no_of_cols = count($rs->fields);
+  $no_of_cols = $rs?count($rs->fields):0;
   //echo $rs->fields[0];
   if ($rs && !$rs->EOF)
   {

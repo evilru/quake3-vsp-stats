@@ -4,7 +4,7 @@
    
   // The password must be at least 6 characters long. 
   
-  $vsp['password']="vspvsp";
+  $vsp['password']="vsp";
   
   // A password that is shorter than 6 characters long will automatically disable web access to vsp.php
                                          
