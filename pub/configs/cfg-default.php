@@ -136,7 +136,7 @@ global $cfg;
 //================================================
 // Server info
 
-    $cfg['display']['server_title']='HERE GOES YOUR SERVER TITLE';
+    $cfg['display']['server_title']="HERE GOES YOUR SERVER TITLE";
 
     $cfg['display']['server_image']="../../images/server.gif";
 
