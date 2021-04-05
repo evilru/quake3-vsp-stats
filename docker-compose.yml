@@ -18,8 +18,10 @@ services:
     build: .
     depends_on:
       - db
-    # volumes:
-      # - ./..:/var/www/html/
+    volumes:
+      # - /path/to/your/games.log:/vsp/games.log
+      # - /path/to/your/server.gif:/vsp/pub/images/server.gif
+      # - /path/to/your/logo.gif:/vsp/pub/images/logo.gif
     ports:
       - 80:80
       - 9001:9001
