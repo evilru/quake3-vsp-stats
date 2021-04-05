@@ -5,6 +5,20 @@ FROM php:7.4.16-apache
 # EXPOSE 9001
 
 ENV LOGTYPE q3a-osp
+ENV SERVER_TITLE HERE GOES YOUR SERVER TITLE
+ENV SERVER_NAME_IP Your Server Name and IP goes here
+ENV SERVER_GAME_MOD Your Game and Mod type goes here
+ENV SERVER_ADMINS List your admin(s) here
+ENV SERVER_EMAIL_IM List your E-Mail and/or IM account here
+ENV WEB_SITE_ADDRESS http://My.web_site_goes_here.com
+ENV WEB_SITE_NAME My web site name goes here
+ENV SERVER_QUOTE My quote goes here
+ENV TABLE_PREFIX vsp_
+ENV DB_HOSTNAME host.docker.internal
+ENV DB_NAME vsp
+# ENV VSP_WEB_PASSWORD
+# ENV DB_USERNAME
+# ENV DB_PASSWORD
 
 RUN docker-php-ext-install mysqli \
  && pecl install xdebug-2.9.8 \
@@ -44,14 +58,5 @@ RUN chmod +x docker/import.sh \
  && sed -ri -e 's!My quote goes here!{$_ENV["SERVER_QUOTE"]}!g' pub/configs/cfg-default.php \
  && sed -ri -e 's!http://My_STATS_Page_Goes_Here.com!/!g' pub/themes/bismarck/all.inc.php \
  && sed -ri -e 's!My Server Name Goes Here!<?php print $_ENV["SERVER_TITLE"];?>!g' pub/themes/bismarck/all.inc.php
-
-ENV SERVER_TITLE HERE GOES YOUR SERVER TITLE
-ENV SERVER_NAME_IP Your Server Name and IP goes here
-ENV SERVER_GAME_MOD Your Game and Mod type goes here
-ENV SERVER_ADMINS List your admin(s) here
-ENV SERVER_EMAIL_IM List your E-Mail and/or IM account here
-ENV WEB_SITE_ADDRESS http://My.web_site_goes_here.com
-ENV WEB_SITE_NAME My web site name goes here
-ENV SERVER_QUOTE My quote goes here
 
 CMD /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
