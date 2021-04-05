@@ -95,7 +95,7 @@ Should be the sames as _MYSQL_PASSWORD_.
 
 No default value, to enable this feature, set a password with at least 6 characters.
 
-All VSP commands can be called from the commandline and from the browser. The docker image comes with the following [cronjob](docker\import-cron).
+All VSP commands can be called from the commandline and from the browser. The docker image comes with the following [cronjob](./docker/import-cron).
 
 It is available under the following url: http://yourserver.com/vsp.php.
 
