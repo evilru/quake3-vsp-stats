@@ -41,7 +41,7 @@ services:
       DB_USERNAME: devuser
       DB_PASSWORD: devpass
       #xdebug 2
-      # XDEBUG_CONFIG: remote_enable=1 remote_autostart=1 default_enable=1 remote_host=host.docker.internal idekey=VSCODE remote_port=9000
+      # XDEBUG_CONFIG: remote_enable=1 remote_autostart=1 default_enable=1 remote_host=host.docker.internal idekey=VSCODE remote_port=9003
       #xdebug 3
       # discover_client_host=true
       # XDEBUG_MODE: debug

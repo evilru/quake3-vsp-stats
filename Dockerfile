@@ -7,8 +7,11 @@ FROM php:7.4.16-apache
 ENV LOGTYPE q3a-osp
 
 RUN docker-php-ext-install mysqli \
- && mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
+ && pecl install xdebug-2.9.8 \
+ && docker-php-ext-enable xdebug \
+#  && mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
  && apt-get update && apt-get -y install \
+    git \
     cron \
     supervisor \
     vim \
