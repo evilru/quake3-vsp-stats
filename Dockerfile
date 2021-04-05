@@ -23,6 +23,7 @@ COPY . /vsp
 WORKDIR /vsp
 
 RUN chmod +x docker/import.sh \
+ && chmod 777 -R logdata \
  && mv docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf \
  && crontab docker/import-cron \
  && sed -ri -e 's!/var/www/html!/vsp!g' /etc/apache2/sites-available/*.conf \

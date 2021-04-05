@@ -22,6 +22,7 @@ services:
       # - /path/to/your/games.log:/vsp/games.log
       # - /path/to/your/server.gif:/vsp/pub/images/server.gif
       # - /path/to/your/logo.gif:/vsp/pub/images/logo.gif
+      - logdata:/vsp/logdata
     ports:
       - 80:80
       - 9001:9001
@@ -48,3 +49,5 @@ services:
       # discover_client_host=true
       # XDEBUG_MODE: debug
       # XDEBUG_CONFIG: start_with_request=yes client_port=9003 idekey=VSCODE client_host=host.docker.internal
+volumes:
+  logdata:
