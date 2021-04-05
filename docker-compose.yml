@@ -33,6 +33,7 @@ services:
       SERVER_EMAIL_IM: SERVER_EMAIL_IM
       WEB_SITE_ADDRESS: WEB_SITE_ADDRESS
       WEB_SITE_NAME: WEB_SITE_NAME
+      VSP_WEB_PASSWORD: vspvsp
       SERVER_QUOTE: SERVER_QUOTE
       TABLE_PREFIX: vsp_
       DB_HOSTNAME: host.docker.internal

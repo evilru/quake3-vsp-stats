@@ -22,13 +22,14 @@ WORKDIR /vsp
 RUN chmod +x docker/import.sh \
  && mv docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf \
  && crontab docker/import-cron \
- && sed -ri -e 's!/var/www/html!/vsp/pub!g' /etc/apache2/sites-available/*.conf \
- && sed -ri -e 's!/var/www/!/vsp/pub!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf \
+ && sed -ri -e 's!/var/www/html!/vsp!g' /etc/apache2/sites-available/*.conf \
+ && sed -ri -e 's!/var/www/!/vsp!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf \
  && sed -ri -e 's!(\['\''table_prefix'\''\]\s*=\s*)"vsp_"(;)!\1$_ENV["TABLE_PREFIX"]\2!g' pub/configs/cfg-default.php \
  && sed -ri -e 's!(\['\''hostname'\''\]\s*=\s*)"localhost"(;)!\1$_ENV["DB_HOSTNAME"]\2!g' pub/configs/cfg-default.php \
  && sed -ri -e 's!(\['\''dbname'\''\]\s*=\s*)"vsp"(;)!\1$_ENV["DB_NAME"]\2!g' pub/configs/cfg-default.php \
  && sed -ri -e 's!(\['\''username'\''\]\s*=\s*)"root"(;)!\1$_ENV["DB_USERNAME"]\2!g' pub/configs/cfg-default.php \
  && sed -ri -e 's!(\['\''password'\''\]\s*=\s*)"secretPassword"(;)!\1$_ENV["DB_PASSWORD"]\2!g' pub/configs/cfg-default.php \
+ && sed -ri -e 's!(\['\''password'\''\]\s*=\s*)"vsp"(;)!\1$_ENV["VSP_WEB_PASSWORD"]\2!g' password.inc.php \
  && sed -ri -e 's!HERE GOES YOUR SERVER TITLE!{$_ENV["SERVER_TITLE"]}!g' pub/configs/cfg-default.php \
  && sed -ri -e 's!Your Server Name and IP goes here!{$_ENV["SERVER_NAME_IP"]}!g' pub/configs/cfg-default.php \
  && sed -ri -e 's!Your Game and Mod type goes here!{$_ENV["SERVER_GAME_MOD"]}!g' pub/configs/cfg-default.php \
