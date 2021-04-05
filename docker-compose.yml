@@ -1,5 +1,3 @@
-# docker-compose -p vsp up -d --build
-
 version: '3'
 
 services:
