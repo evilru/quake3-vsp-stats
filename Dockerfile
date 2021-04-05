@@ -40,7 +40,9 @@ RUN chmod +x docker/import.sh \
  && sed -ri -e 's!List your E-Mail and/or IM account here!{$_ENV["SERVER_EMAIL_IM"]}!g' pub/configs/cfg-default.php \
  && sed -ri -e 's!http://My.web_site_goes_here.com!{$_ENV["WEB_SITE_ADDRESS"]}!g' pub/configs/cfg-default.php \
  && sed -ri -e 's!My web site name goes here!{$_ENV["WEB_SITE_NAME"]}!g' pub/configs/cfg-default.php \
- && sed -ri -e 's!My quote goes here!{$_ENV["SERVER_QUOTE"]}!g' pub/configs/cfg-default.php
+ && sed -ri -e 's!My quote goes here!{$_ENV["SERVER_QUOTE"]}!g' pub/configs/cfg-default.php \
+ && sed -ri -e 's!http://My_STATS_Page_Goes_Here.com!/!g' pub/themes/bismarck/all.inc.php \
+ && sed -ri -e 's!My Server Name Goes Here!<?php print $_ENV["SERVER_TITLE"];?>!g' pub/themes/bismarck/all.inc.php
 
 ENV SERVER_TITLE HERE GOES YOUR SERVER TITLE
 ENV SERVER_NAME_IP Your Server Name and IP goes here
