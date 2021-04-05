@@ -143,7 +143,7 @@ volumes:
   - /path/to/your/logo.gif:/vsp/pub/images/logo.gif
 ```
 
-## Extended configuration with multiple mods
+## Extended configuration with multiple mods / servers
 
 1. Create a copy of [pub/configs/cfg-default.php](./pub/configs/cfg-default.php), update the database configuration and set a different table_prefix. Mount it into the image.
 
