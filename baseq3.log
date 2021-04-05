@@ -1,0 +1,188 @@
+  0:00 ------------------------------------------------------------
+  0:00 InitGame: \g_blueTeam\Pagans\g_redTeam\Stroggs\sv_maxPing\0\sv_minPing\0\sv_punkbuster\0\dmflags\0\fraglimit\20\timelimit\0\sv_hostname\noname\sv_maxclients\8\sv_maxRate\0\sv_floodProtect\1\g_maxGameClients\0\capturelimit\0\version\Q3 1.32 win-x86 Oct  7 2002\g_gametype\0\protocol\68\mapname\Q3DM6\sv_privateClients\0\sv_allowDownload\0\gamename\baseq3\g_needpass\0
+  0:00 ClientConnect: 0
+  0:00 ClientUserinfoChanged: 0 n\UnnamedPlayer\t\0\model\sarge\hmodel\sarge\g_redteam\\g_blueteam\\c1\4\c2\5\hc\100\w\0\l\0\tt\0\tl\0
+  0:00 ClientConnect: 1
+  0:00 ClientUserinfoChanged: 1 n\Orbb\t\0\model\orbb\hmodel\orbb\c1\4\c2\5\hc\70\w\0\l\0\skill\    2.00\tt\0\tl\0
+  0:00 ClientBegin: 1
+  0:00 ClientConnect: 2
+  0:00 ClientUserinfoChanged: 2 n\Hossman\t\0\model\biker/hossman\hmodel\biker/hossman\c1\4\c2\5\hc\70\w\0\l\0\skill\    2.00\tt\0\tl\0
+  0:00 ClientBegin: 2
+  0:00 ClientConnect: 3
+  0:00 ClientUserinfoChanged: 3 n\Daemia\t\0\model\major/daemia\hmodel\major/daemia\c1\4\c2\5\hc\70\w\0\l\0\skill\    2.00\tt\0\tl\0
+  0:00 ClientBegin: 3
+  0:00 ClientUserinfoChanged: 0 n\UnnamedPlayer\t\0\model\sarge\hmodel\sarge\g_redteam\\g_blueteam\\c1\4\c2\5\hc\100\w\0\l\0\tt\0\tl\0
+  0:00 ClientBegin: 0
+  0:01 Item: 2 ammo_slugs
+  0:01 Item: 1 ammo_shells
+  0:01 Item: 1 ammo_rockets
+  0:02 Item: 3 ammo_bullets
+  0:02 Item: 2 ammo_bullets
+  0:02 Item: 3 ammo_cells
+  0:03 Item: 0 ammo_cells
+  0:03 Item: 0 ammo_bullets
+  0:06 Item: 3 item_health
+  0:07 Item: 1 item_armor_combat
+  0:07 Item: 3 weapon_shotgun
+  0:09 Item: 1 ammo_cells
+  0:09 Item: 1 ammo_bullets
+  0:09 Item: 1 ammo_rockets
+  0:10 Item: 1 ammo_slugs
+  0:12 Kill: 3 2 1: Daemia killed Hossman by MOD_SHOTGUN
+  0:13 Item: 1 ammo_rockets
+  0:14 Item: 2 ammo_cells
+  0:14 Item: 2 ammo_rockets
+  0:15 Item: 1 item_health_small
+  0:15 Item: 1 item_health_small
+  0:15 Item: 3 weapon_rocketlauncher
+  0:16 Item: 1 item_health_small
+  0:16 Item: 1 item_health_small
+  0:16 Item: 1 item_health_small
+  0:17 Item: 3 item_health
+  0:18 Kill: 0 1 3: UnnamedPlayer killed Orbb by MOD_MACHINEGUN
+  0:19 Item: 2 weapon_plasmagun
+  0:22 Item: 1 weapon_rocketlauncher
+  0:24 Item: 0 ammo_shells
+  0:24 Item: 3 item_health
+  0:26 Kill: 1 2 7: Orbb killed Hossman by MOD_ROCKET_SPLASH
+  0:26 Item: 0 item_health
+  0:27 Item: 1 weapon_plasmagun
+  0:32 Item: 0 item_armor_combat
+  0:34 Item: 2 weapon_plasmagun
+  0:40 Item: 2 weapon_rocketlauncher
+  0:40 Kill: 2 1 8: Hossman killed Orbb by MOD_PLASMA
+  0:42 say: Orbb: You make this unit die good, hossman!
+  0:43 Item: 0 ammo_slugs
+  0:43 Item: 0 weapon_railgun
+  0:45 Item: 2 weapon_plasmagun
+  0:45 Item: 2 weapon_rocketlauncher
+  0:46 Item: 3 item_quad
+  0:50 Kill: 2 1 6: Hossman killed Orbb by MOD_ROCKET
+  0:50 Item: 0 item_health_small
+  0:50 Item: 0 item_health_small
+  0:52 Item: 2 item_health
+  0:55 Kill: 2 3 7: Hossman killed Daemia by MOD_ROCKET_SPLASH
+  0:56 Item: 1 weapon_plasmagun
+  0:56 Item: 0 weapon_rocketlauncher
+  0:58 say: Daemia: Te veo en el infierno!
+  0:58 Item: 0 item_quad
+  0:58 Item: 3 ammo_cells
+  0:58 Item: 0 item_health
+  0:58 Kill: 0 2 7: UnnamedPlayer killed Hossman by MOD_ROCKET_SPLASH
+  1:00 Item: 0 weapon_rocketlauncher
+  1:01 Item: 2 ammo_bullets
+  1:02 Item: 2 ammo_cells
+  1:02 Item: 0 weapon_rocketlauncher
+  1:05 Item: 2 weapon_plasmagun
+  1:07 Item: 0 ammo_bullets
+  1:07 Item: 0 ammo_shells
+  1:07 Item: 0 ammo_rockets
+  1:08 Item: 0 item_health_mega
+  1:10 Item: 0 item_armor_body
+  1:10 Kill: 2 3 8: Hossman killed Daemia by MOD_PLASMA
+  1:11 Item: 2 weapon_rocketlauncher
+  1:12 Item: 0 ammo_cells
+  1:13 Item: 3 weapon_plasmagun
+  1:14 Kill: 2 1 6: Hossman killed Orbb by MOD_ROCKET
+  1:14 Item: 2 weapon_plasmagun
+  1:18 Kill: 0 2 7: UnnamedPlayer killed Hossman by MOD_ROCKET_SPLASH
+  1:20 Item: 2 weapon_plasmagun
+  1:20 Item: 0 item_armor_combat
+  1:21 Item: 0 weapon_rocketlauncher
+  1:21 Item: 3 weapon_rocketlauncher
+  1:22 Item: 0 ammo_cells
+  1:22 Item: 0 ammo_slugs
+  1:22 Item: 0 ammo_bullets
+  1:22 Item: 0 ammo_rockets
+  1:25 Kill: 3 3 7: Daemia killed Daemia by MOD_ROCKET_SPLASH
+  1:25 Item: 0 item_health_small
+  1:25 Item: 0 item_health_small
+  1:26 Item: 2 ammo_shells
+  1:26 Item: 2 ammo_rockets
+  1:27 Item: 0 weapon_plasmagun
+  1:27 say: Daemia: Someone had to do it. I was getting tired of you being last every time, .
+  1:28 Item: 1 weapon_rocketlauncher
+  1:30 Item: 1 weapon_rocketlauncher
+  1:30 Item: 0 ammo_bullets
+  1:31 Item: 0 ammo_slugs
+  1:34 Kill: 1 1 7: Orbb killed Orbb by MOD_ROCKET_SPLASH
+  1:40 Item: 2 item_health
+  1:41 Item: 1 weapon_plasmagun
+  1:43 Kill: 2 3 8: Hossman killed Daemia by MOD_PLASMA
+  1:43 Item: 0 weapon_rocketlauncher
+  1:44 Item: 0 weapon_rocketlauncher
+  1:45 Item: 3 ammo_bullets
+  1:46 Item: 3 ammo_cells
+  1:49 Item: 0 item_armor_combat
+  1:49 Item: 3 weapon_plasmagun
+  1:51 Item: 2 weapon_rocketlauncher
+  1:53 Item: 2 item_health
+  1:53 Item: 2 item_health
+  1:54 Item: 0 item_health_small
+  1:54 Item: 0 item_health_small
+  1:54 Item: 0 item_health_small
+  1:55 Item: 1 item_health
+  1:56 Item: 0 weapon_plasmagun
+  1:59 Kill: 2 2 7: Hossman killed Hossman by MOD_ROCKET_SPLASH
+  1:59 Item: 3 weapon_rocketlauncher
+  1:59 Item: 1 ammo_rockets
+  1:59 Item: 1 ammo_shells
+  2:05 Item: 2 weapon_plasmagun
+  2:06 Item: 3 weapon_shotgun
+  2:06 Item: 1 weapon_rocketlauncher
+  2:07 Item: 3 item_health
+  2:12 Item: 2 item_health_small
+  2:12 Item: 2 item_health_small
+  2:12 Item: 1 ammo_bullets
+  2:13 Item: 0 weapon_rocketlauncher
+  2:13 Item: 1 ammo_slugs
+  2:14 Item: 2 ammo_rockets
+  2:15 Item: 2 ammo_shells
+  2:15 Item: 3 item_armor_body
+  2:17 Item: 1 weapon_plasmagun
+  2:21 Kill: 3 1 1: Daemia killed Orbb by MOD_SHOTGUN
+  2:21 Item: 2 weapon_rocketlauncher
+  2:22 Item: 3 weapon_plasmagun
+  2:24 Item: 1 item_armor_combat
+  2:26 Item: 1 ammo_cells
+  2:27 Item: 1 ammo_slugs
+  2:27 Item: 1 ammo_bullets
+  2:27 Item: 1 ammo_rockets
+  2:28 Item: 0 ammo_shells
+  2:29 Item: 0 ammo_rockets
+  2:29 Item: 2 ammo_bullets
+  2:29 Item: 0 item_health_mega
+  2:33 Item: 2 ammo_cells
+  2:33 Item: 3 weapon_plasmagun
+  2:33 Item: 0 ammo_cells
+  2:34 Kill: 3 1 1: Daemia killed Orbb by MOD_SHOTGUN
+  2:36 Item: 2 weapon_shotgun
+  2:37 Item: 1 ammo_cells
+  2:37 Item: 1 ammo_bullets
+  2:37 Item: 0 weapon_rocketlauncher
+  2:42 Item: 1 ammo_rockets
+  2:42 Item: 1 ammo_shells
+  2:43 say: Daemia: El que rie de ultimo rie mejor.
+  2:43 Item: 2 weapon_plasmagun
+  2:46 Item: 0 item_health_small
+  2:46 Item: 3 weapon_rocketlauncher
+  2:46 Item: 0 item_health_small
+  2:46 Item: 0 item_health_small
+  2:49 Item: 2 item_quad
+  2:50 Kill: 3 1 1: Daemia killed Orbb by MOD_SHOTGUN
+  2:50 Kill: 0 2 6: UnnamedPlayer killed Hossman by MOD_ROCKET
+  2:52 Item: 0 weapon_rocketlauncher
+  2:52 Item: 0 item_quad
+  2:52 say: Orbb: You make this unit die good, daemia!
+  2:52 Item: 1 weapon_plasmagun
+  2:53 Item: 3 item_health
+  2:53 Item: 3 item_health
+  2:55 Item: 0 weapon_rocketlauncher
+  2:56 Kill: 1 2 8: Orbb killed Hossman by MOD_PLASMA
+  2:58 say: Hossman: You better have eyes in the back of your head, orbb.
+  2:59 Item: 3 item_armor_combat
+  3:01 Item: 0 item_armor_body
+  3:03 Item: 1 weapon_rocketlauncher
+  3:03 Item: 2 item_health
+  3:04 ShutdownGame:
+  3:04 ------------------------------------------------------------

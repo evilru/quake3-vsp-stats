@@ -22,6 +22,7 @@ services:
       # - /path/to/your/games.log:/vsp/games.log
       # - /path/to/your/server.gif:/vsp/pub/images/server.gif
       # - /path/to/your/logo.gif:/vsp/pub/images/logo.gif
+      - ./osp.log:/vsp/games.log
       - logdata:/vsp/logdata
     ports:
       - 80:80
