@@ -21,14 +21,14 @@ ENV DB_NAME vsp
 # ENV DB_PASSWORD
 
 RUN docker-php-ext-install mysqli \
- && pecl install xdebug-2.9.8 \
- && docker-php-ext-enable xdebug \
+#  && pecl install xdebug-2.9.8 \
+#  && docker-php-ext-enable xdebug \
 #  && mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
  && apt-get update && apt-get -y install \
-    git \
     cron \
     supervisor \
-    vim \
+    # git \
+    # vim \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
