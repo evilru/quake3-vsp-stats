@@ -43,7 +43,6 @@ RUN chmod +x docker/import.sh \
  && sed -ri -e 's!My quote goes here!{$_ENV["SERVER_QUOTE"]}!g' pub/configs/cfg-default.php
 
 ENV SERVER_TITLE HERE GOES YOUR SERVER TITLE
-  # server.gif
 ENV SERVER_NAME_IP Your Server Name and IP goes here
 ENV SERVER_GAME_MOD Your Game and Mod type goes here
 ENV SERVER_ADMINS List your admin(s) here
