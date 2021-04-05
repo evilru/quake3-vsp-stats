@@ -10,7 +10,7 @@ ENV SERVER_NAME_IP Your Server Name and IP goes here
 ENV SERVER_GAME_MOD Your Game and Mod type goes here
 ENV SERVER_ADMINS List your admins here
 ENV SERVER_EMAIL_IM List your E-Mail and/or IM account here
-ENV WEB_SITE_ADDRESS http://My.web_site_goes_here.com
+ENV WEB_SITE_ADDRESS http://my.web_site_goes_here.com
 ENV WEB_SITE_NAME My web site name goes here
 ENV SERVER_QUOTE My quote goes here
 ENV TABLE_PREFIX vsp_
