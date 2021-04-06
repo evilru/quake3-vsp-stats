@@ -22,15 +22,15 @@ Follow the setup proceduere described in [readme.txt](./readme.txt) or run the p
 I will provide a link to the dockerimage soon, meanwhile you can build it yourself.
 
 1. install docker
-1. clone the repository
-1. configure games.log mapping
-1. in the repository folder, run the following command with your favorite shell
+1. copy [docker-compose.yml](./docker-compose.yml) and [docker-compose.override.yml](./docker-compose.override.yml) to your disk into the same folder
+1. configure the container (see below)
+1. run the docker stack
 
 ```sh
-docker-compose -p vsp up -d --build
+docker-compose up -d
 ```
 
-It will build the dockerimage and start the stack. The configured games.log will be checked every 5 minutes for new games.
+The configured games.log will be checked every 5 minutes for new games.
 
 The following configuration options need to be done in the [docker-compose.yml](./docker-compose.yml).
 
