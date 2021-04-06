@@ -19,7 +19,7 @@ Follow the setup proceduere described in [readme.txt](./readme.txt) or run the p
 
 ## Docker
 
-I will provide a link to the dockerimage soon, meanwhile you can build it yourself.
+https://hub.docker.com/r/evilru/quake3-vsp-stats
 
 1. install docker
 1. copy [docker-compose.yml](./docker-compose.yml) and [docker-compose.override.yml](./docker-compose.override.yml) to your disk into the same folder
