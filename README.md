@@ -19,8 +19,6 @@ Follow the setup proceduere described in [readme.txt](./readme.txt) or run the p
 
 ## Docker
 
-### Setup the docker-compose stack
-
 I will provide a link to the dockerimage soon, meanwhile you can build it yourself.
 
 1. install docker
@@ -34,18 +32,21 @@ docker-compose -p vsp up -d --build
 
 It will build the dockerimage and start the stack. The configured games.log will be checked every 5 minutes for new games.
 
+The following configuration options need to be done in the [docker-compose.yml](./docker-compose.yml).
+
 ### Logfile
 
-Mount your games.log
+Mount your games.log.  
+Needs to be placed in the _volumes_ section of the _web_ service.
 
 ```yaml
-volumes:
-    - /path/to/your/games.log:/vsp/games.log
+    volumes:
+        - /path/to/your/games.log:/vsp/games.log
 ```
 
 ### VSP configuration
 
-The parser can be configured with the following ENV variabels:
+The parser can be configured with the following ENV variabels. They need to be placed in _evnironment_ section of the _web_ service.
 
 #### LOGTYPE
 
@@ -101,6 +102,8 @@ The webinterface is available under the following url: http://yourserver.com/vsp
 
 ### VSP Header configuration
 
+The VSP Header can be configured with the following ENV variabels. They need to be placed in _evnironment_ section of the _web_ service.
+
 #### SERVER_TITLE
 
 default: _HERE GOES YOUR SERVER TITLE_
@@ -135,12 +138,13 @@ default: _My quote goes here_
 
 #### Headerimages
 
-Mount your own images
+Mount your own images.  
+Needs to be placed in the _volumes_ section of the _web_ service.
 
 ```yaml
-volumes:
-  - /path/to/your/server.gif:/vsp/pub/images/server.gif
-  - /path/to/your/logo.gif:/vsp/pub/images/logo.gif
+    volumes:
+      - /path/to/your/server.gif:/vsp/pub/images/server.gif
+      - /path/to/your/logo.gif:/vsp/pub/images/logo.gif
 ```
 
 ## Extended configuration with multiple mods / servers
@@ -148,15 +152,15 @@ volumes:
 1. Create a copy of [pub/configs/cfg-default.php](./pub/configs/cfg-default.php), update the database configuration and set a different table_prefix. Mount it into the image.
 
 ```yaml
-volumes:
-  - /path/to/your/cfg-ra3.php:/vsp/pub/configs/cfg-ra3.php
+    volumes:
+      - /path/to/your/cfg-ra3.php:/vsp/pub/configs/cfg-ra3.php
 ```
 
 2. Mount your games.log
 
 ```yaml
-volumes:
-    - /path/to/your/ra3.log:/vsp/ra3.log
+    volumes:
+        - /path/to/your/ra3.log:/vsp/ra3.log
 ```
 
 3. Add a your configuration to the [import script](docker/import.sh)
