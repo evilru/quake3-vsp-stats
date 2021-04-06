@@ -15,7 +15,7 @@ To get more information about the ExcessivePlus Community version you might visi
 
 ## Usage
 
-Follow the setup proceduere described in [readme.txt](./readme.txt) or run the provided [docker-compose.yml](./docker-compose.yml).
+Follow the setup proceduere described in [readme.txt](./readme.txt) or run the provided docker compose stack.
 
 ## Docker
 
