@@ -14,7 +14,6 @@ services:
     ports:
       - "3306:3306"
   web:
-    build: .
     restart: always
     depends_on:
       - db
@@ -34,11 +33,5 @@ services:
       DB_NAME: vsp
       DB_USERNAME: devuser
       DB_PASSWORD: devpass
-      #xdebug 2
-      # XDEBUG_CONFIG: remote_enable=1 remote_autostart=1 default_enable=1 remote_host=host.docker.internal idekey=VSCODE remote_port=9003
-      #xdebug 3
-      # discover_client_host=true
-      # XDEBUG_MODE: debug
-      # XDEBUG_CONFIG: start_with_request=yes client_port=9003 idekey=VSCODE client_host=host.docker.internal
 volumes:
   logdata:
