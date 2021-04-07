@@ -147,7 +147,10 @@ Needs to be placed in the _volumes_ section of the _web_ service.
       - /path/to/your/logo.gif:/vsp/pub/images/logo.gif
 ```
 
-## Extended configuration with multiple mods / servers
+## Extended configuration with multiple logfiles
+
+You can configure the vsp container like you would do it without docker by adding additional configuration files.  
+Please note: only the cfg-default.php in the container will pickup the environment variables.
 
 1. Create a copy of [pub/configs/cfg-default.php](./pub/configs/cfg-default.php), update the database configuration and set a different table_prefix. Mount it into the image.
 
@@ -163,13 +166,20 @@ Needs to be placed in the _volumes_ section of the _web_ service.
         - /path/to/your/ra3.log:/vsp/ra3.log
 ```
 
-3. Add a your configuration to the [import script](docker/import.sh)
+3. Copy the [import script](docker/import.sh) and add a call for your configuration
 
 ```sh
 php /vsp/vsp.php -c /vsp/pub/configs/cfg-ra3.php -l q3a-ra3 -p savestate 1 ra3.log
 ```
 
-4. Call it from the browser
+4. Mount your import script
+
+```yaml
+    volumes:
+        - /path/to/your/import.sh:/vsp/docker/import.sh
+```
+
+5. Call it from the browser
 
 http://yourserver.com/pub/themes/bismarck/index.php?config=cfg-ra3.php
 
