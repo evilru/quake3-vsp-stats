@@ -13,6 +13,7 @@ ENV SERVER_EMAIL_IM List your E-Mail and/or IM account here
 ENV WEB_SITE_ADDRESS http://my.web_site_goes_here.com
 ENV WEB_SITE_NAME My web site name goes here
 ENV SERVER_QUOTE My quote goes here
+ENV DEFAULT_SKIN fest
 ENV TABLE_PREFIX vsp_
 ENV DB_HOSTNAME host.docker.internal
 ENV DB_NAME vsp
@@ -57,6 +58,7 @@ RUN chmod +x docker/import.sh \
  && sed -ri -e 's!My web site name goes here!{$_ENV["WEB_SITE_NAME"]}!g' pub/configs/cfg-default.php \
  && sed -ri -e 's!My quote goes here!{$_ENV["SERVER_QUOTE"]}!g' pub/configs/cfg-default.php \
  && sed -ri -e 's!http://My_STATS_Page_Goes_Here.com!/!g' pub/themes/bismarck/all.inc.php \
- && sed -ri -e 's!My Server Name Goes Here!<?php print $_ENV["SERVER_TITLE"];?>!g' pub/themes/bismarck/all.inc.php
+ && sed -ri -e 's!My Server Name Goes Here!<?php print $_ENV["SERVER_TITLE"];?>!g' pub/themes/bismarck/all.inc.php \
+ && sed -ri -e 's!(\['\''default_skin'\'']=)'\''fest'\''(;)!\1$_ENV["DEFAULT_SKIN"]\2!g' pub/themes/bismarck/settings.php
 
 CMD /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf

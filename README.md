@@ -100,9 +100,9 @@ All VSP commands can be called from the commandline and from the browser. The do
 
 The webinterface is available under the following url: http://yourserver.com/vsp.php.
 
-### VSP Header configuration
+### VSP Statspage configuration
 
-The VSP Header can be configured with the following ENV variabels. They need to be placed in _evnironment_ section of the _web_ service.
+The VSP Statspage can be configured with the following ENV variabels. They need to be placed in _evnironment_ section of the _web_ service.
 
 #### SERVER_TITLE
 
@@ -135,6 +135,27 @@ default: _My web site name goes here_
 #### SERVER_QUOTE
 
 default: _My quote goes here_
+
+#### DEFAULT_SKIN
+
+default: _fest_  
+The skin value will be stored in a cookie, this value will be used if no cookie is present.
+
+The theme supports the following values:
+
+* avalanche
+* avalanche-b
+* avalanche-i
+* camo
+* cyber
+* evilsmurfs
+* f8tal-b
+* fest
+* ignited
+* sssp
+* swat
+* twat
+* xp
 
 #### Headerimages
 
