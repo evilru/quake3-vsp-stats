@@ -19,7 +19,7 @@ Follow the setup proceduere described in [readme.txt](./readme.txt) or run the p
 
 ## Docker
 
-https://hub.docker.com/r/evilru/quake3-vsp-stats
+<https://hub.docker.com/r/evilru/quake3-vsp-stats>
 
 1. install docker
 1. copy [docker-compose.yml](./docker-compose.yml) and [docker-compose.override.yml](./docker-compose.override.yml) to your disk into the same folder
@@ -69,7 +69,7 @@ q3a-xp           Quake 3 Arena Excessive Plus
 #### TABLE_PREFIX
 
 default: _vsp\__  
-The tableprefix used in the database
+The table prefix used in the database
 
 #### DB_HOSTNAME
 
@@ -90,7 +90,7 @@ Should be the same as _MYSQL_USER_.
 #### DB_PASSWORD
 
 Password used to connect to the database.  
-Should be the sames as _MYSQL_PASSWORD_.
+Should be the same as _MYSQL_PASSWORD_.
 
 #### VSP_WEB_PASSWORD
 
@@ -98,11 +98,11 @@ No default value, to enable this feature, set a password with at least 6 charact
 
 All VSP commands can be called from the commandline and from the browser. The docker image comes with the following [cronjob](./docker/import-cron).
 
-The webinterface is available under the following url: http://yourserver.com/vsp.php.
+The webinterface is available under the following url: <http://yourserver.com/vsp.php>.
 
-### VSP Statspage configuration
+### VSP Stats page configuration
 
-The VSP Statspage can be configured with the following ENV variabels. They need to be placed in _evnironment_ section of the _web_ service.
+The VSP Stats page can be configured with the following ENV variabels. They need to be placed in _evnironment_ section of the _web_ service.
 
 #### SERVER_TITLE
 
@@ -157,7 +157,7 @@ The theme supports the following values:
 * twat
 * xp
 
-#### Headerimages
+#### Header images
 
 Mount your own images.  
 Needs to be placed in the _volumes_ section of the _web_ service.
@@ -173,36 +173,37 @@ Needs to be placed in the _volumes_ section of the _web_ service.
 You can configure the vsp container like you would do it without docker by adding additional configuration files.  
 Please note: only the cfg-default.php in the container will pickup the environment variables.
 
-1. Create a copy of [pub/configs/cfg-default.php](./pub/configs/cfg-default.php), update the database configuration and set a different table_prefix. Mount it into the image.
+1. Create a copy of [pub/configs/cfg-default.php](./pub/configs/cfg-default.php), update the database configuration and set a different table_prefix.  
+Mount it into the image.
 
-```yaml
-    volumes:
-      - /path/to/your/cfg-ra3.php:/vsp/pub/configs/cfg-ra3.php
-```
+    ```yaml
+        volumes:
+          - /path/to/your/cfg-ra3.php:/vsp/pub/configs/cfg-ra3.php
+    ```
 
-2. Mount your games.log
+1. Mount your games.log
 
-```yaml
-    volumes:
-        - /path/to/your/ra3.log:/vsp/ra3.log
-```
+    ```yaml
+        volumes:
+            - /path/to/your/ra3.log:/vsp/ra3.log
+    ```
 
-3. Copy the [import script](docker/import.sh) and add a call for your configuration
+1. Copy the [import script](docker/import.sh) and add a call for your configuration
 
-```sh
-php /vsp/vsp.php -c /vsp/pub/configs/cfg-ra3.php -l q3a-ra3 -p savestate 1 ra3.log
-```
+    ```sh
+    php /vsp/vsp.php -c /vsp/pub/configs/cfg-ra3.php -l q3a-ra3 -p savestate 1 ra3.log
+    ```
 
-4. Mount your import script
+1. Mount your import script
 
-```yaml
-    volumes:
-        - /path/to/your/import.sh:/vsp/docker/import.sh
-```
+    ```yaml
+        volumes:
+            - /path/to/your/import.sh:/vsp/docker/import.sh
+    ```
 
-5. Call it from the browser
+1. Call it from the browser
 
-http://yourserver.com/pub/themes/bismarck/index.php?config=cfg-ra3.php
+    <http://yourserver.com/pub/themes/bismarck/index.php?config=cfg-ra3.php>
 
 ---
 
