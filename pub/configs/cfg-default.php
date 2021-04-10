@@ -9,8 +9,8 @@ global $cfg;
 //================================================
 // PHP configurations
 
-    error_reporting(E_ALL ^ E_NOTICE ^ (defined('E_DEPRECATED') ? E_DEPRECATED : 0)); // For Debugging. Recommended when you set up vsp for the first time.
-    //error_reporting(E_ALL ^ E_NOTICE ^ (defined('E_DEPRECATED') ? E_DEPRECATED : 0) ^ E_WARNING); // Recommended for regular use after ensuring proper run of vsp.
+    // error_reporting(E_ALL ^ E_NOTICE ^ (defined('E_DEPRECATED') ? E_DEPRECATED : 0)); // For Debugging. Recommended when you set up vsp for the first time.
+    error_reporting(E_ALL ^ E_NOTICE ^ (defined('E_DEPRECATED') ? E_DEPRECATED : 0) ^ E_WARNING); // Recommended for regular use after ensuring proper run of vsp.
     //error_reporting(E_ALL ^ (defined('E_DEPRECATED') ? E_DEPRECATED : 0));                        // For Debugging. Enable this if you are having a hard time to get vsp going.
 
     ini_set("default_charset", "UTF-8");             // default charset
