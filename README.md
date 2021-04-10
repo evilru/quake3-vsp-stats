@@ -68,9 +68,8 @@ q3a-xp           Quake 3 Arena Excessive Plus
 
 #### CHECK_UNIQUE_GAMEID
 
-default: _1_
-check uniqueness of game start date
-stet to 0 if log doesn't have server date information
+default: _1_  
+Check uniqueness of game start date, set to 0 if log doesn't have server date information
 
 #### TABLE_PREFIX
 
