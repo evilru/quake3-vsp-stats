@@ -7,10 +7,10 @@ services:
     restart: always
     environment:
       TZ: Europe/Berlin
-      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
       MYSQL_DATABASE: vsp
-      MYSQL_USER: devuser
-      MYSQL_PASSWORD: devpass
+      MYSQL_USER:
+      MYSQL_PASSWORD:
     ports:
       - "3306:3306"
   web:
@@ -27,9 +27,12 @@ services:
       - 80:80
     environment:
       TZ: Europe/Berlin
-      # VSP_WEB_PASSWORD: vspweb
+      # needs to be at least 6 characters long
+      # VSP_WEB_PASSWORD:
       DB_NAME: vsp
-      DB_USERNAME: devuser
-      DB_PASSWORD: devpass
+      # use the same value as for MYSQL_USER
+      DB_USERNAME:
+      # use the same value as for MYSQL_PASSWORD
+      DB_PASSWORD:
 volumes:
   logdata:
