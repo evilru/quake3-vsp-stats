@@ -3,6 +3,9 @@ version: '3'
 services:
   web:
     build: .
+    # ports:
+      # supervisor web gui would be available on port 9001
+      # - 9001:9001
     environment:
       #xdebug 2
       # XDEBUG_CONFIG: remote_enable=1 remote_autostart=1 default_enable=1 remote_host=host.docker.internal idekey=VSCODE remote_port=9003

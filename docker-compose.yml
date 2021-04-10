@@ -25,8 +25,6 @@ services:
       - logdata:/vsp/logdata
     ports:
       - 80:80
-      # supervisor web gui would be available on port 9001
-      # - 9001:9001
     environment:
       TZ: Europe/Berlin
       # VSP_WEB_PASSWORD: vspweb
