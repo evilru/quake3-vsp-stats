@@ -60,8 +60,8 @@ RUN chmod +x docker/import.sh \
  && sed -ri -e 's!My quote goes here!{$_ENV["SERVER_QUOTE"]}!g' pub/configs/cfg-default.php \
  && sed -ri -e 's!http://My_STATS_Page_Goes_Here.com!/!g' pub/themes/bismarck/all.inc.php \
  && sed -ri -e 's!My Server Name Goes Here!<?php print $_ENV["SERVER_TITLE"];?>!g' pub/themes/bismarck/all.inc.php \
- && sed -ri -e 's!(\['\''default_skin'\'']=)'\''fest'\''(;)!\1$_ENV["DEFAULT_SKIN"]\2!g' pub/themes/bismarck/settings.php \
- && sed -ri -e 's!(\[\'\''check_unique_gameID\'\''\]\s=\s)1!\1$_ENV["CHECK_UNIQUE_GAMEID"]!g' pub/configs/cfg-default.php
+ && sed -ri -e 's!(\['\''default_skin'\''\]\s*=\s*)'\''fest'\''(;)!\1$_ENV["DEFAULT_SKIN"]\2!g' pub/themes/bismarck/settings.php \
+ && sed -ri -e 's!(\['\''check_unique_gameID'\''\]\s*=\s*)1!\1$_ENV["CHECK_UNIQUE_GAMEID"]!g' pub/configs/cfg-default.php
 
 
 CMD /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
