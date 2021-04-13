@@ -1,6 +1,6 @@
-# VSP Stats Processor - Quake 3 ExcessivePlus
+# VSP - Quake 3 ExcessivePlus Community version
 
-Quake 3 ExcessivePlus Community version 0.45-xp-1.1.2, based on the VSP Stats Processor 0.45 by Myrddin.
+VSP Stats Game Log Processor - Quake 3 ExcessivePlus Community version 0.45-xp-1.1.2, based on the VSP Stats Processor 0.45 by Myrddin.
 
 Related GitHub repository:
 <https://github.com/evilru/quake3-vsp-stats>.
