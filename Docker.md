@@ -218,8 +218,8 @@ Mount it into the image.
 
     <http://yourserver.com/pub/themes/bismarck/index.php?config=cfg-ra3.php>
 
-[docker-compose.yml]: https://github.com/evilru/quake3-vsp-stats/blob/dev/docker-compose.yml
-[docker-compose.override.yml]: https://github.com/evilru/quake3-vsp-stats/blob/dev/docker-compose.override.yml
-[cronjob]: https://github.com/evilru/quake3-vsp-stats/blob/dev/docker/import-cron
-[pub/configs/cfg-default.php]: https://github.com/evilru/quake3-vsp-stats/blob/dev/pub/configs/cfg-default.php
-[import script]: https://github.com/evilru/quake3-vsp-stats/blob/dev/docker/import.sh
+[docker-compose.yml]: https://github.com/evilru/quake3-vsp-stats/blob/master/docker-compose.yml
+[docker-compose.override.yml]: https://github.com/evilru/quake3-vsp-stats/blob/master/docker-compose.override.yml
+[cronjob]: https://github.com/evilru/quake3-vsp-stats/blob/master/docker/import-cron
+[pub/configs/cfg-default.php]: https://github.com/evilru/quake3-vsp-stats/blob/master/pub/configs/cfg-default.php
+[import script]: https://github.com/evilru/quake3-vsp-stats/blob/master/docker/import.sh
