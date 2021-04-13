@@ -1,4 +1,6 @@
-# VSP Stats Processor - ExcessivePlus Community version 0.45-xp-1.1.2
+# VSP Stats Processor - Quake 3 ExcessivePlus
+
+Quake 3 ExcessivePlus Community version 0.45-xp-1.1.2, based on the VSP Stats Processor 0.45 by Myrddin.
 
 Related GitHub repository:
 <https://github.com/evilru/quake3-vsp-stats>.
@@ -101,7 +103,7 @@ No default value, to enable this feature, set a password with at least 6 charact
 
 All VSP commands can be called from the commandline and from the browser. The docker image comes with the following [cronjob].
 
-The webinterface is available under the following url: <http://yourserver.com/vsp.php>.
+The webinterface is available under the following url: http://yourserver.com/vsp.php.
 
 ### VSP Stats page configuration
 
@@ -219,5 +221,5 @@ Mount it into the image.
 [docker-compose.yml]: https://github.com/evilru/quake3-vsp-stats/blob/dev/docker-compose.yml
 [docker-compose.override.yml]: https://github.com/evilru/quake3-vsp-stats/blob/dev/docker-compose.override.yml
 [cronjob]: https://github.com/evilru/quake3-vsp-stats/blob/dev/docker/import-cron
-[pub/configs/cfg-default.php]: https://github.com/evilru/quake3-vsp-stats/blob/dev/docker/pub/configs/cfg-default.php
+[pub/configs/cfg-default.php]: https://github.com/evilru/quake3-vsp-stats/blob/dev/pub/configs/cfg-default.php
 [import script]: https://github.com/evilru/quake3-vsp-stats/blob/dev/docker/import.sh

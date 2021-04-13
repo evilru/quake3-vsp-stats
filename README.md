@@ -1,4 +1,4 @@
-# VSP Stats Processor - ExcessivePlus Community version 0.45-xp-1.1.2
+# VSP Stats Processor - Quake 3 ExcessivePlus
 
 Quake 3 ExcessivePlus Community version 0.45-xp-1.1.2, based on the VSP Stats Processor 0.45 by Myrddin.
 
