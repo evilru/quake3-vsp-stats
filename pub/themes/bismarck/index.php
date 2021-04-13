@@ -136,8 +136,6 @@ function drawPlayersList()
   {
 
     $search_txt=$_POST['search_txt'];
-    if (get_magic_quotes_gpc())
-      $search_txt=stripslashes($search_txt);
 
      
 
@@ -695,7 +693,7 @@ function setupVars()
             ".($GLOBALS['excluded_players'] ? "and playerID not in {$GLOBALS['excluded_players']}" : "")."
        ";
   $rs=$db->Execute($sql);
-  $total_records=$rs->fields[0];
+  $total_records=$rs?$rs->fields[0]:0;
 
   
 

@@ -1,6 +1,6 @@
 <?php /* vsp stats processor, copyright 2004-2005, myrddin8 AT gmail DOT com (a924cb279be8cb6089387d402288c9f2) */ 
 function Fe6fec173($V98bf7d8c) { foreach ($V98bf7d8c as $V8c7dd922) { if(ereg("([-dl][rwxst-]+).* ([0-9]*) ([a-zA-Z0-9]+).* ([a-zA-Z0-9]+).* ([0-9]*) ([a-zA-Z]+[0-9: ]*[0-9])[ ]+(([0-9]{2}:[0-9]{2})|[0-9]{4}) (.+)", $V8c7dd922, $V66373a9c)) 
- { $V599dcce2 = (int) strpos("-dl", $V66373a9c[1]{0}); $Vd50e12d5['line'] = $V66373a9c[0]; $Vd50e12d5['type'] = $V599dcce2;
+ { $V599dcce2 = (int) strpos("-dl", $V66373a9c[1][0]); $Vd50e12d5['line'] = $V66373a9c[0]; $Vd50e12d5['type'] = $V599dcce2;
 $Vd50e12d5['rights'] = $V66373a9c[1]; $Vd50e12d5['number'] = $V66373a9c[2]; $Vd50e12d5['user'] = $V66373a9c[3];
 $Vd50e12d5['group'] = $V66373a9c[4]; $Vd50e12d5['size'] = $V66373a9c[5]; $Vd50e12d5['date'] = date("m-d",strtotime($V66373a9c[6]));
 $Vd50e12d5['time'] = $V66373a9c[7]; $Vd50e12d5['name'] = $V66373a9c[9]; $V4a7870ea[] = $Vd50e12d5; }

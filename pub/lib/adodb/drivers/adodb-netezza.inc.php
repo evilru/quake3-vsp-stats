@@ -1,6 +1,6 @@
 <?php
 /*
-  @version   v5.21.0-dev  ??-???-2016
+  @version   v5.21.0  2021-02-27
   @copyright (c) 2000-2013 John Lim (jlim#natsoft.com). All rights reserved.
   @copyright (c) 2014      Damien Regad, Mark Newnham and the ADOdb community
 
@@ -14,7 +14,7 @@
     Fixed the way data types and lengths are returned in MetaColumns()
     as well as added the default lengths for certain types
     Updated public variables for Netezza
-    Still need to remove blob functions, as Netezza doesn't suppport blob
+    Still need to remove blob functions, as Netezza doesn't support blob
 */
 // security - hide paths
 if (!defined('ADODB_DIR')) die();

@@ -1,6 +1,6 @@
 <?php
 /*
-@version   v5.21.0-dev  ??-???-2016
+@version   v5.21.0  2021-02-27
 @copyright (c) 2000-2013 John Lim (jlim#natsoft.com). All rights reserved.
 @copyright (c) 2014      Damien Regad, Mark Newnham and the ADOdb community
   Released under both BSD license and Lesser GPL library license.
@@ -8,7 +8,7 @@
   the BSD license will take precedence.
 Set tabs to 4 for best viewing.
 
-  Latest version is available at http://adodb.sourceforge.net
+  Latest version is available at https://adodb.org/
 
   MSSQL support via ODBC. Requires ODBC. Works on Windows and Unix.
   For Unix configuration, see http://phpbuilder.com/columns/alberto20000919.php3
@@ -274,6 +274,8 @@ order by constraint_name, referenced_table_name, keyno";
 
 	function SelectLimit($sql,$nrows=-1,$offset=-1, $inputarr=false,$secs2cache=0)
 	{
+		$nrows = (int) $nrows;
+		$offset = (int) $offset;
 		if ($nrows > 0 && $offset <= 0) {
 			$sql = preg_replace(
 				'/(^\s*select\s+(distinctrow|distinct)?)/i','\\1 '.$this->hasTop." $nrows ",$sql);
@@ -392,6 +394,35 @@ order by constraint_name, referenced_table_name, keyno";
 	function textMax()
 	{
 		return ADODB_STRINGMAX_NOLIMIT;
+	}
+	
+	// returns concatenated string
+	// MSSQL requires integers to be cast as strings
+	// automatically cast every datatype to VARCHAR(255)
+	// @author David Rogers (introspectshun)
+	function Concat()
+	{
+		$s = "";
+		$arr = func_get_args();
+
+		// Split single record on commas, if possible
+		if (sizeof($arr) == 1) {
+			foreach ($arr as $arg) {
+				$args = explode(',', $arg);
+			}
+			$arr = $args;
+		}
+
+		array_walk(
+			$arr,
+			function(&$value, $key) {
+				$value = "CAST(" . $value . " AS VARCHAR(255))";
+			}
+		);
+		$s = implode('+',$arr);
+		if (sizeof($arr) > 0) return "$s";
+
+		return '';
 	}
 
 }

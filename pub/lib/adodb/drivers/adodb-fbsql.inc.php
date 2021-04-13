@@ -1,6 +1,6 @@
 <?php
 /*
- @version   v5.21.0-dev  ??-???-2016
+ @version   v5.21.0  2021-02-27
  @copyright (c) 2000-2013 John Lim (jlim#natsoft.com). All rights reserved.
  @copyright (c) 2014      Damien Regad, Mark Newnham and the ADOdb community
  Released under both BSD license and Lesser GPL library license.
@@ -173,7 +173,7 @@ class ADORecordSet_fbsql extends ADORecordSet{
 		default:
 		$this->fetchMode = FBSQL_BOTH; break;
 		}
-		return parent::__construct($queryID);
+		parent::__construct($queryID);
 	}
 
 	function _initrs()

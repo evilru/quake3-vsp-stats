@@ -1,35 +1,34 @@
 <?php
 //==============================================================================
 // Anything following double slashes // are comments.
-// You can use // to disable certain settings. 
+// You can use // to disable certain settings.
 // Remove the // infront of a variable if you want to enable it.
 //==============================================================================
 global $cfg;
 
 //================================================
 // PHP configurations
-    
-    error_reporting(E_ALL ^ E_NOTICE ^ (defined('E_DEPRECATED') ? E_DEPRECATED : 0)); // For Debugging. Recommended when you set up vsp for the first time.
-    //error_reporting(E_ALL ^ E_NOTICE ^ (defined('E_DEPRECATED') ? E_DEPRECATED : 0) ^ E_WARNING); // Recommended for regular use after ensuring proper run of vsp.
+
+    // error_reporting(E_ALL ^ E_NOTICE ^ (defined('E_DEPRECATED') ? E_DEPRECATED : 0)); // For Debugging. Recommended when you set up vsp for the first time.
+    error_reporting(E_ALL ^ E_NOTICE ^ (defined('E_DEPRECATED') ? E_DEPRECATED : 0) ^ E_WARNING); // Recommended for regular use after ensuring proper run of vsp.
     //error_reporting(E_ALL ^ (defined('E_DEPRECATED') ? E_DEPRECATED : 0));                        // For Debugging. Enable this if you are having a hard time to get vsp going.
 
     ini_set("default_charset", "UTF-8");             // default charset
     setlocale(LC_NUMERIC, 'C');                      // numeric locale (dont set a locale that uses commas for separating float numbers)
-    
+
 //================================================
 // Database settings
-    
+
     //$cfg['db']['adodb_path']= "C:/php/lib/adodb/"; // Uncomment/Enable this only if you have and want to use your own adodb libraries.
                                                      // Must specify it as an absolute path! ie:- "../../adodb" etc. are *NOT ALLOWED*
-    
-    $cfg['db']['adodb_driver']= 'mysqli'; 
-    
+
+    $cfg['db']['adodb_driver'] = 'mysqli';
+
     $cfg['db']['table_prefix'] = "vsp_";           // use only lower case to minimize windows/linux portability problems
-    
     $cfg['db']['hostname'] = "localhost";
-    $cfg['db']['dbname']   = "vsp";      // use only lower case to minimize windows/linux portability problems
+    $cfg['db']['dbname']  = "vsp";      // use only lower case to minimize windows/linux portability problems
     $cfg['db']['username'] = "root";
-    $cfg['db']['password'] = "123456";
+    $cfg['db']['password'] = "secretPassword";
 
 //================================================
 // Ip2Country table
@@ -49,15 +48,15 @@ global $cfg;
 
 
 //================================================
-// Game settings 
+// Game settings
 
     $cfg['game']['name']='q3a'; /*** make sure this is set correctly! Read below! ***/
                                                      /*----------------------------------------
                                                      In order to find out what values are
                                                      acceptable for this variable, look in the
-                                                     /pub/games/ folder in vsp. Any sub 
+                                                     /pub/games/ folder in vsp. Any sub
                                                      directory in this folder is valid.
-                                                     ex:- 
+                                                     ex:-
                                                           'cod'     for Call of Duty and all its expansions/mods
                                                           'hl'      for Half Life and all its mods
                                                           'moh'     for Medal of Honor and all its expansions/mods
@@ -86,29 +85,29 @@ global $cfg;
 
 //================================================
 // Parser Options
-    
+
     $cfg['parser']['use_original_playerID'] = 1;                   // Check http://www.clanavl.com/ipb/index.php?showtopic=32
     $cfg['parser']['use_most_used_playerName'] = 1;                // use the most used playerName (set to 1) OR newest playerName (set to 0) as primary playerName
     $cfg['parser']['use_most_used_playerIP'] = 1;                  // use the most used playerIP (set to 1) OR newest playerIP (set to 0) as primary playerIP
     $cfg['parser']['check_unique_gameID'] = 1;                     // check uniqueness of game start date
                                                                    // disable if log doesn't have server date information
-    
-    
-    
-    // You can track players by guid and ip if the game/mod supports it. 
+
+
+
+    // You can track players by guid and ip if the game/mod supports it.
     // Tracking by guid is always the best option if its available. If it doesn't work track by playername
-    
+
     //----- ***USE ONLY ONE OF THESE AT A TIME*** -----
-    
+
     //$cfg['parser']['trackID'] = 'playerName';                      // Default method for tracking, works with all games/mods. If unsure, use this.
-    
+
     //$cfg['parser']['trackID'] = 'ip=/(\d+\\.\d+\\.\d+\\.\d+)/';  // Track by ip AAA.BBB.CCC.DDD (NOT RECOMMENDED - the full ip of the player will be viewable by anyone)
     //$cfg['parser']['trackID'] = 'ip=/(\d+\\.\d+\\.\d+\\.)/U';    // Track by ip AAA.BBB.CCC.*   (recommended tracking format for ips)
     //$cfg['parser']['trackID'] = 'ip=/(\d+\\.\d+\\.\d)/U';        // Track by ip AAA.BBB.C*.*
     //$cfg['parser']['trackID'] = 'ip=/(\d+\\.)/U';                // Track by ip AAA.*.*.*
-    
+
     $cfg['parser']['trackID'] = 'playerName';                          // Recommended method of tracking, if available for that game/mod
-    
+
     //----- ***USE ONLY ONE OF THESE AT A TIME*** -----
 
 //================================================
@@ -129,7 +128,7 @@ global $cfg;
 
 //================================================
 // Display settings
-    
+
     $cfg['display']['record_limit']=50;
     $cfg['display']['days_inactivity']=30;      // number of days after which players are excluded
                                                 // for rank and awards (0 means never)
@@ -137,10 +136,10 @@ global $cfg;
 //================================================
 // Server info
 
-    $cfg['display']['server_title']='HERE GOES YOUR SERVER TITLE';
+    $cfg['display']['server_title']="HERE GOES YOUR SERVER TITLE";
 
     $cfg['display']['server_image']="../../images/server.gif";
-    
+
     $cfg['display']['server_info']=<<<END_OF_SERVER_INFO
     <table style="border-width: 10;">
     <TR>
@@ -181,7 +180,7 @@ END_OF_SERVER_INFO;
   $cfg['data_filter']['events']['ammo']="/.*/"; // excluded all ammo events
   //$cfg['data_filter']['events']['items']="/.*/"; // uncomment this line to exclude all item pickup events (mainly health, armor and powerups)
   $cfg['data_filter']['events']['']="/^(team_CTF_blueflag|team_CTF_redflag|team_CTF_neutralflag)/"; // innacurate
-  
+
   //$cfg['data_filter']['gamedata']['']="/^(sv_|g_|p_)/";
   $cfg['data_filter']['gamedata']['']="/.*/";
 

@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    # ports:
+      # supervisor web gui would be available on port 9001
+      # - 9001:9001
+    volumes:
+      - ./osp.log:/vsp/games.log
+    environment:
+      #xdebug 2
+      XDEBUG_CONFIG: remote_enable=1 remote_autostart=1 default_enable=1 remote_host=host.docker.internal idekey=VSCODE remote_port=9003
+      #xdebug 3
+      # discover_client_host=true
+      # XDEBUG_MODE: debug
+      # XDEBUG_CONFIG: start_with_request=yes client_port=9003 idekey=VSCODE client_host=host.docker.internal
+
