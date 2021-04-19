@@ -15,7 +15,7 @@ Related GitHub repository:
 docker-compose up -d
 ```
 
-The configured games.log will be checked every 5 minutes for new games.
+The configured games.log will be checked every 15 minutes for new games.
 
 ## Configuration
 
