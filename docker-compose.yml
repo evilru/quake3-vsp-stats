@@ -28,6 +28,7 @@ services:
       TZ: Europe/Berlin
       # needs to be at least 6 characters long
       # VSP_WEB_PASSWORD:
+      DB_HOSTNAME: db
       DB_NAME: vsp
       # use the same value as for MYSQL_USER
       DB_USERNAME:
