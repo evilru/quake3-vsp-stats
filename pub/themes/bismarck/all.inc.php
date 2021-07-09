@@ -56,7 +56,7 @@ function getConfig()
     $config=$_GET['config'];
   else
     $config = "cfg-default.php";
-  
+
   return $cfg_path.$config;
 }
 //******************************************************************************
@@ -66,7 +66,7 @@ function setSkin()
   $cookie_expire_time=time()+60*60*24*30*12;
 
   global $skin,$skin_data,$stylesheet;
-  ob_start(); 
+  ob_start();
 
   if (!$GLOBALS['settings']['display']['skin_selector'])
   {
@@ -86,7 +86,7 @@ function setSkin()
   {
     $skin=$_COOKIE['vsp_skin'];
   }
-  
+
   if (strlen($skin)<1)
     $skin=$GLOBALS['settings']['display']['default_skin'];
 
@@ -143,7 +143,7 @@ function drawMainHeading()
           <TD WIDTH="100%" CLASS="cell1" style="vertical-align: top; text-align: left">
             <?php print $GLOBALS['cfg']['display']['server_info'];?>
           </TD>
-          <TD CLASS="cell1" style="text-align: left"><A href="http://My_STATS_Page_Goes_Here.com"><IMG border="0" alt="My Server Name Goes Here - Game Server Stats" title="My Server Name Goes Here - Game Server Stats" SRC="../../images/_v_logo.gif"></A></TD>
+          <TD CLASS="cell1" style="text-align: left"><A href="http://My_STATS_Page_Goes_Here.com"><IMG border="0" alt="My Server Name Goes Here - Game Server Stats" title="My Server Name Goes Here - Game Server Stats" SRC="../../images/logo.gif"></A></TD>
         </TR>
         <?php
       }
@@ -162,14 +162,14 @@ function drawMenu()
       <?php if ($GLOBALS['cfg']['display']['days_inactivity']) : ?>
         <TD HEIGHT="20" WIDTH="12.5%" CLASS="cellSubHeading" style="text-align: center; font-size: larger"><A HREF="index.php?config=<?php  print $GLOBALS['config']; ?>&hist_rank=1"><B>Historical Stats</B></A></TD>
       <?php endif ?>
-      
+
       <?php
       if ($GLOBALS['settings']['display']['gamestats'] && $GLOBALS['cfg']['games_limit'])
       {
         ?><TD WIDTH="12.5%" CLASS="cellSubHeading" style="text-align: center; font-size: larger"><A HREF="gamestat.php?config=<?php  print $GLOBALS['config']; ?>"><B>Game Stats</B></A></TD><?php
       }
       ?>
-      
+
       <TD WIDTH="12.5%" CLASS="cellSubHeading" style="text-align: center; font-size: larger"><A HREF="awardstat.php?config=<?php  print $GLOBALS['config']; ?>"><B>Award Stats</B></A></TD>
       <!--<TD WIDTH="12.5%" CLASS="cellSubHeading" style="text-align: center">Server Stats</TD>-->
       <!--<TD WIDTH="12.5%" CLASS="cellSubHeading" style="text-align: center">Violations</TD>-->
@@ -180,11 +180,11 @@ function drawMenu()
       <?php
       if ($GLOBALS['settings']['display']['skin_selector'])
       {
-        if ($handle = opendir('./skins')) 
+        if ($handle = opendir('./skins'))
         {
-           while (false !== ($file = readdir($handle))) 
+           while (false !== ($file = readdir($handle)))
            {
-               if (!preg_match("/^\\./",$file)) 
+               if (!preg_match("/^\\./",$file))
                {
                    //echo "$file\n";
                    $skin_file[]=$file;
@@ -216,7 +216,7 @@ function drawMenu()
                          ?><option <?php if ($GLOBALS['skin']=="$file") echo "selected";?> style="text-align: center;" class="cellSubHeading" value="<?php  print $file; ?>" ><?php  print $file; ?></option><?php
                      }
               ?>
-            </select> 
+            </select>
             </form>
           </TD>
           <?php
@@ -233,7 +233,7 @@ function drawCredits()
 {
   global $skin_data;
   global $db;
-  
+
   $sql="SELECT value
           from {$GLOBALS['cfg']['db']['table_prefix']}gamedata
           where name=".$db->qstr("last update time");

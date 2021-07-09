@@ -8,24 +8,7 @@
             "name": "Listen for XDebug",
             "type": "php",
             "request": "launch",
-            "port": 9000
-        },
-        {
-            "name": "Launch vsp.php",
-            "type": "php",
-            "request": "launch",
-            "program": "/var/www/html/vsp.php",
-            "cwd": "/var/www/html/",
-            "port": 9000,
-            "args": ["-l q3a-osp games.log"]
-        },
-        {
-            "name": "Launch currently open script",
-            "type": "php",
-            "request": "launch",
-            "program": "${file}",
-            "cwd": "${fileDirname}",
-            "port": 9000
+            "port": 9003
         }
     ]
 }

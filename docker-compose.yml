@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  db:
+    # image: mysql:8.0.23
+    image: mariadb:10.5.9
+    restart: always
+    environment:
+      TZ: Europe/Berlin
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_DATABASE: vsp
+      MYSQL_USER:
+      MYSQL_PASSWORD:
+    ports:
+      - "3306:3306"
+  web:
+    restart: always
+    depends_on:
+      - db
+    volumes:
+      # - /path/to/your/games.log:/vsp/games.log
+      # - /path/to/your/server.gif:/vsp/pub/images/server.gif
+      # - /path/to/your/logo.gif:/vsp/pub/images/logo.gif
+      - logdata:/vsp/logdata
+    ports:
+      - 80:80
+    environment:
+      TZ: Europe/Berlin
+      # needs to be at least 6 characters long
+      # VSP_WEB_PASSWORD:
+      DB_NAME: vsp
+      # use the same value as for MYSQL_USER
+      DB_USERNAME:
+      # use the same value as for MYSQL_PASSWORD
+      DB_PASSWORD:
+volumes:
+  logdata:
