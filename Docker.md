@@ -33,20 +33,25 @@ services:
         - /path/to/your/games.log:/vsp/games.log
 ```
 
-### VSP configuration
+### DB configuration
 
-The parser can be configured with the following ENV variabels. They need to be placed in _evnironment_ section of the _web_ service.
+**Make sure to set username and password for the database!**
 
 ```yaml
 services:
+  db:
+    environment:
+      MYSQL_USER:
+      MYSQL_PASSWORD:
   web:
     environment:
-      DB_NAME: vsp
-      # use the same value as for MYSQL_USER
       DB_USERNAME:
-      # use the same value as for MYSQL_PASSWORD
       DB_PASSWORD:
 ```
+
+### VSP configuration
+
+The parser can be configured with the following ENV variabels. They need to be placed in _evnironment_ section of the _web_ service.
 
 #### LOGTYPE
 
