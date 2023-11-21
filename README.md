@@ -16,8 +16,8 @@ Follow the setup proceduere described in [readme.txt](./readme.txt).
 
 ### Compatibility
 
-* **PHP 7.4.16**
-* **MySQL 8.0.23** / **MariaDB 10.5.9**
+* **PHP 7.4.33**
+* **MariaDB 11.1.3**
 
 ## From the VSP Readme
 
