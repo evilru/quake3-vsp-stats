@@ -78,7 +78,7 @@ The table prefix used in the database
 
 #### DB_HOSTNAME
 
-default: _host.docker.internal_  
+default: _db_  
 This is the internal hostname of the dockerhost, no need to change that
 
 #### DB_NAME
