@@ -2,8 +2,7 @@ version: '3'
 
 services:
   db:
-    # image: mysql:8.0.23
-    image: mariadb:10.5.9
+    image: mariadb
     restart: always
     environment:
       TZ: Europe/Berlin

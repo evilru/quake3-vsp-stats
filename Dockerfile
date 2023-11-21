@@ -1,4 +1,4 @@
-FROM php:7.4.16-apache
+FROM php:7.4.33-apache
 # FROM php:8-apache
 
 # supervisor web gui would be available on port 9001
