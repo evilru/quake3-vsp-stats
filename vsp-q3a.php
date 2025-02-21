@@ -444,7 +444,12 @@ class VSPParserQ3A
   {
     // parece eliminar efectos del nombre
     if (!strcmp($this->config["gametype"], "xp")) {
-      return $this->convertXPColorCodes($str);
+      $newStr = $this->convertXPColorCodes($str);
+      // if newStr is empty, it's likley using vanilla color codes
+      // just let it fall through to get processed normally
+      if (!empty($newStr)) {
+        return $newStr;
+      }
     }
     $str = strtr($str, $this->translationData["char_trans"]);
     $enableColor = 1;
