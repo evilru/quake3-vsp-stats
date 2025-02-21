@@ -1,174 +1,862 @@
 <?php /* vsp stats processor, copyright 2004-2005, myrddin8 AT gmail DOT com (a924cb279be8cb6089387d402288c9f2) */
-class VSPParserCLIENT { var $V2e9590a3; var $Va10baeb6; var $V1c7b7557; var $Vdba7d3a2; var $V8ba4afff;
-var $Va509f5c2; var $Vbbf5edcf; var $V93da65a9; var $V21d8a920; var $Vae2aeb93; var $Va2bbabfe; var $V6d2b5d2c;
- var $V42dfa3a4; var $Vc3ecd549; var $V9693e947; var $Vdafa753c; var $V50dffd37; var $Vd6d33a32;
-var $logdata; var $Va733fe6b; var $Vb3b1075a; function VSPParserCLIENT($Ve0d85fdc,&$V4f00ff2f,&$V495c39bf)
- { $this->Vbbf5edcf=array( "#PLAYER#(?:\\^[^\\^])? renamed to #NAME#$" ); $this->def_chat=array(
- "#PLAYER#(?:\\^[^\\^])?: #CHAT#$" ); $this->Vdba7d3a2=array( "Match has begun!" ); $this->V1c7b7557=array(
- "^Timelimit hit\\." ,"^Pointlimit hit\\." ,"hit the capturelimit\\.$" ,"hit the fraglimit\\.$" ,"^----- CL_Shutdown -----"
- ); $this->Va10baeb6=array( "#PLAYER#(?:\\^[^\\^])? entered the game" ); $this->V8ba4afff=array(
- "#PLAYER#(?:\\^[^\\^])? entered the game \\(#TEAM#\\)" ); $this->Va509f5c2=array( "#PLAYER#(?:\\^[^\\^])? RED's flag carrier defends against an agressive enemy" => "CTF|Defend_Hurt_Carrier"
- ,"#PLAYER#(?:\\^[^\\^])? got the BLUE flag!" => "CTF|Flag_Pickup" ,"#PLAYER#(?:\\^[^\\^])? returned the RED flag!" => "CTF|Flag_Return"
- ,"#PLAYER#(?:\\^[^\\^])? fragged BLUE's flag carrier!" => "CTF|Kill_Carrier" ,"#PLAYER#(?:\\^[^\\^])? gets an assist for returning the RED flag!" => "CTF|Flag_Assist_Return"
- ,"#PLAYER#(?:\\^[^\\^])? gets an assist for fragging the RED flag carrier!" => "CTF|Flag_Assist_Frag"
- ,"#PLAYER#(?:\\^[^\\^])? defends RED's flag carrier against an agressive enemy" => "CTF|Defend_Hurt_Carrier"
- ,"#PLAYER#(?:\\^[^\\^])? defends the RED flag carrier against an agressive enemy!" => "CTF|Defend_Hurt_Carrier"
- ,"#PLAYER#(?:\\^[^\\^])? defends the RED's flag carrier." => "CTF|Defend_Carrier" ,"#PLAYER#(?:\\^[^\\^])? defends the RED flag carrier!" => "CTF|Defend_Carrier"
- ,"#PLAYER#(?:\\^[^\\^])? defends the RED base" => "CTF|Defend_Base" ,"#PLAYER#(?:\\^[^\\^])? defends the RED flag" => "CTF|Defend_Flag"
- ,"#PLAYER#(?:\\^[^\\^])? captured the BLUE flag!" => "CTF|Flag_Capture" ,"#PLAYER#(?:\\^[^\\^])? BLUE's flag carrier defends against an agressive enemy" => "CTF|Defend_Hurt_Carrier"
- ,"#PLAYER#(?:\\^[^\\^])? got the RED flag!" => "CTF|Flag_Pickup" ,"#PLAYER#(?:\\^[^\\^])? returned the BLUE flag!" => "CTF|Flag_Return"
- ,"#PLAYER#(?:\\^[^\\^])? fragged RED's flag carrier!" => "CTF|Kill_Carrier" ,"#PLAYER#(?:\\^[^\\^])? gets an assist for returning the BLUE flag!" => "CTF|Flag_Assist_Return"
- ,"#PLAYER#(?:\\^[^\\^])? gets an assist for fragging the BLUE flag carrier!" => "CTF|Flag_Assist_Frag"
- ,"#PLAYER#(?:\\^[^\\^])? defends BLUE's flag carrier against an agressive enemy" => "CTF|Defend_Hurt_Carrier"
- ,"#PLAYER#(?:\\^[^\\^])? defends the BLUE flag carrier against an agressive enemy!" => "CTF|Defend_Hurt_Carrier"
- ,"#PLAYER#(?:\\^[^\\^])? defends the BLUE's flag carrier." => "CTF|Defend_Carrier" ,"#PLAYER#(?:\\^[^\\^])? defends the BLUE flag carrier!" => "CTF|Defend_Carrier"
- ,"#PLAYER#(?:\\^[^\\^])? defends the BLUE base" => "CTF|Defend_Base" ,"#PLAYER#(?:\\^[^\\^])? defends the BLUE flag" => "CTF|Defend_Flag"
- ,"#PLAYER#(?:\\^[^\\^])? captured the RED flag!" => "CTF|Flag_Capture" ,"#PLAYER#(?:\\^[^\\^])? got an assist for returning the flag!" => "CTF|Flag_Assist_Return"
- ,"#PLAYER#(?:\\^[^\\^])? got an assist for fragging the enemy flag carrier!" => "CTF|Flag_Assist_Frag"
- ); $this->V2e9590a3=array( "#VICTIM#(?:\\^[^\\^])? was pummeled by #KILLER#(?:\\^[^\\^])?$" => "GAUNTLET"
- ,"#VICTIM#(?:\\^[^\\^])? was machinegunned by #KILLER#(?:\\^[^\\^])?$" => "MACHINEGUN" ,"#VICTIM#(?:\\^[^\\^])? was gunned down by #KILLER#(?:\\^[^\\^])?$" => "SHOTGUN"
- ,"#VICTIM#(?:\\^[^\\^])? was shredded by #KILLER#(?:\\^[^\\^])?'s shrapnel" => "GRENADE" ,"#VICTIM#(?:\\^[^\\^])? ate #KILLER#(?:\\^[^\\^])?'s grenade" => "GRENADE"
- ,"#VICTIM#(?:\\^[^\\^])? ate #KILLER#(?:\\^[^\\^])?'s rocket" => "ROCKET" ,"#VICTIM#(?:\\^[^\\^])? almost dodged #KILLER#(?:\\^[^\\^])?'s rocket" => "ROCKET"
- ,"#VICTIM#(?:\\^[^\\^])? was electrocuted by #KILLER#(?:\\^[^\\^])?$" => "LIGHTNING" ,"#VICTIM#(?:\\^[^\\^])? was railed by #KILLER#(?:\\^[^\\^])?$" => "RAILGUN"
- ,"#VICTIM#(?:\\^[^\\^])? was melted by #KILLER#(?:\\^[^\\^])?'s plasmagun" => "PLASMA" ,"#VICTIM#(?:\\^[^\\^])? was blasted by #KILLER#(?:\\^[^\\^])?'s BFG" => "BFG"
- ,"#VICTIM#(?:\\^[^\\^])? tried to invade #KILLER#(?:\\^[^\\^])?'s personal space" => "TELEFRAG" ,"#VICTIM#(?:\\^[^\\^])? blew itself up\\." => "ROCKET"
- ,"#VICTIM#(?:\\^[^\\^])? blew herself up\\." => "ROCKET" ,"#VICTIM#(?:\\^[^\\^])? blew himself up\\." => "ROCKET"
- ,"#VICTIM#(?:\\^[^\\^])? tripped on his own grenade\\." => "GRENADE" ,"#VICTIM#(?:\\^[^\\^])? tripped on her own grenade\\." => "GRENADE"
- ,"#VICTIM#(?:\\^[^\\^])? tripped on its own grenade\\." => "GRENADE" ,"#VICTIM#(?:\\^[^\\^])? melted himself\\." => "PLASMA"
- ,"#VICTIM#(?:\\^[^\\^])? melted herself\\." => "PLASMA" ,"#VICTIM#(?:\\^[^\\^])? melted itself\\." => "PLASMA"
- ,"#VICTIM#(?:\\^[^\\^])? should have used a smaller gun\\." => "BFG" ,"#VICTIM#(?:\\^[^\\^])? killed himself\\." => "SUICIDE"
- ,"#VICTIM#(?:\\^[^\\^])? killed herself\\." => "SUICIDE" ,"#VICTIM#(?:\\^[^\\^])? killed itself\\." => "SUICIDE"
- ,"#VICTIM#(?:\\^[^\\^])? cratered\\." => "FALLING" ,"#VICTIM#(?:\\^[^\\^])? does a back flip into the lava\\." => "LAVA"
- ,"#VICTIM#(?:\\^[^\\^])? was squished\\." => "CRUSH" ,"#VICTIM#(?:\\^[^\\^])? sank like a rock\\." => "WATER"
- ,"#VICTIM#(?:\\^[^\\^])? melted\\." => "SLIME" ,"#VICTIM#(?:\\^[^\\^])? was in the wrong place\\." => "TRIGGER_HURT" 
- ,"#VICTIM#(?:\\^[^\\^])? was disemboweled by #KILLER#(?:\\^[^\\^])?'s grappling hook" => "GRAPPLE"
- ,"#VICTIM#(?:\\^[^\\^])? was impaled by #KILLER#(?:\\^[^\\^])?'s shower of nails" => "NAILGUN" ,"#VICTIM#(?:\\^[^\\^])? was swimming too close to #KILLER#(?:\\^[^\\^])?$" => "DISCHARGE"
- ,"#VICTIM#(?:\\^[^\\^])? pressed the wrong button\\." => "DISCHARGE" ); define("C7e731e80",1024);
-$this->Fcda1c5ae($Ve0d85fdc); $this->V21d8a920= $V4f00ff2f; $this->Vae2aeb93= $V495c39bf; $this->V6d2b5d2c= array();
- $this->V42dfa3a4= array(); $this->Va2bbabfe= array(); $this->logdata=array(); $this->Vdafa753c= false;
- } function Fcda1c5ae($Ve0d85fdc) { $this->V93da65a9['savestate']=0; $this->V93da65a9['gametype']="";
-$this->V93da65a9['backuppath']=""; $this->V93da65a9['trackID']="playerName"; if (is_array($Ve0d85fdc))
- { foreach($Ve0d85fdc as $Ve7cb9038 => $Va36fd2a1) { $this->V93da65a9[$Ve7cb9038] = $Va36fd2a1; }
-} if ($this->V93da65a9['backuppath']) { $this->V93da65a9['backuppath']=F9578dd1f($this->V93da65a9['backuppath']);
-} print_r($this->V93da65a9); } function F713be45c() { unset($this->Va2bbabfe); $this->Va2bbabfe= array();
-unset($this->V6d2b5d2c); $this->V6d2b5d2c= array(); $this->V9693e947['month']=12; $this->V9693e947['date']=28;
-$this->V9693e947['year']=1971; $this->V9693e947['hour']=23; $this->V9693e947['min']=59; $this->V9693e947['sec']=59;
-} function F5c0b129c() { $this->logdata["last_shutdown_end_position"]=ftell($this->V50dffd37); 
- $V9a52fe40=fseek ($this->V50dffd37, -C7e731e80, SEEK_CUR); if ($V9a52fe40==0) { $this->logdata['last_shutdown_hash']=md5(fread($this->V50dffd37, C7e731e80));
-} else { $V284073b9=ftell($this->V50dffd37); fseek ($this->V50dffd37, 0); $this->logdata['last_shutdown_hash']=md5(fread($this->V50dffd37, $V284073b9)); 
- } $V3b2eb2c1 = fopen('./logdata/savestate_'.Fff47f8ac($this->Vd6d33a32).'.inc.php',"wb"); fwrite($V3b2eb2c1,"<?php \n");
-fwrite($V3b2eb2c1,"\$this->logdata['last_shutdown_hash']='{$this->logdata['last_shutdown_hash']}';\n");
-fwrite($V3b2eb2c1,"\$this->logdata['last_shutdown_end_position']={$this->logdata['last_shutdown_end_position']};\n");
-fwrite($V3b2eb2c1,"?>"); fclose($V3b2eb2c1); } function Fb96636b2() { echo "Verifying savestate\n";
-$V8774de0e=fopen($this->Vd6d33a32,"rb"); $V2843c763=fseek($V8774de0e,$this->logdata['last_shutdown_end_position']);
- if ($V2843c763==0) { $V9a52fe40=fseek ($V8774de0e, -C7e731e80, SEEK_CUR); if ($V9a52fe40==0) { 
- $Vb9cc7f4b=fread($V8774de0e, C7e731e80); } else { $V284073b9=ftell($V8774de0e); fseek ($V8774de0e, 0);
-$Vb9cc7f4b=fread($V8774de0e, $V284073b9); } if (strcmp(md5($Vb9cc7f4b),$this->logdata['last_shutdown_hash'])==0)
- { echo " - Hash matched, resuming parsing from previous saved location in log file\n"; fseek($this->V50dffd37,$this->logdata['last_shutdown_end_position']);
-} else { echo " - Hash did not match, assuming new log file\n"; fseek($this->V50dffd37,0); } } else
- { echo " - Seek to prior location failed, assuming new log file\n"; fseek($this->V50dffd37,0); }
- fclose($V8774de0e); } function F1417ca90($Vdbe56eaf) { $this->Vd6d33a32=realpath($Vdbe56eaf); 
- if (!file_exists($this->Vd6d33a32)) { F03c2b497("error: log file \"{$Vdbe56eaf}\" does not exist");
-} $this->F713be45c(); if ($this->V93da65a9['savestate']==1) { echo "savestate 1 processing enabled\n";
-@include_once('./logdata/savestate_'.Fff47f8ac($this->Vd6d33a32).'.inc.php'); $this->V50dffd37= fopen($this->Vd6d33a32,"rb");
- if (!empty($this->logdata)) { $this->Fb96636b2($this->Vd6d33a32); } } else { $this->V50dffd37= fopen($this->Vd6d33a32,"rb");
-} if (!$this->V50dffd37) { Fb7d30ee1("error: {this->logfile} could not be opened"); return; } $this->V42dfa3a4['logfile_size']=filesize($this->Vd6d33a32); 
- while(!feof($this->V50dffd37)) { $this->Va733fe6b=ftell($this->V50dffd37); $V6438c669 = fgets($this->V50dffd37, cBIG_STRING_LENGTH); 
- $V6438c669=rtrim($V6438c669,"\r\n"); $this->F20dd322a($V6438c669); } fclose($this->V50dffd37); 
- } function F7212cda9($V341be97d) { $Vfc9b3a06=preg_replace("/\\^[xX][\da-fA-F]{6}/","",$V341be97d);
-$Vfc9b3a06=preg_replace("/\\^[^\\^]/","",$Vfc9b3a06); return $Vfc9b3a06; } function Fa3f5d48d($V341be97d)
- { $Vc6a8fe6b=1; $V865c0c0b=0; $V5b7f33be=0; $Veedf5beb=strlen($V341be97d); if ($Veedf5beb<1) return " ";
-if ($Vc6a8fe6b) $Vf8f0c0d8="`#FFFFFF"; for ($V865c0c0b=0;$V865c0c0b< $Veedf5beb-1;$V865c0c0b++) {
- if ($V341be97d[$V865c0c0b]=="^" && $V341be97d[$V865c0c0b+1]!="^") { $V5b7f33be = ord($V341be97d[$V865c0c0b+1]);
-if ($Vc6a8fe6b) { if ($V5b7f33be == 70 || $V5b7f33be == 102 || $V5b7f33be == 66 || $V5b7f33be == 98 || $V5b7f33be == 78)
- { $V865c0c0b++; continue; } if (($V5b7f33be == 88 || $V5b7f33be == 120) && strlen($V341be97d)-$V865c0c0b>6)
- { if (preg_match("/^[\da-fA-F]{6}/",substr($V341be97d, $V865c0c0b+2,6),$Vb74df323)) { $Vf8f0c0d8 .= "`#";
-$Vf8f0c0d8 .= substr($V341be97d, $V865c0c0b+2,6); $V865c0c0b += 7; continue; } } switch($V5b7f33be%8)
- { case 0: $Vf8f0c0d8 .= "`#777777"; break; case 1: $Vf8f0c0d8 .= "`#FF0000"; break; case 2: $Vf8f0c0d8 .= "`#00FF00";
-break; case 3: $Vf8f0c0d8 .= "`#FFFF00"; break; case 4: $Vf8f0c0d8 .= "`#4444FF"; break; case 5: $Vf8f0c0d8 .= "`#00FFFF";
-break; case 6: $Vf8f0c0d8 .= "`#FF00FF"; break; case 7: $Vf8f0c0d8 .= "`#FFFFFF"; break; } } $V865c0c0b++;
-} else { $Vf8f0c0d8 .=$V341be97d[$V865c0c0b]; } } if ($V865c0c0b<$Veedf5beb) { $Vf8f0c0d8 .= $V341be97d[$V865c0c0b];
-} return $Vf8f0c0d8; } function Ffa84691e() { if (preg_match("/^(\d+):(\d+)/", $this->Vc3ecd549, $Vb74df323))
- { $V110decc3['min']=$Vb74df323[1]; $V110decc3['sec']=$Vb74df323[2]; return date ("Y-m-d H:i:s", adodb_mktime ($this->V9693e947['hour'],$this->V9693e947['min']+$V110decc3['min'],$this->V9693e947['sec']+$V110decc3['sec'],$this->V9693e947['month'],$this->V9693e947['date'],$this->V9693e947['year']));
-} else if (preg_match("/^(\d+).(\d+)/", $this->Vc3ecd549, $Vb74df323)) { $V110decc3['min']=0; $V110decc3['sec']=$Vb74df323[1]; 
- return date ("Y-m-d H:i:s", adodb_mktime ($this->V9693e947['hour'],$this->V9693e947['min']+$V110decc3['min'],$this->V9693e947['sec']+$V110decc3['sec'],$this->V9693e947['month'],$this->V9693e947['date'],$this->V9693e947['year']));
-} else if (preg_match("/^(\d+):(\d+):(\d+)/", $this->Vc3ecd549, $Vb74df323)) { $V110decc3['hour']=$Vb74df323[1];
-$V110decc3['min'] =$Vb74df323[2]; $V110decc3['sec'] =$Vb74df323[3]; return date ("Y-m-d H:i:s", adodb_mktime ($V110decc3['hour'],$V110decc3['min'],$V110decc3['sec'],$this->V9693e947['month'],$this->V9693e947['date'],$this->V9693e947['year']));
-} } function F7939839b(&$V6438c669) { foreach ($this->Vdba7d3a2 as $V8792851f) { $Vd405fc11 = "/".($V8792851f)."/";
- if (preg_match($Vd405fc11, $V6438c669, $Vb74df323)) { if ($this->Vdafa753c) { Fb7d30ee1("corrupt game (no Shutdown after Init), ignored\n");
-Fb7d30ee1("{$this->Vc3ecd549} $V6438c669\n"); $this->Vae2aeb93->Fc3b570a7(); $this->Vae2aeb93->F242ca9da();
-} $this->Vdafa753c= true; $this->Vb3b1075a=$this->Va733fe6b; $this->F713be45c(); $this->Vae2aeb93->Fd45b6912(); 
- $this->Vae2aeb93->F6d04475a("_v_time_start",date('Y-m-d H:i:s')); $this->Vae2aeb93->F6d04475a("_v_map","?");
-$this->Vae2aeb93->F6d04475a("_v_game",'q3a'); if (isset($this->V42dfa3a4['mod'])) $this->Vae2aeb93->F6d04475a("_v_mod",$this->V42dfa3a4['mod']);
-else $this->Vae2aeb93->F6d04475a("_v_mod","?"); $this->Vae2aeb93->F6d04475a("_v_game_type","?");
- return true; } } return false; } function Fdd0441e2(&$V6438c669) { while(!feof($this->V50dffd37))
- { $this->Va733fe6b=ftell($this->V50dffd37); $V6438c669 = fgets($this->V50dffd37, cBIG_STRING_LENGTH);
-$V6438c669=rtrim($V6438c669,"\r\n"); if (preg_match("/^Accuracy info for\\: (?:\\^[^\\^])?(.*?)(?:\\^[^\\^])?$/", $V6438c669, $Vb74df323))
- { $V912af0df=$Vb74df323[1]; continue; } $V6438c669=$this->F7212cda9($V6438c669); if (preg_match("/^(.*?) *\\: *(\d+\\.\d+) *(\d+)\\/(\d+) */",$V6438c669,$Va9ddcf51))
- { $V47239253=$Va9ddcf51[1]; $Vfce79135=$Va9ddcf51[3]; $V9f892c18=$Va9ddcf51[4]; if (!strcmp($V47239253,"MachineGun"))
- $V47239253="MACHINEGUN"; else if (!strcmp($V47239253,"Shotgun")) $V47239253="SHOTGUN"; else if (!strcmp($V47239253,"G.Launcher"))
- $V47239253="GRENADE"; else if (!strcmp($V47239253,"R.Launcher")) $V47239253="ROCKET"; else if (!strcmp($V47239253,"LightningGun"))
- $V47239253="LIGHTNING"; else if (!strcmp($V47239253,"Railgun")) $V47239253="RAILGUN"; else if (!strcmp($V47239253,"Plasmagun"))
- $V47239253="PLASMA"; else $V47239253=preg_replace("/^MOD_/","",$V47239253); $this->Vae2aeb93->F4135e567($V912af0df,$V912af0df,"accuracy|{$V47239253}_hits",$Vfce79135);
-$this->Vae2aeb93->F4135e567($V912af0df,$V912af0df,"accuracy|{$V47239253}_shots",$V9f892c18); } else if (preg_match("/^Total damage given\\: (.*)$/",$V6438c669,$Va9ddcf51))
- { $this->Vae2aeb93->F72d01d3f($V912af0df,"damage given",$Va9ddcf51[1]); } else if (preg_match("/^Total damage rcvd \\: (.*)$/",$V6438c669,$Va9ddcf51))
- { $this->Vae2aeb93->F72d01d3f($V912af0df,"damage taken",$Va9ddcf51[1]); } else if (preg_match("/^Map\\: (.*)/",$V6438c669,$Va9ddcf51))
- { $this->Vae2aeb93->F6d04475a("_v_map",$Va9ddcf51[1]); return true; } else if (preg_match("/entered the game/",$V6438c669,$Va9ddcf51))
- { return true; } } return true; } function Fc5aace53(&$V6438c669) { foreach ($this->V1c7b7557 as $V8792851f)
- { $Vd405fc11 = "/".($V8792851f)."/"; if (preg_match($Vd405fc11, $V6438c669, $Vb74df323)) { $this->Fdd0441e2($V6438c669);
- if ($this->V93da65a9['savestate']==1) { $this->F5c0b129c(); } $this->Vae2aeb93->Fc3b570a7(); $this->V21d8a920->F43781db5($this->Vae2aeb93->F26dd5333(),$this->Vae2aeb93->F068fac4f());
-$this->Vae2aeb93->F242ca9da(); $this->Vdafa753c= false; return true; } } return false; } function F4b57e26a($Vc165b9b5)
- { foreach ($this->Va2bbabfe as $Vd915074e => $V163b0d74) { if (strstr($Vd915074e,$Vc165b9b5)) return $Vd915074e;
-} return $Vc165b9b5; } function Fa00ebe94(&$V6438c669) { foreach ($this->Va10baeb6 as $V8792851f)
- { $Vd405fc11 = "/".($V8792851f)."/"; $Vd405fc11 = str_replace("#PLAYER#","(.*?)",$Vd405fc11); if (preg_match($Vd405fc11, $V6438c669, $Vb74df323))
- { $this->Va2bbabfe[$Vb74df323[1]]['name']=$this->Fa3f5d48d($Vb74df323[1]); $this->Vae2aeb93->F6aae4907($Vb74df323[1],$this->Fa3f5d48d($Vb74df323[1]));
-return false; } } return false; } function F390143ba(&$V6438c669) { foreach ($this->V8ba4afff as $V8792851f)
- { $V912af0df=""; $Vf894427c=""; $Vd405fc11 = "/".($V8792851f)."/"; $Vd405fc11 = str_replace("#PLAYER#","(.*?)",$Vd405fc11);
-$Vd405fc11 = str_replace("#TEAM#",".+",$Vd405fc11); if (preg_match($Vd405fc11, $V6438c669, $Vb74df323))
- { $V912af0df=$Vb74df323[1]; } $Vd405fc11 = "/".($V8792851f)."/"; $Vd405fc11 = str_replace("#PLAYER#",".*",$Vd405fc11);
-$Vd405fc11 = str_replace("#TEAM#","(.+?)",$Vd405fc11); if (preg_match($Vd405fc11, $V6438c669, $Vb74df323))
- { $Vf894427c=$Vb74df323[1]; } if (strlen($V912af0df)>0 && strlen($Vf894427c)>0) { if ($this->F7212cda9($Vf894427c)=="RED")
- $Vf894427c="1"; else if($this->F7212cda9($Vf894427c)=="BLUE") $Vf894427c="2"; $this->Vae2aeb93->F555c9055($V912af0df,$Vf894427c);
-return true; } } return false; } function F58a1721d(&$V6438c669) { foreach ($this->V2e9590a3 as $V8792851f => $V80cfa351)
- { $V96d4976b=""; $Vb36d3314=""; $Vd405fc11 = "/".($V8792851f)."/"; $Vd405fc11 = str_replace("#VICTIM#","(.*?)",$Vd405fc11);
-$Vd405fc11 = str_replace("#KILLER#",".*",$Vd405fc11); if (preg_match($Vd405fc11, $V6438c669, $Vb74df323))
- { $V96d4976b=$Vb74df323[1]; if (strlen($V96d4976b)>=29) { $V96d4976b=$this->F4b57e26a($V96d4976b);
-} } $Vd405fc11 = "/".($V8792851f)."/"; $Vd405fc11 = str_replace("#VICTIM#",".*",$Vd405fc11); $Vd405fc11 = str_replace("#KILLER#","(.*?)",$Vd405fc11); 
- if (preg_match($Vd405fc11, $V6438c669, $Vb74df323)) { if (isset($Vb74df323[1])) { $Vb36d3314=$Vb74df323[1];
-if (strlen($Vb36d3314)>=29) { $Vb36d3314=$this->F4b57e26a($Vb36d3314); } } } if (strlen($V96d4976b)>0 && strlen($Vb36d3314)>0)
- { $this->Vae2aeb93->Fd65f3244($Vb36d3314,$V96d4976b,$V80cfa351); return true; } else if (strlen($V96d4976b)>0)
- { $this->Vae2aeb93->Fd65f3244($V96d4976b,$V96d4976b,$V80cfa351); return true; } else { } } return false;
-} function F53e6621b(&$V6438c669) { foreach ($this->Va509f5c2 as $V8792851f => $V6b0755dd) { $Vd405fc11 = "/".($V8792851f)."/";
-$Vd405fc11 = str_replace("#PLAYER#","(.*?)",$Vd405fc11); if (preg_match($Vd405fc11, $V6438c669, $Vb74df323))
- { $this->Vae2aeb93->F72d01d3f($Vb74df323[1],$V6b0755dd,1); return true; } } return false; } function F92efcba9(&$V6438c669)
- { foreach ($this->Vbbf5edcf as $V8792851f) { $V912af0df=""; $Vb068931c=""; $Vd405fc11 = "/".($V8792851f)."/";
-$Vd405fc11 = str_replace("#PLAYER#","(.*?)",$Vd405fc11); $Vd405fc11 = str_replace("#NAME#",".+",$Vd405fc11);
- if (preg_match($Vd405fc11, $V6438c669, $Vb74df323)) { $V912af0df=$Vb74df323[1]; } $Vd405fc11 = "/".($V8792851f)."/";
-$Vd405fc11 = str_replace("#PLAYER#",".*",$Vd405fc11); $Vd405fc11 = str_replace("#NAME#","(.*)",$Vd405fc11);
- if (preg_match($Vd405fc11, $V6438c669, $Vb74df323)) { $Vb068931c=$Vb74df323[1]; } if (strlen($V912af0df)>0 && strlen($Vb068931c)>0)
- { $V1963b948=$this->Fa3f5d48d($Vb068931c); $this->Vae2aeb93->Fec5ab55c("sto",$V912af0df,"alias",$V1963b948);
-$this->Vae2aeb93->Fddcbd60f($V912af0df,$V1963b948); $this->Vae2aeb93->F95791962($V912af0df,$Vb068931c); 
- return true; } } return false; } function F7888de3f(&$V6438c669) { foreach ($this->def_chat as $V8792851f)
- { $V912af0df=""; $Vaa8af3eb=""; $Vd405fc11 = "/".($V8792851f)."/"; $Vd405fc11 = str_replace("#PLAYER#","(.*?)",$Vd405fc11);
-$Vd405fc11 = str_replace("#CHAT#",".+",$Vd405fc11); if (preg_match($Vd405fc11, $V6438c669, $Vb74df323))
- { $V912af0df=$Vb74df323[1]; } $Vd405fc11 = "/".($V8792851f)."/"; $Vd405fc11 = str_replace("#PLAYER#",".*",$Vd405fc11);
-$Vd405fc11 = str_replace("#CHAT#","(.*?)",$Vd405fc11); if (preg_match($Vd405fc11, $V6438c669, $Vb74df323))
- { $Vaa8af3eb=$Vb74df323[1]; } if (strlen($V912af0df)>0 && strlen($Vaa8af3eb)>0) { $this->Vae2aeb93->F8405e6ea($V912af0df,$this->F7212cda9($Vaa8af3eb));
-return true; } } return false; } function F60053465(&$V6438c669) { if (!preg_match("/^\\^?\d+ *([\da-fA-F]*)\\((.*?)\\) .*? *\d+\\.\d+ \d+ (.*)$/", $V6438c669, $Vb74df323))
- return false; $this->Vae2aeb93->Fec5ab55c("sto",$Vb74df323[3],"guid",$Vb74df323[1]); return true;
-} function Fa5af98c8(&$V6438c669) { return false; } function Fd1ef0bee(&$V6438c669) { return false;
-} function Fe7c49e90(&$V6438c669) { return false; } function Fd624d004(&$V6438c669) { return false;
-} function F26a565c8(&$V6438c669) { if (!strcmp($this->V93da65a9['gametype'],"osp")) { return $this->Fa5af98c8($V6438c669);
-} else if (!strcmp($this->V93da65a9['gametype'],"threewave")) { if ($this->Fa5af98c8($V6438c669))
- return true; else if ($this->Fd1ef0bee($V6438c669)) return true; else return false; } else if (!strcmp($this->V93da65a9['gametype'],"freeze"))
- { if ($this->Fa5af98c8($V6438c669)) return true; else if ($this->Fe7c49e90($V6438c669)) return true;
-else return false; } else if (!strcmp($this->V93da65a9['gametype'],"ut")) { return $this->F98e2592b($V6438c669);
-} else if (!strcmp($this->V93da65a9['gametype'],"ra3")) { return $this->Fd624d004($V6438c669); } return false;
-} function F20dd322a(&$V6438c669) { if ($this->F7939839b($V6438c669)) { echo sprintf("(%05.2f%%) ",100.0 * ftell($this->V50dffd37)/$this->V42dfa3a4['logfile_size']);
-} else if ($this->Vdafa753c) { if ($this->F26a565c8($V6438c669)) { } else if ($this->Fa00ebe94($V6438c669))
- { } else if ($this->F390143ba($V6438c669)) { } else if ($this->F58a1721d($V6438c669)) { } else if ($this->F53e6621b($V6438c669))
- { } else if ($this->F92efcba9($V6438c669)) { } else if ($this->Fc5aace53($V6438c669)) { } else if ($this->F60053465($V6438c669))
- { } else if ($this->F7888de3f($V6438c669)) { } else { } } else { if (preg_match("/^Current search path\\:/", $V6438c669, $Vb74df323))
- { $this->Va733fe6b=ftell($this->V50dffd37); $V6438c669 = fgets($this->V50dffd37, cBIG_STRING_LENGTH);
-$V6438c669=rtrim($V6438c669,"\r\n"); if (preg_match("/[\\\\\/]([^\\\\\/]*)[\\\\\/][^\\\\\/]*$/", $V6438c669, $Va9ddcf51))
- { $this->V42dfa3a4['mod']=$Va9ddcf51[1]; } } } } } ?>
+class VSPParserCLIENT
+{
+  var $killRegexPatterns;
+  var $playerEnterPatterns;
+  var $shutdownPatterns;
+  var $gameStartPatterns;
+  var $playerTeamEnterPatterns;
+  var $ctfEventPatterns;
+  var $renamePatterns;
+  var $config;
+  var $statsAggregator;
+  var $statsProcessor;
+  var $playerAliases;
+  var $currentPlayerData;
+  var $logInfo;
+  var $rawTimestamp;
+  var $baseTimeParts;
+  var $gameInProgress;
+  var $logFileHandle;
+  var $logFilePath;
+  var $logdata;
+  var $currentFilePosition;
+  var $gameStartFilePosition;
+
+  // Constructor: initializes configuration, aggregator and processor.
+  function __construct($configData, &$statsAggregator, &$statsProcessor)
+  {
+    $this->renamePatterns = ["#PLAYER#(?:\\^[^\\^])? renamed to #NAME#$"];
+    $this->chatPatterns = ["#PLAYER#(?:\\^[^\\^])?: #CHAT#$"];
+    $this->gameStartPatterns = ["Match has begun!"];
+    $this->shutdownPatterns = [
+      "^Timelimit hit\\.",
+      "^Pointlimit hit\\.",
+      "hit the capturelimit\\.$",
+      "hit the fraglimit\\.$",
+      "^----- CL_Shutdown -----",
+    ];
+    $this->playerEnterPatterns = ["#PLAYER#(?:\\^[^\\^])? entered the game"];
+    $this->playerTeamEnterPatterns = [
+      "#PLAYER#(?:\\^[^\\^])? entered the game \\(#TEAM#\\)",
+    ];
+    $this->ctfEventPatterns = [
+      "#PLAYER#(?:\\^[^\\^])? RED's flag carrier defends against an agressive enemy" =>
+        "CTF|Defend_Hurt_Carrier",
+      "#PLAYER#(?:\\^[^\\^])? got the BLUE flag!" => "CTF|Flag_Pickup",
+      "#PLAYER#(?:\\^[^\\^])? returned the RED flag!" => "CTF|Flag_Return",
+      "#PLAYER#(?:\\^[^\\^])? fragged BLUE's flag carrier!" =>
+        "CTF|Kill_Carrier",
+      "#PLAYER#(?:\\^[^\\^])? gets an assist for returning the RED flag!" =>
+        "CTF|Flag_Assist_Return",
+      "#PLAYER#(?:\\^[^\\^])? gets an assist for fragging the RED flag carrier!" =>
+        "CTF|Flag_Assist_Frag",
+      "#PLAYER#(?:\\^[^\\^])? defends RED's flag carrier against an agressive enemy" =>
+        "CTF|Defend_Hurt_Carrier",
+      "#PLAYER#(?:\\^[^\\^])? defends the RED flag carrier against an agressive enemy!" =>
+        "CTF|Defend_Hurt_Carrier",
+      "#PLAYER#(?:\\^[^\\^])? defends the RED's flag carrier." =>
+        "CTF|Defend_Carrier",
+      "#PLAYER#(?:\\^[^\\^])? defends the RED flag carrier!" =>
+        "CTF|Defend_Carrier",
+      "#PLAYER#(?:\\^[^\\^])? defends the RED base" => "CTF|Defend_Base",
+      "#PLAYER#(?:\\^[^\\^])? defends the RED flag" => "CTF|Defend_Flag",
+      "#PLAYER#(?:\\^[^\\^])? captured the BLUE flag!" => "CTF|Flag_Capture",
+      "#PLAYER#(?:\\^[^\\^])? BLUE's flag carrier defends against an agressive enemy" =>
+        "CTF|Defend_Hurt_Carrier",
+      "#PLAYER#(?:\\^[^\\^])? got the RED flag!" => "CTF|Flag_Pickup",
+      "#PLAYER#(?:\\^[^\\^])? returned the BLUE flag!" => "CTF|Flag_Return",
+      "#PLAYER#(?:\\^[^\\^])? fragged RED's flag carrier!" =>
+        "CTF|Kill_Carrier",
+      "#PLAYER#(?:\\^[^\\^])? gets an assist for returning the BLUE flag!" =>
+        "CTF|Flag_Assist_Return",
+      "#PLAYER#(?:\\^[^\\^])? gets an assist for fragging the BLUE flag carrier!" =>
+        "CTF|Flag_Assist_Frag",
+      "#PLAYER#(?:\\^[^\\^])? defends BLUE's flag carrier against an agressive enemy" =>
+        "CTF|Defend_Hurt_Carrier",
+      "#PLAYER#(?:\\^[^\\^])? defends the BLUE flag carrier against an agressive enemy!" =>
+        "CTF|Defend_Hurt_Carrier",
+      "#PLAYER#(?:\\^[^\\^])? defends the BLUE's flag carrier." =>
+        "CTF|Defend_Carrier",
+      "#PLAYER#(?:\\^[^\\^])? defends the BLUE flag carrier!" =>
+        "CTF|Defend_Carrier",
+      "#PLAYER#(?:\\^[^\\^])? defends the BLUE base" => "CTF|Defend_Base",
+      "#PLAYER#(?:\\^[^\\^])? defends the BLUE flag" => "CTF|Defend_Flag",
+      "#PLAYER#(?:\\^[^\\^])? captured the RED flag!" => "CTF|Flag_Capture",
+      "#PLAYER#(?:\\^[^\\^])? got an assist for returning the flag!" =>
+        "CTF|Flag_Assist_Return",
+      "#PLAYER#(?:\\^[^\\^])? got an assist for fragging the enemy flag carrier!" =>
+        "CTF|Flag_Assist_Frag",
+    ];
+    $this->killRegexPatterns = [
+      "#VICTIM#(?:\\^[^\\^])? was pummeled by #KILLER#(?:\\^[^\\^])?$" =>
+        "GAUNTLET",
+      "#VICTIM#(?:\\^[^\\^])? was machinegunned by #KILLER#(?:\\^[^\\^])?$" =>
+        "MACHINEGUN",
+      "#VICTIM#(?:\\^[^\\^])? was gunned down by #KILLER#(?:\\^[^\\^])?$" =>
+        "SHOTGUN",
+      "#VICTIM#(?:\\^[^\\^])? was shredded by #KILLER#(?:\\^[^\\^])?'s shrapnel" =>
+        "GRENADE",
+      "#VICTIM#(?:\\^[^\\^])? ate #KILLER#(?:\\^[^\\^])?'s grenade" =>
+        "GRENADE",
+      "#VICTIM#(?:\\^[^\\^])? ate #KILLER#(?:\\^[^\\^])?'s rocket" => "ROCKET",
+      "#VICTIM#(?:\\^[^\\^])? almost dodged #KILLER#(?:\\^[^\\^])?'s rocket" =>
+        "ROCKET",
+      "#VICTIM#(?:\\^[^\\^])? was electrocuted by #KILLER#(?:\\^[^\\^])?$" =>
+        "LIGHTNING",
+      "#VICTIM#(?:\\^[^\\^])? was railed by #KILLER#(?:\\^[^\\^])?$" =>
+        "RAILGUN",
+      "#VICTIM#(?:\\^[^\\^])? was melted by #KILLER#(?:\\^[^\\^])?'s plasmagun" =>
+        "PLASMA",
+      "#VICTIM#(?:\\^[^\\^])? was blasted by #KILLER#(?:\\^[^\\^])?'s BFG" =>
+        "BFG",
+      "#VICTIM#(?:\\^[^\\^])? tried to invade #KILLER#(?:\\^[^\\^])?'s personal space" =>
+        "TELEFRAG",
+      "#VICTIM#(?:\\^[^\\^])? blew itself up\\." => "ROCKET",
+      "#VICTIM#(?:\\^[^\\^])? blew herself up\\." => "ROCKET",
+      "#VICTIM#(?:\\^[^\\^])? blew himself up\\." => "ROCKET",
+      "#VICTIM#(?:\\^[^\\^])? tripped on his own grenade\\." => "GRENADE",
+      "#VICTIM#(?:\\^[^\\^])? tripped on her own grenade\\." => "GRENADE",
+      "#VICTIM#(?:\\^[^\\^])? tripped on its own grenade\\." => "GRENADE",
+      "#VICTIM#(?:\\^[^\\^])? melted himself\\." => "PLASMA",
+      "#VICTIM#(?:\\^[^\\^])? melted herself\\." => "PLASMA",
+      "#VICTIM#(?:\\^[^\\^])? melted itself\\." => "PLASMA",
+      "#VICTIM#(?:\\^[^\\^])? should have used a smaller gun\\." => "BFG",
+      "#VICTIM#(?:\\^[^\\^])? killed himself\\." => "SUICIDE",
+      "#VICTIM#(?:\\^[^\\^])? killed herself\\." => "SUICIDE",
+      "#VICTIM#(?:\\^[^\\^])? killed itself\\." => "SUICIDE",
+      "#VICTIM#(?:\\^[^\\^])? cratered\\." => "FALLING",
+      "#VICTIM#(?:\\^[^\\^])? does a back flip into the lava\\." => "LAVA",
+      "#VICTIM#(?:\\^[^\\^])? was squished\\." => "CRUSH",
+      "#VICTIM#(?:\\^[^\\^])? sank like a rock\\." => "WATER",
+      "#VICTIM#(?:\\^[^\\^])? melted\\." => "SLIME",
+      "#VICTIM#(?:\\^[^\\^])? was in the wrong place\\." => "TRIGGER_HURT",
+      "#VICTIM#(?:\\^[^\\^])? was disemboweled by #KILLER#(?:\\^[^\\^])?'s grappling hook" =>
+        "GRAPPLE",
+      "#VICTIM#(?:\\^[^\\^])? was impaled by #KILLER#(?:\\^[^\\^])?'s shower of nails" =>
+        "NAILGUN",
+      "#VICTIM#(?:\\^[^\\^])? was swimming too close to #KILLER#(?:\\^[^\\^])?$" =>
+        "DISCHARGE",
+      "#VICTIM#(?:\\^[^\\^])? pressed the wrong button\\." => "DISCHARGE",
+    ];
+    define("LOG_READ_SIZE", 1024);
+    $this->initializeConfig($configData);
+    $this->statsAggregator = $statsAggregator;
+    $this->statsProcessor = $statsProcessor;
+    $this->currentPlayerData = [];
+    $this->logInfo = [];
+    $this->playerAliases = [];
+    $this->logdata = [];
+    $this->gameInProgress = false;
+  }
+
+  // Initialize configuration from given data array.
+  function initializeConfig($configData)
+  {
+    $this->config["savestate"] = 0;
+    $this->config["gametype"] = "";
+    $this->config["backuppath"] = "";
+    $this->config["trackID"] = "playerName";
+    if (is_array($configData)) {
+      foreach ($configData as $key => $value) {
+        $this->config[$key] = $value;
+      }
+    }
+    if ($this->config["backuppath"]) {
+      $this->config["backuppath"] = ensureTrailingSlash(
+        $this->config["backuppath"]
+      );
+    }
+    print_r($this->config);
+  }
+
+  // Reset player alias and session data, and initialize base time parts.
+  function resetSessionData()
+  {
+    unset($this->playerAliases);
+    $this->playerAliases = [];
+    unset($this->currentPlayerData);
+    $this->currentPlayerData = [];
+    $this->baseTimeParts["month"] = 12;
+    $this->baseTimeParts["date"] = 28;
+    $this->baseTimeParts["year"] = 1971;
+    $this->baseTimeParts["hour"] = 23;
+    $this->baseTimeParts["min"] = 59;
+    $this->baseTimeParts["sec"] = 59;
+  }
+
+  // Process and save shutdown state (hash and file position)
+  function saveShutdownState()
+  {
+    $this->logdata["last_shutdown_end_position"] = ftell($this->logFileHandle);
+    $seekResult = fseek($this->logFileHandle, -LOG_READ_SIZE, SEEK_CUR);
+    if ($seekResult == 0) {
+      $this->logdata["last_shutdown_hash"] = md5(
+        fread($this->logFileHandle, LOG_READ_SIZE)
+      );
+    } else {
+      $currentPosition = ftell($this->logFileHandle);
+      fseek($this->logFileHandle, 0);
+      $this->logdata["last_shutdown_hash"] = md5(
+        fread($this->logFileHandle, $currentPosition)
+      );
+    }
+    $savestateFile = fopen(
+      "./logdata/savestate_" .
+        sanitizeFilename($this->logFilePath) .
+        ".inc.php",
+      "wb"
+    );
+    fwrite($savestateFile, "<?php \n");
+    fwrite(
+      $savestateFile,
+      "\$this->logdata['last_shutdown_hash']='{$this->logdata["last_shutdown_hash"]}';\n"
+    );
+    fwrite(
+      $savestateFile,
+      "\$this->logdata['last_shutdown_end_position']={$this->logdata["last_shutdown_end_position"]};\n"
+    );
+    fwrite($savestateFile, "?>");
+    fclose($savestateFile);
+  }
+
+  // Verify the saved state by comparing the shutdown hash.
+  function verifySavestate()
+  {
+    echo "Verifying savestate\n";
+    $savestateFile = fopen($this->logFilePath, "rb");
+    $seekResult = fseek(
+      $savestateFile,
+      $this->logdata["last_shutdown_end_position"]
+    );
+    if ($seekResult == 0) {
+      $seekBackResult = fseek($savestateFile, -LOG_READ_SIZE, SEEK_CUR);
+      if ($seekBackResult == 0) {
+        $hashBlock = fread($savestateFile, LOG_READ_SIZE);
+      } else {
+        $currentPosition = ftell($savestateFile);
+        fseek($savestateFile, 0);
+        $hashBlock = fread($savestateFile, $currentPosition);
+      }
+      if (strcmp(md5($hashBlock), $this->logdata["last_shutdown_hash"]) == 0) {
+        echo " - Hash matched, resuming parsing from previous saved location in log file\n";
+        fseek(
+          $this->logFileHandle,
+          $this->logdata["last_shutdown_end_position"]
+        );
+      } else {
+        echo " - Hash did not match, assuming new log file\n";
+        fseek($this->logFileHandle, 0);
+      }
+    } else {
+      echo " - Seek to prior location failed, assuming new log file\n";
+      fseek($this->logFileHandle, 0);
+    }
+    fclose($savestateFile);
+  }
+
+  // Open and process the log file.
+  function processLogFile($logFileName)
+  {
+    $this->logFilePath = realpath($logFileName);
+    if (!file_exists($this->logFilePath)) {
+      errorAndExit("error: log file \"{$logFileName}\" does not exist");
+    }
+    $this->resetSessionData();
+    if ($this->config["savestate"] == 1) {
+      echo "savestate 1 processing enabled\n";
+      @include_once "./logdata/savestate_" .
+        sanitizeFilename($this->logFilePath) .
+        ".inc.php";
+      $this->logFileHandle = fopen($this->logFilePath, "rb");
+      if (!empty($this->logdata)) {
+        $this->verifySavestate($this->logFilePath);
+      }
+    } else {
+      $this->logFileHandle = fopen($this->logFilePath, "rb");
+    }
+    if (!$this->logFileHandle) {
+      debugPrint("error: {this->logfile} could not be opened");
+      return;
+    }
+    $this->logInfo["logfile_size"] = filesize($this->logFilePath);
+    while (!feof($this->logFileHandle)) {
+      $this->currentFilePosition = ftell($this->logFileHandle);
+      $line = fgets($this->logFileHandle, cBIG_STRING_LENGTH);
+      $line = rtrim($line, "\r\n");
+      $this->processLogLine($line);
+    }
+    fclose($this->logFileHandle);
+  }
+
+  // Remove color codes from a string.
+  function removeColorCodes($str)
+  {
+    $cleanStr = preg_replace("/\\^[xX][\da-fA-F]{6}/", "", $str);
+    $cleanStr = preg_replace("/\\^[^\\^]/", "", $cleanStr);
+    return $cleanStr;
+  }
+
+  // Convert color codes in a string to a new format.
+  function convertColorCodes($str)
+  {
+    $enableColor = 1;
+    $i = 0;
+    $charCode = 0;
+    $strLength = strlen($str);
+    if ($strLength < 1) {
+      return " ";
+    }
+    if ($enableColor) {
+      $resultStr = "`#FFFFFF";
+    }
+    for ($i = 0; $i < $strLength - 1; $i++) {
+      if ($str[$i] == "^" && $str[$i + 1] != "^") {
+        $charCode = ord($str[$i + 1]);
+        if ($enableColor) {
+          if (
+            $charCode == 70 ||
+            $charCode == 102 ||
+            $charCode == 66 ||
+            $charCode == 98 ||
+            $charCode == 78
+          ) {
+            $i++;
+            continue;
+          }
+          if (($charCode == 88 || $charCode == 120) && strlen($str) - $i > 6) {
+            if (
+              preg_match(
+                "/^[\da-fA-F]{6}/",
+                substr($str, $i + 2, 6),
+                $matchColor
+              )
+            ) {
+              $resultStr .= "`#";
+              $resultStr .= substr($str, $i + 2, 6);
+              $i += 7;
+              continue;
+            }
+          }
+          switch ($charCode % 8) {
+            case 0:
+              $resultStr .= "`#777777";
+              break;
+            case 1:
+              $resultStr .= "`#FF0000";
+              break;
+            case 2:
+              $resultStr .= "`#00FF00";
+              break;
+            case 3:
+              $resultStr .= "`#FFFF00";
+              break;
+            case 4:
+              $resultStr .= "`#4444FF";
+              break;
+            case 5:
+              $resultStr .= "`#00FFFF";
+              break;
+            case 6:
+              $resultStr .= "`#FF00FF";
+              break;
+            case 7:
+              $resultStr .= "`#FFFFFF";
+              break;
+          }
+        }
+        $i++;
+      } else {
+        $resultStr .= $str[$i];
+      }
+    }
+    if ($i < $strLength) {
+      $resultStr .= $str[$i];
+    }
+    return $resultStr;
+  }
+
+  // Generate a formatted timestamp based on the raw timestamp and base time parts.
+  function generateTimestamp()
+  {
+    if (preg_match("/^(\d+):(\d+)/", $this->rawTimestamp, $matchTime)) {
+      $timeOffset["min"] = $matchTime[1];
+      $timeOffset["sec"] = $matchTime[2];
+      return date(
+        "Y-m-d H:i:s",
+        adodb_mktime(
+          $this->baseTimeParts["hour"],
+          $this->baseTimeParts["min"] + $timeOffset["min"],
+          $this->baseTimeParts["sec"] + $timeOffset["sec"],
+          $this->baseTimeParts["month"],
+          $this->baseTimeParts["date"],
+          $this->baseTimeParts["year"]
+        )
+      );
+    } elseif (preg_match("/^(\d+).(\d+)/", $this->rawTimestamp, $matchTime)) {
+      $timeOffset["min"] = 0;
+      $timeOffset["sec"] = $matchTime[1];
+      return date(
+        "Y-m-d H:i:s",
+        adodb_mktime(
+          $this->baseTimeParts["hour"],
+          $this->baseTimeParts["min"] + $timeOffset["min"],
+          $this->baseTimeParts["sec"] + $timeOffset["sec"],
+          $this->baseTimeParts["month"],
+          $this->baseTimeParts["date"],
+          $this->baseTimeParts["year"]
+        )
+      );
+    } elseif (
+      preg_match("/^(\d+):(\d+):(\d+)/", $this->rawTimestamp, $matchTime)
+    ) {
+      $timeOffset["hour"] = $matchTime[1];
+      $timeOffset["min"] = $matchTime[2];
+      $timeOffset["sec"] = $matchTime[3];
+      return date(
+        "Y-m-d H:i:s",
+        adodb_mktime(
+          $timeOffset["hour"],
+          $timeOffset["min"],
+          $timeOffset["sec"],
+          $this->baseTimeParts["month"],
+          $this->baseTimeParts["date"],
+          $this->baseTimeParts["year"]
+        )
+      );
+    }
+  }
+
+  // Process game initialization messages.
+  function processGameInit(&$line)
+  {
+    foreach ($this->gameStartPatterns as $pattern) {
+      $regex = "/" . $pattern . "/";
+      if (preg_match($regex, $line, $match)) {
+        if ($this->gameInProgress) {
+          debugPrint("corrupt game (no Shutdown after Init), ignored\n");
+          debugPrint("{$this->rawTimestamp} $line\n");
+          $this->statsProcessor->updatePlayerStreaks();
+          $this->statsProcessor->clearProcessorData();
+        }
+        $this->gameInProgress = true;
+        $this->gameStartFilePosition = $this->currentFilePosition;
+        $this->resetSessionData();
+        $this->statsProcessor->startGameAnalysis();
+        $this->statsProcessor->setGameData(
+          "_v_time_start",
+          date("Y-m-d H:i:s")
+        );
+        $this->statsProcessor->setGameData("_v_map", "?");
+        $this->statsProcessor->setGameData("_v_game", "q3a");
+        if (isset($this->logInfo["mod"])) {
+          $this->statsProcessor->setGameData("_v_mod", $this->logInfo["mod"]);
+        } else {
+          $this->statsProcessor->setGameData("_v_mod", "?");
+        }
+        $this->statsProcessor->setGameData("_v_game_type", "?");
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // Process accuracy and damage info from the log.
+  function processAccuracyAndDamage(&$line)
+  {
+    while (!feof($this->logFileHandle)) {
+      $this->currentFilePosition = ftell($this->logFileHandle);
+      $line = fgets($this->logFileHandle, cBIG_STRING_LENGTH);
+      $line = rtrim($line, "\r\n");
+      if (
+        preg_match(
+          "/^Accuracy info for\\: (?:\\^[^\\^])?(.*?)(?:\\^[^\\^])?$/",
+          $line,
+          $matchPlayer
+        )
+      ) {
+        $currentPlayer = $matchPlayer[1];
+        continue;
+      }
+      $line = $this->removeColorCodes($line);
+      if (
+        preg_match(
+          "/^(.*?) *\\: *(\d+\\.\d+) *(\d+)\\/(\d+) */",
+          $line,
+          $matchAccuracy
+        )
+      ) {
+        $weaponName = $matchAccuracy[1];
+        $hits = $matchAccuracy[3];
+        $shots = $matchAccuracy[4];
+        if (!strcmp($weaponName, "MachineGun")) {
+          $weaponName = "MACHINEGUN";
+        } elseif (!strcmp($weaponName, "Shotgun")) {
+          $weaponName = "SHOTGUN";
+        } elseif (!strcmp($weaponName, "G.Launcher")) {
+          $weaponName = "GRENADE";
+        } elseif (!strcmp($weaponName, "R.Launcher")) {
+          $weaponName = "ROCKET";
+        } elseif (!strcmp($weaponName, "LightningGun")) {
+          $weaponName = "LIGHTNING";
+        } elseif (!strcmp($weaponName, "Railgun")) {
+          $weaponName = "RAILGUN";
+        } elseif (!strcmp($weaponName, "Plasmagun")) {
+          $weaponName = "PLASMA";
+        } else {
+          $weaponName = preg_replace("/^MOD_/", "", $weaponName);
+        }
+        $this->statsProcessor->updateAccuracyEvent(
+          $currentPlayer,
+          $currentPlayer,
+          "accuracy|{$weaponName}_hits",
+          $hits
+        );
+        $this->statsProcessor->updateAccuracyEvent(
+          $currentPlayer,
+          $currentPlayer,
+          "accuracy|{$weaponName}_shots",
+          $shots
+        );
+      } elseif (
+        preg_match("/^Total damage given\\: (.*)$/", $line, $matchDamage)
+      ) {
+        $this->statsProcessor->updatePlayerEvent(
+          $currentPlayer,
+          "damage given",
+          $matchDamage[1]
+        );
+      } elseif (
+        preg_match("/^Total damage rcvd \\: (.*)$/", $line, $matchDamage)
+      ) {
+        $this->statsProcessor->updatePlayerEvent(
+          $currentPlayer,
+          "damage taken",
+          $matchDamage[1]
+        );
+      } elseif (preg_match("/^Map\\: (.*)/", $line, $matchMap)) {
+        $this->statsProcessor->setGameData("_v_map", $matchMap[1]);
+        return true;
+      } elseif (preg_match("/entered the game/", $line, $match)) {
+        return true;
+      }
+    }
+    return true;
+  }
+
+  // Process shutdown messages and finish the game.
+  function processGameShutdown(&$line)
+  {
+    foreach ($this->shutdownPatterns as $pattern) {
+      $regex = "/" . $pattern . "/";
+      if (preg_match($regex, $line, $match)) {
+        $this->processAccuracyAndDamage($line);
+        if ($this->config["savestate"] == 1) {
+          $this->saveShutdownState();
+        }
+        $this->statsProcessor->updatePlayerStreaks();
+        $this->statsAggregator->storeGameData(
+          $this->statsProcessor->getPlayerStats(),
+          $this->statsProcessor->getGameData()
+        );
+        $this->statsProcessor->clearProcessorData();
+        $this->gameInProgress = false;
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // Retrieve an alias for a given player identifier.
+  function lookupPlayerAlias($playerIdentifier)
+  {
+    foreach ($this->playerAliases as $aliasKey => $aliasData) {
+      if (strstr($aliasKey, $playerIdentifier)) {
+        return $aliasKey;
+      }
+    }
+    return $playerIdentifier;
+  }
+
+  // Process player entering the game.
+  function processPlayerEnter(&$line)
+  {
+    foreach ($this->playerEnterPatterns as $pattern) {
+      $regex = "/" . $pattern . "/";
+      $regex = str_replace("#PLAYER#", "(.*?)", $regex);
+      if (preg_match($regex, $line, $match)) {
+        $this->playerAliases[$match[1]]["name"] = $this->convertColorCodes(
+          $match[1]
+        );
+        $this->statsProcessor->initializePlayerData(
+          $match[1],
+          $this->convertColorCodes($match[1])
+        );
+        return false;
+      }
+    }
+    return false;
+  }
+
+  // Process player team assignment messages.
+  function processPlayerTeamAssignment(&$line)
+  {
+    $playerName = "";
+    $teamName = "";
+    $regex = "/" . $this->playerTeamEnterPatterns[0] . "/";
+    $regex = str_replace("#PLAYER#", "(.*?)", $regex);
+    $regex = str_replace("#TEAM#", ".+", $regex);
+    if (preg_match($regex, $line, $match)) {
+      $playerName = $match[1];
+    }
+    $regex = "/" . $this->playerTeamEnterPatterns[0] . "/";
+    $regex = str_replace("#PLAYER#", ".*", $regex);
+    $regex = str_replace("#TEAM#", "(.+?)", $regex);
+    if (preg_match($regex, $line, $match)) {
+      $teamName = $match[1];
+    }
+    if (strlen($playerName) > 0 && strlen($teamName) > 0) {
+      if ($this->removeColorCodes($teamName) == "RED") {
+        $teamName = "1";
+      } elseif ($this->removeColorCodes($teamName) == "BLUE") {
+        $teamName = "2";
+      }
+      $this->statsProcessor->updatePlayerTeam($playerName, $teamName);
+      return true;
+    }
+    return false;
+  }
+
+  // Process kill events.
+  function processKillEvent(&$line)
+  {
+    foreach ($this->killRegexPatterns as $pattern => $weapon) {
+      $victim = "";
+      $killer = "";
+      $regex = "/" . $pattern . "/";
+      $regex = str_replace("#VICTIM#", "(.*?)", $regex);
+      $regex = str_replace("#KILLER#", ".*", $regex);
+      if (preg_match($regex, $line, $match)) {
+        $victim = $match[1];
+        if (strlen($victim) >= 29) {
+          $victim = $this->lookupPlayerAlias($victim);
+        }
+      }
+      $regex = "/" . $pattern . "/";
+      $regex = str_replace("#VICTIM#", ".*", $regex);
+      $regex = str_replace("#KILLER#", "(.*?)", $regex);
+      if (preg_match($regex, $line, $match)) {
+        if (isset($match[1])) {
+          $killer = $match[1];
+          if (strlen($killer) >= 29) {
+            $killer = $this->lookupPlayerAlias($killer);
+          }
+        }
+      }
+      if (strlen($victim) > 0 && strlen($killer) > 0) {
+        $this->statsProcessor->processKillEvent($killer, $victim, $weapon);
+        return true;
+      } elseif (strlen($victim) > 0) {
+        $this->statsProcessor->processKillEvent($victim, $victim, $weapon);
+        return true;
+      } else {
+      }
+    }
+    return false;
+  }
+
+  // Process CTF events.
+  function processCTFEvent(&$line)
+  {
+    foreach ($this->ctfEventPatterns as $pattern => $eventType) {
+      $regex = "/" . $pattern . "/";
+      $regex = str_replace("#PLAYER#", "(.*?)", $regex);
+      if (preg_match($regex, $line, $match)) {
+        $this->statsProcessor->updatePlayerEvent($match[1], $eventType, 1);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // Process rename (alias) events.
+  function processRenameEvent(&$line)
+  {
+    foreach ($this->renamePatterns as $pattern) {
+      $playerName = "";
+      $newName = "";
+      $regex = "/" . $pattern . "/";
+      $regex = str_replace("#PLAYER#", "(.*?)", $regex);
+      $regex = str_replace("#NAME#", ".+", $regex);
+      if (preg_match($regex, $line, $match)) {
+        $playerName = $match[1];
+      }
+      $regex = "/" . $pattern . "/";
+      $regex = str_replace("#PLAYER#", ".*", $regex);
+      $regex = str_replace("#NAME#", "(.*)", $regex);
+      if (preg_match($regex, $line, $match)) {
+        $newName = $match[1];
+      }
+      if (strlen($playerName) > 0 && strlen($newName) > 0) {
+        $formattedName = $this->convertColorCodes($newName);
+        $this->statsProcessor->updatePlayerDataField(
+          "sto",
+          $playerName,
+          "alias",
+          $formattedName
+        );
+        $this->statsProcessor->updatePlayerName($playerName, $formattedName);
+        $this->statsProcessor->resolvePlayerIDConflict($playerName, $newName);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // Process chat messages.
+  function processChatMessage(&$line)
+  {
+    foreach ($this->chatPatterns as $pattern) {
+      $playerName = "";
+      $chatMessage = "";
+      $regex = "/" . $pattern . "/";
+      $regex = str_replace("#PLAYER#", "(.*?)", $regex);
+      $regex = str_replace("#CHAT#", ".+", $regex);
+      if (preg_match($regex, $line, $match)) {
+        $playerName = $match[1];
+      }
+      $regex = "/" . $pattern . "/";
+      $regex = str_replace("#PLAYER#", ".*", $regex);
+      $regex = str_replace("#CHAT#", "(.*?)", $regex);
+      if (preg_match($regex, $line, $match)) {
+        $chatMessage = $match[1];
+      }
+      if (strlen($playerName) > 0 && strlen($chatMessage) > 0) {
+        $this->statsProcessor->updatePlayerQuote(
+          $playerName,
+          $this->removeColorCodes($chatMessage)
+        );
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // Process GUID assignment events.
+  function processGUIDAssignment(&$line)
+  {
+    if (
+      !preg_match(
+        "/^\\^?\d+ *([\da-fA-F]*)\\((.*?)\\) .*? *\d+\\.\d+ \d+ (.*)$/",
+        $line,
+        $match
+      )
+    ) {
+      return false;
+    }
+    $this->statsProcessor->updatePlayerDataField(
+      "sto",
+      $match[3],
+      "guid",
+      $match[1]
+    );
+    return true;
+  }
+
+  // Process OSP events (stub – not implemented).
+  function processOSPEvent(&$line)
+  {
+    return false;
+  }
+
+  // Process Threewave events (stub – not implemented).
+  function processThreewaveEvent(&$line)
+  {
+    return false;
+  }
+
+  // Process Freeze events (stub – not implemented).
+  function processFreezeEvent(&$line)
+  {
+    return false;
+  }
+
+  // Process RA3 events (stub – not implemented).
+  function processRA3Event(&$line)
+  {
+    return false;
+  }
+
+  // Process UT events (stub – not implemented).
+  function processUTEvent(&$line)
+  {
+    return false;
+  }
+
+  // Dispatch event processing based on game type.
+  function dispatchGameTypeEvent(&$line)
+  {
+    if (!strcmp($this->config["gametype"], "osp")) {
+      return $this->processOSPEvent($line);
+    } elseif (!strcmp($this->config["gametype"], "threewave")) {
+      if ($this->processOSPEvent($line)) {
+        return true;
+      } elseif ($this->processThreewaveEvent($line)) {
+        return true;
+      } else {
+        return false;
+      }
+    } elseif (!strcmp($this->config["gametype"], "freeze")) {
+      if ($this->processOSPEvent($line)) {
+        return true;
+      } elseif ($this->processFreezeEvent($line)) {
+        return true;
+      } else {
+        return false;
+      }
+    } elseif (!strcmp($this->config["gametype"], "ut")) {
+      return $this->processUTEvent($line);
+    } elseif (!strcmp($this->config["gametype"], "ra3")) {
+      return $this->processRA3Event($line);
+    }
+    return false;
+  }
+
+  // Main log line processor – dispatches to various event handlers.
+  function processLogLine(&$line)
+  {
+    if ($this->processGameInit($line)) {
+      echo sprintf(
+        "(%05.2f%%) ",
+        (100.0 * ftell($this->logFileHandle)) / $this->logInfo["logfile_size"]
+      );
+    } elseif ($this->gameInProgress) {
+      if ($this->dispatchGameTypeEvent($line)) {
+      } elseif ($this->processPlayerEnter($line)) {
+      } elseif ($this->processPlayerTeamAssignment($line)) {
+      } elseif ($this->processKillEvent($line)) {
+      } elseif ($this->processCTFEvent($line)) {
+      } elseif ($this->processRenameEvent($line)) {
+      } elseif ($this->processGameShutdown($line)) {
+      } elseif ($this->processGUIDAssignment($line)) {
+      } elseif ($this->processChatMessage($line)) {
+      } else {
+      }
+    } else {
+      if (preg_match("/^Current search path\\:/", $line, $match)) {
+        $this->currentFilePosition = ftell($this->logFileHandle);
+        $line = fgets($this->logFileHandle, cBIG_STRING_LENGTH);
+        $line = rtrim($line, "\r\n");
+        if (
+          preg_match(
+            "/[\\\\\/]([^\\\\\/]*)[\\\\\/][^\\\\\/]*$/",
+            $line,
+            $matchMod
+          )
+        ) {
+          $this->logInfo["mod"] = $matchMod[1];
+        }
+      }
+    }
+  }
+} ?>
