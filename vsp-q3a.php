@@ -314,6 +314,7 @@ class VSPParserQ3A
   // Open and process the log file.
   function processLogFile($logFileName)
   {
+    echo "\nProcessing log file: {$logFileName}\n";
     $this->logFilePath = realpath($logFileName);
     if (!file_exists($this->logFilePath)) {
       errorAndExit("error: log file \"{$logFileName}\" does not exist");

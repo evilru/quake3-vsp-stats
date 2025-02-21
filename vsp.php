@@ -2293,7 +2293,18 @@ function configureAndProcessGameLogs()
     "\$parser = new VSPParser$upperLogCode(\$options['parser-options'],\$processor,\$skillProcessor);"
   );
 
-  $parser->processLogFile($options["logfile"]); // parsea el log
+  if(is_dir($options["logfile"])) {
+    $logFiles = scandir($options["logfile"]);
+    foreach($logFiles as $logFile) {
+      if($logFile == '.' || $logFile == '..') {
+        continue;
+      }
+      $parser->processLogFile($options["logfile"] . '/' . $logFile);
+    }
+  } else {
+    $parser->processLogFile($options["logfile"]); // parsea el log
+  }
+
   $processor->prune_old_games();
   $processor->generateAwards(); // generate awards
   echo "\ngames: parsed: " .
