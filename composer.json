@@ -1,0 +1,17 @@
+{
+    "name": "evilru/quake3-vsp-stats",
+    "description": "Quake3 Statistics Tool",
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/"
+        ]
+    }
+}

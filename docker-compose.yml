@@ -1,15 +1,17 @@
-version: '3'
+version: '3.8'
 
 services:
   db:
-    image: mariadb:11.1.3
+    image: mariadb:10.5
     restart: always
     environment:
       TZ: Europe/Berlin
-      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: vsp
-      MYSQL_USER:
-      MYSQL_PASSWORD:
+      MYSQL_USER: vsp
+      MYSQL_PASSWORD: vsp
+    volumes:
+      - db_data:/var/lib/mysql
     ports:
       - "3306:3306"
   web:
@@ -22,15 +24,37 @@ services:
       # - /path/to/your/logo.gif:/vsp/pub/images/logo.gif
       - logdata:/vsp/logdata
     ports:
-      - 80:80
+      - 8080:80
     environment:
       TZ: Europe/Berlin
       # needs to be at least 6 characters long
       # VSP_WEB_PASSWORD:
       DB_NAME: vsp
       # use the same value as for MYSQL_USER
-      DB_USERNAME:
+      DB_USERNAME: foo
       # use the same value as for MYSQL_PASSWORD
-      DB_PASSWORD:
+      DB_PASSWORD: bar
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile.php
+    volumes:
+      - ./:/app
+    depends_on:
+      - db
+  php-test:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    volumes:
+      - ./:/app
+    environment:
+      - DB_HOST=db
+      - DB_DATABASE=vsp
+      - DB_USERNAME=vsp
+      - DB_PASSWORD=vsp
+    depends_on:
+      - db
 volumes:
+  db_data:
   logdata:

@@ -1,200 +1,98 @@
 <?php
-/* vsp stats processor, copyright 2004-2005, myrddin8 AT gmail DOT com (a924cb279be8cb6089387d402288c9f2) */
-define("cVERSION", "0.45-xp-1.1.2");
-define(
-  "cTITLE",
-  /*__POBS_EXCLUDE__*/ "                                                                               " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ " ----------------------------------------------------------------------------- " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                     vsp stats processor (c) 2004-2005                         " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                               version " .
-    constant("cVERSION") .
-    "                                    " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                 vsp by myrddin (myrddin8 AT gmail DOT com)                    " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ " ----------------------------------------------------------------------------- " .
-    "\r\n" .
-    "\r\n"
-);
-define(
-  "cUSAGE",
-  /*__POBS_EXCLUDE__*/ "                                                                               " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "  ---------------------------------------------------------------------------  " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "  Usage: php vsp.php [options] [-p parserOptions] [logFilename]                " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                                                                               " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "    [options]                                                                  " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "    ---------                                                                  " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                                                                               " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "    -c                 specify config file (must be in pub/configs/)           " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                                                                               " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "    -l                 specify logType (gamecode-gametype)                     " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                                                                               " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                         logType:-                                             " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                                                                               " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                           client           Client Logs (Any game)             " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                           q3a              Quake 3 Arena (and q3 engine games)" .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                           q3a-battle       Quake 3 Arena BattleMod            " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                           q3a-cpma         Quake 3 Arena CPMA (Promode)       " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                           q3a-freeze       Quake 3 Arena (U)FreezeTag etc.    " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                           q3a-lrctf        Quake 3 Arena Lokis Revenge CTF    " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                           q3a-osp          Quake 3 Arena OSP                  " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                           q3a-ra3          Quake 3 Arena Rocket Arena 3       " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                           q3a-threewave    Quake 3 Arena Threewave            " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                           q3a-ut           Quake 3 Arena UrbanTerror          " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                           q3a-xp           Quake 3 Arena Excessive Plus       " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                                                                               " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "    -n                                                                         " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                         No confirmation/prompts (for unattended runs etc.)    " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                                                                               " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "    -a                 specify action                                          " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                         perform a specific predefined action                  " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                         *make sure this is the last option specified!*        " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                         [logFilename] is not needed if this option is used    " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                                                                               " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                         action:-                                              " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                                                                               " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                           clear_db         Clear the database in config       " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                                            ie. Reset Stats                    " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                                                                               " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                           gen_awards       Generate only the awards           " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                                                                               " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                           clear_savestate  Clears the savestate information   " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                                            for the specified log. If no log   " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                                            file is specified, then all the    " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                                            savestate information will be      " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                                            cleared. Currently only works with " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                                            the q3a gamecode                   " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                                                                               " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                           pop_ip2country   Deletes the information of the     " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                                            ip2country table and populates it  " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                                            from the CSV file specified in the " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                                            configuration                      " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                                                                               " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                           prune_old_games  Removes all the detailed           " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                                            information of old games           " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                                                                               " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "    -p [parserOptions]                                                         " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                                                                               " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "       savestate       1                                                       " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                         Enable savestate processing                           " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                         Remembers previously scanned logs and events.         " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                         If this option is enabled, VSP will remember the      " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                         location in the log file where the last stats was     " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                         parsed from. So the next time VSP is run with the     " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                         savestate 1 option against the same log file, it will " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                         start parsing the stats from the previous saved       " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                         location.                                             " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                         If you want VSP to forget this save state, then you   " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                         have to delete the corresponding save state file from " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                         the logdata/ folder. The name is in the format        " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                         savestate_[special_Form_Of_Logfile_Name]              " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                         Deleting that file and running VSP again with         " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                         savestate 1 option will reparse the whole log again   " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                         from the beginning. Also note that each logfile will  " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                         have a separate save state file under the logdata     " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                         folder. Do not edit/modify the savestate files! If    " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                         you dont want it, just delete it.                     " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                                                                               " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "       check ReadME or first few lines of a particular parser php for other    " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "       valid options for that particular parser                                " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                                                                               " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "    [logFilename] could be an FTP link/url. Set FTP username/password in config" .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "    [logFilename] may be a logDirectory for some games. ex:- *HalfLife*        " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "                                                                               " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "    Usage: php vsp.php [options] [-p parserOptions] [logFilename]              " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "  Example: php vsp.php -l q3a -p savestate 1 \"c:/quake iii arena/games.log\"    " .
-    "\r\n" .
-    /*__POBS_EXCLUDE__*/ "  ---------------------------------------------------------------------------  " .
-    "\r\n" .
-    "\r\n"
-);
+  /* vsp stats processor, copyright 2004-2005, myrddin8 AT gmail DOT com (a924cb279be8cb6089387d402288c9f2) */
+  define("cVERSION", "0.45-xp-1.1.2");
+  define("cTITLE", /*__POBS_EXCLUDE__*/"                                                                               " . "\r\n".
+  /*__POBS_EXCLUDE__*/" ----------------------------------------------------------------------------- " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                     vsp stats processor (c) 2004-2005                         " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                               version " . constant("cVERSION") . "                                    " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                 vsp by myrddin (myrddin8 AT gmail DOT com)                    " . "\r\n".
+  /*__POBS_EXCLUDE__*/" ----------------------------------------------------------------------------- " . "\r\n" . "\r\n");
+  define("cUSAGE", /*__POBS_EXCLUDE__*/"                                                                               " . "\r\n".
+  /*__POBS_EXCLUDE__*/"  ---------------------------------------------------------------------------  " . "\r\n".
+  /*__POBS_EXCLUDE__*/"  Usage: php vsp.php [options] [-p parserOptions] [logFilename]                " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                                                                               " . "\r\n".
+  /*__POBS_EXCLUDE__*/"    [options]                                                                  " . "\r\n".
+  /*__POBS_EXCLUDE__*/"    ---------                                                                  " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                                                                               " . "\r\n".
+  /*__POBS_EXCLUDE__*/"    -c                 specify config file (must be in pub/configs/)           " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                                                                               " . "\r\n".
+  /*__POBS_EXCLUDE__*/"    -l                 specify logType (gamecode-gametype)                     " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                                                                               " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                         logType:-                                             " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                                                                               " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                           client           Client Logs (Any game)             " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                           q3a              Quake 3 Arena (and q3 engine games)" . "\r\n".
+  /*__POBS_EXCLUDE__*/"                           q3a-battle       Quake 3 Arena BattleMod            " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                           q3a-cpma         Quake 3 Arena CPMA (Promode)       " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                           q3a-freeze       Quake 3 Arena (U)FreezeTag etc.    " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                           q3a-lrctf        Quake 3 Arena Lokis Revenge CTF    " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                           q3a-osp          Quake 3 Arena OSP                  " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                           q3a-ra3          Quake 3 Arena Rocket Arena 3       " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                           q3a-threewave    Quake 3 Arena Threewave            " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                           q3a-ut           Quake 3 Arena UrbanTerror          " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                           q3a-xp           Quake 3 Arena Excessive Plus       " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                                                                               " . "\r\n".
+  /*__POBS_EXCLUDE__*/"    -n                                                                         " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                         No confirmation/prompts (for unattended runs etc.)    " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                                                                               " . "\r\n".
+  /*__POBS_EXCLUDE__*/"    -a                 specify action                                          " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                         perform a specific predefined action                  " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                         *make sure this is the last option specified!*        " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                         [logFilename] is not needed if this option is used    " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                                                                               " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                         action:-                                              " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                                                                               " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                           clear_db         Clear the database in config       " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                                            ie. Reset Stats                    " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                                                                               " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                           gen_awards       Generate only the awards           " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                                                                               " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                           clear_savestate  Clears the savestate information   " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                                            for the specified log. If no log   " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                                            file is specified, then all the    " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                                            savestate information will be      " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                                            cleared. Currently only works with " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                                            the q3a gamecode                   " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                                                                               " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                           pop_ip2country   Deletes the information of the     " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                                            ip2country table and populates it  " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                                            from the CSV file specified in the " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                                            configuration                      " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                                                                               " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                           prune_old_games  Removes all the detailed           " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                                            information of old games           " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                                                                               " . "\r\n".
+  /*__POBS_EXCLUDE__*/"    -p [parserOptions]                                                         " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                                                                               " . "\r\n".
+  /*__POBS_EXCLUDE__*/"       savestate       1                                                       " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                         Enable savestate processing                           " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                         Remembers previously scanned logs and events.         " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                         If this option is enabled, VSP will remember the      " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                         location in the log file where the last stats was     " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                         parsed from. So the next time VSP is run with the     " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                         savestate 1 option against the same log file, it will " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                         start parsing the stats from the previous saved       " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                         location.                                             " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                         If you want VSP to forget this save state, then you   " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                         have to delete the corresponding save state file from " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                         the logdata/ folder. The name is in the format        " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                         savestate_[special_Form_Of_Logfile_Name]              " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                         Deleting that file and running VSP again with         " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                         savestate 1 option will reparse the whole log again   " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                         from the beginning. Also note that each logfile will  " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                         have a separate save state file under the logdata     " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                         folder. Do not edit/modify the savestate files! If    " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                         you dont want it, just delete it.                     " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                                                                               " . "\r\n".
+  /*__POBS_EXCLUDE__*/"       check ReadME or first few lines of a particular parser php for other    " . "\r\n".
+  /*__POBS_EXCLUDE__*/"       valid options for that particular parser                                " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                                                                               " . "\r\n".
+  /*__POBS_EXCLUDE__*/"    [logFilename] could be an FTP link/url. Set FTP username/password in config" . "\r\n".
+  /*__POBS_EXCLUDE__*/"    [logFilename] may be a logDirectory for some games. ex:- *HalfLife*        " . "\r\n".
+  /*__POBS_EXCLUDE__*/"                                                                               " . "\r\n".
+  /*__POBS_EXCLUDE__*/"    Usage: php vsp.php [options] [-p parserOptions] [logFilename]              " . "\r\n".
+  /*__POBS_EXCLUDE__*/"  Example: php vsp.php -l q3a -p savestate 1 \"c:/quake iii arena/games.log\"    " . "\r\n".
+  /*__POBS_EXCLUDE__*/"  ---------------------------------------------------------------------------  " . "\r\n" . "\r\n");
 
 class PlayerSkillProcessor
 {
@@ -2518,9 +2416,15 @@ function finalizeProgram()
 }
 
 require_once "vutil.php";
-initializeEnvironment();
-processCommandLineArgs();
-configureAndProcessGameLogs();
-finalizeProgram(); // Note: In the original, these functions are called in sequence: initializeEnvironment(), processCommandLineArgs(), configureAndProcessGameLogs(), finalizeProgram().
-
+// Wrap the execution code in a main() function and only execute if script is called directly
+function main($argc, $argv) {
+  initializeEnvironment();
+  processCommandLineArgs();
+  configureAndProcessGameLogs();
+  finalizeProgram(); // Note: In the original, these functions are called in sequence: initializeEnvironment(), processCommandLineArgs(), configureAndProcessGameLogs(), finalizeProgram().
+}
+// Only run main() if script is called directly
+if (basename(__FILE__) == basename($_SERVER['PHP_SELF'])) {
+  main($argc, $argv);
+}
 ?>
