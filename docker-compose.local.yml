@@ -15,4 +15,24 @@ services:
       # discover_client_host=true
       # XDEBUG_MODE: debug
       # XDEBUG_CONFIG: start_with_request=yes client_port=9003 idekey=VSCODE client_host=host.docker.internal
-
+      CHECK_UNIQUE_GAMEID: ${CHECK_UNIQUE_GAMEID:-}
+      DB_HOSTNAME: ${DB_HOSTNAME:-db}
+      DB_NAME: ${DB_NAME:-vsp}
+      DB_PASSWORD: ${DB_PASSWORD:-vsp}
+      DB_USERNAME: ${DB_USERNAME:-vsp}
+      DEFAULT_SKIN: ${DEFAULT_SKIN:-}
+      EXCLUDED_PLAYERS: ${EXCLUDED_PLAYERS:-}
+      FTP_USERNAME: ${FTP_USERNAME:-}
+      FTP_PASSWORD: ${FTP_PASSWORD:-}
+      FTP_PASSIVE_MODE: ${FTP_PASSIVE_MODE:-}
+      FTP_OVERWRITE: ${FTP_OVERWRITE:-}
+      GAMES_LIMIT: ${GAMES_LIMIT:-}
+      SERVER_ADMINS: ${SERVER_ADMINS:-}
+      SERVER_EMAIL_IM: ${SERVER_EMAIL_IM:-}
+      SERVER_GAME_MOD: ${SERVER_GAME_MOD:-}
+      SERVER_NAME_IP: ${SERVER_NAME_IP:-}
+      SERVER_QUOTE: ${SERVER_QUOTE:-}
+      SERVER_TITLE: ${SERVER_TITLE:-}
+      TABLE_PREFIX: ${TABLE_PREFIX:-}
+      WEB_SITE_ADDRESS: ${WEB_SITE_ADDRESS:-}
+      WEB_SITE_NAME: ${WEB_SITE_NAME:-}
