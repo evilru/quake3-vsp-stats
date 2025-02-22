@@ -7,9 +7,9 @@ services:
     environment:
       TZ: Europe/Berlin
       MYSQL_RANDOM_ROOT_PASSWORD: "yes"
-      MYSQL_DATABASE: vsp
-      MYSQL_USER:
-      MYSQL_PASSWORD:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-vsp}
+      MYSQL_USER: ${MYSQL_USER:-vsp}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-vsp}
     ports:
       - "3306:3306"
   web:
@@ -29,8 +29,8 @@ services:
       # VSP_WEB_PASSWORD:
       DB_NAME: vsp
       # use the same value as for MYSQL_USER
-      DB_USERNAME:
+      DB_USERNAME: ${MYSQL_USER:-vsp}
       # use the same value as for MYSQL_PASSWORD
-      DB_PASSWORD:
+      DB_PASSWORD: ${MYSQL_PASSWORD:-vsp}
 volumes:
   logdata:
