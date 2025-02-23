@@ -1,6 +1,10 @@
 {
     "name": "evilru/quake3-vsp-stats",
     "description": "Quake3 Statistics Tool",
+    "require": {
+        "php": "^7.4",
+        "adodb/adodb-php": "v5.20.20"
+    },
     "require-dev": {
         "phpunit/phpunit": "^9.5"
     },

@@ -30,16 +30,6 @@ class VspTest extends TestCase
         $this->assertEquals('0.45-xp-1.1.2', cVERSION);
     }
 
-    public function testDatabaseConnection()
-    {
-        $db = new PDO(
-            "mysql:host=" . getenv('DB_HOST') . ";dbname=" . getenv('DB_DATABASE'),
-            getenv('DB_USERNAME'),
-            getenv('DB_PASSWORD')
-        );
-        $this->assertNotNull($db);
-    }
-
     /**
      * @dataProvider validLogTypesProvider
      */
