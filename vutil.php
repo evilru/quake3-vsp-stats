@@ -121,6 +121,7 @@ function ensureDirectoryExists($dirPath)
 
 function sanitizeFilename($filename)
 {
+  $filename = str_replace(['../', '..\\'], '', $filename);
   return str_replace(
     ["\\", "<", ">", "/", "=", ":", "*", "?", '"', " ", "|"],
     "_",
@@ -136,4 +137,3 @@ function getElapsedTime(&$startTime)
     (float) ($currentTime["usec"] - $startTime["usec"]) / 1000000;
   return $elapsed;
 }
-?>
