@@ -1,5 +1,13 @@
 <?php
 
+function secureString($value) {
+    global $db;
+    if (!$db) {
+        return addslashes($value);
+    }
+    return $db->qstr($value);
+}
+
 // First statement in array MUST be a create database statement
 //change: added if not exists
 $sql_create = array(
@@ -120,7 +128,7 @@ $sql_create = array(
     ,dataCount INT unsigned NOT NULL default '0'
     ,PRIMARY KEY (playerID, dataName, dataValue)
   ) ENGINE=MyISAM DEFAULT CHARSET=utf8"
-  
+
   ,"
   CREATE TABLE IF NOT EXISTS {$GLOBALS['cfg']['db']['table_prefix']}eventdata1d_total (
     playerID varchar(100) CHARSET 'latin1' NOT NULL default ''
@@ -141,7 +149,6 @@ $sql_create = array(
   ) ENGINE=MyISAM DEFAULT CHARSET=utf8"
 //endchange
 );
-
 
 //change: added if exists
 $sql_destroy = array(

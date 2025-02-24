@@ -121,6 +121,7 @@ function ensureDirectoryExists($dirPath)
 
 function sanitizeFilename($filename)
 {
+  $filename = str_replace(['../', '..\\'], '', $filename);
   return str_replace(
     ["\\", "<", ">", "/", "=", ":", "*", "?", '"', " ", "|"],
     "_",
