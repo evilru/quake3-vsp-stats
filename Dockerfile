@@ -1,26 +1,33 @@
+# syntax=docker/dockerfile:1.4
 FROM php:7.4.33-apache
 # FROM php:8-apache
 
 # supervisor web gui would be available on port 9001
 # EXPOSE 9001
 
-ENV LOGTYPE q3a-osp
-ENV SERVER_TITLE HERE GOES YOUR SERVER TITLE
-ENV SERVER_NAME_IP Your Server Name and IP goes here
-ENV SERVER_GAME_MOD Your Game and Mod type goes here
-ENV SERVER_ADMINS List your admins here
-ENV SERVER_EMAIL_IM List your E-Mail and/or IM account here
-ENV WEB_SITE_ADDRESS http://my.web_site_goes_here.com
-ENV WEB_SITE_NAME My web site name goes here
-ENV SERVER_QUOTE My quote goes here
-ENV DEFAULT_SKIN fest
-ENV CHECK_UNIQUE_GAMEID 1
-ENV TABLE_PREFIX vsp_
-ENV DB_HOSTNAME db
-ENV DB_NAME vsp
-# ENV VSP_WEB_PASSWORD
-# ENV DB_USERNAME
-# ENV DB_PASSWORD
+# Application Settings
+ENV LOGTYPE="q3a-osp" \
+    SERVER_TITLE="HERE GOES YOUR SERVER TITLE" \
+    SERVER_NAME_IP="Your Server Name and IP goes here" \
+    SERVER_GAME_MOD="Your Game and Mod type goes here" \
+    SERVER_ADMINS="List your admins here" \
+    SERVER_EMAIL_IM="List your E-Mail and/or IM account here" \
+    WEB_SITE_ADDRESS="http://my.web_site_goes_here.com" \
+    WEB_SITE_NAME="My web site name goes here" \
+    SERVER_QUOTE="My quote goes here"
+
+# Theme Settings
+ENV DEFAULT_SKIN="fest" \
+    CHECK_UNIQUE_GAMEID="1"
+
+# Database Settings
+ENV TABLE_PREFIX="vsp_" \
+    DB_HOSTNAME="db" \
+    DB_NAME="vsp"
+    # Uncomment and set these in docker-compose or at runtime
+    # DB_USERNAME="" \
+    # DB_PASSWORD="" \
+    # VSP_WEB_PASSWORD=""
 
 RUN docker-php-ext-install mysqli \
 #  && pecl install xdebug-2.9.8 \
@@ -40,7 +47,6 @@ WORKDIR /vsp
 
 RUN chmod +x docker/import.sh \
  && chmod 777 -R logdata \
- && mv docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf \
  && crontab docker/import-cron \
  && sed -ri -e 's!/var/www/html!/vsp!g' /etc/apache2/sites-available/*.conf \
  && sed -ri -e 's!/var/www/!/vsp!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf \
@@ -64,4 +70,4 @@ RUN chmod +x docker/import.sh \
  && sed -ri -e 's!(\['\''check_unique_gameID'\''\]\s*=\s*)1!\1$_ENV["CHECK_UNIQUE_GAMEID"]!g' pub/configs/cfg-default.php
 
 
-CMD /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
+CMD ["supervisord", "-c", "/vsp/docker/supervisord.conf"]

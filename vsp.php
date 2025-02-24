@@ -226,10 +226,9 @@ class PlayerSkillProcessor
   function getPlayerSkill($playerID)
   {
     // obtiene el skill del player
-    global $db; // db
-    $playerID = $db->qstr($playerID);
-    $sql = "select skill from {$GLOBALS["cfg"]["db"]["table_prefix"]}playerprofile where playerID=$playerID
- ";
+    global $db;
+    $playerID = secureString($playerID); // Add this line
+    $sql = "select skill from {$GLOBALS['cfg']['db']['table_prefix']}playerprofile where playerID=$playerID";
     $rs = $db->Execute($sql);
     if ($rs and !$rs->EOF) {
       //change: skill puede bajar de 1600
@@ -1543,11 +1542,11 @@ class GameDataProcessor
       if (!isset($queries["playerprofile"])) {
         $queries["playerprofile"] = [
           "sql" => [
-            "INSERT INTO {$GLOBALS["cfg"]["db"]["table_prefix"]}playerprofile (playerID, playerName, countryCode, 
+            "INSERT INTO {$GLOBALS["cfg"]["db"]["table_prefix"]}playerprofile (playerID, playerName, countryCode,
                             skill, kills, deaths, games, kill_streak, death_streak, first_seen, last_seen) VALUES ",
-            " ON DUPLICATE KEY UPDATE playerName = VALUES(playerName), countryCode = VALUES(countryCode), skill = VALUES(skill), 
-                            kills = kills + VALUES(kills), deaths = deaths + VALUES(deaths), games = games + VALUES(games), 
-                            kill_streak = IF(VALUES(kill_streak) > kill_streak, VALUES(kill_streak), kill_streak), 
+            " ON DUPLICATE KEY UPDATE playerName = VALUES(playerName), countryCode = VALUES(countryCode), skill = VALUES(skill),
+                            kills = kills + VALUES(kills), deaths = deaths + VALUES(deaths), games = games + VALUES(games),
+                            kill_streak = IF(VALUES(kill_streak) > kill_streak, VALUES(kill_streak), kill_streak),
                             death_streak = IF(VALUES(death_streak) > death_streak, VALUES(death_streak), death_streak),
                             first_seen = IF(VALUES(first_seen) < first_seen, VALUES(first_seen), first_seen),
                             last_seen = IF(VALUES(last_seen) > last_seen, VALUES(last_seen), last_seen)",
@@ -2450,24 +2449,24 @@ function checkWebAccess()
     echo "<HTML><BODY><PRE>Web Access to vsp.php is currently disabled.\nIf you want to enable web access to vsp.php,\nlook in password.inc.php under your vsp folder using a text editor(notepad).\nRead the ReadME.txt file for additional information.";
     exitProgram();
   }
-  if (!isset($_POST["password"])) { ?> 
+  if (!isset($_POST["password"])) { ?>
     <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-    <HTML> <HEAD> <TITLE>vsp stats processor</TITLE> </HEAD> 
+    <HTML> <HEAD> <TITLE>vsp stats processor</TITLE> </HEAD>
     <BODY> <center> <PRE> <?php printTitle(); ?>
-    </PRE> 
-    <form action="vsp.php?mode=web" method="post"> 
+    </PRE>
+    <form action="vsp.php?mode=web" method="post">
       <TABLE BORDER="0" CELLSPACING="5" CELLPADDING="0">
         <TR> <TD>&nbsp;</TD> <TD>[options] [-p parserOptions] [logFilename]</TD> </TR>
         <TR> <TD VALIGN="TOP">php vsp.php</TD>
           <TD><input size="50" type="text" name="CMD_LINE_ARGS" /><BR>example: -l q3a-osp -p savestate 1 "games.log"</TD>
         </TR>
-      </TABLE> 
+      </TABLE>
       <BR><BR> password = <input size=10 type=password name="password" /><BR><BR>
       <input type="submit" value="Submit ( Process Stats )" />
-      <BR><BR> 
-    </form> 
-    <PRE> <?php printUsage(); ?> 
-    </PRE> </center> </BODY></HTML> 
+      <BR><BR>
+    </form>
+    <PRE> <?php printUsage(); ?>
+    </PRE> </center> </BODY></HTML>
     <?php exit();}
   $userPass = $_POST["password"];
   if (md5($userPass) != md5($vsp["password"])) {
