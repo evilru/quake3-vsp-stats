@@ -137,3 +137,4 @@ function getElapsedTime(&$startTime)
     (float) ($currentTime["usec"] - $startTime["usec"]) / 1000000;
   return $elapsed;
 }
+?>
