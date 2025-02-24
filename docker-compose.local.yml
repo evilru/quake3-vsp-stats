@@ -27,12 +27,12 @@ services:
       FTP_PASSIVE_MODE: ${FTP_PASSIVE_MODE:-}
       FTP_OVERWRITE: ${FTP_OVERWRITE:-}
       GAMES_LIMIT: ${GAMES_LIMIT:-}
-      SERVER_ADMINS: ${SERVER_ADMINS:-}
-      SERVER_EMAIL_IM: ${SERVER_EMAIL_IM:-}
-      SERVER_GAME_MOD: ${SERVER_GAME_MOD:-}
-      SERVER_NAME_IP: ${SERVER_NAME_IP:-}
-      SERVER_QUOTE: ${SERVER_QUOTE:-}
-      SERVER_TITLE: ${SERVER_TITLE:-}
-      TABLE_PREFIX: ${TABLE_PREFIX:-}
-      WEB_SITE_ADDRESS: ${WEB_SITE_ADDRESS:-}
-      WEB_SITE_NAME: ${WEB_SITE_NAME:-}
+      SERVER_ADMINS: ${SERVER_ADMINS:-List your admins here}
+      SERVER_EMAIL_IM: ${SERVER_EMAIL_IM:-List your E-Mail and/or IM account here}
+      SERVER_GAME_MOD: ${SERVER_GAME_MOD:-Your Game and Mod type goes here}
+      SERVER_NAME_IP: ${SERVER_NAME_IP:-Your Server Name and IP goes here}
+      SERVER_QUOTE: ${SERVER_QUOTE:-My quote goes here}
+      SERVER_TITLE: ${SERVER_TITLE:-HERE GOES YOUR SERVER TITLE}
+      TABLE_PREFIX: ${TABLE_PREFIX:-vsp_}
+      WEB_SITE_ADDRESS: ${WEB_SITE_ADDRESS:-http://my.web_site_goes_here.com"}
+      WEB_SITE_NAME: ${WEB_SITE_NAME:-My web site name goes here}
