@@ -20,11 +20,12 @@ class CliTest extends TestCase
             'games.log'
         ];
 
-        F92261ca6(); // Parse command line
+        // Use the actual function name from vsp.php
+        global $options;
+        processCommandLineArgs();
 
-        global $V0f14082c;
-        $this->assertEquals('q3a', $V0f14082c['log-gamecode']);
-        $this->assertEquals('games.log', $V0f14082c['logfile']);
+        $this->assertEquals('q3a', $options['log-gamecode']);
+        $this->assertEquals('games.log', $options['logfile']);
     }
 
     public function testGameTypeOptionParsing()
@@ -37,10 +38,10 @@ class CliTest extends TestCase
             'games.log'
         ];
 
-        F92261ca6();
+        global $options;
+        processCommandLineArgs();
 
-        global $V0f14082c;
-        $this->assertEquals('q3a', $V0f14082c['log-gamecode']);
-        $this->assertEquals('osp', $V0f14082c['log-gametype']);
+        $this->assertEquals('q3a', $options['log-gamecode']);
+        $this->assertEquals('osp', $options['log-gametype']);
     }
 }

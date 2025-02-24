@@ -1,13 +1,4 @@
 <?php
-
-function secureString($value) {
-    global $db;
-    if (!$db) {
-        return addslashes($value);
-    }
-    return $db->qstr($value);
-}
-
 // First statement in array MUST be a create database statement
 //change: added if not exists
 $sql_create = array(

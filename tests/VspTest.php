@@ -26,8 +26,8 @@ class VspTest extends TestCase
 
     public function testVersionConstantExists()
     {
-        $this->assertTrue(defined('cVERSION'));
-        $this->assertEquals('0.45-xp-1.1.2', cVERSION);
+        $this->assertTrue(defined('cVERSION')); // Updated constant name
+        $this->assertEquals('0.45-xp-1.1.2', cVERSION); // Updated version number
     }
 
     /**

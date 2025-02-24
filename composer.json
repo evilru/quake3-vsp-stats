@@ -10,7 +10,7 @@
     },
     "autoload": {
         "classmap": [
-            "src/"
+            "."
         ]
     },
     "autoload-dev": {

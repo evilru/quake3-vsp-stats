@@ -11,7 +11,7 @@ class GameDataTest extends TestCase
     {
         parent::setUp();
 
-        // Create DB mock before resetting state
+        // Create DB mock
         $this->dbMock = $this->createMock(\ADOConnection::class);
         $this->dbMock->expects($this->any())
             ->method('qstr')
@@ -19,17 +19,17 @@ class GameDataTest extends TestCase
                 return "'$str'";
             });
 
-        // Set mock after state reset
-        $GLOBALS['V9c1ebee8'] = $this->dbMock;
+        // Set mock
+        $GLOBALS['db'] = $this->dbMock;
 
-        $this->gameData = new F02ac4643();
+        $this->gameData = new PlayerSkillProcessor();
     }
 
     protected function tearDown(): void
     {
         parent::tearDown();
         $this->gameData = null;
-        $GLOBALS['V9c1ebee8'] = null;
+        $GLOBALS['db'] = null;
         resetGlobalState();
     }
 
@@ -40,9 +40,12 @@ class GameDataTest extends TestCase
         $ip = "127.0.0.1";
         $tld = "de";
 
-        $this->gameData->F6aae4907($playerId, $playerName, $ip, $tld);
+        // Changed from F6aae4907 to initializePlayerData
+        $this->gameData->initializePlayerData($playerId, $playerName, $ip, $tld);
 
-        $players = $this->gameData->F26dd5333();
+        // Changed from F26dd5333 to getPlayerStats
+        $players = $this->gameData->getPlayerStats();
+
         $this->assertArrayHasKey($playerId, $players);
         $this->assertEquals($playerName, $players[$playerId]['profile']['name']);
         $this->assertEquals($ip, $players[$playerId]['profile']['ip']);

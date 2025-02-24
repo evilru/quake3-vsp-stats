@@ -1,0 +1,24 @@
+<?php
+use PHPUnit\Framework\TestCase;
+
+class PlayerSkillTest extends TestCase
+{
+    private $skillProcessor;
+
+    protected function setUp(): void
+    {
+        $this->skillProcessor = new PlayerSkillProcessor();
+    }
+
+    public function testCalculateSkill()
+    {
+        $stats = [
+            'kills' => 10,
+            'deaths' => 5,
+            'accuracy' => 35.5
+        ];
+
+        $result = $this->skillProcessor->getPlayerSkill($stats);
+        $this->assertIsFloat($result);
+    }
+}

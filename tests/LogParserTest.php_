@@ -1,0 +1,25 @@
+<?php
+use PHPUnit\Framework\TestCase;
+
+class LogParserTest extends TestCase
+{
+    private $parser;
+
+    protected function setUp(): void
+    {
+        $config = [
+            'logtype' => 'q3a-osp'
+        ];
+        $this->parser = new VSPParserQ3A($config, null, null);
+    }
+
+    public function testParseKill()
+    {
+        $line = '20:15 Kill: 1 2 10: PlayerA killed PlayerB by MOD_RAILGUN';
+        $result = $this->parser->processLogLine($line);
+
+        $this->assertTrue($result['isKill']);
+        $this->assertEquals('PlayerA', $result['killer']);
+        $this->assertEquals('PlayerB', $result['victim']);
+    }
+}

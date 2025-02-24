@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   db:
-    image: mariadb:10.5
+    image: mariadb:11.1.3
     restart: always
     environment:
       TZ: Europe/Berlin
@@ -31,9 +31,9 @@ services:
       # VSP_WEB_PASSWORD:
       DB_NAME: vsp
       # use the same value as for MYSQL_USER
-      DB_USERNAME: foo
+      DB_USERNAME: vsp
       # use the same value as for MYSQL_PASSWORD
-      DB_PASSWORD: bar
+      DB_PASSWORD: vsp
   php:
     build:
       context: .

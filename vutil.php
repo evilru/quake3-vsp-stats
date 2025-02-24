@@ -1,6 +1,14 @@
 <?php
 /* vsp stats processor, copyright 2004-2005, myrddin8 AT gmail DOT com (a924cb279be8cb6089387d402288c9f2) */
 
+function secureString($value) {
+  global $db;
+  if (!$db) {
+      return addslashes($value);
+  }
+  return $db->qstr($value);
+}
+
 function parseFileListing($fileLines)
 {
   foreach ($fileLines as $line) {
