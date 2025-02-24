@@ -156,7 +156,7 @@ function drawPlayersList()
               where dataName='alias' 
                 AND dataValue REGEXP '$search_txt'
                 AND PP.playerID=PD.playerID
-                ".($GLOBALS['excluded_players'] ? "and pp.playerID not in {$GLOBALS['excluded_players']}" : "")."
+                ".($GLOBALS['excluded_players'] ? "and PP.playerID not in {$GLOBALS['excluded_players']}" : "")."
               order by {$GLOBALS['sort']} {$GLOBALS['order']}
            ";
       //echo $sql;
