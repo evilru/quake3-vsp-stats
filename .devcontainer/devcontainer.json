@@ -18,7 +18,8 @@
                 "neilbrayfield.php-docblocker",
                 "mehedidracula.php-namespace-resolver",
                 "recca0120.vscode-phpunit",
-                "formulahendry.code-runner"
+                "formulahendry.code-runner",
+                "ms-azuretools.vscode-docker"
             ],
             "settings": {
                 "php.validate.enable": true,
