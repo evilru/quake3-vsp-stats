@@ -5,11 +5,11 @@ function parseFileListing($fileLines)
 {
   foreach ($fileLines as $line) {
     if (
-      ereg(
-        "([-dl][rwxst-]+).* ([0-9]*) ([a-zA-Z0-9]+).* ([a-zA-Z0-9]+).* ([0-9]*) ([a-zA-Z]+[0-9: ]*[0-9])[ ]+(([0-9]{2}:[0-9]{2})|[0-9]{4}) (.+)",
-        $line,
-        $matches
-      )
+        preg_match(
+            '/([-dl][rwxst-]+).* ([0-9]*) ([a-zA-Z0-9]+).* ([a-zA-Z0-9]+).* ([0-9]*) ([a-zA-Z]+[0-9: ]*[0-9])[ ]+(([0-9]{2}:[0-9]{2})|[0-9]{4}) (.+)/',
+            $line,
+            $matches
+        )
     ) {
       // Determine file type (directory, link, etc.) by finding the position of the first char in "-dl"
       $fileType = (int) strpos("-dl", $matches[1][0]);
@@ -137,3 +137,4 @@ function getElapsedTime(&$startTime)
     (float) ($currentTime["usec"] - $startTime["usec"]) / 1000000;
   return $elapsed;
 }
+?>
