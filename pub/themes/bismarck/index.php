@@ -142,7 +142,13 @@ function drawPlayersList()
     if ($_POST['search_by']=='name')
     {
       //echo $search_txt."<BR>";
-      $search_txt=preg_replace("/(.)/e", "'(`#[0-9a-fA-F]{6})*'.preg_quote(preg_quote('\\1','\''),'\'')", $search_txt);
+      $search_txt = preg_replace_callback(
+        "/(.)/",
+        function ($matches) {
+            return '(`#[0-9a-fA-F]{6})*' . preg_quote(preg_quote($matches[1], '\''), '\'');
+        },
+        $search_txt
+    );
       //echo $search_txt."<BR>";
 
       $sql="select distinct PP.playerID as playerID,playerName,skill as skill,kills,deaths,kill_streak,death_streak,games,countryCode
@@ -150,7 +156,7 @@ function drawPlayersList()
               where dataName='alias' 
                 AND dataValue REGEXP '$search_txt'
                 AND PP.playerID=PD.playerID
-                ".($GLOBALS['excluded_players'] ? "and pp.playerID not in {$GLOBALS['excluded_players']}" : "")."
+                ".($GLOBALS['excluded_players'] ? "and PP.playerID not in {$GLOBALS['excluded_players']}" : "")."
               order by {$GLOBALS['sort']} {$GLOBALS['order']}
            ";
       //echo $sql;
