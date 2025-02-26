@@ -1,6 +1,11 @@
 version: '3'
 
 services:
+  db:
+      environment:
+        MYSQL_DATABASE: ${VSP_DB_NAME}
+        MYSQL_USER: ${VSP_DB_USERNAME}
+        MYSQL_PASSWORD: ${VSP_DB_PASSWORD}
   web:
     build: .
     # ports:
@@ -9,30 +14,6 @@ services:
     volumes:
       - ./osp.log:/vsp/games.log
     environment:
-      #xdebug 2
-      XDEBUG_CONFIG: remote_enable=1 remote_autostart=1 default_enable=1 remote_host=host.docker.internal idekey=VSCODE remote_port=9003
-      #xdebug 3
-      # discover_client_host=true
-      # XDEBUG_MODE: debug
-      # XDEBUG_CONFIG: start_with_request=yes client_port=9003 idekey=VSCODE client_host=host.docker.internal
-      CHECK_UNIQUE_GAMEID: ${CHECK_UNIQUE_GAMEID:-1}
-      DB_HOSTNAME: ${DB_HOSTNAME:-db}
-      DB_NAME: ${DB_NAME:-vsp}
-      DB_PASSWORD: ${DB_PASSWORD:-vsp}
-      DB_USERNAME: ${DB_USERNAME:-vsp}
-      DEFAULT_SKIN: ${DEFAULT_SKIN:-fest}
-      EXCLUDED_PLAYERS: ${EXCLUDED_PLAYERS:-}
-      FTP_USERNAME: ${FTP_USERNAME:-}
-      FTP_PASSWORD: ${FTP_PASSWORD:-}
-      FTP_PASSIVE_MODE: ${FTP_PASSIVE_MODE:-}
-      FTP_OVERWRITE: ${FTP_OVERWRITE:-}
-      GAMES_LIMIT: ${GAMES_LIMIT:-}
-      SERVER_ADMINS: ${SERVER_ADMINS:-List your admins here}
-      SERVER_EMAIL_IM: ${SERVER_EMAIL_IM:-List your E-Mail and/or IM account here}
-      SERVER_GAME_MOD: ${SERVER_GAME_MOD:-Your Game and Mod type goes here}
-      SERVER_NAME_IP: ${SERVER_NAME_IP:-Your Server Name and IP goes here}
-      SERVER_QUOTE: ${SERVER_QUOTE:-My quote goes here}
-      SERVER_TITLE: ${SERVER_TITLE:-HERE GOES YOUR SERVER TITLE}
-      TABLE_PREFIX: ${TABLE_PREFIX:-vsp_}
-      WEB_SITE_ADDRESS: ${WEB_SITE_ADDRESS:-http://my.web_site_goes_here.com"}
-      WEB_SITE_NAME: ${WEB_SITE_NAME:-My web site name goes here}
+      DB_NAME: ${VSP_DB_NAME}
+      DB_USERNAME: ${VSP_DB_USERNAME}
+      DB_PASSWORD: ${VSP_DB_PASSWORD}

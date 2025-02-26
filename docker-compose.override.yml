@@ -1,5 +1,0 @@
-version: '3'
-
-services:
-  web:
-    image: evilru/quake3-vsp-stats:latest
