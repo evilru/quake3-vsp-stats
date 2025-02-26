@@ -1,0 +1,82 @@
+version: '3'
+
+vars:
+  PHP_VERSION: 7.4.33
+  COMPOSER: composer
+  PHP: php
+
+tasks:
+  default:
+    cmds:
+      - task -l
+    silent: true
+
+  # Development tasks
+  dev:
+    desc: Start development environment
+    cmds:
+      - docker compose up -d
+      - task: composer:install
+      - task: serve
+
+  serve:
+    desc: Start PHP development server
+    cmds:
+      - ${{.PHP}} -S localhost:8000 -t pub/
+
+  # Testing and quality tasks
+  test:
+    desc: Run all quality checks
+    cmds:
+      - task: test:unit
+      - task: test:lint
+      - task: test:cs
+      - task: test:md
+
+  test:unit:
+    desc: Run PHPUnit tests
+    cmds:
+      - vendor/bin/phpunit
+
+  test:lint:
+    desc: Check PHP syntax
+    cmds:
+      - |
+        for file in $(find . -name "*.php" -not -path "./vendor/*"); do
+          ${{.PHP}} -l "$file" || exit 1
+        done
+
+  test:cs:
+    desc: Run PHP CodeSniffer
+    cmds:
+      - vendor/bin/phpcs --standard=PSR2 pub/ lib/
+
+  test:md:
+    desc: Run PHP Mess Detector
+    cmds:
+      - vendor/bin/phpmd src text codesize,unusedcode,naming,cleancode,design
+
+  # Composer tasks
+  composer:install:
+    desc: Install dependencies
+    cmds:
+      - ${{.COMPOSER}} install
+
+  composer:update:
+    desc: Update dependencies
+    cmds:
+      - ${{.COMPOSER}} update
+
+  # Maintenance tasks
+  clean:
+    desc: Clean temporary files and logs
+    cmds:
+      - rm -rf tmp/*
+      - rm -rf logdata/*.log
+      - mkdir -p tmp/cache logdata
+      - chmod -R 777 tmp logdata
+
+  logs:
+    desc: Display application logs
+    cmds:
+      - tail -f logdata/*.log

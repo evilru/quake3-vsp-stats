@@ -1,0 +1,58 @@
+{
+    "name": "Q3 Stats PHP Development",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "bmewburn.vscode-intelephense-client",
+                "xdebug.php-debug",
+                "DEVSENSE.phptools-vscode",
+                "eamodio.gitlens",
+                "editorconfig.editorconfig",
+                "visualstudioexptteam.vscodeintellicode",
+                "github.vscode-pull-request-github",
+                "task.vscode-task",
+                "redhat.vscode-yaml",
+                "neilbrayfield.php-docblocker",
+                "mehedidracula.php-namespace-resolver",
+                "recca0120.vscode-phpunit",
+                "formulahendry.code-runner",
+                "ms-azuretools.vscode-docker"
+            ],
+            "settings": {
+                "php.validate.enable": true,
+                "php.suggest.basic": true,
+                "php.validate.run": "onType",
+                "files.associations": {
+                    "*.php": "php"
+                },
+                "phpunit.php": "/usr/local/bin/php",
+                "phpunit.args": [],
+                "php.problems.exclude": {
+                    "vendor/": true
+                },
+                "terminal.integrated.defaultProfile.linux": "bash",
+                "editor.rulers": [80, 120],
+                "[php]": {
+                    "editor.formatOnSave": true,
+                    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+                }
+            }
+        }
+    },
+    "forwardPorts": [8000],
+    "postCreateCommand": "composer install",
+    "features": {
+        "ghcr.io/devcontainers/features/git:1": {},
+        "ghcr.io/devcontainers/features/github-cli:1": {}
+    },
+    "remoteUser": "vscode",
+    "waitFor": "postCreateCommand",
+    "mounts": [
+        "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
+    ],
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+    "workspaceFolder": "/workspace"
+}
