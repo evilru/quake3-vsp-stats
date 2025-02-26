@@ -29,6 +29,19 @@ ENV TABLE_PREFIX="vsp_" \
     # DB_PASSWORD="" \
     # VSP_WEB_PASSWORD=""
 
+# FTP settings
+ENV FTP_USERNAME="anonymous" \
+    FTP_PASSWORD="anonymous" \
+    # 1 for passive mode, 0 for active mode
+    FTP_PASSIVE_MODE="1" \
+    # 1 to overwrite existing files, 0 to skip
+    FTP_OVERWRITE="0"
+
+# Additional Settings
+ENV EXCLUDED_PLAYERS="comma-separated list of players (e.g. Angel,Biker,Bitterman,Bones,Cadavre)" \
+   # limit of detailed game stats that will be stored on the database (negative number for unlimited)
+   GAMES_LIMIT="1000"
+
 RUN docker-php-ext-install mysqli \
 #  && pecl install xdebug-2.9.8 \
 #  && docker-php-ext-enable xdebug \
