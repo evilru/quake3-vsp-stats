@@ -198,32 +198,33 @@ define(
 
 class PlayerSkillProcessor
 {
-  var $gameData; // formerly $Vf273a653
-  var $gameCounter = 0; // formerly $V56cacbad
-  var $roundCounter = 0; // formerly $Vb77eef69
-  var $teamCounts; // formerly $V282dbc1d
-  var $playerStats; // formerly $V75125d17
-  var $translationData; // formerly $V42dfa3a4
+  private array $gameData = [];
+  private int $gameCounter = 0;
+  private int $roundCounter = 0;
+  private array $teamCounts = [];
+  public array $playerStats = [];
+  private array $translationData = [];
+  public array $players_team = [];
 
-  function getWeaponSkillFactor($weaponEvent)
+  private function getWeaponSkillFactor(string $weaponEvent): float
   {
     // devuelve el skill del arma
     if (isset($GLOBALS["skillset"]["weapon_factor"][$weaponEvent])) {
-      return $GLOBALS["skillset"]["weapon_factor"][$weaponEvent];
+      return (float) $GLOBALS["skillset"]["weapon_factor"][$weaponEvent];
     }
     return 0.0;
   }
 
-  function getEventSkillFactor($eventName)
+  private function getEventSkillFactor(string $eventName): float
   {
     // devuelve el skill del evento
     if (isset($GLOBALS["skillset"]["event"][$eventName])) {
-      return $GLOBALS["skillset"]["event"][$eventName];
+      return (float) $GLOBALS["skillset"]["event"][$eventName];
     }
     return 0.0;
   }
 
-  function getPlayerSkill($playerID)
+  private function getPlayerSkill(string $playerID): float
   {
     // obtiene el skill del player
     global $db;
@@ -239,8 +240,12 @@ class PlayerSkillProcessor
     return $GLOBALS["skillset"]["defaults"]["value"];
   }
 
-  function updatePlayerDataField($action, $playerID, $dataName, $value)
-  {
+  public function updatePlayerDataField(
+    string $action,
+    string $playerID,
+    string $dataName,
+    $value
+  ): void {
     // hace más cosas con el player, no entiendo muy bien qué
     if (!isset($this->playerStats[$playerID])) {
       return;
@@ -291,8 +296,10 @@ class PlayerSkillProcessor
     }
   }
 
-  function resolvePlayerIDConflict($oldPlayerID, $newPlayerID)
-  {
+  public function resolvePlayerIDConflict(
+    string $oldPlayerID,
+    string $newPlayerID
+  ): void {
     if (!isset($this->playerStats[$oldPlayerID])) {
       return;
     }
@@ -339,7 +346,7 @@ class PlayerSkillProcessor
     unset($this->playerStats[$oldPlayerID]);
   }
 
-  function updatePlayerName($playerID, $newName)
+  public function updatePlayerName(string $playerID, string $newName): void
   {
     if (!isset($this->playerStats[$playerID])) {
       return;
@@ -347,7 +354,7 @@ class PlayerSkillProcessor
     $this->playerStats[$playerID]["profile"]["name"] = $newName;
   }
 
-  function setPlayerIcon($playerID, $icon)
+  private function setPlayerIcon(string $playerID, string $icon): void
   {
     if (!isset($this->playerStats[$playerID])) {
       return;
@@ -356,7 +363,7 @@ class PlayerSkillProcessor
     $this->playerStats[$playerID]["vdata"]["icon"][1] = "$icon";
   }
 
-  function setPlayerRole($playerID, $role)
+  public function setPlayerRole(string $playerID, string $role): void
   {
     if (!isset($this->playerStats[$playerID])) {
       return;
@@ -365,7 +372,7 @@ class PlayerSkillProcessor
     $this->playerStats[$playerID]["vdata"]["role"][1] = "$role";
   }
 
-  function updatePlayerTeam($playerID, $team)
+  public function updatePlayerTeam(string $playerID, string $team): void
   {
     // actualiza el equipo en el que el player está
     if (!isset($this->playerStats[$playerID])) {
@@ -378,21 +385,19 @@ class PlayerSkillProcessor
     }
   }
 
-  function ensureTeamCount($team)
+  private function ensureTeamCount(string $team): void
   {
     if (!isset($this->teamCounts[$team])) {
       $this->teamCounts[$team] = "1";
     }
   }
 
-  function incrementRoundCounter()
+  private function incrementRoundCounter(): void
   {
     $this->roundCounter++;
   }
 
-  function doNothing() {}
-
-  function setGameData($key, $value)
+  public function setGameData(string $key, $value): void
   {
     // Asigna datos de juego; keys beginning with "_v_" are always stored.
     if (preg_match("/^_v_/", $key, $match)) {
@@ -407,8 +412,12 @@ class PlayerSkillProcessor
     }
   }
 
-  function initializePlayerData($playerID, $playerName, $ip = "", $tld = "")
-  {
+  public function initializePlayerData(
+    string $playerID,
+    string $playerName,
+    ?string $ip = null,
+    ?string $tld = null
+  ): void {
     // inicializa datos del jugador
     foreach ($GLOBALS["player_ban_list"] as $banPattern) {
       // saltar si el player está en la lista de bans
@@ -443,7 +452,7 @@ class PlayerSkillProcessor
     $this->updatePlayerDataField("sto", $playerID, "alias", $playerName);
   }
 
-  function updatePlayerQuote($playerID, $quote)
+  public function updatePlayerQuote(string $playerID, string $quote): void
   {
     if (!isset($this->playerStats[$playerID])) {
       return;
@@ -463,7 +472,7 @@ class PlayerSkillProcessor
     }
   }
 
-  function startGameAnalysis()
+  public function startGameAnalysis(): void
   {
     // muestra mensaje de inicio de análisis de juego
     $this->clearProcessorData(); // limpieza de variables
@@ -474,7 +483,7 @@ class PlayerSkillProcessor
     $this->roundCounter = 0;
   }
 
-  function updatePlayerStreaks()
+  public function updatePlayerStreaks(): void
   {
     // actualiza los streaks de los players
     if (isset($this->playerStats)) {
@@ -497,7 +506,7 @@ class PlayerSkillProcessor
     }
   }
 
-  function clearPlayerEvents()
+  private function clearPlayerEvents(): void
   {
     foreach ($this->playerStats as $playerID => $pdata) {
       if (isset($this->playerStats[$playerID]["events"])) {
@@ -520,7 +529,7 @@ class PlayerSkillProcessor
     }
   }
 
-  function clearProcessorData()
+  public function clearProcessorData(): void
   {
     // limpieza de variables
     if (isset($this->playerStats)) {
@@ -537,28 +546,29 @@ class PlayerSkillProcessor
     }
   }
 
-  function getPlayerStats()
+  public function getPlayerStats(): ?array
   {
     // devuelve la información de los jugadores
     if (isset($this->playerStats)) {
       return $this->playerStats;
     }
-    return false;
+    return null;
   }
 
-  function getGameData()
+  public function getGameData(): ?array
   {
     // devuelve la información del juego
     if (isset($this->gameData)) {
       return $this->gameData;
     }
-    return false;
+    return null;
   }
 
-  //change: ELO based skill change
-  function updateTeamEventSkill($team, $eventName, $value)
-  {
-    // team events launcher
+  public function updateTeamEventSkill(
+    string $team,
+    string $eventName,
+    float $value
+  ): void {
     $eventPrefix = "";
     $eventFull = $eventName;
     if (preg_match("/^(.*)\\|(.+)/", $eventFull, $match)) {
@@ -675,12 +685,12 @@ class PlayerSkillProcessor
   //endchange
 
   //change: ELO based skills change
-  function updatePlayerEvent(
+  public function updatePlayerEvent(
     $playerID,
-    $eventName,
-    $value,
+    string $eventName,
+    float $value,
     &$clients_info = false
-  ) {
+  ): void {
     // default events launcher
     //change: team control
     if ($clients_info) {
@@ -737,13 +747,13 @@ class PlayerSkillProcessor
   }
   //endchange
 
-  function updateAccuracyEvent(
+  public function updateAccuracyEvent(
     $playerID1,
     $playerID2,
-    $eventName,
-    $value,
+    string $eventName,
+    float $value,
     &$clients_info = false
-  ) {
+  ): void {
     // accuracy events
     //change: client ids instead of ids
     if ($clients_info) {
@@ -803,12 +813,12 @@ class PlayerSkillProcessor
     //endchange
   }
 
-  function processKillEvent(
+  public function processKillEvent(
     $killer,
     $victim,
-    $weaponEvent,
+    string $weaponEvent,
     &$clients_info = false
-  ) {
+  ): void {
     // kill events
     //change: skill configuration
     $variance = $GLOBALS["skillset"]["defaults"]["variance"];
@@ -980,13 +990,13 @@ class PlayerSkillProcessor
   }
 
   //change: add event
-  function event_skills_update(
+  private function event_skills_update(
     $playerID,
-    $eventName,
-    $value,
+    string $eventName,
+    float $value,
     &$clients_info = false,
-    $team_penalty = true
-  ) {
+    bool $team_penalty = true
+  ): void {
     ////change: team control
     if ($clients_info) {
       $client_id = $playerID;
@@ -1075,7 +1085,7 @@ class PlayerSkillProcessor
   //endchange
 
   //change: launch skill events
-  function launch_skill_events()
+  public function launch_skill_events(): void
   {
     if (isset($this->playerStats)) {
       foreach ($this->playerStats as $playerID => $pdata) {
@@ -1106,13 +1116,15 @@ class PlayerSkillProcessor
 }
 class GameDataProcessor
 {
-  var $games_parsed = 0;
-  var $games_inserted = 0;
-  var $playerStats;
-  var $gameID;
-  var $gameData;
-  function GameDataProcessor() {}
-  function purgeEmptyOneDEvents()
+  public int $games_parsed = 0;
+  public int $games_inserted = 0;
+  public array $playerStats = [];
+  private ?string $gameID = null;
+  private array $gameData = [];
+
+  public function __construct() {}
+
+  private function purgeEmptyOneDEvents(): void
   {
     foreach ($this->playerStats as $playerID => $playerData) {
       foreach ($playerData as $key => $value) {
@@ -1146,7 +1158,7 @@ class GameDataProcessor
       }
     }
   }
-  function purifyDatabaseEvents()
+  function purifyDatabaseEvents(): void
   {
     global $db;
     $sql = "select count(*) from {$GLOBALS["cfg"]["db"]["table_prefix"]}eventdata2d";
@@ -1181,7 +1193,8 @@ class GameDataProcessor
       }
     }
   }
-  function generateAwards()
+
+  public function generateAwards(): void
   {
     // genera los awards
     $tp = $GLOBALS["cfg"]["db"]["table_prefix"];
@@ -1337,7 +1350,7 @@ class GameDataProcessor
   }
 
   //change: remove detailed information of old games
-  function prune_old_games()
+  public function prune_old_games(): void
   {
     global $db; // db
     // check if we are limiting games
@@ -1387,7 +1400,8 @@ class GameDataProcessor
     flushOutputBuffers();
   }
   //endchange
-  function storeGameData(&$players, &$gameOptions)
+
+  public function storeGameData(?array &$players, ?array &$gameOptions): void
   {
     // almacena los cambios en la base de datos
     global $db; // db
@@ -1819,17 +1833,17 @@ class GameDataProcessor
   }
 }
 
-function printTitle()
+function printTitle(): void
 {
   print cTITLE;
 }
 
-function printUsage()
+function printUsage(): void
 {
   print cUSAGE;
 }
 
-function debugPrint($message)
+function debugPrint(string $message): void
 {
   // Currently hardcoded to always print the message.
   $printFlag = 1;
@@ -1838,20 +1852,20 @@ function debugPrint($message)
   }
 }
 
-function errorAndExit($errorMessage)
+function errorAndExit(string $errorMessage): void
 {
   print "\n$errorMessage\n";
   exitProgram();
 }
 
-function usageErrorExit($errorMessage)
+function usageErrorExit(string $errorMessage): void
 {
   printUsage();
   print "$errorMessage\n";
   exitProgram();
 }
 
-function getFtpFileList(&$ftpConnection, $remotePath)
+function getFtpFileList(&$ftpConnection, string $remotePath): array
 {
   // Retrieves a raw file listing via FTP, parses it, and returns only regular files.
   $rawList = ftp_rawlist($ftpConnection, $remotePath);
@@ -1865,7 +1879,7 @@ function getFtpFileList(&$ftpConnection, $remotePath)
   return $fileList;
 }
 
-function downloadFtpLogs($ftpUrl)
+function downloadFtpLogs(string $ftpUrl): string
 {
   // Parse the FTP URL.
   $parsedUrl = parse_url($ftpUrl);
@@ -2018,7 +2032,7 @@ function downloadFtpLogs($ftpUrl)
   return $localTargetPath;
 }
 
-function processCommandLineArgs()
+function processCommandLineArgs(): void
 {
   global $cliArgs;
   if (cIS_SHELL) {
@@ -2130,7 +2144,7 @@ function processCommandLineArgs()
   }
 }
 
-function configureAndProcessGameLogs()
+function configureAndProcessGameLogs(): void
 {
   global $options, $cliArgs;
   global $options; // $options from processCommandLineArgs
@@ -2304,7 +2318,7 @@ function configureAndProcessGameLogs()
     "\n";
 }
 
-function populateIp2countryTable()
+function populateIp2countryTable(): void
 {
   global $db;
   echo "Populating ip to country table...";
@@ -2372,7 +2386,7 @@ function populateIp2countryTable()
 }
 
 //change: database-driven savestate
-function save_savestate(&$parser)
+function save_savestate(&$parser): void
 {
   $parser->logdata["last_shutdown_end_position"] = ftell($parser->logFileHandle);
   $seekResult = fseek($parser->logFileHandle, -LOG_READ_SIZE, SEEK_CUR);
@@ -2402,7 +2416,7 @@ function save_savestate(&$parser)
   $rs = $db->Execute($sql);
 }
 
-function check_savestate(&$parser)
+function check_savestate(&$parser): void
 {
   echo "Verifying savestate\n";
   $fp = fopen($parser->logFilePath, "rb");
@@ -2431,7 +2445,7 @@ function check_savestate(&$parser)
 }
 //endchange
 
-function checkWebAccess()
+function checkWebAccess(): void
 {
   require_once "./password.inc.php";
   if (strlen($vsp["password"]) < 6) {
@@ -2464,7 +2478,7 @@ function checkWebAccess()
   }
 }
 
-function initializeEnvironment()
+function initializeEnvironment(): void
 {
   flushOutputBuffers();
   $GLOBALS["startTime"] = gettimeofday();
@@ -2495,7 +2509,7 @@ function initializeEnvironment()
   printTitle();
 }
 
-function exitProgram()
+function exitProgram(): void
 {
   if (!cIS_SHELL) {
     echo "</PRE></BODY></HTML>";
@@ -2503,7 +2517,7 @@ function exitProgram()
   exit();
 }
 
-function finalizeProgram()
+function finalizeProgram(): void
 {
   // final del programa
   printTitle();
@@ -2521,6 +2535,6 @@ require_once "vutil.php";
 initializeEnvironment();
 processCommandLineArgs();
 configureAndProcessGameLogs();
-finalizeProgram(); // Note: In the original, these functions are called in sequence: initializeEnvironment(), processCommandLineArgs(), configureAndProcessGameLogs(), finalizeProgram().
+finalizeProgram();
 
 ?>

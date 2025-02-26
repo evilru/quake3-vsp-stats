@@ -1,31 +1,35 @@
 <?php /* vsp stats processor, copyright 2004-2005, myrddin8 AT gmail DOT com (a924cb279be8cb6089387d402288c9f2) */
 class VSPParserCLIENT
 {
-  var $killRegexPatterns;
-  var $playerEnterPatterns;
-  var $shutdownPatterns;
-  var $gameStartPatterns;
-  var $playerTeamEnterPatterns;
-  var $ctfEventPatterns;
-  var $renamePatterns;
-  var $config;
-  var $statsAggregator;
-  var $statsProcessor;
-  var $playerAliases;
-  var $currentPlayerData;
-  var $logInfo;
-  var $rawTimestamp;
-  var $baseTimeParts;
-  var $gameInProgress;
-  var $logFileHandle;
-  var $logFilePath;
-  var $logdata;
-  var $currentFilePosition;
-  var $gameStartFilePosition;
+  private array $killRegexPatterns = [];
+  private array $playerEnterPatterns = [];
+  private array $shutdownPatterns = [];
+  private array $gameStartPatterns = [];
+  private array $playerTeamEnterPatterns = [];
+  private array $ctfEventPatterns = [];
+  private array $renamePatterns = [];
+  private array $chatPatterns = [];
+  private array $config = [];
+  private GameDataProcessor $gameDataProcessor;
+  private PlayerSkillProcessor $playerSkillProcessor;
+  private array $playerAliases = [];
+  private array $currentPlayerData = [];
+  private array $logInfo = [];
+  private string $rawTimestamp = "";
+  private array $baseTimeParts = [];
+  private bool $gameInProgress = false;
+  public $logFileHandle; // resource type; no native type hint in PHP 7.4.
+  public string $logFilePath = "";
+  public array $logdata = [];
+  private int $currentFilePosition = 0;
+  private int $gameStartFilePosition = 0;
 
   // Constructor: initializes configuration, aggregator and processor.
-  function __construct($configData, &$statsAggregator, &$statsProcessor)
-  {
+  public function __construct(
+    array $configData,
+    GameDataProcessor $gameDataProcessor,
+    PlayerSkillProcessor $playerSkillProcessor
+  ) {
     $this->renamePatterns = ["#PLAYER#(?:\\^[^\\^])? renamed to #NAME#$"];
     $this->chatPatterns = ["#PLAYER#(?:\\^[^\\^])?: #CHAT#$"];
     $this->gameStartPatterns = ["Match has begun!"];
@@ -141,8 +145,8 @@ class VSPParserCLIENT
     ];
     define("LOG_READ_SIZE", 1024);
     $this->initializeConfig($configData);
-    $this->statsAggregator = $statsAggregator;
-    $this->statsProcessor = $statsProcessor;
+    $this->gameDataProcessor = $gameDataProcessor;
+    $this->playerSkillProcessor = $playerSkillProcessor;
     $this->currentPlayerData = [];
     $this->logInfo = [];
     $this->playerAliases = [];
@@ -151,7 +155,7 @@ class VSPParserCLIENT
   }
 
   // Initialize configuration from given data array.
-  function initializeConfig($configData)
+  private function initializeConfig(array $configData): void
   {
     $this->config["savestate"] = 0;
     $this->config["gametype"] = "";
@@ -171,7 +175,7 @@ class VSPParserCLIENT
   }
 
   // Reset player alias and session data, and initialize base time parts.
-  function resetSessionData()
+  private function resetSessionData(): void
   {
     unset($this->playerAliases);
     $this->playerAliases = [];
@@ -186,7 +190,7 @@ class VSPParserCLIENT
   }
 
   // Process and save shutdown state (hash and file position)
-  function saveShutdownState()
+  private function saveShutdownState(): void
   {
     $this->logdata["last_shutdown_end_position"] = ftell($this->logFileHandle);
     $seekResult = fseek($this->logFileHandle, -LOG_READ_SIZE, SEEK_CUR);
@@ -221,7 +225,7 @@ class VSPParserCLIENT
   }
 
   // Verify the saved state by comparing the shutdown hash.
-  function verifySavestate()
+  private function verifySavestate(): void
   {
     echo "Verifying savestate\n";
     $savestateFile = fopen($this->logFilePath, "rb");
@@ -256,7 +260,7 @@ class VSPParserCLIENT
   }
 
   // Open and process the log file.
-  function processLogFile($logFileName)
+  public function processLogFile(string $logFileName): void
   {
     $this->logFilePath = realpath($logFileName);
     if (!file_exists($this->logFilePath)) {
@@ -290,7 +294,7 @@ class VSPParserCLIENT
   }
 
   // Remove color codes from a string.
-  function removeColorCodes($str)
+  private function removeColorCodes(string $str): string
   {
     $cleanStr = preg_replace("/\\^[xX][\da-fA-F]{6}/", "", $str);
     $cleanStr = preg_replace("/\\^[^\\^]/", "", $cleanStr);
@@ -298,7 +302,7 @@ class VSPParserCLIENT
   }
 
   // Convert color codes in a string to a new format.
-  function convertColorCodes($str)
+  private function convertColorCodes(string $str): string
   {
     $enableColor = 1;
     $i = 0;
@@ -377,7 +381,7 @@ class VSPParserCLIENT
   }
 
   // Generate a formatted timestamp based on the raw timestamp and base time parts.
-  function generateTimestamp()
+  private function generateTimestamp(): string
   {
     if (preg_match("/^(\d+):(\d+)/", $this->rawTimestamp, $matchTime)) {
       $timeOffset["min"] = $matchTime[1];
@@ -428,7 +432,7 @@ class VSPParserCLIENT
   }
 
   // Process game initialization messages.
-  function processGameInit(&$line)
+  private function processGameInit(string &$line): bool
   {
     foreach ($this->gameStartPatterns as $pattern) {
       $regex = "/" . $pattern . "/";
@@ -436,25 +440,25 @@ class VSPParserCLIENT
         if ($this->gameInProgress) {
           debugPrint("corrupt game (no Shutdown after Init), ignored\n");
           debugPrint("{$this->rawTimestamp} $line\n");
-          $this->statsProcessor->updatePlayerStreaks();
-          $this->statsProcessor->clearProcessorData();
+          $this->playerSkillProcessor->updatePlayerStreaks();
+          $this->playerSkillProcessor->clearProcessorData();
         }
         $this->gameInProgress = true;
         $this->gameStartFilePosition = $this->currentFilePosition;
         $this->resetSessionData();
-        $this->statsProcessor->startGameAnalysis();
-        $this->statsProcessor->setGameData(
+        $this->playerSkillProcessor->startGameAnalysis();
+        $this->playerSkillProcessor->setGameData(
           "_v_time_start",
           date("Y-m-d H:i:s")
         );
-        $this->statsProcessor->setGameData("_v_map", "?");
-        $this->statsProcessor->setGameData("_v_game", "q3a");
+        $this->playerSkillProcessor->setGameData("_v_map", "?");
+        $this->playerSkillProcessor->setGameData("_v_game", "q3a");
         if (isset($this->logInfo["mod"])) {
-          $this->statsProcessor->setGameData("_v_mod", $this->logInfo["mod"]);
+          $this->playerSkillProcessor->setGameData("_v_mod", $this->logInfo["mod"]);
         } else {
-          $this->statsProcessor->setGameData("_v_mod", "?");
+          $this->playerSkillProcessor->setGameData("_v_mod", "?");
         }
-        $this->statsProcessor->setGameData("_v_game_type", "?");
+        $this->playerSkillProcessor->setGameData("_v_game_type", "?");
         return true;
       }
     }
@@ -462,7 +466,7 @@ class VSPParserCLIENT
   }
 
   // Process accuracy and damage info from the log.
-  function processAccuracyAndDamage(&$line)
+  private function processAccuracyAndDamage(string &$line): bool
   {
     while (!feof($this->logFileHandle)) {
       $this->currentFilePosition = ftell($this->logFileHandle);
@@ -506,13 +510,13 @@ class VSPParserCLIENT
         } else {
           $weaponName = preg_replace("/^MOD_/", "", $weaponName);
         }
-        $this->statsProcessor->updateAccuracyEvent(
+        $this->playerSkillProcessor->updateAccuracyEvent(
           $currentPlayer,
           $currentPlayer,
           "accuracy|{$weaponName}_hits",
           $hits
         );
-        $this->statsProcessor->updateAccuracyEvent(
+        $this->playerSkillProcessor->updateAccuracyEvent(
           $currentPlayer,
           $currentPlayer,
           "accuracy|{$weaponName}_shots",
@@ -521,7 +525,7 @@ class VSPParserCLIENT
       } elseif (
         preg_match("/^Total damage given\\: (.*)$/", $line, $matchDamage)
       ) {
-        $this->statsProcessor->updatePlayerEvent(
+        $this->playerSkillProcessor->updatePlayerEvent(
           $currentPlayer,
           "damage given",
           $matchDamage[1]
@@ -529,13 +533,13 @@ class VSPParserCLIENT
       } elseif (
         preg_match("/^Total damage rcvd \\: (.*)$/", $line, $matchDamage)
       ) {
-        $this->statsProcessor->updatePlayerEvent(
+        $this->playerSkillProcessor->updatePlayerEvent(
           $currentPlayer,
           "damage taken",
           $matchDamage[1]
         );
       } elseif (preg_match("/^Map\\: (.*)/", $line, $matchMap)) {
-        $this->statsProcessor->setGameData("_v_map", $matchMap[1]);
+        $this->playerSkillProcessor->setGameData("_v_map", $matchMap[1]);
         return true;
       } elseif (preg_match("/entered the game/", $line, $match)) {
         return true;
@@ -545,7 +549,7 @@ class VSPParserCLIENT
   }
 
   // Process shutdown messages and finish the game.
-  function processGameShutdown(&$line)
+  private function processGameShutdown(string &$line): bool
   {
     foreach ($this->shutdownPatterns as $pattern) {
       $regex = "/" . $pattern . "/";
@@ -554,12 +558,12 @@ class VSPParserCLIENT
         if ($this->config["savestate"] == 1) {
           $this->saveShutdownState();
         }
-        $this->statsProcessor->updatePlayerStreaks();
-        $this->statsAggregator->storeGameData(
-          $this->statsProcessor->getPlayerStats(),
-          $this->statsProcessor->getGameData()
+        $this->playerSkillProcessor->updatePlayerStreaks();
+        $this->gameDataProcessor->storeGameData(
+          $this->playerSkillProcessor->getPlayerStats(),
+          $this->playerSkillProcessor->getGameData()
         );
-        $this->statsProcessor->clearProcessorData();
+        $this->playerSkillProcessor->clearProcessorData();
         $this->gameInProgress = false;
         return true;
       }
@@ -568,7 +572,7 @@ class VSPParserCLIENT
   }
 
   // Retrieve an alias for a given player identifier.
-  function lookupPlayerAlias($playerIdentifier)
+  private function lookupPlayerAlias(string $playerIdentifier): string
   {
     foreach ($this->playerAliases as $aliasKey => $aliasData) {
       if (strstr($aliasKey, $playerIdentifier)) {
@@ -579,7 +583,7 @@ class VSPParserCLIENT
   }
 
   // Process player entering the game.
-  function processPlayerEnter(&$line)
+  private function processPlayerEnter(string &$line): bool
   {
     foreach ($this->playerEnterPatterns as $pattern) {
       $regex = "/" . $pattern . "/";
@@ -588,7 +592,7 @@ class VSPParserCLIENT
         $this->playerAliases[$match[1]]["name"] = $this->convertColorCodes(
           $match[1]
         );
-        $this->statsProcessor->initializePlayerData(
+        $this->playerSkillProcessor->initializePlayerData(
           $match[1],
           $this->convertColorCodes($match[1])
         );
@@ -599,7 +603,7 @@ class VSPParserCLIENT
   }
 
   // Process player team assignment messages.
-  function processPlayerTeamAssignment(&$line)
+  private function processPlayerTeamAssignment(string &$line): bool
   {
     $playerName = "";
     $teamName = "";
@@ -621,14 +625,14 @@ class VSPParserCLIENT
       } elseif ($this->removeColorCodes($teamName) == "BLUE") {
         $teamName = "2";
       }
-      $this->statsProcessor->updatePlayerTeam($playerName, $teamName);
+      $this->playerSkillProcessor->updatePlayerTeam($playerName, $teamName);
       return true;
     }
     return false;
   }
 
   // Process kill events.
-  function processKillEvent(&$line)
+  private function processKillEvent(string &$line): bool
   {
     foreach ($this->killRegexPatterns as $pattern => $weapon) {
       $victim = "";
@@ -654,10 +658,10 @@ class VSPParserCLIENT
         }
       }
       if (strlen($victim) > 0 && strlen($killer) > 0) {
-        $this->statsProcessor->processKillEvent($killer, $victim, $weapon);
+        $this->playerSkillProcessor->processKillEvent($killer, $victim, $weapon);
         return true;
       } elseif (strlen($victim) > 0) {
-        $this->statsProcessor->processKillEvent($victim, $victim, $weapon);
+        $this->playerSkillProcessor->processKillEvent($victim, $victim, $weapon);
         return true;
       } else {
       }
@@ -666,13 +670,13 @@ class VSPParserCLIENT
   }
 
   // Process CTF events.
-  function processCTFEvent(&$line)
+  private function processCTFEvent(string &$line): bool
   {
     foreach ($this->ctfEventPatterns as $pattern => $eventType) {
       $regex = "/" . $pattern . "/";
       $regex = str_replace("#PLAYER#", "(.*?)", $regex);
       if (preg_match($regex, $line, $match)) {
-        $this->statsProcessor->updatePlayerEvent($match[1], $eventType, 1);
+        $this->playerSkillProcessor->updatePlayerEvent($match[1], $eventType, 1);
         return true;
       }
     }
@@ -680,7 +684,7 @@ class VSPParserCLIENT
   }
 
   // Process rename (alias) events.
-  function processRenameEvent(&$line)
+  private function processRenameEvent(string &$line): bool
   {
     foreach ($this->renamePatterns as $pattern) {
       $playerName = "";
@@ -699,14 +703,14 @@ class VSPParserCLIENT
       }
       if (strlen($playerName) > 0 && strlen($newName) > 0) {
         $formattedName = $this->convertColorCodes($newName);
-        $this->statsProcessor->updatePlayerDataField(
+        $this->playerSkillProcessor->updatePlayerDataField(
           "sto",
           $playerName,
           "alias",
           $formattedName
         );
-        $this->statsProcessor->updatePlayerName($playerName, $formattedName);
-        $this->statsProcessor->resolvePlayerIDConflict($playerName, $newName);
+        $this->playerSkillProcessor->updatePlayerName($playerName, $formattedName);
+        $this->playerSkillProcessor->resolvePlayerIDConflict($playerName, $newName);
         return true;
       }
     }
@@ -714,7 +718,7 @@ class VSPParserCLIENT
   }
 
   // Process chat messages.
-  function processChatMessage(&$line)
+  private function processChatMessage(string &$line): bool
   {
     foreach ($this->chatPatterns as $pattern) {
       $playerName = "";
@@ -732,7 +736,7 @@ class VSPParserCLIENT
         $chatMessage = $match[1];
       }
       if (strlen($playerName) > 0 && strlen($chatMessage) > 0) {
-        $this->statsProcessor->updatePlayerQuote(
+        $this->playerSkillProcessor->updatePlayerQuote(
           $playerName,
           $this->removeColorCodes($chatMessage)
         );
@@ -743,7 +747,7 @@ class VSPParserCLIENT
   }
 
   // Process GUID assignment events.
-  function processGUIDAssignment(&$line)
+  private function processGUIDAssignment(string &$line): bool
   {
     if (
       !preg_match(
@@ -754,7 +758,7 @@ class VSPParserCLIENT
     ) {
       return false;
     }
-    $this->statsProcessor->updatePlayerDataField(
+    $this->playerSkillProcessor->updatePlayerDataField(
       "sto",
       $match[3],
       "guid",
@@ -764,37 +768,37 @@ class VSPParserCLIENT
   }
 
   // Process OSP events (stub – not implemented).
-  function processOSPEvent(&$line)
+  private function processOSPEvent(string &$line): bool
   {
     return false;
   }
 
   // Process Threewave events (stub – not implemented).
-  function processThreewaveEvent(&$line)
+  private function processThreewaveEvent(string &$line): bool
   {
     return false;
   }
 
   // Process Freeze events (stub – not implemented).
-  function processFreezeEvent(&$line)
+  private function processFreezeEvent(string &$line): bool
   {
     return false;
   }
 
   // Process RA3 events (stub – not implemented).
-  function processRA3Event(&$line)
+  private function processRA3Event(string &$line): bool
   {
     return false;
   }
 
   // Process UT events (stub – not implemented).
-  function processUTEvent(&$line)
+  private function processUTEvent(string &$line): bool
   {
     return false;
   }
 
   // Dispatch event processing based on game type.
-  function dispatchGameTypeEvent(&$line)
+  private function dispatchGameTypeEvent(string &$line): bool
   {
     if (!strcmp($this->config["gametype"], "osp")) {
       return $this->processOSPEvent($line);
@@ -823,7 +827,7 @@ class VSPParserCLIENT
   }
 
   // Main log line processor – dispatches to various event handlers.
-  function processLogLine(&$line)
+  private function processLogLine(string &$line): void
   {
     if ($this->processGameInit($line)) {
       echo sprintf(

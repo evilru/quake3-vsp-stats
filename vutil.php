@@ -1,7 +1,7 @@
 <?php
 /* vsp stats processor, copyright 2004-2005, myrddin8 AT gmail DOT com (a924cb279be8cb6089387d402288c9f2) */
 
-function parseFileListing($fileLines)
+function parseFileListing(array $fileLines): array
 {
     foreach ($fileLines as $line) {
         if (
@@ -29,7 +29,7 @@ function parseFileListing($fileLines)
     return $result;
 }
 
-function parseCommandLineArgs($inputStr)
+function parseCommandLineArgs(string $inputStr): array
 {
     while (
         preg_match('/^\s*"(.+)"/U', $inputStr, $match) ||
@@ -42,7 +42,7 @@ function parseCommandLineArgs($inputStr)
     return $args;
 }
 
-function flushOutputBuffers()
+function flushOutputBuffers(): void
 {
     while (ob_get_level() > 0) {
         ob_end_flush();
@@ -50,12 +50,12 @@ function flushOutputBuffers()
     flush();
 }
 
-function ensureTrailingSlash($path)
+function ensureTrailingSlash(string $path): string
 {
     return rtrim($path, "\\/") . "/";
 }
 
-function copyDirectoryRecursive($sourceDir, $destDir)
+function copyDirectoryRecursive(string $sourceDir, string $destDir): void
 {
     $sourceDir = rtrim($sourceDir, "/");
     $destDir = rtrim($destDir, "/");
@@ -76,7 +76,7 @@ function copyDirectoryRecursive($sourceDir, $destDir)
     }
 }
 
-function getDirectoryListing($dir)
+function getDirectoryListing(string $dir): array
 {
     if ($handle = opendir($dir)) {
         while (false !== ($entry = readdir($handle))) {
@@ -94,7 +94,7 @@ function getDirectoryListing($dir)
     return $listing;
 }
 
-function readStdinLine($maxLength = 255)
+function readStdinLine(int $maxLength = 255): string
 {
     $stdinHandle = fopen("php://stdin", "r");
     $line = fgets($stdinHandle, $maxLength);
@@ -103,7 +103,7 @@ function readStdinLine($maxLength = 255)
     return $line;
 }
 
-function ensureDirectoryExists($dirPath)
+function ensureDirectoryExists(string $dirPath): bool
 {
     $dirPath = str_replace("\\", "/", $dirPath);
     if (!file_exists($dirPath)) {
@@ -119,7 +119,7 @@ function ensureDirectoryExists($dirPath)
     return true;
 }
 
-function sanitizeFilename($filename)
+function sanitizeFilename(string $filename): string
 {
     $filename = str_replace(['../', '..\\'], '', $filename);
     return str_replace(
@@ -138,7 +138,7 @@ function secureString($value)
     return $db->qstr($value);
 }
 
-function getElapsedTime(&$startTime)
+function getElapsedTime(array &$startTime): float
 {
     $currentTime = gettimeofday();
     $elapsed =
@@ -146,3 +146,4 @@ function getElapsedTime(&$startTime)
         (float) ($currentTime["usec"] - $startTime["usec"]) / 1000000;
     return $elapsed;
 }
+?>
