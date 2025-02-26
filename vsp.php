@@ -202,7 +202,7 @@ class PlayerSkillProcessor
   private int $gameCounter = 0;
   private int $roundCounter = 0;
   private array $teamCounts = [];
-  private array $playerStats = [];
+  public array $playerStats = [];
   private array $translationData = [];
   public array $players_team = [];
 
@@ -1118,7 +1118,7 @@ class GameDataProcessor
 {
   public int $games_parsed = 0;
   public int $games_inserted = 0;
-  private array $playerStats = [];
+  public array $playerStats = [];
   private ?string $gameID = null;
   private array $gameData = [];
 

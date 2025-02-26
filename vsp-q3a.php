@@ -11,12 +11,12 @@ class VSPParserQ3A
   private string $rawTimestamp = "";
   private array $baseTime = [];
   private bool $gameInProgress = false;
-  private $logFileHandle = null;
-  private string $logFilePath = "";
-  private array $logdata = [];
+  public $logFileHandle = null;
+  public string $logFilePath = "";
+  public array $logdata = [];
   private int $currentFilePosition = 0;
   private int $gameStartFilePosition = 0;
-  private string $original_log = "";
+  public string $original_log = "";
   private array $has_acc_stats = [];
 
   // Class constant for log read size.

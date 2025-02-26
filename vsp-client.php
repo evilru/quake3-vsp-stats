@@ -18,9 +18,9 @@ class VSPParserCLIENT
   private string $rawTimestamp = "";
   private array $baseTimeParts = [];
   private bool $gameInProgress = false;
-  private $logFileHandle; // resource type; no native type hint in PHP 7.4.
-  private string $logFilePath = "";
-  private array $logdata = [];
+  public $logFileHandle; // resource type; no native type hint in PHP 7.4.
+  public string $logFilePath = "";
+  public array $logdata = [];
   private int $currentFilePosition = 0;
   private int $gameStartFilePosition = 0;
 
