@@ -7,12 +7,13 @@ services:
     environment:
       TZ: Europe/Berlin
       MYSQL_RANDOM_ROOT_PASSWORD: "yes"
-      MYSQL_DATABASE: vsp
+      MYSQL_DATABASE:
       MYSQL_USER:
       MYSQL_PASSWORD:
     ports:
       - "3306:3306"
   web:
+    image: evilru/quake3-vsp-stats:latest
     restart: always
     depends_on:
       - db
@@ -27,7 +28,8 @@ services:
       TZ: Europe/Berlin
       # needs to be at least 6 characters long
       # VSP_WEB_PASSWORD:
-      DB_NAME: vsp
+      # use the same value as for MYSQL_DATABASE
+      DB_NAME:
       # use the same value as for MYSQL_USER
       DB_USERNAME:
       # use the same value as for MYSQL_PASSWORD
