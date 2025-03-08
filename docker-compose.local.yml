@@ -1,7 +1,7 @@
-version: '3'
-
 services:
   db:
+      networks:
+        - vsp
       environment:
         MYSQL_DATABASE: ${VSP_DB_NAME}
         MYSQL_USER: ${VSP_DB_USERNAME}
@@ -11,6 +11,8 @@ services:
     # ports:
       # supervisor web gui would be available on port 9001
       # - 9001:9001
+    networks:
+      - vsp
     volumes:
       - ./osp.log:/vsp/games.log
     environment:
@@ -31,3 +33,6 @@ services:
       SERVER_TITLE: ${SERVER_TITLE}
       WEB_SITE_ADDRESS: ${WEB_SITE_ADDRESS}
       WEB_SITE_NAME: ${WEB_SITE_NAME}
+
+networks:
+  vsp:
