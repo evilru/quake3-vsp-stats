@@ -15,14 +15,19 @@ tasks:
   dev:
     desc: Start development environment
     cmds:
-      - docker compose up -d
-      - task: composer:install
+      - docker compose -f docker-compose.yml -f docker-compose.local.yml up -d db
       - task: serve
 
   serve:
     desc: Start PHP development server
     cmds:
-      - ${{.PHP}} -S localhost:8000 -t pub/
+      - "{{.PHP}} -S 0.0.0.0:8000 -t pub/"
+
+  import-logs:baseq3:
+    desc: Import baseq3 logs
+    cmds:
+      - "{{.PHP}} vsp.php -c pub/configs/cfg-default.php -l q3a -p savestate 1 baseq3.log"
+
 
   # Testing and quality tasks
   test:
@@ -43,7 +48,7 @@ tasks:
     cmds:
       - |
         for file in $(find . -name "*.php" -not -path "./vendor/*"); do
-          ${{.PHP}} -l "$file" || exit 1
+          {{.PHP}} -l "$file" || exit 1
         done
 
   test:cs:
@@ -60,23 +65,24 @@ tasks:
   composer:install:
     desc: Install dependencies
     cmds:
-      - ${{.COMPOSER}} install
+      - "{{.COMPOSER}} install"
 
   composer:update:
     desc: Update dependencies
     cmds:
-      - ${{.COMPOSER}} update
+      - "{{.COMPOSER}} update"
 
   # Maintenance tasks
-  clean:
-    desc: Clean temporary files and logs
-    cmds:
-      - rm -rf tmp/*
-      - rm -rf logdata/*.log
-      - mkdir -p tmp/cache logdata
-      - chmod -R 777 tmp logdata
+  # clean:
+  #   desc: Clean temporary files and logs
+  #   cmds:
+  #     - rm -rf tmp/*
+  #     - rm -rf logdata/*.log
+  #     - mkdir -p tmp/cache logdata
+  #     - chmod -R 777 tmp logdata
 
-  logs:
-    desc: Display application logs
-    cmds:
-      - tail -f logdata/*.log
+  # logs:
+  #   desc: Display application logs
+  #   cmds:
+  #     - tail -f logdata/*.log
+
