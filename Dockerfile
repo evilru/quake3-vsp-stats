@@ -23,11 +23,10 @@ ENV DEFAULT_SKIN="fest" \
 # Database Settings
 ENV TABLE_PREFIX="vsp_" \
     DB_HOSTNAME="db" \
-    DB_NAME="vsp"
-    # Uncomment and set these in docker-compose or at runtime
-    # DB_USERNAME="" \
-    # DB_PASSWORD="" \
-    # VSP_WEB_PASSWORD=""
+    DB_NAME="vsp" \
+    DB_USERNAME= \
+    DB_PASSWORD= \
+    VSP_WEB_PASSWORD=
 
 # FTP settings
 ENV FTP_USERNAME="anonymous" \

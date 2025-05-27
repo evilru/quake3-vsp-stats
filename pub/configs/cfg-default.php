@@ -30,6 +30,20 @@ global $cfg;
     $cfg['db']['username'] = "root";
     $cfg['db']['password'] = "secretPassword";
 
+    // use the following lines to override the above settings with environment variables
+    if (getenv('VSP_DB_HOSTNAME')) {
+        $cfg['db']['hostname'] = getenv('VSP_DB_HOSTNAME');
+    }
+    if (getenv('VSP_DB_NAME')) {
+        $cfg['db']['dbname'] = getenv('VSP_DB_NAME');
+    }
+    if (getenv('VSP_DB_USERNAME')) {
+        $cfg['db']['username'] = getenv('VSP_DB_USERNAME');
+    }
+    if (getenv('VSP_DB_PASSWORD')) {
+        $cfg['db']['password'] = getenv('VSP_DB_PASSWORD');
+    }
+
 //================================================
 // Ip2Country table
 

@@ -1,5 +1,7 @@
 version: '3'
 
+dotenv: ['.env']
+
 vars:
   PHP_VERSION: 7.4.33
   COMPOSER: composer
