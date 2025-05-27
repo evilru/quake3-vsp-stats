@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM php:7.4.33-apache
+FROM php:7.4.33-apache-buster
 # FROM php:8-apache
 
 # supervisor web gui would be available on port 9001

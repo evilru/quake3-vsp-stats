@@ -28,7 +28,7 @@ tasks:
   docker:build:
     desc: Build Docker images
     cmds:
-      - docker build . -t evilru/quake3-vsp-stats:latest
+      - docker buildx build --platform linux/amd64,linux/arm64 . -t evilru/quake3-vsp-stats:latest
   docker:start:
     desc: Start Docker containers
     cmds:
