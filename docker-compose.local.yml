@@ -1,6 +1,6 @@
 services:
   db:
-    restart: unless-stopped
+    restart: no
     networks:
       - workspace_vsp
     environment:
@@ -12,7 +12,7 @@ services:
     # ports:
       # supervisor web gui would be available on port 9001
       # - 9001:9001
-    restart: unless-stopped
+    restart: no
     networks:
       - workspace_vsp
     volumes:
