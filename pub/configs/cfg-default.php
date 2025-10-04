@@ -25,7 +25,7 @@ global $cfg;
     $cfg['db']['adodb_driver'] = 'mysqli';
 
     $cfg['db']['table_prefix'] = "vsp_";           // use only lower case to minimize windows/linux portability problems
-    $cfg['db']['hostname'] = "localhost";
+    $cfg['db']['hostname'] = "127.0.0.1";
     $cfg['db']['dbname']  = "vsp";      // use only lower case to minimize windows/linux portability problems
     $cfg['db']['username'] = "root";
     $cfg['db']['password'] = "secretPassword";
