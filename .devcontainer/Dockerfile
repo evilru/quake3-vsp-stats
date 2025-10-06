@@ -19,7 +19,6 @@ RUN rm -f /etc/apt/sources.list.d/yarn.list* && \
     docker-php-ext-install \
     mysqli
 
-WORKDIR /workspace
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \

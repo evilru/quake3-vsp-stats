@@ -60,16 +60,17 @@
     "ghcr.io/audacioustux/devcontainers/taskfile:1": {},
     "ghcr.io/devcontainers/features/node:1": {}
   },
-  "initializeCommand": "docker network create workspace_vsp || true",
+  "initializeCommand": "docker network create workspace_vsp >/dev/null 2>&1 || true",
   "runArgs": [
     "--network=workspace_vsp"
   ],
   "remoteUser": "vscode",
   "waitFor": "postCreateCommand",
   "mounts": [
-    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached",
+    // not needed, start ssh-agent on the host (vscode will forward it automatically)
+    // "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached",
     "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
   ],
-  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
-  "workspaceFolder": "/workspace"
+  "workspaceMount": "source=${localWorkspaceFolder},target=${localWorkspaceFolder},type=bind,consistency=cached",
+  "workspaceFolder": "${localWorkspaceFolder}"
 }
