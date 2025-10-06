@@ -41,17 +41,20 @@ ENV EXCLUDED_PLAYERS="comma-separated list of players (e.g. Angel,Biker,Bitterma
    # limit of detailed game stats that will be stored on the database (negative number for unlimited)
    GAMES_LIMIT="1000"
 
-RUN docker-php-ext-install mysqli \
-#  && pecl install xdebug-2.9.8 \
-#  && docker-php-ext-enable xdebug \
-#  && mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
- && apt-get update && apt-get -y install \
-    cron \
-    supervisor \
+# Moved to Debian Archive
+RUN sed -i s/deb.debian.org/archive.debian.org/g /etc/apt/sources.list \
+    && sed -i s/security.debian.org/archive.debian.org/g /etc/apt/sources.list \
+    && docker-php-ext-install mysqli \
+#   && pecl install xdebug-2.9.8 \
+#   && docker-php-ext-enable xdebug \
+#   && mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
+    && apt-get update && apt-get -y upgrade && apt-get -y install --no-install-recommends \
+      cron \
+      supervisor \
     # git \
     # vim \
- && apt-get clean \
- && rm -rf /var/lib/apt/lists/*
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY . /vsp
 
