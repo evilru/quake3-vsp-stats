@@ -14,32 +14,29 @@ ENV LOGTYPE="q3a-osp" \
     SERVER_EMAIL_IM="List your E-Mail and/or IM account here" \
     WEB_SITE_ADDRESS="http://my.web_site_goes_here.com" \
     WEB_SITE_NAME="My web site name goes here" \
-    SERVER_QUOTE="My quote goes here"
-
-# Theme Settings
-ENV DEFAULT_SKIN="fest" \
-    CHECK_UNIQUE_GAMEID="1"
-
-# Database Settings
-ENV TABLE_PREFIX="vsp_" \
+    SERVER_QUOTE="My quote goes here" \
+    # Theme Settings
+    DEFAULT_SKIN="fest" \
+    CHECK_UNIQUE_GAMEID="1" \
+    # Database Settings
+    TABLE_PREFIX="vsp_" \
     DB_HOSTNAME="db" \
     DB_NAME="vsp" \
-    DB_USERNAME= \
-    DB_PASSWORD= \
-    VSP_WEB_PASSWORD=
-
-# FTP settings
-ENV FTP_USERNAME="anonymous" \
-    FTP_PASSWORD="anonymous" \
+    # DB_USERNAME= \
+    # DB_PASSWORD= \
+    # VSP_WEB_PASSWORD=
+    # FTP settings
+    FTP_USERNAME="anonymous" \
+    # FTP_PASSWORD="anonymous" \
     # 1 for passive mode, 0 for active mode
     FTP_PASSIVE_MODE="1" \
     # 1 to overwrite existing files, 0 to skip
-    FTP_OVERWRITE="0"
-
-# Additional Settings
-ENV EXCLUDED_PLAYERS="comma-separated list of players (e.g. Angel,Biker,Bitterman,Bones,Cadavre)" \
-   # limit of detailed game stats that will be stored on the database (negative number for unlimited)
-   GAMES_LIMIT="1000"
+    FTP_OVERWRITE="0" \
+    # Additional Settings
+    # limit of detailed game stats that will be stored on the database (negative number for unlimited)
+    GAMES_LIMIT="1000"
+    # Comma-separated list of player names (case sensitive) to be excluded from stats, e.g. Angel,Biker,Bitterman,Bones,Cadavre
+    # EXCLUDED_PLAYERS=""
 
 # Moved to Debian Archive
 RUN sed -i s/deb.debian.org/archive.debian.org/g /etc/apt/sources.list \
