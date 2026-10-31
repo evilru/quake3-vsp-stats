@@ -114,6 +114,19 @@ class WebIndexTest extends TestCase
         $this->assertStringNotContainsString('imagefilledpolygon()', $body);
     }
 
+    public function testPlayerPageForEmptyPlayerIdHasNoOffsetOrPropertyWarnings(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+
+        $body = $this->get('/themes/bismarck/playerstat.php?playerID=&config=cfg-default.php');
+
+        $this->assertStringContainsString('</HTML>', strtoupper($body));
+        $this->assertDoesNotMatchRegularExpression(
+            '/Trying to access array offset|Trying to get property|Attempt to read property/',
+            $body
+        );
+    }
+
     private function importBaseq3Database(string $type = 'q3a', string $log = 'baseq3.log'): void
     {
         $root = dirname(__DIR__);
