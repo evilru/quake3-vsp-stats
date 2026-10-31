@@ -1,16 +1,16 @@
 # AGENTS.md
 
-Migrating this PHP app + CLI importer (`vsp.php`, MariaDB) from PHP 7.4.33 to 8.5 on `feature/php8`.
+Migrated this PHP app + CLI importer (`vsp.php`, MariaDB) from PHP 7.4.33 to 8.5 on `feature/php8`. The repo now targets PHP 8.5 (`composer.json`: `^8.5`, Docker: `php:8.5-apache`).
 All repo content (code comments, docs, scripts, commits) is English. The branch and environment are mine: build tooling in `scripts/` whenever something is needed repeatedly.
 
 ## Workflow (one issue per run)
-- Find the first error on 8.5, check it on 7.4.33. Only 8.5 -> path A: test green on 7.4, red on 8.5, fix. Also 7.4 / plainly wrong -> path B: red test, minimal fix, no compat work.
+- Find the first error on 8.5. Path A (compat) vs B (plain bug) was decided by running the old code on 7.4.33; PHPUnit no longer starts on 7.4 (composer platform check), so compare via the CLI (`php-use 7.4`, `scripts/import.sh`) or a `git worktree` of an old commit. Path B: red test, minimal fix. Path A: red test on 8.5, fix.
 - Separate commits for test and fix (Conventional Commits), push `feature/php8`. No PR unless asked. Unclear or behavior-changing -> ask; other findings are only noted here.
 - Run history lives only in commit messages (bodies explain why, findings, decisions), nowhere else.
 
 ## Tools (`scripts/`)
 - `php-use 7.4|8.5`, `vsp-db-start` (installed to /usr/local/bin by setup-cloud.sh)
-- `bootstrap.sh` DB + vendor/ (seeded composer cache), `check.sh [ver]` tests + 3 imports, `import.sh <type> <log>` fresh-DB import with deduplicated PHP messages
+- `bootstrap.sh` DB + vendor/ (seeded composer cache), `check.sh [ver]` tests + 3 imports (default 8.5; 7.4 only works for the imports), `import.sh <type> <log>` fresh-DB import with deduplicated PHP messages
 - `variants.py` import + web crawl for config/settings variants (all must print OK), `compose-test.sh` podman build + podman-compose end-to-end check of the Docker stack
 - `composer-seed.php`, `setup-cloud.sh` (the cloud environment setup script)
 - Imports: `-l q3a|q3a-xp|q3a-osp` with `baseq3.log|xp.log|osp.log`.
@@ -26,7 +26,7 @@ All repo content (code comments, docs, scripts, commits) is English. The branch 
 - q3a / q3a-xp / q3a-osp: log types (baseq3, XP mod, OSP mod). savestate: resume marker for incremental imports.
 
 ## Invariants
-- Code must run on 7.4.33 and 8.5: no syntax or functions one of them lacks.
+- Target is PHP 8.5. Existing version gates (`PHP_VERSION_ID`, attributes that are comments on 7.4) stay; do not add 7.4 workarounds for new code.
 - Smallest change that turns the test green; no refactoring or formatting.
 - Tests must be real unit tests that protect behavior against future breakage: assert observable behavior/results, not implementation details or log-output absence, so they do not block later refactoring.
 - Error reporting is not set in the app any more: the server decides (php.ini; in Docker `PHP_DISPLAY_ERRORS` / `PHP_ERROR_REPORTING` via `docker/vsp.ini`). Tests pass `-d display_errors=1 -d error_reporting=-1` explicitly.

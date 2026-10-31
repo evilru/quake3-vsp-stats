@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# Tests on 7.4 and 8.5, then the three CLI imports on 8.5. Exit 0 = clean.
-# Usage: scripts/check.sh [7.4|8.5]   (default: both)
+# Tests and the three CLI imports on 8.5. Exit 0 = clean.
+# Usage: scripts/check.sh [8.5]   (PHPUnit no longer starts on 7.4: composer requires ^8.5)
 cd "$(dirname "$0")/.."
 rc=0
 scripts/bootstrap.sh >/dev/null 2>&1 || { echo "bootstrap failed"; exit 2; }
-for v in ${1:-7.4 8.5}; do
+for v in ${1:-8.5}; do
   scripts/php-use "$v" >/dev/null
   echo "== PHPUnit on PHP $(php -r 'echo PHP_VERSION;')"
   vendor/bin/phpunit --no-coverage 2>&1 | tail -6; [ "${PIPESTATUS[0]}" -eq 0 ] || rc=1
