@@ -721,7 +721,7 @@ class VSPParserQ3A
       $serverVarsArray["xp_version"]
     )
       ? $serverVarsArray["xp_version"]
-      : $serverVarsArray["gameversion"];
+      : $serverVarsArray["gameversion"] ?? "";
     return true;
   }
 
