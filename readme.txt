@@ -31,310 +31,240 @@ Installation and Usage Instructions:
    
    0. requirements
       ------------
-   
-      - php (http://www.php.net) - version 4
-      - mysql (http://www.mysql.com)
-      - a php compatible web server (http://www.apache.org)
-      - a web browser (http://www.mozilla.org/products/firefox/)
 
-      vsp uses php and mysql to store and retrieve stats, so you need to
-      install both php and mysql on your server/system.
-      You may also need a webserver that is compatible with php if you dont 
-      already have one. Apache is a good one and is the recommended web server.
-      php, mysql and apache can be downloaded and used for free.
-      Download the latest version of the php, mysql & apache(or another webserver)
+      - PHP 8.5 (https://www.php.net) with the extensions mysqli, mbstring,
+        iconv, ctype and json. The ftp extension is needed to download logs
+        from an FTP server and the gd extension (with JPEG and PNG support)
+        for the hitbox image on the player page.
+      - MariaDB 12.3 (https://mariadb.org); MySQL should work as well, but is
+        not tested.
+      - a web server that runs PHP, e.g. Apache with PHP-FPM or mod_php. For a
+        quick local look the PHP built-in web server is enough (see 3d).
+      - a web browser
 
-      php can be downloaded from http://www.php.net
-      mysql can be downloaded from http://www.mysql.com
-      apache can be downloaded from http://www.apache.org
-      You can also get a free webserver from http://www.xitami.com , which may be
-      easier to setup than apache.
+      vsp uses PHP and MariaDB to store and retrieve stats, so you need both.
+      If you only want to run it, the Docker image is the easier route, see
+      Docker.md (or https://hub.docker.com/r/evilru/quake3-vsp-stats). The
+      steps below describe the manual installation.
 
-      Install the webserver first. In windows, the PHP setup program can 
-      automatically detect the webserver and configure it accordingly.
-      Install mysql and php on your system.
+      Check that PHP is available and new enough:
 
-      Check the installation instructions that comes with php, mysql and apache, 
-      for further instructions. 
+        php -v
+        php -m | grep -iE "mysqli|mbstring|iconv|ctype|json|ftp|gd"
 
-      http://www.google.com is a good resource as well.
 
-      It is recommended that you run php as a module from apache.
-   
-   
-   1. mysql setup
-      -----------
-   
-      If you already have a mysql username/password/hostname/database set up,
-      then you may skip this step. Usually your website host will provide you
-      with this information. 
-   
-   a. Read the section (section 5?) that deals with MySQL Database 
-      Administration from the mysql manual which can be found C:/mysql/Docs or
-      online at http://www.mysql.com/doc/en/Adding_users.html or
-      http://www.mysql.com
-      This section deals with user priveleges and tells you how to make mysql
-      more secure and add a new user etc. You can simplify this process using
-      an application called MySQL Control Center which can be found at
-      http://www.mysql.com/products/mysqlcc/index.html
+   1. database setup
+      --------------
 
-      You need to setup a user AND a password in mysql. If you are planning
-      to run mysql as user 'root' then you have to set up a password for user 
-      'root' if it isn't already setup.
-      
-      The following is from the mysql documentation:-
-      
-      
-          The default privileges on Windows give all local users full privileges 
-          to all databases without specifying a password. To make MySQL more 
-          secure, you should set a password for at least the root accounts. 
-          You should also remove the row in the mysql.user table that has 
-          Host='localhost' and User=''. This account allows anonymous access 
-          but has full privileges, so removing it improves security.
+      If you already have a database, user, password and hostname, you can skip
+      this step. Create a database and a user that may only use it:
 
-          The following example shows how to remove the anonymous-user account 
-          that has all privileges, and then assigns a password to the root 
-          accounts:
-          
-          C:\> C:\mysql\bin\mysql -u root mysql
-          mysql> DELETE FROM user WHERE Host='localhost' AND User='';
-          mysql> FLUSH PRIVILEGES;
-          mysql> QUIT
-          C:\> C:\mysql\bin\mysqladmin -u root password "newpwd"
-          C:\> C:\mysql\bin\mysqladmin -u root -h host_name password "newpwd"
+        mariadb -u root -p
+        MariaDB> CREATE DATABASE vsp;
+        MariaDB> CREATE USER 'vsp'@'localhost' IDENTIFIED BY 'a-long-password';
+        MariaDB> GRANT ALL PRIVILEGES ON vsp.* TO 'vsp'@'localhost';
+        MariaDB> QUIT
 
-          Replace "newpwd" with the actual root password that you want to use. 
-          The double quotes are not always necessary, but they are helpful if 
-          the password contains spaces or other characters that are special 
-          to your command interpreter. In the second mysqladmin command, 
-          replace host_name with the name of the server host. 
-      
-      
-      If you are running mysql as root, you *MUST* have a root password set up
-      as indicated above
-      
-      Test to see if you can load up mysql with the username and the password
-      you have set up. Open up a command prompt and do the following:
+      vsp creates its tables on the first run. If the database does not exist,
+      vsp tries to create it itself, which requires the privileges to do so.
+      Do not run vsp as the database root user and do not expose the database
+      port to the internet: only the web server host needs to reach it.
 
-        mysql -u Username -pPassword
+      Check that the login works:
 
-      Note: Username = your username
-            Password = your password
-            There is no space between the -p and your password
+        mariadb -u vsp -p vsp
 
-      If it goes to the mysql> prompt, mysql is properly set up on your system.
-      Quit mysql by typing QUIT in the mysql> prompt and that should return to 
-      the command prompt.
-      
-        mysql> QUIT
-      
-      Close the command prompt window.
-      
-      Further help on how to set up mysql can be found at http://www.mysql.com
- 
- 
+
    2. php setup
       ---------
-      
-      If you already have php set up on your host then you may skip this step. 
-   
-   a. The following step is not required but it is recommended to make things
-      easier. If you dont do the following, then you have to type the full
-      php path whenever you want to execute vsp. (i.e. Instead of typing
-      php vsp.php, you have to type C:/php/php vsp.php.
-   
-      Add the php command path (c:/php/ is the default) to your 
-      environment variable PATH.
-      In windows 2000/XP you can specify the PATH in
-      start->
-        settings->
-          control panel->
-            system->
-              advanced->
-                environment variables->
-                  user variables->
-                    PATH
-      In win9x versions, you can specify the PATH in autoexec.bat:
-        Path=C:\Windows;C:\Windows\Command;c:\php;
-      
-      i.e, when you type php -v from the command prompt (from any directory), 
-           it should display the php version you have installed.
-      Test it! Open up a command prompt window, and from C:\ or any other 
-      directory, type php -v and press enter. It should display your php version.
-      
-   
-   b. Make sure you have configured your webserver to intercept .php files.
-      This should automatically be done by the php installation program. Read
-      the ReadMe file that comes with php. You may have to configure some things
-      manually depending on the webserver you have on your system.
-      
-      ***WARNING*** If php is not set up properly, your username/password for 
-                    mysql may be compromised!
-      
-      There is a file called test.php in this distribution under the pub 
-      sub-folder. After setting up php, start your webserver and configure it
-      to give public access to the pub folder. Then load up the test.php file
-      using your internet browser. If php is set up properly, you should see
-      a whole lot of tables with variables and its values. If instead you see a
-      line saying that "php is not set up properly" followed by "phpinfo();",
-      then php is not set up properly! Once you confirm php is working properly,
-      you can and should delete the test.php file from your system (more secure).
-  
-      Further help on how to set up php can be found at http://www.php.net
- 
- 
+
+      php must be callable from the command line (php -v) and your web server
+      must run .php files. Check the manual of your web server for that.
+
+      ***WARNING*** If php is not set up properly, the web server may deliver the
+                    source of the .php files and with it your database password!
+                    Test it before you put real credentials into the config.
+
+      Error messages are controlled by php, not by vsp. In production, log
+      errors and do not display them (php.ini):
+
+        display_errors = Off
+        log_errors = On
+        error_reporting = E_ALL
+
+      While setting up, set display_errors = On to see problems in the browser
+      or on the console.
+
+      The pub/info.php page shows the php configuration. Remove it from the
+      server after you checked your setup, it reveals details about your system.
+
+
    3. vsp setup
       ---------
-      
-      If you installed mysql, php, apache or another webserver or made any 
-      changes to your system configuration, its a good idea to reboot your 
-      system before you continue any further.
 
-   a.  i) Download the vsp core zip file and extract it to a folder of your choice.
-   
-      ii) Download all the game media zip files that you want vsp to work with and 
-          extract to the same folder you chose in step (3a.i), overwriting existing 
-          files if necessary. If there is no media file for the game you are 
-          looking for, you can ignore this step. 
+   a. Download or clone vsp into a folder of your choice. Make the folders
+      logdata/ and ftplogs/ writable for the user that runs vsp.
 
-   b. Open up pub/configs/cfg-default.php file using a text editor and 
-      specify your mysql database username, password and other preferences. 
-      Further decription of what each setting in the cfg file mean, can be
-      found in cfg-default.php itself. Before you start parsing the logs, you 
-      must make sure that you set the variable $cfg['game']['name'] in the config
-      file properly. Read the comments beside that variable in cfg-default.php
-      
-   c. To analyze a log file and generate stats
-      
-      There are two available methods to update your stats:-
-      
-       i) If you have command line shell access to server where you installed vsp...
-      
-          Lets say you want to generate stats from a log file for Quake 3 Arena and
-          your games.log file is in c:/games/quake iii arena/osp/
-          To analyze this file, go to the directory where you unzipped vsp and type:
+   b. Open pub/configs/cfg-default.php with a text editor and specify the
+      database hostname, name, username and password and your other
+      preferences. A description of every setting can be found in
+      cfg-default.php itself. Before you start parsing logs, you must make sure
+      that $cfg['game']['name'] is set properly (read the comments beside it).
 
-            php vsp.php -l q3a-osp "c:/games/quake iii arena/osp/games.log"
+      Excluded players ($cfg['player_exclude_list']) and the web theme
+      settings (pub/themes/bismarck/settings.php) are separate files.
 
-      ii) If you dont have command line shell access...
-      
-          You have to run vsp.php using your web browser ( Firefox is good - 
-          http://www.mozilla.org/products/firefox/ :D ).
-          Inorder to run vsp via your web browser, you will require a password.
-          There is a file called "password.inc.php" in the main vsp folder.
-          You must edit this file using a text editor and choose a password that
-          is atleast six character long to enable web access to vsp.php
-          Make sure you upload the edited "password.inc.php" to the web server.
-          
-          Lets say you want to generate stats from a Quake 3 Arena log file called 
-          games.log that you transferred to the vsp folder on the server
-          
-          To analyze this file, load http://www.YourServer.com/vsp/vsp.php?mode=web
-          (ofcourse this url and path will depend on your website host and wherever 
-          you uploaded VSP to on the web server) in your web browser, then
-          Enter 
+   c. To analyze a log file and generate stats there are two methods:
+
+       i) With command line access (recommended).
+
+          Lets say you want to generate stats from a Quake 3 Arena OSP log
+          file /srv/quake3/osp/games.log. Go to the vsp folder and type:
+
+            php vsp.php -c pub/configs/cfg-default.php -l q3a-osp -p savestate 1 /srv/quake3/osp/games.log
+
+          With -p savestate 1 vsp remembers how far a log was read (in the
+          database), so you can run the same command repeatedly, e.g. from cron
+          every 15 minutes, and only new games are added:
+
+            */15 * * * * cd /srv/vsp && php vsp.php -c pub/configs/cfg-default.php -l q3a-osp -p savestate 1 /srv/quake3/osp/games.log
+
+          Use -a clear_savestate to make vsp read a log from the beginning
+          again, and -a clear_db to reset all stats.
+
+      ii) Without command line access, through the web browser.
+
+          Edit "password.inc.php" and choose a password that is at least six
+          characters long. The default password is too short on purpose: as long
+          as you do not change it, web access to vsp.php stays disabled.
+
+          Load http://www.YourServer.com/vsp.php?mode=web (the url depends on
+          where you installed vsp), enter
+
             -l q3a-osp "games.log"
-          into the first text box following the phrase "php vsp.php". 
-          Make sure to enter the password below as well.
-          Hit the "Submit (Process Stats)" button.
-  
-   d. If you want to access your stats from the www, give public access to the
-      pub/themes, pub/games and pub/images subfolder including its sub-directories 
-      using your webserver. NOTE:- if you still get access problems try giving 
-      public access to the entire pub/ folder.
-      
-      The default theme that php uses is pub/themes/bismarck/index.php
-      index.php is the main stats webpage. If no config file is specified,
-      index.php reads cfg-default.php and uses the information in that to access
-      the mysql stats database. You can make several different php config files
-      with different database settings and other preferences and tell index.php
-      to read your preferences from the specified config file. All the config 
-      files should be put in pub/configs/ folder
-      
-      ex: If you have a config file called cfg-myconfig.php with your 
-          preferences, then you can tell index.php to read from that config 
-          file by accessing:
-          
-            themes/bismarck/index.php?config=cfg-myconfig.php
-      
-      You can customize the theme further by editing pub/themes/bismarck/settings.php
+
+          into the first text box following the phrase "php vsp.php", enter the
+          password and hit "Submit (Process Stats)".
+
+   d. To show your stats on the web, point your web server at the pub/ folder
+      (document root or an alias). The theme is pub/themes/bismarck/index.php.
+      Do not publish the other folders (logdata/, sql/, vendor/ ...) and the
+      config files; only pub/ needs to be reachable.
+
+      For a quick look without a web server:
+
+        php -S 127.0.0.1:8000 -t pub/
+
+      and open http://127.0.0.1:8000/themes/bismarck/index.php
+
+      index.php reads cfg-default.php unless you pass another config file. All
+      config files live in pub/configs/. If you have a file cfg-myconfig.php,
+      open:
+
+        themes/bismarck/index.php?config=cfg-myconfig.php
+
+      You can customize the theme further by editing
+      pub/themes/bismarck/settings.php.
+
+
+   4. tests
+      -----
+
+      The test suite needs the dev dependencies (composer install) and a
+      database that matches pub/configs/cfg-default.php:
+
+        vendor/bin/phpunit
 
 
     NOTE: In order to display all the options and games that vsp supports, type:
 
     php vsp.php
 
-    ---------------------------------------------------------------------------  
-    Usage: php vsp.php [options] [-p parserOptions] [logFilename]                
+      ---------------------------------------------------------------------------
+      Usage: php vsp.php [options] [-p parserOptions] [logFilename]
 
-    [options]                                                                  
-    ---------                                                                  
+        [options]
+        ---------
 
-    -c                 specify config file (must be in pub/configs/)           
+        -c                 specify config file (must be in pub/configs/)
 
-    -l                 specify logType (gamecode-gametype)                     
+        -l                 specify logType (gamecode-gametype)
 
-                         logType:-                                             
+                             logType:-
 
-                           client           Client Logs (Any game)             
-                           cod              Call Of Duty, United Offensive     
-                           hl               HalfLife 1 & 2, CS:Source etc.     
-                           moh              Medal Of Honor AA,SH,BT,PA? etc.   
-                           q3a              Quake 3 Arena                      
-                           q3a-battle       Quake 3 Arena BattleMod            
-                           q3a-cpma         Quake 3 Arena CPMA (Promode)       
-                           q3a-freeze       Quake 3 Arena (U)FreezeTag etc.    
-                           q3a-lrctf        Quake 3 Arena Lokis Revenge CTF    
-                           q3a-osp          Quake 3 Arena OSP                  
-                           q3a-ra3          Quake 3 Arena Rocket Arena 3       
-                           q3a-threewave    Quake 3 Arena Threewave            
-                           q3a-ut           Quake 3 Arena UrbanTerror          
-                           q3a-xp           Quake 3 Arena Excessive Plus       
-                           rtcw             Return to Castle Wolfenstein       
-                           sof2             Soldier of Fortune 2               
-                           wet              Wolfenstein: Enemy Territory       
+                               client           Client Logs (Any game)
+                               q3a              Quake 3 Arena (and q3 engine games)
+                               q3a-battle       Quake 3 Arena BattleMod
+                               q3a-cpma         Quake 3 Arena CPMA (Promode)
+                               q3a-freeze       Quake 3 Arena (U)FreezeTag etc.
+                               q3a-lrctf        Quake 3 Arena Lokis Revenge CTF
+                               q3a-osp          Quake 3 Arena OSP
+                               q3a-ra3          Quake 3 Arena Rocket Arena 3
+                               q3a-threewave    Quake 3 Arena Threewave
+                               q3a-ut           Quake 3 Arena UrbanTerror
+                               q3a-xp           Quake 3 Arena Excessive Plus
 
-    -a                 specify action                                          
-                         perform a specific predefined action                  
-                         *make sure this is the last option specified!*        
-                         [logFilename] is not needed if this option is used    
+        -n
+                             No confirmation/prompts (for unattended runs etc.)
 
-                         action:-                                              
+        -a                 specify action
+                             perform a specific predefined action
+                             *make sure this is the last option specified!*
+                             [logFilename] is not needed if this option is used
 
-                           clear_db         Clear the database in config       
-                                            ie. Reset Stats                    
+                             action:-
 
-    -p [parserOptions]                                                         
+                               clear_db         Clear the database in config
+                                                ie. Reset Stats
 
-       savestate       1                                                       
-                         disable/enable savestate processing                   
-                         (remembers previously scanned logs and events)        
-                         If this option is enabled, VSP will remember the      
-                         location in the log file where the last stats was     
-                         parsed from. So the next time VSP is run with the     
-                         savestate 1 option against the same log file, it will 
-                         start parsing the stats from the previous saved       
-                         location.                                             
-                         If you want VSP to forget this save state, then you   
-                         have to delete the corresponding save state file from 
-                         the logdata/ folder. The name is in the format        
-                         savestate_[special_Form_Of_Logfile_Name]              
-                         Deleting that file and running VSP again with         
-                         savestate 1 option will reparse the whole log again   
-                         from the beginning. Also note that each logfile will  
-                         have a separate save state file under the logdata     
-                         folder. Do not edit/modify the savestate files! If    
-                         you dont want it, just delete it.                     
+                               gen_awards       Generate only the awards
 
-       check ReadME or first few lines of a particular parser php for other    
-       valid options for that particular parser                                
+                               clear_savestate  Clears the savestate information
+                                                for the specified log. If no log
+                                                file is specified, then all the
+                                                savestate information will be
+                                                cleared. Currently only works with
+                                                the q3a gamecode
 
-    [logFilename] could be an FTP link/url. Set FTP username/password in config
-    [logFilename] may be a logDirectory for some games. ex:- *HalfLife*        
+                               pop_ip2country   Deletes the information of the
+                                                ip2country table and populates it
+                                                from the CSV file specified in the
+                                                configuration
 
-    Usage: php vsp.php [options] [-p parserOptions] [logFilename]              
-    Example: php vsp.php -l q3a -p savestate 1 "c:/quake iii arena/games.log"      
-    ---------------------------------------------------------------------------  
+                               prune_old_games  Removes all the detailed
+                                                information of old games
+
+        -p [parserOptions]
+
+           savestate       1
+                             Enable savestate processing
+                             Remembers previously scanned logs and events.
+                             If this option is enabled, VSP will remember the
+                             location in the log file where the last stats was
+                             parsed from. So the next time VSP is run with the
+                             savestate 1 option against the same log file, it will
+                             start parsing the stats from the previous saved
+                             location.
+                             If you want VSP to forget this save state, then you
+                             have to delete the corresponding save state file from
+                             the logdata/ folder. The name is in the format
+                             savestate_[special_Form_Of_Logfile_Name]
+                             Deleting that file and running VSP again with
+                             savestate 1 option will reparse the whole log again
+                             from the beginning. Also note that each logfile will
+                             have a separate save state file under the logdata
+                             folder. Do not edit/modify the savestate files! If
+                             you dont want it, just delete it.
+
+           check ReadME or first few lines of a particular parser php for other
+           valid options for that particular parser
+
+        [logFilename] could be an FTP link/url. Set FTP username/password in config
+        [logFilename] may be a logDirectory for some games. ex:- *HalfLife*
+
+        Usage: php vsp.php [options] [-p parserOptions] [logFilename]
+      Example: php vsp.php -l q3a -p savestate 1 "c:/quake iii arena/games.log"
+      ---------------------------------------------------------------------------
 
    Further help on how to set up vsp can be found at http://www.clanavl.com/vsp/
 
