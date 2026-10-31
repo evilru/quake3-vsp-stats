@@ -120,6 +120,7 @@ class ADODB_mysqli extends ADOConnection {
 		if(!extension_loaded("mysqli")) {
 			return null;
 		}
+		mysqli_report(MYSQLI_REPORT_OFF); // PHP 8.1+ throws by default; ADOdb expects false returns
 		$this->_connectionID = @mysqli_init();
 
 		if (is_null($this->_connectionID)) {
