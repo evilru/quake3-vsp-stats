@@ -44,7 +44,7 @@ Open findings after the PHP 8.5 migration. Resolved items are not listed (see th
 
 ## Tooling
 
-- `phpmd` 2.15 emits PHP 8.5 deprecations from its own code and reports 142 findings; `phpstan` reports 26.
+- `phpmd` 2.15 emits PHP 8.5 deprecations from its own code; `phpmd` and `phpstan` still report findings.
 - `composer.json` has an empty PSR-4 mapping for `src/` (directory does not exist).
 - `error_reporting(E_ALL)` is gone from the app; `pub/configs/cfg-default.php` has no error settings any more. Production
   default in Docker is `display_errors=Off` (see `docker/vsp.ini`).
