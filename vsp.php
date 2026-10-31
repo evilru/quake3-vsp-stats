@@ -1745,10 +1745,13 @@ class GameDataProcessor
                           if (
                             $GLOBALS["cfg"]["parser"]["use_original_playerID"]
                           ) {
+                            // TODO(tech-debt): opponents unknown to playerStats (e.g. renamed
+                            // players) get an empty player2ID; that is kept via "". Intended:
+                            // resolve the opponent's original_id correctly.
                             $player2ID =
                               $this->playerStats[$opponentName]["v"][
                                 "original_id"
-                              ];
+                              ] ?? "";
                           } else {
                             $player2ID = $opponentName;
                           }
