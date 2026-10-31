@@ -1796,16 +1796,20 @@ class VSPParserQ3A
         //change: special chars
         if ($this->config["xp_version"] <= 103) {
           // 1.03 special chars
-          $chatMsg = preg_replace(
-            "/\+([\x01-\x7F])#/e",
-            "chr(ord('\\1') + 127)",
+          $chatMsg = preg_replace_callback(
+            "/\+([\x01-\x7F])#/",
+            function ($m) {
+              return chr(ord($m[1]) + 127);
+            },
             $chatMsg
           );
         } else {
           // 1.04 special chars
-          $chatMsg = preg_replace(
-            "/#(#|[0-9a-f]{2})/ie",
-            "'\\1' == '#' ? '#' : chr(hexdec('\\1'))",
+          $chatMsg = preg_replace_callback(
+            "/#(#|[0-9a-f]{2})/i",
+            function ($m) {
+              return $m[1] == '#' ? '#' : chr(hexdec($m[1]));
+            },
             $chatMsg
           );
         }
