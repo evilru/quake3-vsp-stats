@@ -4,14 +4,14 @@ use PHPUnit\Framework\TestCase;
 
 class ImportCliTest extends TestCase
 {
-    private function importBaseq3(): string
+    private function importBaseq3(string $type = 'q3a', string $log = 'baseq3.log'): string
     {
         exec('mysql -e "DROP DATABASE IF EXISTS vsp; CREATE DATABASE vsp" 2>&1', $ignored, $rc);
         if ($rc !== 0) {
             $this->markTestSkipped('MariaDB not available (run vsp-db-start)');
         }
         $root = dirname(__DIR__);
-        $cmd = escapeshellarg(PHP_BINARY) . ' vsp.php -c pub/configs/cfg-default.php -l q3a -p savestate 1 baseq3.log 2>&1 </dev/null';
+        $cmd = escapeshellarg(PHP_BINARY) . ' vsp.php -c pub/configs/cfg-default.php -l ' . $type . ' -p savestate 1 ' . $log . ' 2>&1 </dev/null';
         exec('cd ' . escapeshellarg($root) . ' && ' . $cmd, $lines, $rc);
         return implode("\n", $lines);
     }
@@ -69,6 +69,14 @@ class ImportCliTest extends TestCase
         $this->assertDoesNotMatchRegularExpression(
             "/array offset on (?:value of type )?\\w+ in \\S+ : eval\\(\\)'d code/",
             $this->importBaseq3()
+        );
+    }
+
+    public function testXpImportHasNoUndefinedOpponentPlayerStats(): void
+    {
+        $this->assertDoesNotMatchRegularExpression(
+            '/Undefined (?:array key|index:) "?ExcessivePlayer/',
+            $this->importBaseq3('q3a-xp', 'xp.log')
         );
     }
 }
