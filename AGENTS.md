@@ -23,7 +23,7 @@
 - Nicht `pkill -f "composer install"` aus der Shell: trifft die eigene Shell (Exit 144).
 - `composer install` ohne Seeding klont volle Git-Mirrors (>20 GB, Platte voll). Lösung: `php scripts/composer-seed.php composer.lock` (git fetch --depth 1 + git archive in den Dist-Cache, ~5 s), danach `composer install` ~2 s. Setup-Skript macht das vor. Falls Cache leer: selbst seeden. Aufräumen: `rm -rf /root/.cache/composer/vcs vendor`. `COMPOSER_ALLOW_SUPERUSER=1` setzen (sonst deaktiviert Composer Plugins).
 - Heruntergeladene Phars ausführen blockt der Auto-Mode-Klassifizierer.
-- pub/configs/cfg-default.php setzt `error_reporting(... ^ E_WARNING)`: Warnings sind in der CLI unter 7.4 UND 8.5 unsichtbar; Fatal/TypeErrors nicht. Für Funde zum Vergleich `-d error_reporting=-1` bzw. Config-Override nutzen.
+- pub/configs/cfg-default.php nutzt jetzt `error_reporting(E_ALL)` (Migration). VOR ABSCHLUSS der Migration die auskommentierte Original-Zeile wiederherstellen. Meldungen erscheinen doppelt (stderr-Log + Anzeige), zum Zählen `| sort | uniq -c`; fgetcsv-Deprecation unter 8.5 kommt >100k mal -> immer filtern/`head`.
 - Vor jedem Import-Vergleich DB zurücksetzen: `mysql -e "DROP DATABASE vsp; CREATE DATABASE vsp"` (sonst 'ignored: 1').
 - Mehrere parallele `composer install` vermeiden (Cache-Locks).
 - composer.json verlangt `php ^7.4`; vendor/composer/platform_check.php kann unter 8.5 abbrechen -> ggf. eigener Fund (Weg A).
@@ -32,6 +32,7 @@
 
 ## Status
 - Run 1 (erledigt): `LOG_READ_SIZE` undefiniert in vsp.php (save_savestate/check_savestate). Verhalten unter 7.4 war: Hash = md5(""). Fix behält das bei (explizit `md5("")` / `$fileData = ""`) + TODO(tech-debt) an beiden Stellen. Gleiches Muster, unberührt: vsp-q3a.php:254/296 (unused saveShutdownState/verifySavestate), vsp-client.php.
+- Neue Funde mit E_ALL: 8.5 Deprecated: fgetcsv() ohne $escape (Hunderttausende, Fundstelle per grep), ADOdb dynamic property `adodbFetchMode`, ADOdb `(integer)`-Cast (pub/lib/adodb = Fremdcode); 7.4/8.5 Notice/Warning: Undefined index/array key `gameversion` (vsp-q3a.php:724), array offset on bool/null (vsp.php:1311, 1472).
 - Nächste Funde (offen, Reihenfolge = Priorität):
   1. 8.5-Import bricht ab: `mysqli_sql_exception: Field 'value' doesn't have a default value` (INSERT INTO savestate SET logfile=..., vsp.php save_savestate). PHP 8.1+ wirft mysqli-Exceptions standardmäßig; unter 7.4 stilles Scheitern, savestate-Tabelle bleibt leer (Savestate funktioniert also nie). Weg A.
   2. ConvertColorCodesTest::testXpConvertEmptyName: `Uninitialized string offset 0` (vsp-q3a.php:436/464), rot unter 7.4 UND 8.5 (Bug im Original, Weg B).
