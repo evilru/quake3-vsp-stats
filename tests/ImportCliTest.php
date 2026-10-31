@@ -35,4 +35,9 @@ class ImportCliTest extends TestCase
     {
         $this->assertStringNotContainsString('gameversion', $this->importBaseq3());
     }
+
+    public function testBaseq3ImportHasNoPassByReferenceNotice(): void
+    {
+        $this->assertStringNotContainsString('passed by reference', $this->importBaseq3());
+    }
 }
