@@ -1,7 +1,10 @@
 #!/bin/bash
 set -e
 
-# dump environment variables
-printenv | sed 's/^\([^=]*=\)\(.*\)$/export \1"\2"/g' > /etc/profile.d/docker_env.sh
+ENV_FILE="${DOCKER_ENV_FILE:-/etc/profile.d/docker_env.sh}"
+
+# dump environment variables (export -p quotes values safely; the file contains passwords)
+umask 077
+export -p > "$ENV_FILE"
 
 exec cron -f

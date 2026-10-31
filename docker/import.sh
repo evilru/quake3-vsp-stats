@@ -1,7 +1,7 @@
 #!/bin/bash -l
 set -e
 
-source /etc/profile.d/docker_env.sh || {
+source "${DOCKER_ENV_FILE:-/etc/profile.d/docker_env.sh}" || {
     echo "Failed to source environment" >&2
     exit 1
 }
