@@ -242,9 +242,9 @@ function load_player_exclude_list() {
 //endchange
 //************************************************************************
 function html_encode($var) {
-	$return = htmlentities($var, ENT_QUOTES, 'UTF-8');
+	$return = htmlentities((string) $var, ENT_QUOTES, 'UTF-8');
     if (!$return) {
-        $return = htmlentities($var, ENT_QUOTES);
+        $return = htmlentities((string) $var, ENT_QUOTES);
     }
     return $return;
 }
