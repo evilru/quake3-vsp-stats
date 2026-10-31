@@ -3,7 +3,7 @@
     "description": "Quake 3 VSP Stats Parser and Analyzer",
     "type": "project",
     "require": {
-        "php": "^7.4",
+        "php": ">=7.4",
         "ext-json": "*"
     },
     "require-dev": {
