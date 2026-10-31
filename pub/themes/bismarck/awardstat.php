@@ -185,11 +185,12 @@ function drawAwardList()
   //echo $sql;
   $rs=$db->SelectLimit($sql,1,0);
   
-  $award_name = $rs->fields[1];
+  // TODO(tech-debt): unknown awards have no row, so an empty query is executed (7.4 notices). Show an "award not found" page instead.
+  $award_name = $rs->fields[1] ?? null;
   
   
   
-  $rs=$db->SelectLimit($rs->fields[0],$GLOBALS['cfg']['display']['record_limit'],$GLOBALS['start_from']);
+  $rs=$db->SelectLimit($rs->fields[0] ?? null,$GLOBALS['cfg']['display']['record_limit'],$GLOBALS['start_from']);
   
   $no_of_cols = $rs?count($rs->fields):0;
   //echo $rs->fields[0];
