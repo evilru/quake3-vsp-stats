@@ -20,6 +20,7 @@ All repo content (code comments, docs, scripts, commits) is English. The branch 
 ## Invariants
 - Code must run on 7.4.33 and 8.5: no syntax or functions one of them lacks.
 - Smallest change that turns the test green; no refactoring or formatting.
+- Tests must be real unit tests that protect behavior against future breakage: assert observable behavior/results, not implementation details or log-output absence, so they do not block later refactoring.
 - `error_reporting(E_ALL)` in pub/configs/cfg-default.php is temporary: restore the commented original when the migration is done.
 
 ## Gotchas
