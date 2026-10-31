@@ -794,7 +794,7 @@ function setupVars()
 <?php ob_start("compactHTML");?>
 <BODY>
 <?php
-  $db = &ADONewConnection($GLOBALS['cfg']['db']['adodb_driver']);
+  $db = ADONewConnection($GLOBALS['cfg']['db']['adodb_driver']);
   if(!$db->Connect($GLOBALS['cfg']['db']['hostname'], $GLOBALS['cfg']['db']['username'], $GLOBALS['cfg']['db']['password'], $GLOBALS['cfg']['db']['dbname']))
   {
     print "error: cannot establish database connection or database {$GLOBALS['cfg']['db']['dbname']} does not exist\n";

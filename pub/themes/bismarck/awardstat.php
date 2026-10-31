@@ -8,7 +8,7 @@ require(getConfig());
 
 
 require("{$GLOBALS['cfg']['db']['adodb_path']}".'adodb.inc.php');
-$db = &ADONewConnection("{$GLOBALS['cfg']['db']['adodb_driver']}");
+$db = ADONewConnection("{$GLOBALS['cfg']['db']['adodb_driver']}");
 if(!$db->Connect($GLOBALS['cfg']['db']['hostname'], $GLOBALS['cfg']['db']['username'], $GLOBALS['cfg']['db']['password'], $GLOBALS['cfg']['db']['dbname']))
 {
   print "error: cannot establish database connection\n";
