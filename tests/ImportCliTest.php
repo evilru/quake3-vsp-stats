@@ -63,4 +63,12 @@ class ImportCliTest extends TestCase
             $this->importBaseq3()
         );
     }
+
+    public function testBaseq3ImportAwardSqlHasNoArrayOffsetWarning(): void
+    {
+        $this->assertDoesNotMatchRegularExpression(
+            "/array offset on (?:value of type )?\\w+ in \\S+ : eval\\(\\)'d code/",
+            $this->importBaseq3()
+        );
+    }
 }
