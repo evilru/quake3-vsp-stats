@@ -555,7 +555,10 @@ function getStats()
   
   
   
-  ksort($gweapon);
+  // TODO(tech-debt): $gweapon is never initialized; players without weapon data leave it null (7.4 only warned). Initialize it to an array.
+  if (is_array($gweapon)) {
+    ksort($gweapon);
+  }
   
   
   //htmlprint_r($gmatrixtotal);
