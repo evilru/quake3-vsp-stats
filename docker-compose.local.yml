@@ -4,9 +4,9 @@ services:
     networks:
       - workspace_vsp
     environment:
-      MYSQL_DATABASE: ${VSP_DB_NAME}
-      MYSQL_USER: ${VSP_DB_USERNAME}
-      MYSQL_PASSWORD: ${VSP_DB_PASSWORD}
+      MARIADB_DATABASE: ${VSP_DB_NAME}
+      MARIADB_USER: ${VSP_DB_USERNAME}
+      MARIADB_PASSWORD: ${VSP_DB_PASSWORD}
   web:
     build: .
     # ports:

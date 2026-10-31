@@ -41,13 +41,20 @@ services:
 services:
   db:
     environment:
-      MYSQL_USER:
-      MYSQL_PASSWORD:
+      MARIADB_USER:
+      MARIADB_PASSWORD:
   web:
     environment:
       DB_USERNAME:
       DB_PASSWORD:
 ```
+
+The database is only reachable from the web service: it sits on an internal network and publishes no ports.
+To inspect it, use `docker compose exec db mariadb -u <user> -p <database>`.
+
+_Upgrade note:_ the database variables were renamed from `MYSQL_*` to `MARIADB_*`
+(`MARIADB_DATABASE`, `MARIADB_USER`, `MARIADB_PASSWORD`). Rename them in your `.env` or environment.
+Existing data directories keep working.
 
 ### VSP configuration
 
@@ -90,17 +97,17 @@ Hostname of the database. This is the name of the database service in the compos
 
 default: _vsp_  
 If not available, this database will be created on the first run.  
-Should be the same as _MYSQL_DATABASE_.
+Should be the same as _MARIADB_DATABASE_.
 
 #### DB_USERNAME
 
 Username used to connect to the database.  
-Should be the same as _MYSQL_USER_.
+Should be the same as _MARIADB_USER_.
 
 #### DB_PASSWORD
 
 Password used to connect to the database.  
-Should be the same as _MYSQL_PASSWORD_.
+Should be the same as _MARIADB_PASSWORD_.
 
 #### GAMES_LIMIT
 
