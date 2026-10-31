@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 
 class AdodbConnectionTest extends TestCase
 {
-    public function testConnectExposesDatabaseNameWithoutDynamicProperty(): void
+    public function testConnectSelectsDatabaseWithoutDynamicProperty(): void
     {
         $messages = [];
         set_error_handler(function ($no, $msg) use (&$messages) {
@@ -21,9 +21,9 @@ class AdodbConnectionTest extends TestCase
             restore_error_handler();
         }
 
-        $this->assertSame('vsp', $db->databaseName);
+        $this->assertSame('vsp', $db->database);
         $this->assertSame([], array_values(array_filter($messages, function ($m) {
-            return strpos($m, 'databaseName') !== false;
+            return strpos($m, 'dynamic property') !== false;
         })));
     }
 }

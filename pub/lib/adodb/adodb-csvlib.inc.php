@@ -1,4 +1,26 @@
 <?php
+/**
+ * Library for CSV serialization.
+ *
+ * This is used by the csv/proxy driver and is the CacheExecute()
+ * serialization format.
+ *
+ * This file is part of ADOdb, a Database Abstraction Layer library for PHP.
+ *
+ * @package ADOdb
+ * @link https://adodb.org Project's web site and documentation
+ * @link https://github.com/ADOdb/ADOdb Source code and issue tracker
+ *
+ * The ADOdb Library is dual-licensed, released under both the BSD 3-Clause
+ * and the GNU Lesser General Public Licence (LGPL) v2.1 or, at your option,
+ * any later version. This means you can use it in proprietary products.
+ * See the LICENSE.md file distributed with this source code for details.
+ * @license BSD-3-Clause
+ * @license LGPL-2.1-or-later
+ *
+ * @copyright 2000-2013 John Lim
+ * @copyright 2014 Damien Regad, Mark Newnham and the ADOdb community
+ */
 
 // security - hide paths
 if (!defined('ADODB_DIR')) die();
@@ -6,28 +28,14 @@ if (!defined('ADODB_DIR')) die();
 global $ADODB_INCLUDED_CSV;
 $ADODB_INCLUDED_CSV = 1;
 
-/*
-
-  @version   v5.21.0  2021-02-27
-  @copyright (c) 2000-2013 John Lim (jlim#natsoft.com). All rights reserved.
-  @copyright (c) 2014      Damien Regad, Mark Newnham and the ADOdb community
-  Released under both BSD license and Lesser GPL library license.
-  Whenever there is any discrepancy between the two licenses,
-  the BSD license will take precedence. See License.txt.
-  Set tabs to 4 for best viewing.
-
-  Latest version is available at https://adodb.org/
-
-  Library for CSV serialization. This is used by the csv/proxy driver and is the
-  CacheExecute() serialization format.
-*/
-
 	/**
- 	 * convert a recordset into special format
+ 	 * Convert a recordset into special format
 	 *
-	 * @param rs	the recordset
+	 * @param ADORecordSet  $rs the recordset
+	 * @param ADOConnection $conn
+	 * @param string        $sql
 	 *
-	 * @return	the CSV formatted data
+	 * @return string the CSV formatted data
 	 */
 	function _rs2serialize(&$rs,$conn=false,$sql='')
 	{
@@ -68,28 +76,28 @@ $ADODB_INCLUDED_CSV = 1;
 
 		$savefetch = isset($rs->adodbFetchMode) ? $rs->adodbFetchMode : $rs->fetchMode;
 		$class = $rs->connection->arrayClass;
-		$rs2 = new $class();
+		/** @var ADORecordSet $rs2 */
+		$rs2 = new $class(ADORecordSet::DUMMY_QUERY_ID);
 		$rs2->timeCreated = $rs->timeCreated; # memcache fix
 		$rs2->sql = $rs->sql;
-		$rs2->oldProvider = $rs->dataProvider;
 		$rs2->InitArrayFields($rows,$flds);
 		$rs2->fetchMode = $savefetch;
 		return $line.serialize($rs2);
 	}
 
-
-/**
-* Open CSV file and convert it into Data.
-*
-* @param url  		file/ftp/http url
-* @param err		returns the error message
-* @param timeout	dispose if recordset has been alive for $timeout secs
-*
-* @return		recordset, or false if error occurred. If no
-*			error occurred in sql INSERT/UPDATE/DELETE,
-*			empty recordset is returned
-*/
-	function csv2rs($url,&$err,$timeout=0, $rsclass='ADORecordSet_array')
+	/**
+	 * Open CSV file and convert it into Data.
+	 *
+	 * @param string $url     file/ftp/http url
+	 * @param string &$err    returns the error message
+	 * @param int $timeout    dispose if recordset has been alive for $timeout secs
+	 * @param string $rsclass RecordSet class to return
+	 *
+	 * @return ADORecordSet|false recordset, or false if error occurred.
+	 *                            If no error occurred in sql INSERT/UPDATE/DELETE,
+	 *                            empty recordset is returned.
+	 */
+	function csv2rs($url, &$err, $timeout=0, $rsclass='ADORecordSet_array')
 	{
 		$false = false;
 		$err = false;
@@ -102,7 +110,7 @@ $ADODB_INCLUDED_CSV = 1;
 		$arr = array();
 		$ttl = 0;
 
-		if ($meta = fgetcsv($fp, 32000, ",")) {
+		if ($meta = fgetcsv($fp, 32000, ",", '"', "\\")) {
 			// check if error message
 			if (strncmp($meta[0],'****',4) === 0) {
 				$err = trim(substr($meta[0],4,1024));
@@ -134,7 +142,7 @@ $ADODB_INCLUDED_CSV = 1;
 					$rs->EOF = true;
 					$rs->_numOfFields = 0;
 					$rs->sql = urldecode($meta[2]);
-					$rs->affectedrows = (integer)$meta[3];
+					$rs->affectedrows = (int)$meta[3];
 					$rs->insertid = $meta[4];
 					return $rs;
 				}
@@ -148,7 +156,7 @@ $ADODB_INCLUDED_CSV = 1;
 			# +0 sec after timeout, give processes 100% chance of timing out
 				if (sizeof($meta) > 1) {
 					if($timeout >0){
-						$tdiff = (integer)( $meta[1]+$timeout - time());
+						$tdiff = (int)( $meta[1]+$timeout - time());
 						if ($tdiff <= 2) {
 							switch($tdiff) {
 							case 4:
@@ -206,7 +214,7 @@ $ADODB_INCLUDED_CSV = 1;
 				}
 
 				$meta = false;
-				$meta = fgetcsv($fp, 32000, ",");
+				$meta = fgetcsv($fp, 32000, ",", '"', '\\');
 				if (!$meta) {
 					fclose($fp);
 					$err = "Unexpected EOF 1";
