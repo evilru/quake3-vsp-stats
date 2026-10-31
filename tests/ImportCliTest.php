@@ -48,4 +48,11 @@ class ImportCliTest extends TestCase
         $this->assertCount(1, $rows);
         $this->assertStringContainsString('last_shutdown_end_position', $rows[0]);
     }
+
+    public function testBaseq3ImportReportsWholeSecondsWithoutFloatConversion(): void
+    {
+        $output = $this->importBaseq3();
+        $this->assertMatchesRegularExpression('/processed in \d+m \d+s \(/', $output);
+        $this->assertStringNotContainsString('Implicit conversion from float', $output);
+    }
 }
