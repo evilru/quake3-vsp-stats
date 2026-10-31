@@ -49,14 +49,13 @@ Open findings after the PHP 8.5 migration. Resolved items are not listed (see th
 - `error_reporting(E_ALL)` is gone from the app; `pub/configs/cfg-default.php` has no error settings any more. Production
   default in Docker is `display_errors=Off` (see `docker/vsp.ini`).
 
-## Security (open after the first fixes: sort whitelist, hist_rank, root-page query string, PHP_SELF)
+## Security (open; fixed so far: sort whitelist, hist_rank, root-page query string, PHP_SELF, search heading, unknown-skin redirect, web login comparison)
 
-- **Reflected XSS, still open:** `pub/themes/bismarck/index.php:23` prints `$_POST['search_by']` / `search_txt` unescaped;
-  `all.inc.php` prints `$_GET['sort']` into a script (skin-fallback redirect) and `$skin_data[name]` (from `$_GET['skin']`
-  or the `vsp_skin` cookie) into the footer; `$_GET['skin']` is also used unvalidated in `./skins/$skin/$skin.css`
-  (path manipulation; `fopen` only probes existence). Fix with a whitelist of the skin directories.
-- **Login of `vsp.php` (web mode):** `md5($a) != md5($b)` is a loose comparison (magic hashes `0e...`) and the password is
-  sent in clear text. `hash_equals()` keeps the config format; ask before changing the format of `password.inc.php`.
+- **`$_GET['skin']` in the file path** (`all.inc.php`, `./skins/$skin/$skin.css`): path manipulation; `fopen` only probes existence and the
+  name is only printed when such a file exists. Fix with a whitelist of the skin directories.
+- **Web login of `vsp.php`** still sends the password in clear text and compares plain text from `password.inc.php`; hashing the
+  stored password would change the config format (ask first). In the Docker image Apache's document root is `/vsp`, so
+  `vsp.php`, `*.log` and `logdata/` are reachable over HTTP: check what should be served and restrict the rest.
 - **Name search:** `index.php` builds a `REGEXP` from user input (escaped with `preg_quote`); check the escaping for MariaDB
   regex and the cost of crafted patterns.
 - **Non-numeric `start_from`** (`?start_from=abc`) raises a TypeError on 8.x (`"abc" - int`); robustness, not injection
