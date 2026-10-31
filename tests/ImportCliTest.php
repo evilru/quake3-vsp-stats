@@ -25,4 +25,9 @@ class ImportCliTest extends TestCase
     {
         $this->assertStringNotContainsString('fgetcsv', $this->importBaseq3());
     }
+
+    public function testBaseq3ImportHasNoReferenceAssignmentNotice(): void
+    {
+        $this->assertStringNotContainsString('assigned by reference', $this->importBaseq3());
+    }
 }
