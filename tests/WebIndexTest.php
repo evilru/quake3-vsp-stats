@@ -58,7 +58,17 @@ class WebIndexTest extends TestCase
         $this->assertStringNotContainsString('assigned by reference', $body);
     }
 
-    private function importBaseq3Database(): void
+    public function testPlayerPageRendersWithoutUndefinedIpPart(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+
+        $body = $this->get('/themes/bismarck/playerstat.php?playerID=Bitterman&config=default');
+
+        $this->assertStringContainsString('Bitterman', $body);
+        $this->assertDoesNotMatchRegularExpression('/Undefined (?:array key|offset)/', $body);
+    }
+
+    private function importBaseq3Database(string $type = 'q3a', string $log = 'baseq3.log'): void
     {
         $root = dirname(__DIR__);
         exec('mysql -e "DROP DATABASE IF EXISTS vsp; CREATE DATABASE vsp" 2>&1', $ignored, $rc);
@@ -66,6 +76,6 @@ class WebIndexTest extends TestCase
             $this->markTestSkipped('MariaDB not available (run vsp-db-start)');
         }
         exec('cd ' . escapeshellarg($root) . ' && ' . escapeshellarg(PHP_BINARY)
-            . ' vsp.php -c pub/configs/cfg-default.php -l q3a -p savestate 1 baseq3.log >/dev/null 2>&1 </dev/null');
+            . ' vsp.php -c pub/configs/cfg-default.php -l ' . $type . ' -p savestate 1 ' . $log . ' >/dev/null 2>&1 </dev/null');
     }
 }
