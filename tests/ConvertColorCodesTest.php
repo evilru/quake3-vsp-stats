@@ -33,7 +33,9 @@ class ConvertColorCodesTest extends TestCase
     {
         $reflection = new ReflectionClass(get_class($parser));
         $method = $reflection->getMethod($methodName);
-        $method->setAccessible(true);
+        if (PHP_VERSION_ID < 80100) {
+            $method->setAccessible(true);
+        }
         return $method->invokeArgs($parser, $parameters);
     }
 
