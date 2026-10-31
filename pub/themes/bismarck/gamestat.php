@@ -43,11 +43,13 @@ if ($gameID)
 
   // TODO(tech-debt): unknown games leave these globals uninitialized (null). 7.4 only warned and
   // treated them as empty; keep that by initializing empty arrays. Intended: show a "game not found" page.
-  foreach (array('gteam', 'gmatrix', 'gmatrixtotal', 'gweapon', 'gplayerName', 'gteam_index', 'gmatrix1D', 'gevent1D') as $emptyGlobal) {
+  foreach (array('gteam', 'gmatrix', 'gmatrixtotal', 'gweapon', 'gplayerName', 'gteam_index', 'gmatrix1D', 'gevent1D', 'ggame') as $emptyGlobal) {
     if (!isset($GLOBALS[$emptyGlobal])) {
       $GLOBALS[$emptyGlobal] = array();
     }
   }
+  // Missing game fields print as empty values (7.4 notices); they are hidden from the settings list by their _v_ prefix.
+  $GLOBALS['ggame'] += array('_v_time_start' => null, '_v_map' => null, '_v_game' => null, '_v_mod' => null, '_v_game_type' => null);
   
   
   // To make it easy for making team classes for style sheets, assign a counter type index to each unique team and use that for naming the classes
