@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Cloud environment setup (Ubuntu 24.04, root, full network access).
-# Installs PHP 7.4 + 8.5 (ondrej/php PPA), MariaDB, Composer, seeds the Composer cache, starts the DB.
+# Installs PHP 7.4 + 8.5 (ondrej/php PPA), MariaDB, Composer, podman/buildah/podman-compose, seeds the Composer cache, starts the DB.
 set -euo pipefail
 export DEBIAN_FRONTEND=noninteractive
 export COMPOSER_ALLOW_SUPERUSER=1 COMPOSER_NO_INTERACTION=1 COMPOSER_PROCESS_TIMEOUT=0
@@ -29,6 +29,10 @@ done
 
 apt-get install -y -qq mariadb-server mariadb-client
 
+# Containers without a Docker daemon: podman builds/runs the image and the compose stack (scripts/compose-test.sh).
+# podman compose uses an external provider; podman-compose is the daemon-free one.
+apt-get install -y -qq podman buildah podman-compose
+
 # Tools (php-use, vsp-db-start) and composer seeding come from a shallow clone: setup has no repo context.
 REPO=$(mktemp -d)
 git clone -q --depth 1 --branch feature/php8 https://github.com/evilru/quake3-vsp-stats.git "$REPO" \
@@ -51,4 +55,4 @@ rm -rf "$REPO"
 # Start the DB now
 vsp-db-start </dev/null || echo "WARN: DB start failed"
 
-echo "Done. php-use 7.4|8.5, vsp-db-start, scripts/check.sh"
+echo "Done. php-use 7.4|8.5, vsp-db-start, scripts/check.sh, scripts/variants.py, scripts/compose-test.sh"
