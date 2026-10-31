@@ -2389,18 +2389,10 @@ function populateIp2countryTable(): void
 function save_savestate(&$parser): void
 {
   $parser->logdata["last_shutdown_end_position"] = ftell($parser->logFileHandle);
-  $seekResult = fseek($parser->logFileHandle, -LOG_READ_SIZE, SEEK_CUR);
-  if ($seekResult == 0) {
-    $parser->logdata["last_shutdown_hash"] = md5(
-      fread($parser->logFileHandle, LOG_READ_SIZE)
-    );
-  } else {
-    $currentPos = ftell($parser->logFileHandle);
-    fseek($parser->logFileHandle, 0);
-    $parser->logdata["last_shutdown_hash"] = md5(
-      fread($parser->logFileHandle, $currentPos)
-    );
-  }
+  // TODO(tech-debt): LOG_READ_SIZE was never defined here. PHP 7.4 silently turned this into
+  // md5("") and PHP 8 throws; that behaviour is kept. Intended: md5 of the last 1024 bytes before
+  // the end position (see check_savestate); changing it invalidates stored savestate hashes.
+  $parser->logdata["last_shutdown_hash"] = md5("");
   // $fp = fopen('./logdata/savestate_' . sanitizeFilename($parser->logFilePath) . '.inc.php', "wb");
   global $db; // db
   $logfile = $db->qstr(
@@ -2422,14 +2414,9 @@ function check_savestate(&$parser): void
   $fp = fopen($parser->logFilePath, "rb");
   $seekResult = fseek($fp, $parser->logdata["last_shutdown_end_position"]);
   if ($seekResult == 0) {
-    $seekResult2 = fseek($fp, -LOG_READ_SIZE, SEEK_CUR);
-    if ($seekResult2 == 0) {
-      $fileData = fread($fp, LOG_READ_SIZE);
-    } else {
-      $currentPos = ftell($fp);
-      fseek($fp, 0);
-      $fileData = fread($fp, $currentPos);
-    }
+    // TODO(tech-debt): see save_savestate(); undefined LOG_READ_SIZE yielded no data on PHP 7.4.
+    // Kept as md5("") to match the saved hash. Intended: last 1024 bytes before the position.
+    $fileData = "";
     if (strcmp(md5($fileData), $parser->logdata["last_shutdown_hash"]) == 0) {
       echo " - Hash matched, resuming parsing from previous saved location in log file\n";
       fseek($parser->logFileHandle, $parser->logdata["last_shutdown_end_position"]);
