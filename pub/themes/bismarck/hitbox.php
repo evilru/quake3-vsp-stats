@@ -248,7 +248,12 @@ foreach($HB as $loc => $val)
 
   foreach($bodypartPoints[$loc] as $points)
   {
-    imagefilledpolygon($bodyImage, $points, count($points)/2, getColorLevel($bodybgImage,intval($HB[$loc]/$hits_at_highest_loc*$max_color_level)) );
+    $color = getColorLevel($bodybgImage,intval($HB[$loc]/$hits_at_highest_loc*$max_color_level));
+    if (PHP_VERSION_ID >= 80100) {
+      imagefilledpolygon($bodyImage, $points, $color); // num_points is deprecated since 8.1
+    } else {
+      imagefilledpolygon($bodyImage, $points, count($points)/2, $color); // required on 7.4
+    }
   }
 }
 
