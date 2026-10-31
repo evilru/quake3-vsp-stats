@@ -289,6 +289,24 @@ class WebIndexTest extends TestCase
         $this->assertStringNotContainsString('<script>alert(1)</script>', $body);
     }
 
+    public function testUnknownSkinRedirectKeepsSortParameter(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+
+        $body = $this->get('/themes/bismarck/index.php?config=cfg-default.php&skin=nonexistent&sort=kills');
+
+        $this->assertStringContainsString('index.php?config=cfg-default.php&amp;sort=kills"', $body);
+    }
+
+    public function testUnknownSkinRedirectDoesNotReflectSortMarkup(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+
+        $body = $this->get('/themes/bismarck/index.php?config=cfg-default.php&skin=nonexistent&sort=' . rawurlencode('"</script><script>alert(1)</script>'));
+
+        $this->assertStringNotContainsString('<script>alert(1)</script>', $body);
+    }
+
     private function importBaseq3Database(string $type = 'q3a', string $log = 'baseq3.log'): void
     {
         $root = dirname(__DIR__);
