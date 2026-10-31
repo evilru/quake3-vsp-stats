@@ -666,7 +666,7 @@ function setupVars()
 
   //change: historical rank
   if (isset($_GET['hist_rank'])) {
-    $hist_rank=$_GET['hist_rank'];
+    $hist_rank=html_encode($_GET['hist_rank']);
   }
   
   $last_update = false;
