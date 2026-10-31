@@ -80,7 +80,7 @@ def main():
                     seen.add(u)
                     try: b = urllib.request.urlopen(base + u, timeout=60).read().decode("utf8", "replace")
                     except Exception as e: found["HTTP error: %s %s" % (u[:40], e)] += 1; continue
-                    found.update(messages(b))
+                    found.update({m + "  [" + u[:70] + "]": n for m, n in messages(b).items()})
                     for h in re.findall(r'href="([^"#]+)"', b, re.I):
                         h = html.unescape(h)
                         if re.match(r"^(index|playerstat|gamestat|awardstat)\.php", h) and h not in seen: queue.append(h)

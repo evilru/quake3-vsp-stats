@@ -6,8 +6,13 @@ class WebIndexTest extends TestCase
 {
     private $server;
 
+    private $settingsBackup;
+
     protected function tearDown(): void
     {
+        if ($this->settingsBackup !== null) {
+            file_put_contents(dirname(__DIR__) . '/pub/themes/bismarck/settings.php', $this->settingsBackup);
+        }
         if (is_resource($this->server)) {
             proc_terminate($this->server);
             proc_close($this->server);
@@ -169,6 +174,19 @@ class WebIndexTest extends TestCase
         $body = $this->get('/themes/bismarck/index.php?skin=nonexistent&config=cfg-default.php');
 
         $this->assertStringContainsString('window.location', $body);
+        $this->assertDoesNotMatchRegularExpression('/(?:Warning|Deprecated|Notice)(?:<\/b>)?:/', $body);
+    }
+
+    public function testPlayerPageForEmptyPlayerIdWithCountryFlagsEnabledShowsNoPhpMessages(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+        $file = dirname(__DIR__) . '/pub/themes/bismarck/settings.php';
+        $this->settingsBackup = file_get_contents($file);
+        file_put_contents($file, str_replace("['no_country_flags']=1", "['no_country_flags']=0", $this->settingsBackup));
+
+        $body = $this->get('/themes/bismarck/playerstat.php?playerID=&config=cfg-default.php');
+
+        $this->assertStringContainsString('images/flags/', $body);
         $this->assertDoesNotMatchRegularExpression('/(?:Warning|Deprecated|Notice)(?:<\/b>)?:/', $body);
     }
 
