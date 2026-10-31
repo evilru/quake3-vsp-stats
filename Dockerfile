@@ -22,11 +22,11 @@ ENV DEFAULT_SKIN="fest" \
 # Database Settings
 ENV TABLE_PREFIX="vsp_" \
     DB_HOSTNAME="db" \
-    DB_NAME="vsp"
-    # Uncomment and set these in docker-compose or at runtime
-    # DB_USERNAME="" \
-    # DB_PASSWORD="" \
-    # VSP_WEB_PASSWORD=""
+    DB_NAME="vsp" \
+    DB_USERNAME="" \
+    DB_PASSWORD="" \
+    VSP_WEB_PASSWORD=""
+    # Set DB_USERNAME, DB_PASSWORD and VSP_WEB_PASSWORD in docker-compose or at runtime
 
 # FTP settings
 ENV FTP_USERNAME="anonymous" \
@@ -41,7 +41,8 @@ ENV FTP_USERNAME="anonymous" \
 ENV PHP_DISPLAY_ERRORS="Off" \
     PHP_ERROR_REPORTING="32767"
 
-ENV EXCLUDED_PLAYERS="comma-separated list of players (e.g. Angel,Biker,Bitterman,Bones,Cadavre)" \
+# comma-separated list of excluded players (e.g. Angel,Biker,Bitterman,Bones,Cadavre)
+ENV EXCLUDED_PLAYERS="" \
    # limit of detailed game stats that will be stored on the database (negative number for unlimited)
    GAMES_LIMIT="1000"
 
@@ -94,7 +95,7 @@ RUN chmod +x docker/import.sh \
  && sed -ri -e 's!My Server Name Goes Here!<?php print $_ENV["SERVER_TITLE"];?>!g' pub/themes/bismarck/all.inc.php \
  && sed -ri -e 's!(\['\''default_skin'\''\]\s*=\s*)'\''fest'\''(;)!\1$_ENV["DEFAULT_SKIN"]\2!g' pub/themes/bismarck/settings.php \
  && sed -ri -e 's!(\['\''check_unique_gameID'\''\]\s*=\s*)1!\1$_ENV["CHECK_UNIQUE_GAMEID"]!g' pub/configs/cfg-default.php \
- && sed -ri -e '/\$player_exclude_list=array\(/,/\);/c\$player_exclude_list=explode\('\'','\'', $_ENV["EXCLUDED_PLAYERS"]\);' pub/include/playerExcludeList-default.inc.php
+ && sed -ri -e '/\$player_exclude_list=array\(/,/\);/c\$player_exclude_list=array_values\(array_filter\(explode\('\'','\'', $_ENV["EXCLUDED_PLAYERS"]\)\)\);' pub/include/playerExcludeList-default.inc.php
 
 
 CMD ["supervisord", "-c", "/vsp/docker/supervisord.conf"]

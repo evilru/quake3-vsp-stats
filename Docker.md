@@ -116,8 +116,8 @@ Limit of detailed game stats that will be stored in the database (negative numbe
 
 #### EXCLUDED_PLAYERS
 
-Comma-separated list of player names that are excluded from the stats (e.g. _Angel,Biker,Bitterman_).  
-The image default is only a placeholder text; set it explicitly.
+default: empty (no player excluded)  
+Comma-separated list of player names that are excluded from the stats (e.g. _Angel,Biker,Bitterman_).
 
 #### FTP_USERNAME / FTP_PASSWORD
 
