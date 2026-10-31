@@ -1006,6 +1006,9 @@ function drawPlayerIPs()
         $cell_class="cell2";
 
       preg_match("/(\d+\\.\d+\\.)\d+\\.\d+/", $rs->fields[0], $ma);
+      // TODO(tech-debt): addresses that do not look like IPv4 leave $ma empty; an empty prefix is
+      // kept. Intended: handle non-IPv4 addresses explicitly.
+      $ma[1] = $ma[1] ?? '';
       $ip=$ma[1].'?.?';
       //$ip=$rs->fields[0]
       ?>
