@@ -127,6 +127,16 @@ class WebIndexTest extends TestCase
         );
     }
 
+    public function testGamePageForUnknownGameRendersCompletely(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+
+        $body = $this->get('/themes/bismarck/gamestat.php?gameID=1&config=cfg-default.php');
+
+        $this->assertStringNotContainsString('Fatal error', $body);
+        $this->assertStringContainsString('</HTML>', strtoupper($body));
+    }
+
     private function importBaseq3Database(string $type = 'q3a', string $log = 'baseq3.log'): void
     {
         $root = dirname(__DIR__);
