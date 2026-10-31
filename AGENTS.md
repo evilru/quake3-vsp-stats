@@ -33,6 +33,6 @@ All repo content (code comments, docs, scripts, commits) is English. The branch 
 
 ## Open findings (priority order)
 1. Undefined `LOG_READ_SIZE` remains in vsp-q3a.php:254/296 (unused) and vsp-client.php.
-2. Notices/deprecations: `fgetcsv()` without `$escape` (8.5), ADOdb dynamic property / `(integer)` cast (pub/lib/adodb), undefined `gameversion` (vsp-q3a.php:724), array offset on bool/null (vsp.php:1311, 1472), "Only variables should be assigned by reference" (vsp.php:2174).
+2. Notices/deprecations: ADOdb dynamic property / `(integer)` cast (pub/lib/adodb), array offset on bool/null (vsp.php:1311, 1472).
 3. composer.json requires `php ^7.4`.
 4. pub/themes/bismarck/all.inc.php suppresses warnings in the web path.
