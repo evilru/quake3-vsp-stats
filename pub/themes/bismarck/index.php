@@ -20,7 +20,7 @@ function drawHeadBar()
   <table CLASS="cellHeading" CELLSPACING="0" CELLPADDING="1" WIDTH="100%" style="border-width: 0;">
     <TR>
     <TD HEIGHT="25" CLASS="cellHeading" style="border-right-width: 0; text-align: left;" >
-      <B><?php if ($hist_rank) echo 'Historical ' ?>Player Stats</B> &nbsp;<?php  if (isset($_POST['search_by'])) echo " ( search results for {$_POST['search_by']} = {$_POST['search_txt']} )"; ?>
+      <B><?php if ($hist_rank) echo 'Historical ' ?>Player Stats</B> &nbsp;<?php  if (isset($_POST['search_by'])) echo " ( search results for " . html_encode($_POST['search_by']) . " = " . html_encode($_POST['search_txt']) . " )"; ?>
     </TD>
     
 
