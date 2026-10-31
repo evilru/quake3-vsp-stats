@@ -21,7 +21,7 @@ class WebIndexTest extends TestCase
         }
     }
 
-    private function get(string $path): string
+    private function get(string $path, ?array $post = null): string
     {
         $sock = stream_socket_server('tcp://127.0.0.1:0', $errno, $errstr);
         $port = (int) substr(strrchr(stream_socket_get_name($sock, false), ':'), 1);
@@ -35,7 +35,12 @@ class WebIndexTest extends TestCase
             }
             usleep(100000);
         }
-        return (string) file_get_contents('http://127.0.0.1:' . $port . $path);
+        $context = $post === null ? null : stream_context_create(['http' => [
+            'method' => 'POST',
+            'header' => 'Content-Type: application/x-www-form-urlencoded',
+            'content' => http_build_query($post),
+        ]]);
+        return (string) file_get_contents('http://127.0.0.1:' . $port . $path, false, $context);
     }
 
     public function testRootPageRedirectsToThemeWithoutWarnings(): void
@@ -262,6 +267,24 @@ class WebIndexTest extends TestCase
         $this->importBaseq3Database('q3a-xp', 'xp.log');
 
         $body = $this->get('/themes/bismarck/index.php/' . rawurlencode('"><script>alert(1)</script>') . '?config=cfg-default.php');
+
+        $this->assertStringNotContainsString('<script>alert(1)</script>', $body);
+    }
+
+    public function testPlayerSearchShowsSearchTermInHeading(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+
+        $body = $this->get('/themes/bismarck/index.php?config=cfg-default.php', ['search_by' => 'name', 'search_txt' => 'Doom']);
+
+        $this->assertStringContainsString('( search results for name = Doom )', $body);
+    }
+
+    public function testPlayerSearchEscapesSearchTermInHeading(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+
+        $body = $this->get('/themes/bismarck/index.php?config=cfg-default.php', ['search_by' => 'name', 'search_txt' => '<script>alert(1)</script>']);
 
         $this->assertStringNotContainsString('<script>alert(1)</script>', $body);
     }
