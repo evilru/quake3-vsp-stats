@@ -37,6 +37,7 @@ if (!defined('MYSQLI_READ_DEFAULT_GROUP')) define('MYSQLI_READ_DEFAULT_GROUP',1)
 class ADODB_mysqli extends ADOConnection {
 	var $databaseType = 'mysqli';
 	var $dataProvider = 'mysql';
+	var $databaseName;
 	var $hasInsertID = true;
 	var $hasAffectedRows = true;
 	var $metaTablesSQL = "SELECT
