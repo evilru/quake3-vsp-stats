@@ -32,8 +32,10 @@ All repo content (code comments, docs, scripts, commits) is English. The branch 
 - `pkill -f` on a pattern also kills the own shell.
 - vsp.php runs on include: not unit-testable, use CLI tests (`tests/ImportCliTest.php`).
 
+## Policy
+- Behavior-changing bugs are never fixed during the migration: keep the old behavior and leave a `TODO(tech-debt)` with the intended fix in the code.
+
 ## Open findings (priority order)
-1. Undefined `LOG_READ_SIZE` remains in vsp-q3a.php:254/296 (unused) and vsp-client.php.
-2. Notices/deprecations: ADOdb dynamic property / `(integer)` cast (pub/lib/adodb), array offset on bool/null (vsp.php:1311, 1472).
-3. composer.json requires `php ^7.4`.
-4. pub/themes/bismarck/all.inc.php suppresses warnings in the web path.
+1. `LOG_READ_SIZE` is undefined in the unused `vsp-q3a.php` methods `saveShutdownState()`/`verifySavestate()` (and `vsp-client.php` defines it conditionally); would throw on 8.5 if ever called.
+2. The theme pages `pub/themes/bismarck/*.php` only had index/playerstat/gamestat/awardstat requested with one sample each; other query parameters/branches are unchecked on 8.5.
+3. `error_reporting(E_ALL)` in `pub/themes/bismarck/all.inc.php` is temporary (restore the commented original at the end).
