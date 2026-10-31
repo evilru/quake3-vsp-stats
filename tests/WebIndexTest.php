@@ -79,6 +79,16 @@ class WebIndexTest extends TestCase
         $this->assertDoesNotMatchRegularExpression('/array offset on (?:value of type )?\w+/', $body);
     }
 
+    public function testPlayerPageForPlayerWithoutWeaponDataRendersWithoutKsortError(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+
+        $body = $this->get('/themes/bismarck/playerstat.php?playerID=ExcessivePlayer&config=cfg-default.php');
+
+        $this->assertStringContainsString('ExcessivePlayer', $body);
+        $this->assertStringNotContainsString('ksort()', $body);
+    }
+
     private function importBaseq3Database(string $type = 'q3a', string $log = 'baseq3.log'): void
     {
         $root = dirname(__DIR__);
