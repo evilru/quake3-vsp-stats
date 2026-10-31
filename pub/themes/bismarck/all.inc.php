@@ -205,7 +205,8 @@ function drawMenu()
             <form style="display:inline" method="post" action="<?php  print "$_SERVER[PHP_SELF]"; ?>">
 
             <?php
-            $query_str=$_SERVER['QUERY_STRING'];
+            // TODO(tech-debt): QUERY_STRING is absent without a query; an empty string is kept. Intended: build the skin link without relying on it.
+            $query_str=$_SERVER['QUERY_STRING'] ?? '';
             $query_str=preg_replace("/&amp;skin=[^&]*/i",'',$query_str);
             ?>
 
