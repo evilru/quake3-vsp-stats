@@ -1308,7 +1308,7 @@ class GameDataProcessor
         $rs = $db->Execute($sqlValue);
         $awardset_expanded[$awardKey]["sql"][$sqlKey] = @$rs->fields;
         $awardset_expanded[$awardKey]["result"] =
-          $awardset_expanded[$awardKey]["sql"][$sqlKey][0];
+          $awardset_expanded[$awardKey]["sql"][$sqlKey][0] ?? null;
       }
       if (
         isset($awardset_expanded[$awardKey]["name"]) &&
@@ -1469,7 +1469,7 @@ class GameDataProcessor
                 WHERE timeStart = $qtime
                 LIMIT 1";
       $rs = $db->Execute($sql);
-      if ($rs->fields[0]) {
+      if (!$rs->EOF && $rs->fields[0]) {
         print "duplicated game timestamp, ignored\n";
         flushOutputBuffers();
         return;
