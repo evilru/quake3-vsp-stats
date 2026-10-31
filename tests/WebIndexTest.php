@@ -68,6 +68,17 @@ class WebIndexTest extends TestCase
         $this->assertDoesNotMatchRegularExpression('/Undefined (?:array key|offset)/', $body);
     }
 
+    public function testGamePageRendersWithoutArrayOffsetWarning(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+        $gameId = trim((string) shell_exec('mysql -N -e "SELECT gameID FROM vsp.vsp_gameprofile ORDER BY gameID LIMIT 1"'));
+
+        $body = $this->get('/themes/bismarck/gamestat.php?gameID=' . $gameId . '&config=default');
+
+        $this->assertNotSame('', $gameId);
+        $this->assertDoesNotMatchRegularExpression('/array offset on (?:value of type )?\w+/', $body);
+    }
+
     private function importBaseq3Database(string $type = 'q3a', string $log = 'baseq3.log'): void
     {
         $root = dirname(__DIR__);
