@@ -588,7 +588,7 @@ function drawPreyOrEnemyList($what,$limit)
 
   // TODO(tech-debt): $player_list was undefined for players without matrix data (7.4 only warned). Keep the empty list; initialize $gmatrixtotal properly.
   $player_list = [];
-  foreach($gmatrixtotal as $player_i=>$val_i)
+  foreach($gmatrixtotal ?? [] as $player_i=>$val_i)
     $player_list[$player_i]=@$gmatrixtotal[$player_i]['_v_weapon'][$data];
 
   unset($player_list['_v_player']);
@@ -1337,7 +1337,7 @@ function readPlayerData()
   //endchange
 
   //change: round skills
-  $player_data['skill']=floor($rs->fields[1]);
+  $player_data['skill']=floor((float) $rs->fields[1]);
   //endchange
   //change: add additional skills information
   if ($rs->fields[7]) {
@@ -1352,7 +1352,7 @@ function readPlayerData()
   $player_data['death_streak']=$rs->fields[5];
   
   // TODO(tech-debt): unknown players have no games; 7.4 warned and yielded NAN (0/0). Show a proper empty value instead.
-  $player_data['kills:game']=$player_data['games'] ? round($player_data['kills']/$player_data['games'],2) : NAN;
+  $player_data['kills:game']=$player_data['games'] ? round($player_data['kills']/$player_data['games'],2) : 'NAN';
   $player_data['kills:death']=round($player_data['kills']/(1+$player_data['deaths']),2);
 
   //change: add first seen and last seen fields
@@ -1604,7 +1604,7 @@ function drawWeaponStats()
   
   $count=0;
   //htmlprint_r($gmatrixtotal);
-  foreach($gweapon as $weapon => $val)
+  foreach($gweapon ?? [] as $weapon => $val)
   {
       $count++;
       if ($count%2 == 1)
