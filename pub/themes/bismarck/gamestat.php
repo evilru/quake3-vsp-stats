@@ -369,7 +369,8 @@ function getPlayerNames()
 
           //echo $sql;
           $rs = $db->Execute($sql);
-          $gplayerName[$playerIDi]=$rs->fields[0];
+          // TODO(tech-debt): players without a profile row have no fields; null is kept. Intended: fall back to the playerID or the logged name.
+          $gplayerName[$playerIDi]=$rs->fields[0] ?? null;
         }
         //endchange
   }
