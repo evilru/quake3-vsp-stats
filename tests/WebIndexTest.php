@@ -208,6 +208,24 @@ class WebIndexTest extends TestCase
         $this->assertLessThan(strpos($body, 'Uriel'), strpos($body, 'Doom'));
     }
 
+    public function testPlayerListKeepsHistoricalRankFlagInPagingLinks(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+
+        $body = $this->get('/themes/bismarck/index.php?config=cfg-default.php&hist_rank=1');
+
+        $this->assertStringContainsString('start_from=0&amp;hist_rank=1">first', $body);
+    }
+
+    public function testPlayerListEscapesHistRankParameter(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+
+        $body = $this->get('/themes/bismarck/index.php?config=cfg-default.php&hist_rank=' . rawurlencode('"><script>alert(1)</script>'));
+
+        $this->assertStringNotContainsString('<script>alert(1)</script>', $body);
+    }
+
     private function importBaseq3Database(string $type = 'q3a', string $log = 'baseq3.log'): void
     {
         $root = dirname(__DIR__);
