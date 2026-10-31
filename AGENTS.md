@@ -6,6 +6,7 @@ All repo content (code comments, docs, scripts, commits) is English. The branch 
 ## Workflow (one issue per run)
 - Find the first error on 8.5, check it on 7.4.33. Only 8.5 -> path A: test green on 7.4, red on 8.5, fix. Also 7.4 / plainly wrong -> path B: red test, minimal fix, no compat work.
 - Separate commits for test and fix (Conventional Commits), push `feature/php8`. No PR unless asked. Unclear or behavior-changing -> ask; other findings are only noted here.
+- Run history lives only in commit messages (bodies explain why, findings, decisions), nowhere else.
 
 ## Tools (`scripts/`)
 - `php-use 7.4|8.5`, `vsp-db-start` (installed to /usr/local/bin by setup-cloud.sh)
