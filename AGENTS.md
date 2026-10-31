@@ -31,4 +31,9 @@
 - Scheduled Run: keine Rückfragen möglich; unklare Verhaltensänderungen nur melden.
 
 ## Status
-- Run 1: Erster Fund (noch NICHT geändert, Rückfrage nötig): `LOG_READ_SIZE` ist in vsp.php:2392/2425 undefiniert (definiert nur in vsp-client.php:146, nicht geladen; vsp-q3a.php hat nur `private const`). Unter 7.4 stilles Warning (Hash aus Müll, konsistent in save/check_savestate), unter 8.5 Fatal `Undefined constant`. = Bug im Original (Weg B) UND Kompat. Fix (define 1024) ändert gespeicherte savestate-Hashes -> bestehende Savestates matchen nicht mehr (Log würde neu importiert). Entscheidung des Users abwarten.
+- Run 1 (erledigt): `LOG_READ_SIZE` undefiniert in vsp.php (save_savestate/check_savestate). Verhalten unter 7.4 war: Hash = md5(""). Fix behält das bei (explizit `md5("")` / `$fileData = ""`) + TODO(tech-debt) an beiden Stellen. Gleiches Muster, unberührt: vsp-q3a.php:254/296 (unused saveShutdownState/verifySavestate), vsp-client.php.
+- Nächste Funde (offen, Reihenfolge = Priorität):
+  1. 8.5-Import bricht ab: `mysqli_sql_exception: Field 'value' doesn't have a default value` (INSERT INTO savestate SET logfile=..., vsp.php save_savestate). PHP 8.1+ wirft mysqli-Exceptions standardmäßig; unter 7.4 stilles Scheitern, savestate-Tabelle bleibt leer (Savestate funktioniert also nie). Weg A.
+  2. ConvertColorCodesTest::testXpConvertEmptyName: `Uninitialized string offset 0` (vsp-q3a.php:436/464), rot unter 7.4 UND 8.5 (Bug im Original, Weg B).
+  3. Alte undefined index/array-offset-Warnings (vsp-q3a.php:724/859, vsp.php:1311) und by-reference-Notices (vsp-q3a.php:1070/1071, vsp.php:2174) – nur mit `-d error_reporting=-1` und Debug-Handler sichtbar.
+- Test-Muster für CLI: tests/ImportCliTest.php (setzt DB `vsp` zurück, braucht `vsp-db-start`).
