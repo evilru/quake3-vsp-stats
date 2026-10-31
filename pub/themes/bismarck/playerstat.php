@@ -1251,7 +1251,7 @@ function readPlayerData()
             LIMIT 1
         ";
   $rs = $db->Execute($sql);
-  if ($rs->fields[0])
+  if ($rs->fields[0] ?? null)
     $player_data['icon'] = $rs->fields[0];
 //endchange
 
@@ -1269,6 +1269,11 @@ function readPlayerData()
 //endchange
 
   $rs=$db->Execute($sql);
+  // TODO(tech-debt): players without a profile row (e.g. empty playerID) have no fields; empty
+  // values are kept as on 7.4. Intended: show a "player not found" page instead.
+  if (!$rs->fields) {
+    $rs->fields = array_fill(0, 12, null);
+  }
   
   $player_data['playerName']=$rs->fields[0];
 
@@ -1282,7 +1287,7 @@ function readPlayerData()
         LIMIT 1
         ";
   $rs2 = $db->Execute($sql);
-  if ($rs2->fields[0]) {
+  if ($rs2->fields[0] ?? null) {
       $player_data['country_name'] = $rs2->fields[0];
   }
   //endchange
@@ -1318,7 +1323,7 @@ function readPlayerData()
               $sql .= " AND ({$GLOBALS['settings']['display']['playerlist_conditions']})";
           }
           $rs2 = $db->Execute($sql);
-          $player_data['rank'] = $rs2->fields[0] + 1;
+          $player_data['rank'] = ($rs2->fields[0] ?? null) + 1;
       }
   }
 
@@ -1328,7 +1333,7 @@ function readPlayerData()
       $sql .= " AND ({$GLOBALS['settings']['display']['playerlist_conditions']})";
   }
   $rs2 = $db->Execute($sql);
-  $player_data[ $GLOBALS['cfg']['display']['days_inactivity'] ? 'historical_rank' : 'rank'] = $rs2->fields[0] + 1;
+  $player_data[ $GLOBALS['cfg']['display']['days_inactivity'] ? 'historical_rank' : 'rank'] = ($rs2->fields[0] ?? null) + 1;
   //endchange
 
   //change: round skills
