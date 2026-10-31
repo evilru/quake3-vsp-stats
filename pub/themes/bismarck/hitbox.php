@@ -261,6 +261,11 @@ if (isset($HB['head']) && isset($HB['ALL']) && $HB['ALL']>0)
   imagestring($bodyImage, 2,  90,  15, $string, $color_text);
 }
 
-imagejpeg($bodyImage, '', 100);
+// TODO(tech-debt): an empty filename never produced an image (7.4 warned, 8.x throws ValueError);
+// that behavior is kept. Intended: imagejpeg($bodyImage, null, 100) to write the image to the output.
+try {
+  imagejpeg($bodyImage, '', 100);
+} catch (\ValueError $e) {
+}
 
 ?>
