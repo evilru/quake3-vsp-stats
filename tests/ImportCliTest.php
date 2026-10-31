@@ -55,4 +55,12 @@ class ImportCliTest extends TestCase
         $this->assertMatchesRegularExpression('/processed in \d+m \d+s \(/', $output);
         $this->assertStringNotContainsString('Implicit conversion from float', $output);
     }
+
+    public function testBaseq3ImportHasNoArrayOffsetWarningInVspPhp(): void
+    {
+        $this->assertDoesNotMatchRegularExpression(
+            '/array offset on (?:value of type )?\w+ in \S+vsp\.php on line/',
+            $this->importBaseq3()
+        );
+    }
 }
