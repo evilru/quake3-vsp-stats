@@ -433,7 +433,7 @@ class VSPParserQ3A
       $str,
       array_diff_assoc($this->translationData["char_trans"], $tmp)
     );
-    if ($str[0] != "^") {
+    if (substr($str, 0, 1) != "^") {
       $str = "^7" . $str;
     }
     $str = preg_replace("/\^(a[1-9]|[fFrRbBl])/", "", $str);
