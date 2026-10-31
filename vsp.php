@@ -1306,7 +1306,11 @@ class GameDataProcessor
           $sqlValue
         );
         $rs = $db->Execute($sqlValue);
-        $awardset_expanded[$awardKey]["sql"][$sqlKey] = @$rs->fields;
+        // TODO(tech-debt): an empty result set (e.g. avg_shots_* with no rows for a weapon) leaves
+        // no usable value, so award SQL referencing it evaluates to "" (e.g. "(-1)"). That behaviour
+        // is kept via [null]. Intended: skip or default such awards explicitly instead of
+        // comparing against an empty value.
+        $awardset_expanded[$awardKey]["sql"][$sqlKey] = @$rs->fields ?: [null];
         $awardset_expanded[$awardKey]["result"] =
           $awardset_expanded[$awardKey]["sql"][$sqlKey][0] ?? null;
       }
