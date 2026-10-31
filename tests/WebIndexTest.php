@@ -37,4 +37,25 @@ class WebIndexTest extends TestCase
         $this->assertStringContainsString('url=themes/bismarck/index.php?', $body);
         $this->assertStringNotContainsString('QUERY_STRING', $body);
     }
+
+    public function testThemeIndexRendersWithoutMissingQueryStringWarning(): void
+    {
+        $this->importBaseq3Database();
+
+        $body = $this->get('/themes/bismarck/index.php');
+
+        $this->assertStringContainsString('Skins:', $body);
+        $this->assertStringNotContainsString('QUERY_STRING', $body);
+    }
+
+    private function importBaseq3Database(): void
+    {
+        $root = dirname(__DIR__);
+        exec('mysql -e "DROP DATABASE IF EXISTS vsp; CREATE DATABASE vsp" 2>&1', $ignored, $rc);
+        if ($rc !== 0) {
+            $this->markTestSkipped('MariaDB not available (run vsp-db-start)');
+        }
+        exec('cd ' . escapeshellarg($root) . ' && ' . escapeshellarg(PHP_BINARY)
+            . ' vsp.php -c pub/configs/cfg-default.php -l q3a -p savestate 1 baseq3.log >/dev/null 2>&1 </dev/null');
+    }
 }
