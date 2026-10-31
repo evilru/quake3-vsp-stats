@@ -79,4 +79,18 @@ class ImportCliTest extends TestCase
             $this->importBaseq3('q3a-xp', 'xp.log')
         );
     }
+
+    public function testXpChatDuringGameIsStoredAsPlayerQuote(): void
+    {
+        $lines = file(dirname(__DIR__) . '/xp.log');
+        array_splice($lines, 1021, 0, ["  3:39 say: Bitterman: hello there friend 7\n"]);
+        $log = tempnam(sys_get_temp_dir(), 'xpchat');
+        file_put_contents($log, implode('', $lines));
+
+        $this->importBaseq3('q3a-xp', escapeshellarg($log));
+        unlink($log);
+
+        exec('mysql -N -e "SELECT dataValue FROM vsp.vsp_playerdata WHERE playerID=\'Bitterman\' AND dataName=\'quote\'" 2>&1', $rows);
+        $this->assertSame(['hello there friend'], $rows);
+    }
 }
