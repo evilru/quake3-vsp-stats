@@ -93,7 +93,7 @@ function setSkin()
 
   $stylesheet="./skins/$skin/$skin.css";
 
-  $fp_skin = fopen ($stylesheet, "rb");
+  $fp_skin = @fopen ($stylesheet, "rb");
   if (!$fp_skin)
   {
     if ($skin==$GLOBALS['settings']['display']['default_skin'])
