@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 
 class ImportCliTest extends TestCase
 {
-    public function testBaseq3ImportDoesNotUseUndefinedLogReadSize(): void
+    private function importBaseq3(): string
     {
         exec('mysql -e "DROP DATABASE IF EXISTS vsp; CREATE DATABASE vsp" 2>&1', $ignored, $rc);
         if ($rc !== 0) {
@@ -13,8 +13,16 @@ class ImportCliTest extends TestCase
         $root = dirname(__DIR__);
         $cmd = escapeshellarg(PHP_BINARY) . ' vsp.php -c pub/configs/cfg-default.php -l q3a -p savestate 1 baseq3.log 2>&1 </dev/null';
         exec('cd ' . escapeshellarg($root) . ' && ' . $cmd, $lines, $rc);
-        $output = implode("\n", $lines);
+        return implode("\n", $lines);
+    }
 
-        $this->assertStringNotContainsString('LOG_READ_SIZE', $output);
+    public function testBaseq3ImportDoesNotUseUndefinedLogReadSize(): void
+    {
+        $this->assertStringNotContainsString('LOG_READ_SIZE', $this->importBaseq3());
+    }
+
+    public function testBaseq3ImportEmitsNoFgetcsvDeprecation(): void
+    {
+        $this->assertStringNotContainsString('fgetcsv', $this->importBaseq3());
     }
 }
