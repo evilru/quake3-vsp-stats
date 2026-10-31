@@ -21,7 +21,7 @@
 - `vsp-db-start` im Vordergrund mit `| tail` aufgerufen blockiert (mysqld erbt die Pipe) -> immer `</dev/null`, bei Bedarf `setsid nohup ... &`.
 - `composer install` bekommt in der Cloud keine GitHub-Dist-Downloads ("Could not authenticate") und fällt auf `git clone` zurück: sehr langsam (>15 min). Setup-Skript wärmt den Composer-Cache vor; `vendor/` danach vorhanden halten.
 - Nicht `pkill -f "composer install"` aus der Shell: trifft die eigene Shell (Exit 144).
-- `composer install` klont volle Git-Mirrors nach /root/.cache/composer/vcs (phpstan/symfony: >20 GB) -> Platte voll, vendor/autoload.php fehlt. Danach `rm -rf /root/.cache/composer/vcs vendor`. Ausweg: nur PHPUnit in /opt/phpunit installieren (`composer require --dev --prefer-source phpunit/phpunit:^9.0`) und mit `--bootstrap /opt/phpunit/vendor/autoload.php` starten.
+- `composer install` ohne Seeding klont volle Git-Mirrors (>20 GB, Platte voll). Lösung: `php scripts/composer-seed.php composer.lock` (git fetch --depth 1 + git archive in den Dist-Cache, ~5 s), danach `composer install` ~2 s. Setup-Skript macht das vor. Falls Cache leer: selbst seeden. Aufräumen: `rm -rf /root/.cache/composer/vcs vendor`. `COMPOSER_ALLOW_SUPERUSER=1` setzen (sonst deaktiviert Composer Plugins).
 - Heruntergeladene Phars ausführen blockt der Auto-Mode-Klassifizierer.
 - pub/configs/cfg-default.php setzt `error_reporting(... ^ E_WARNING)`: Warnings sind in der CLI unter 7.4 UND 8.5 unsichtbar; Fatal/TypeErrors nicht. Für Funde zum Vergleich `-d error_reporting=-1` bzw. Config-Override nutzen.
 - Vor jedem Import-Vergleich DB zurücksetzen: `mysql -e "DROP DATABASE vsp; CREATE DATABASE vsp"` (sonst 'ignored: 1').

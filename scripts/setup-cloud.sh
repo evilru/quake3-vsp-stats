@@ -64,19 +64,18 @@ if ! command -v composer >/dev/null; then
   rm -f /tmp/composer-setup.php
 fi
 
-# Composer-Cache vorwärmen. GitHub-Dist-Downloads scheitern hier ("Could not authenticate"),
-# Composer fällt dann auf `git clone` zurück (>15 min). Das passiert einmalig hier im Setup;
-# danach ist `composer install` im Repo nur noch ein Cache-Treffer.
-REPO=/home/user/quake3-vsp-stats
-if [ -f "$REPO/composer.lock" ]; then
-  (cd "$REPO" && composer install --no-interaction --no-progress) || echo "WARN: composer install im Repo fehlgeschlagen"
+# Composer-Cache seeden. GitHub-Zipball/codeload liefern hier 403, Composer klont sonst volle
+# Git-Mirrors (>20 GB, Platte voll, phpstan bricht ab). Das Setup läuft ohne Repo-Kontext:
+# composer.lock + composer-seed.php kommen aus einem flachen Klon. `git fetch --depth 1` geht.
+# Danach ist `composer install` im Repo ein reiner Cache-Treffer (~2 s).
+SEED=$(mktemp -d)
+if git clone -q --depth 1 --branch feature/php8 https://github.com/evilru/quake3-vsp-stats.git "$SEED" \
+   || git clone -q --depth 1 https://github.com/evilru/quake3-vsp-stats.git "$SEED"; then
+  php "$SEED/scripts/composer-seed.php" "$SEED/composer.lock" || echo "WARN: composer-seed fehlgeschlagen"
 else
-  W=$(mktemp -d)
-  (cd "$W" && composer require --dev --no-interaction --no-progress --prefer-source \
-     "phpunit/phpunit:^9.0" "squizlabs/php_codesniffer:^3.0" "phpstan/phpstan:^1.0" "phpmd/phpmd:^2.13") \
-    || echo "WARN: Cache-Vorwärmen fehlgeschlagen"
-  rm -rf "$W"
+  echo "WARN: Klon für composer-seed fehlgeschlagen - composer install wird langsam sein"
 fi
+rm -rf "$SEED"
 
 # DB schon jetzt starten
 vsp-db-start </dev/null || echo "WARN: DB-Start fehlgeschlagen"
