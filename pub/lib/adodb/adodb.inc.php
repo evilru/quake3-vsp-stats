@@ -1830,7 +1830,7 @@ if (!defined('_ADODB_LAYER')) {
 			return false;
 		}
 
-		$midrow = (integer) ($total/2);
+		$midrow = (int) ($total/2);
 		$rs = $this->SelectLimit("select $field from $table $where order by 1",1,$midrow);
 		if ($rs && !$rs->EOF) {
 			return reset($rs->fields);
@@ -5267,10 +5267,10 @@ http://www.stanford.edu/dept/itss/docs/oracle/10g/server.101/b10759/statements_1
 										$nconnect = true; $persist = true; break;
 					case 'persist':
 					case 'persistent':	$persist = $v; break;
-					case 'debug':		$obj->debug = (integer) $v; break;
+					case 'debug':		$obj->debug = (int) $v; break;
 					#ibase
 					case 'role':		$obj->role = $v; break;
-					case 'dialect':	$obj->dialect = (integer) $v; break;
+					case 'dialect':	$obj->dialect = (int) $v; break;
 					case 'charset':		$obj->charset = $v; $obj->charSet=$v; break;
 					case 'buffers':		$obj->buffers = $v; break;
 					case 'fetchmode':   $obj->SetFetchMode($v); break;
