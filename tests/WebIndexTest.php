@@ -8,6 +8,8 @@ class WebIndexTest extends TestCase
 
     private $settingsBackup;
 
+    private $port;
+
     protected function tearDown(): void
     {
         if ($this->settingsBackup !== null) {
@@ -24,6 +26,7 @@ class WebIndexTest extends TestCase
         $sock = stream_socket_server('tcp://127.0.0.1:0', $errno, $errstr);
         $port = (int) substr(strrchr(stream_socket_get_name($sock, false), ':'), 1);
         fclose($sock);
+        $this->port = $port;
         $cmd = [PHP_BINARY, '-d', 'display_errors=1', '-d', 'error_reporting=-1', '-S', '127.0.0.1:' . $port, '-t', dirname(__DIR__) . '/pub'];
         $this->server = proc_open($cmd, [1 => ['file', '/dev/null', 'w'], 2 => ['file', '/dev/null', 'w']], $pipes);
         for ($i = 0; $i < 50; $i++) {
@@ -222,6 +225,25 @@ class WebIndexTest extends TestCase
         $this->importBaseq3Database('q3a-xp', 'xp.log');
 
         $body = $this->get('/themes/bismarck/index.php?config=cfg-default.php&hist_rank=' . rawurlencode('"><script>alert(1)</script>'));
+
+        $this->assertStringNotContainsString('<script>alert(1)</script>', $body);
+    }
+
+    public function testRootPageRedirectKeepsQueryString(): void
+    {
+        $body = $this->get('/?config=cfg-default.php&sort=kills');
+
+        $this->assertStringContainsString('url=themes/bismarck/index.php?config=cfg-default.php&sort=kills">', $body);
+        $this->assertStringContainsString('window.location="themes/bismarck/index.php?config=cfg-default.php&sort=kills"', $body);
+    }
+
+    public function testRootPageRedirectDoesNotReflectRawQueryStringMarkup(): void
+    {
+        $this->get('/');
+        $socket = fsockopen('127.0.0.1', $this->port);
+        fwrite($socket, "GET /?a=\"></script><script>alert(1)</script> HTTP/1.0\r\n\r\n");
+        $body = (string) stream_get_contents($socket);
+        fclose($socket);
 
         $this->assertStringNotContainsString('<script>alert(1)</script>', $body);
     }
