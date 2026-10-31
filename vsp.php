@@ -2332,7 +2332,7 @@ function populateIp2countryTable(): void
   }
   $countries = [];
   if ($file = fopen($filename, "rb")) {
-    while ($line = fgetcsv($file)) {
+    while ($line = fgetcsv($file, null, ",", "\"", "\\")) {
       $from_index = $GLOBALS["cfg"]["ip2country"]["columns"]["ip_from"];
       $to_index = $GLOBALS["cfg"]["ip2country"]["columns"]["ip_to"];
       $code_index = $GLOBALS["cfg"]["ip2country"]["columns"]["country_code2"];
