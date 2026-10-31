@@ -755,7 +755,10 @@ function setupVars()
   if (isset($_GET['sort'])) 
     $sort=$_GET['sort'];
   
-  if (!isset($sort) || strstr($sort,";"))
+  // sort is used in ORDER BY: only the columns offered in the table header (and the expressions printed in the paging links)
+  $allowedSorts=array('countryCode','playerID','playerName','kills','deaths','efficiency','kill_streak','death_streak','kd','kg','games','skill',
+    '((kills*100)/(1+kills+deaths))','(kills/(1+deaths))','(kills/(1+games))');
+  if (!isset($sort) || !in_array($sort,$allowedSorts,true))
     $sort=$GLOBALS['settings']['display']['default_sort'];
   
   if ($sort=="efficiency")
