@@ -2398,13 +2398,11 @@ function save_savestate(&$parser): void
   $logfile = $db->qstr(
     isset($parser->original_log) ? $parser->original_log : $parser->logFilePath
   );
-  $sql = "INSERT INTO {$GLOBALS["cfg"]["db"]["table_prefix"]}savestate SET `logfile` = {$logfile}";
-  $rs = $db->Execute($sql);
   $value = $db->qstr(
     "\$this->logdata['last_shutdown_hash']='{$parser->logdata["last_shutdown_hash"]}';\n" .
       "\$this->logdata['last_shutdown_end_position']={$parser->logdata["last_shutdown_end_position"]};"
   );
-  $sql = "UPDATE {$GLOBALS["cfg"]["db"]["table_prefix"]}savestate SET `value` = {$value}";
+  $sql = "REPLACE INTO {$GLOBALS["cfg"]["db"]["table_prefix"]}savestate SET `logfile` = {$logfile}, `value` = {$value}";
   $rs = $db->Execute($sql);
 }
 
