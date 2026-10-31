@@ -15,7 +15,19 @@ Related GitHub repository:
 docker compose up -d
 ```
 
-The configured games.log will be checked every 15 minutes for new games.
+The configured games.log is imported when the container starts and then every 15 minutes
+(see `IMPORT_INTERVAL`). The stats are available on port 80 of the host
+(<http://yourserver.com/pub/themes/bismarck/index.php>).
+
+Podman works too: `podman compose up -d` (with `docker compose` as provider) or `podman-compose up -d`.
+Use a `.env` file next to the compose file for the variables below.
+
+### Container security
+
+The web container runs as the unprivileged user `www-data` (Apache listens on port 8080 inside the container, the
+compose file maps it to port 80), with a read-only root file system, no Linux capabilities and no new privileges.
+Only `logdata` (a volume) and a few temporary directories are writable. The database lives in the named volume
+`dbdata`; it is not removed by `docker compose down`, only by `docker compose down -v`.
 
 ## Configuration
 
@@ -109,6 +121,12 @@ Should be the same as _MARIADB_USER_.
 Password used to connect to the database.  
 Should be the same as _MARIADB_PASSWORD_.
 
+#### IMPORT_INTERVAL
+
+default: _900_  
+Seconds between two imports of the log file. After a failed import (e.g. the database is not ready yet) the import is
+retried after 30 seconds (`IMPORT_RETRY`).
+
 #### GAMES_LIMIT
 
 default: _1000_  
@@ -138,7 +156,7 @@ default: _0_
 
 No default value, to enable this feature, set a password with at least 6 characters.
 
-All VSP commands can be called from the commandline and from the browser. The docker image comes with the following [cronjob].
+All VSP commands can be called from the commandline and from the browser. The docker image runs the [import loop] in the background.
 
 The webinterface is available under the following url: http://yourserver.com/vsp.php.
 Make sure to set a password in [password.inc.php].
@@ -270,7 +288,7 @@ Mount it into the image.
     <http://yourserver.com/pub/themes/bismarck/index.php?config=cfg-ra3.php>
 
 [docker-compose.yml]: https://github.com/evilru/quake3-vsp-stats/blob/master/docker-compose.yml
-[cronjob]: https://github.com/evilru/quake3-vsp-stats/blob/master/docker/import-cron
+[import loop]: https://github.com/evilru/quake3-vsp-stats/blob/master/docker/import-loop.sh
 [pub/configs/cfg-default.php]: https://github.com/evilru/quake3-vsp-stats/blob/master/pub/configs/cfg-default.php
 [import script]: https://github.com/evilru/quake3-vsp-stats/blob/master/docker/import.sh
 [password.inc.php]: https://github.com/evilru/quake3-vsp-stats/blob/master/password.inc.php

@@ -1,6 +1,8 @@
 # syntax=docker/dockerfile:1
 FROM php:8.5-apache
 
+# Apache listens on 8080 because the container runs as the unprivileged user www-data
+EXPOSE 8080
 # supervisor web gui would be available on port 9001
 # EXPOSE 9001
 
@@ -41,13 +43,15 @@ ENV FTP_USERNAME="anonymous" \
 ENV PHP_DISPLAY_ERRORS="Off" \
     PHP_ERROR_REPORTING="32767"
 
+# seconds between two imports of the log file
+ENV IMPORT_INTERVAL="900"
+
 # comma-separated list of excluded players (e.g. Angel,Biker,Bitterman,Bones,Cadavre)
 ENV EXCLUDED_PLAYERS="" \
    # limit of detailed game stats that will be stored on the database (negative number for unlimited)
    GAMES_LIMIT="1000"
 
-RUN apt-get update && apt-get -y install \
-    cron \
+RUN apt-get update && apt-get -y install --no-install-recommends \
     supervisor \
     libjpeg-dev \
     libpng-dev \
@@ -67,9 +71,12 @@ COPY docker/vsp.ini $PHP_INI_DIR/conf.d/vsp.ini
 
 WORKDIR /vsp
 
-RUN chmod +x docker/import.sh \
- && chmod 777 -R logdata \
- && crontab docker/import-cron \
+RUN chmod +x docker/import.sh docker/import-loop.sh \
+ && mkdir -p ftplogs \
+ && chown -R www-data:www-data logdata ftplogs \
+ && chmod -R 775 logdata ftplogs \
+ && sed -ri -e 's!^Listen 80$!Listen 8080!' /etc/apache2/ports.conf \
+ && sed -ri -e 's!<VirtualHost \*:80>!<VirtualHost *:8080>!' /etc/apache2/sites-available/*.conf \
  && sed -ri -e 's!/var/www/html!/vsp!g' /etc/apache2/sites-available/*.conf \
  && sed -ri -e 's!/var/www/!/vsp!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf \
  && sed -ri -e 's!(\['\''table_prefix'\''\]\s*=\s*)"vsp_"(;)!\1$_ENV["TABLE_PREFIX"]\2!g' pub/configs/cfg-default.php \
@@ -97,5 +104,9 @@ RUN chmod +x docker/import.sh \
  && sed -ri -e 's!(\['\''check_unique_gameID'\''\]\s*=\s*)1!\1$_ENV["CHECK_UNIQUE_GAMEID"]!g' pub/configs/cfg-default.php \
  && sed -ri -e '/\$player_exclude_list=array\(/,/\);/c\$player_exclude_list=array_values\(array_filter\(explode\('\'','\'', $_ENV["EXCLUDED_PLAYERS"]\)\)\);' pub/include/playerExcludeList-default.inc.php
 
+USER www-data
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
+    CMD curl -fsS -o /dev/null http://127.0.0.1:8080/ || exit 1
 
 CMD ["supervisord", "-c", "/vsp/docker/supervisord.conf"]
