@@ -190,6 +190,24 @@ class WebIndexTest extends TestCase
         $this->assertDoesNotMatchRegularExpression('/(?:Warning|Deprecated|Notice)(?:<\/b>)?:/', $body);
     }
 
+    public function testPlayerListSortsByRequestedColumn(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+
+        $body = $this->get('/themes/bismarck/index.php?config=cfg-default.php&sort=kills&order=ASC');
+
+        $this->assertLessThan(strpos($body, 'Doom'), strpos($body, 'Uriel'));
+    }
+
+    public function testPlayerListIgnoresSqlInjectedSortParameter(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+
+        $body = $this->get('/themes/bismarck/index.php?config=cfg-default.php&sort=' . rawurlencode('kills ASC,playerID') . '&order=DESC');
+
+        $this->assertLessThan(strpos($body, 'Uriel'), strpos($body, 'Doom'));
+    }
+
     private function importBaseq3Database(string $type = 'q3a', string $log = 'baseq3.log'): void
     {
         $root = dirname(__DIR__);
