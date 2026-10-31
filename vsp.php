@@ -2508,7 +2508,7 @@ function finalizeProgram(): void
   printTitle();
   $elapsed = getElapsedTime($GLOBALS["startTime"]);
   $minutes = floor($elapsed / 60);
-  $seconds = $elapsed % 60;
+  $seconds = (int) $elapsed % 60;
   echo "processed in {$minutes}m {$seconds}s ({$elapsed}s)\n";
   if (!cIS_SHELL) {
     echo "</PRE></BODY></HTML>";
