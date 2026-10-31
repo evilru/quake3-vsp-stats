@@ -1401,7 +1401,7 @@ class GameDataProcessor
   }
   //endchange
 
-  public function storeGameData(?array &$players, ?array &$gameOptions): void
+  public function storeGameData(?array $players, ?array $gameOptions): void
   {
     // almacena los cambios en la base de datos
     global $db; // db
