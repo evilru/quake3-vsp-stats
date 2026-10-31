@@ -48,6 +48,16 @@ class WebIndexTest extends TestCase
         $this->assertStringNotContainsString('QUERY_STRING', $body);
     }
 
+    public function testThemeIndexHasNoReferenceAssignmentNotice(): void
+    {
+        $this->importBaseq3Database();
+
+        $body = $this->get('/themes/bismarck/index.php');
+
+        $this->assertStringContainsString('Skins:', $body);
+        $this->assertStringNotContainsString('assigned by reference', $body);
+    }
+
     private function importBaseq3Database(): void
     {
         $root = dirname(__DIR__);
