@@ -89,6 +89,16 @@ class WebIndexTest extends TestCase
         $this->assertStringNotContainsString('ksort()', $body);
     }
 
+    public function testPlayerPageForUnknownPlayerRendersCompletely(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+
+        $body = $this->get('/themes/bismarck/playerstat.php?playerID=nobody&config=cfg-default.php');
+
+        $this->assertStringNotContainsString('Fatal error', $body);
+        $this->assertStringContainsString('</HTML>', strtoupper($body));
+    }
+
     private function importBaseq3Database(string $type = 'q3a', string $log = 'baseq3.log'): void
     {
         $root = dirname(__DIR__);
