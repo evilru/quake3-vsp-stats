@@ -248,6 +248,24 @@ class WebIndexTest extends TestCase
         $this->assertStringNotContainsString('<script>alert(1)</script>', $body);
     }
 
+    public function testPlayerListLinksUseScriptPath(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+
+        $body = $this->get('/themes/bismarck/index.php?config=cfg-default.php');
+
+        $this->assertStringContainsString('action="/themes/bismarck/index.php?config=cfg-default.php&amp;sort=skill&amp;hist_rank=', $body);
+    }
+
+    public function testPlayerListDoesNotReflectPathInfoMarkup(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+
+        $body = $this->get('/themes/bismarck/index.php/' . rawurlencode('"><script>alert(1)</script>') . '?config=cfg-default.php');
+
+        $this->assertStringNotContainsString('<script>alert(1)</script>', $body);
+    }
+
     private function importBaseq3Database(string $type = 'q3a', string $log = 'baseq3.log'): void
     {
         $root = dirname(__DIR__);
