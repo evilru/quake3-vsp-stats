@@ -235,6 +235,7 @@ if (!defined('_ADODB_LAYER')) {
 	/**
 	 * Helper class for FetchFields -- holds info on a column
 	 */
+	#[\AllowDynamicProperties]
 	class ADOFieldObject {
 		var $name = '';
 		var $max_length=0;
