@@ -99,6 +99,14 @@ class WebIndexTest extends TestCase
         $this->assertStringContainsString('</HTML>', strtoupper($body));
     }
 
+    public function testHitboxWithEmptyFilenameDoesNotAbortWithFatalError(): void
+    {
+        $body = $this->get('/themes/bismarck/hitbox.php?H[head]=5&H[ALL]=9&H[torso]=2');
+
+        $this->assertStringNotContainsString('Fatal error', $body);
+        $this->assertStringNotContainsString('ValueError', $body);
+    }
+
     private function importBaseq3Database(string $type = 'q3a', string $log = 'baseq3.log'): void
     {
         $root = dirname(__DIR__);
