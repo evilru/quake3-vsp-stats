@@ -32,9 +32,7 @@ All repo content (code comments, docs, scripts, commits) is English. The branch 
 - vsp.php runs on include: not unit-testable, use CLI tests (`tests/ImportCliTest.php`).
 
 ## Open findings (priority order)
-1. 8.5 import: `mysqli_sql_exception: Field 'value' doesn't have a default value` on `INSERT INTO savestate SET` (vsp.php save_savestate). Silent on 7.4, so savestate never persists. Path A.
-2. `ConvertColorCodesTest::testXpConvertEmptyName` red on both versions: `Uninitialized string offset 0` (vsp-q3a.php:436/464). Path B.
-3. Undefined `LOG_READ_SIZE` remains in vsp-q3a.php:254/296 (unused) and vsp-client.php.
-4. Notices/deprecations: `fgetcsv()` without `$escape` (8.5), ADOdb dynamic property / `(integer)` cast (pub/lib/adodb), undefined `gameversion` (vsp-q3a.php:724), array offset on bool/null (vsp.php:1311, 1472).
-5. composer.json requires `php ^7.4`.
-6. pub/themes/bismarck/all.inc.php suppresses warnings in the web path.
+1. Undefined `LOG_READ_SIZE` remains in vsp-q3a.php:254/296 (unused) and vsp-client.php.
+2. Notices/deprecations: `fgetcsv()` without `$escape` (8.5), ADOdb dynamic property / `(integer)` cast (pub/lib/adodb), undefined `gameversion` (vsp-q3a.php:724), array offset on bool/null (vsp.php:1311, 1472), "Only variables should be assigned by reference" (vsp.php:2174).
+3. composer.json requires `php ^7.4`.
+4. pub/themes/bismarck/all.inc.php suppresses warnings in the web path.
