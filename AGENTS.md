@@ -38,4 +38,3 @@ All repo content (code comments, docs, scripts, commits) is English. The branch 
 ## Open findings (priority order)
 1. `LOG_READ_SIZE` is undefined in the unused `vsp-q3a.php` methods `saveShutdownState()`/`verifySavestate()` (and `vsp-client.php` defines it conditionally); would throw on 8.5 if ever called.
 2. Theme pages: valid links (crawled from index) run clean on 8.5. Pages for non-existent IDs (unknown player/game/award, empty playerID) still emit warnings/deprecations (playerstat.php foreach null at ~591/1607, NAN coerced at ~1201, floor(null) at ~1340; gamestat.php array offset on null at ~594-652; awardstat.php:188/192). Only warnings; fatals are fixed.
-3. `error_reporting(E_ALL)` in `pub/themes/bismarck/all.inc.php` is temporary (restore the commented original at the end).

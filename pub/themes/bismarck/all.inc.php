@@ -6,7 +6,7 @@ function runAlways()
   define("cROOT_PATH",realpath(dirname(realpath(__FILE__))."/../../"));
 
   require("./settings.php");
-  // TODO(migration): temporary, restore the original `error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);` when the migration is done.
+  // PHP 8 migration: report everything in the web path (decided to keep this on).
   error_reporting(E_ALL);
 
   if (isset($GLOBALS['cfg']['db']['adodb_path']))
