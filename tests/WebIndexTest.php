@@ -146,6 +146,24 @@ class WebIndexTest extends TestCase
         $this->assertDoesNotMatchRegularExpression('/(?:Warning|Deprecated|Notice)(?:<\/b>)?:/', $body);
     }
 
+    public function testGamePageForUnknownGameShowsNoPhpMessages(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+
+        $body = $this->get('/themes/bismarck/gamestat.php?gameID=1&config=cfg-default.php');
+
+        $this->assertDoesNotMatchRegularExpression('/(?:Warning|Deprecated|Notice)(?:<\/b>)?:/', $body);
+    }
+
+    public function testAwardPageForUnknownAwardShowsNoPhpMessages(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+
+        $body = $this->get('/themes/bismarck/awardstat.php?awardID=zz&config=cfg-default.php');
+
+        $this->assertDoesNotMatchRegularExpression('/(?:Warning|Deprecated|Notice)(?:<\/b>)?:/', $body);
+    }
+
     private function importBaseq3Database(string $type = 'q3a', string $log = 'baseq3.log'): void
     {
         $root = dirname(__DIR__);
