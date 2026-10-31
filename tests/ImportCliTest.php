@@ -40,4 +40,12 @@ class ImportCliTest extends TestCase
     {
         $this->assertStringNotContainsString('passed by reference', $this->importBaseq3());
     }
+
+    public function testBaseq3ImportStoresSavestateWithValue(): void
+    {
+        $this->importBaseq3();
+        exec('mysql -N -e "SELECT value FROM vsp.vsp_savestate WHERE logfile LIKE \'%baseq3.log\'" 2>&1', $rows);
+        $this->assertCount(1, $rows);
+        $this->assertStringContainsString('last_shutdown_end_position', $rows[0]);
+    }
 }
