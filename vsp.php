@@ -2464,7 +2464,7 @@ function checkWebAccess(): void
     </PRE> </center> </BODY></HTML>
     <?php exit();}
   $userPass = $_POST["password"];
-  if (md5($userPass) != md5($vsp["password"])) {
+  if (!is_string($userPass) || !hash_equals((string) $vsp["password"], $userPass)) {
     echo "<HTML><BODY><PRE>Invalid password.\nFor the correct password, Look in password.inc.php under your vsp folder using a text editor(notepad).";
     exitProgram();
   }
