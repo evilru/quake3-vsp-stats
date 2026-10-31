@@ -137,6 +137,15 @@ class WebIndexTest extends TestCase
         $this->assertStringContainsString('</HTML>', strtoupper($body));
     }
 
+    public function testPlayerPageForUnknownPlayerShowsNoPhpMessages(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+
+        $body = $this->get('/themes/bismarck/playerstat.php?playerID=nobody&config=cfg-default.php');
+
+        $this->assertDoesNotMatchRegularExpression('/(?:Warning|Deprecated|Notice)(?:<\/b>)?:/', $body);
+    }
+
     private function importBaseq3Database(string $type = 'q3a', string $log = 'baseq3.log'): void
     {
         $root = dirname(__DIR__);
