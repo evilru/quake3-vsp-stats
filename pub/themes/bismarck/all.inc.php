@@ -3,6 +3,9 @@ runAlways();
 //******************************************************************************
 function runAlways()
 {
+  // PHP_SELF contains the attacker-controlled PATH_INFO and is printed into HTML by all theme pages
+  $_SERVER['PHP_SELF']=html_encode($_SERVER['PHP_SELF']);
+
   define("cROOT_PATH",realpath(dirname(realpath(__FILE__))."/../../"));
 
   require("./settings.php");
