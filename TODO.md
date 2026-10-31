@@ -48,3 +48,18 @@ Open findings after the PHP 8.5 migration. Resolved items are not listed (see th
 - `composer.json` has an empty PSR-4 mapping for `src/` (directory does not exist).
 - `error_reporting(E_ALL)` is gone from the app; `pub/configs/cfg-default.php` has no error settings any more. Production
   default in Docker is `display_errors=Off` (see `docker/vsp.ini`).
+
+## Security (open after the first fixes: sort whitelist, hist_rank, root-page query string, PHP_SELF)
+
+- **Reflected XSS, still open:** `pub/themes/bismarck/index.php:23` prints `$_POST['search_by']` / `search_txt` unescaped;
+  `all.inc.php` prints `$_GET['sort']` into a script (skin-fallback redirect) and `$skin_data[name]` (from `$_GET['skin']`
+  or the `vsp_skin` cookie) into the footer; `$_GET['skin']` is also used unvalidated in `./skins/$skin/$skin.css`
+  (path manipulation; `fopen` only probes existence). Fix with a whitelist of the skin directories.
+- **Login of `vsp.php` (web mode):** `md5($a) != md5($b)` is a loose comparison (magic hashes `0e...`) and the password is
+  sent in clear text. `hash_equals()` keeps the config format; ask before changing the format of `password.inc.php`.
+- **Name search:** `index.php` builds a `REGEXP` from user input (escaped with `preg_quote`); check the escaping for MariaDB
+  regex and the cost of crafted patterns.
+- **Non-numeric `start_from`** (`?start_from=abc`) raises a TypeError on 8.x (`"abc" - int`); robustness, not injection
+  (`SelectLimit` casts to int).
+- **Not reviewed yet:** log parser (player names on their way into the database and into the pages), ADOdb, FTP code path,
+  `composer audit`, other output of player names (`html_encode` use in `playerstat.php`, `gamestat.php`, `awardstat.php`).
