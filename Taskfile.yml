@@ -84,12 +84,12 @@ tasks:
   test:cs:
     desc: Run PHP CodeSniffer
     cmds:
-      - vendor/bin/phpcs --standard=PSR2 pub/ lib/
+      - vendor/bin/phpcs --standard=PSR2 --extensions=php --ignore=pub/lib pub/
 
   test:md:
     desc: Run PHP Mess Detector
     cmds:
-      - vendor/bin/phpmd src text codesize,unusedcode,naming,cleancode,design
+      - vendor/bin/phpmd vsp-q3a.php,vutil.php text codesize,unusedcode,naming,cleancode,design
 
   # Composer tasks
   composer:install:

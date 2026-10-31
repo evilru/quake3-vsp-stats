@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/vscode/devcontainers/php:7.4
+FROM mcr.microsoft.com/devcontainers/php:8.5
 
 # remove yarn, it is not needed and creates an error
 RUN rm -f /etc/apt/sources.list.d/yarn.list* && \
@@ -11,13 +11,16 @@ RUN rm -f /etc/apt/sources.list.d/yarn.list* && \
         docker-buildx-plugin \
         docker-ce-cli \
         docker-compose-plugin \
+        libjpeg-dev \
+        libpng-dev \
         mariadb-client \
         && \
     apt-get clean -y && \
     rm -rf /var/lib/apt/lists/* && \
     # PHP extensions
+    docker-php-ext-configure gd --with-jpeg && \
     docker-php-ext-install \
-    mysqli
+    ftp gd mysqli
 
 WORKDIR /workspace
 

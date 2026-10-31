@@ -1,4 +1,4 @@
 {
-    "intelephense.environment.phpVersion": "7.4.33",
+    "intelephense.environment.phpVersion": "8.5.0",
     "sonarlint.disableTelemetry": true
 }

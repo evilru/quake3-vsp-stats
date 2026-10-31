@@ -26,7 +26,7 @@
         "test": "phpunit",
         "cs": "phpcs",
         "cs-fix": "phpcbf",
-        "stan": "phpstan analyse src tests"
+        "stan": "phpstan analyse vsp-q3a.php vutil.php tests"
     },
     "config": {
         "sort-packages": true,
