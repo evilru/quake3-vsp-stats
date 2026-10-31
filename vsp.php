@@ -2171,7 +2171,7 @@ function configureAndProcessGameLogs(): void
   foreach ($GLOBALS["player_ban_list"] as $key => $value) {
     $GLOBALS["player_ban_list"][$key] = "/^" . preg_quote($value) . "$/";
   }
-  $GLOBALS["db"] = &ADONewConnection($GLOBALS["cfg"]["db"]["adodb_driver"]);
+  $GLOBALS["db"] = ADONewConnection($GLOBALS["cfg"]["db"]["adodb_driver"]);
   global $db;
   if (
     !$db->Connect(
