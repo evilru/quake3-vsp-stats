@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Switch the `php` command: php-use 7.4|8.5
+set -e
+case "${1:-}" in
+  7.4|8.5) ln -sf "/usr/bin/php$1" /usr/local/bin/php ;;
+  *) echo "Usage: php-use 7.4|8.5" >&2; exit 1 ;;
+esac
+php -v | head -1

@@ -1,40 +1,39 @@
-# AGENTS.md – Arbeitsnotizen für die PHP-8.5-Migration
+# AGENTS.md
 
-## Was ich wissen muss
-- Projekt: PHP-Webapp + CLI-Importer `vsp.php` (MariaDB). Migration PHP 7.4.33 -> 8.5 auf Branch `feature/php8`.
-- Pro Durchlauf genau EIN Fehler: Weg A (nur 8.5 kaputt: Test unter 7.4 grün, unter 8.5 rot, Fix) oder Weg B (Bug auch unter 7.4: Test rot, Fix). Test und Fix getrennte Commits, Conventional Commits, push auf `feature/php8`.
-- Befehle: `php-use 7.4|8.5`, `vsp-db-start`, `scripts/bootstrap.sh` (DB + vendor), `scripts/check.sh [Version]` (Tests + Imports).
-- Imports: `php vsp.php -c pub/configs/cfg-default.php -l q3a|q3a-xp|q3a-osp -p savestate 1 baseq3.log|xp.log|osp.log`.
-- Webserver (`php -S 0.0.0.0:8000 -t pub/`) erst, wenn CLI-Läufe fehlerfrei sind.
+Migrating this PHP app + CLI importer (`vsp.php`, MariaDB) from PHP 7.4.33 to 8.5 on `feature/php8`.
+All repo content (code comments, docs, scripts, commits) is English. The branch and environment are mine: build tooling in `scripts/` whenever something is needed repeatedly.
+
+## Workflow (one issue per run)
+- Find the first error on 8.5, check it on 7.4.33. Only 8.5 -> path A: test green on 7.4, red on 8.5, fix. Also 7.4 / plainly wrong -> path B: red test, minimal fix, no compat work.
+- Separate commits for test and fix (Conventional Commits), push `feature/php8`. No PR unless asked. Unclear or behavior-changing -> ask; other findings are only noted here.
+
+## Tools (`scripts/`)
+- `php-use 7.4|8.5`, `vsp-db-start` (installed to /usr/local/bin by setup-cloud.sh)
+- `bootstrap.sh` DB + vendor/ (seeded composer cache), `check.sh [ver]` tests + 3 imports, `import.sh <type> <log>` fresh-DB import with deduplicated PHP messages
+- `composer-seed.php`, `setup-cloud.sh` (the cloud environment setup script)
+- Imports: `-l q3a|q3a-xp|q3a-osp` with `baseq3.log|xp.log|osp.log`.
 
 ## Glossary
-- VSP: Quake-3-Log-Parser/Statistik-Projekt. q3a / q3a-xp / q3a-osp: Logtypen (Baseq3, XP-Mod, OSP-Mod).
-- Weg A = Kompatibilitätsproblem, Weg B = Bug im Originalcode.
-- savestate: Parser-Parameter, speichert Importstand.
+- q3a / q3a-xp / q3a-osp: log types (baseq3, XP mod, OSP mod). savestate: resume marker for incremental imports.
 
 ## Invariants
-- Code muss unter 7.4.33 UND 8.5 laufen; keine Syntax/Funktionen, die eine Version nicht kennt.
-- Nur kleinste Änderung; kein Refactoring, keine Formatierung. Weitere Funde nur notieren.
-- Nie auf anderen Branch pushen; kein PR ohne Auftrag.
+- Code must run on 7.4.33 and 8.5: no syntax or functions one of them lacks.
+- Smallest change that turns the test green; no refactoring or formatting.
+- `error_reporting(E_ALL)` in pub/configs/cfg-default.php is temporary: restore the commented original when the migration is done.
 
 ## Gotchas
-- `vsp-db-start` im Vordergrund mit `| tail` aufgerufen blockiert (mysqld erbt die Pipe) -> immer `</dev/null`, bei Bedarf `setsid nohup ... &`.
-- `composer install` bekommt in der Cloud keine GitHub-Dist-Downloads ("Could not authenticate") und fällt auf `git clone` zurück: sehr langsam (>15 min). Setup-Skript wärmt den Composer-Cache vor; `vendor/` danach vorhanden halten.
-- Nicht `pkill -f "composer install"` aus der Shell: trifft die eigene Shell (Exit 144).
-- `composer install` ohne Seeding klont volle Git-Mirrors (>20 GB, Platte voll). Lösung: `php scripts/composer-seed.php composer.lock` (git fetch --depth 1 + git archive in den Dist-Cache, ~5 s), danach `composer install` ~2 s. Setup-Skript macht das vor. Falls Cache leer: selbst seeden. Aufräumen: `rm -rf /root/.cache/composer/vcs vendor`. `COMPOSER_ALLOW_SUPERUSER=1` setzen (sonst deaktiviert Composer Plugins).
-- Heruntergeladene Phars ausführen blockt der Auto-Mode-Klassifizierer.
-- pub/configs/cfg-default.php nutzt jetzt `error_reporting(E_ALL)` (Migration). VOR ABSCHLUSS der Migration die auskommentierte Original-Zeile wiederherstellen. Meldungen erscheinen doppelt (stderr-Log + Anzeige), zum Zählen `| sort | uniq -c`; fgetcsv-Deprecation unter 8.5 kommt >100k mal -> immer filtern/`head`.
-- Vor jedem Import-Vergleich DB zurücksetzen: `mysql -e "DROP DATABASE vsp; CREATE DATABASE vsp"` (sonst 'ignored: 1').
-- Mehrere parallele `composer install` vermeiden (Cache-Locks).
-- composer.json verlangt `php ^7.4`; vendor/composer/platform_check.php kann unter 8.5 abbrechen -> ggf. eigener Fund (Weg A).
-- Foreground-Befehle über 120 s werden in den Hintergrund geschoben; langes mit run_in_background + Monitor.
-- Scheduled Run: keine Rückfragen möglich; unklare Verhaltensänderungen nur melden.
+- Never run `composer install` unseeded: GitHub zipballs return 403, Composer clones full mirrors (>20 GB, disk full). Use `scripts/bootstrap.sh`; set `COMPOSER_ALLOW_SUPERUSER=1`.
+- Always `</dev/null` and no `| tail` around `vsp-db-start`/mysqld (blocks on the pipe).
+- Reset the DB before each import (`scripts/import.sh` does), otherwise games are "ignored".
+- 8.5 emits >100k `fgetcsv` deprecations: always aggregate (`scripts/import.sh`).
+- Executing downloaded binaries/phars is blocked by the auto-mode classifier.
+- `pkill -f` on a pattern also kills the own shell.
+- vsp.php runs on include: not unit-testable, use CLI tests (`tests/ImportCliTest.php`).
 
-## Status
-- Run 1 (erledigt): `LOG_READ_SIZE` undefiniert in vsp.php (save_savestate/check_savestate). Verhalten unter 7.4 war: Hash = md5(""). Fix behält das bei (explizit `md5("")` / `$fileData = ""`) + TODO(tech-debt) an beiden Stellen. Gleiches Muster, unberührt: vsp-q3a.php:254/296 (unused saveShutdownState/verifySavestate), vsp-client.php.
-- Neue Funde mit E_ALL: 8.5 Deprecated: fgetcsv() ohne $escape (Hunderttausende, Fundstelle per grep), ADOdb dynamic property `adodbFetchMode`, ADOdb `(integer)`-Cast (pub/lib/adodb = Fremdcode); 7.4/8.5 Notice/Warning: Undefined index/array key `gameversion` (vsp-q3a.php:724), array offset on bool/null (vsp.php:1311, 1472).
-- Nächste Funde (offen, Reihenfolge = Priorität):
-  1. 8.5-Import bricht ab: `mysqli_sql_exception: Field 'value' doesn't have a default value` (INSERT INTO savestate SET logfile=..., vsp.php save_savestate). PHP 8.1+ wirft mysqli-Exceptions standardmäßig; unter 7.4 stilles Scheitern, savestate-Tabelle bleibt leer (Savestate funktioniert also nie). Weg A.
-  2. ConvertColorCodesTest::testXpConvertEmptyName: `Uninitialized string offset 0` (vsp-q3a.php:436/464), rot unter 7.4 UND 8.5 (Bug im Original, Weg B).
-  3. Alte undefined index/array-offset-Warnings (vsp-q3a.php:724/859, vsp.php:1311) und by-reference-Notices (vsp-q3a.php:1070/1071, vsp.php:2174) – nur mit `-d error_reporting=-1` und Debug-Handler sichtbar.
-- Test-Muster für CLI: tests/ImportCliTest.php (setzt DB `vsp` zurück, braucht `vsp-db-start`).
+## Open findings (priority order)
+1. 8.5 import: `mysqli_sql_exception: Field 'value' doesn't have a default value` on `INSERT INTO savestate SET` (vsp.php save_savestate). Silent on 7.4, so savestate never persists. Path A.
+2. `ConvertColorCodesTest::testXpConvertEmptyName` red on both versions: `Uninitialized string offset 0` (vsp-q3a.php:436/464). Path B.
+3. Undefined `LOG_READ_SIZE` remains in vsp-q3a.php:254/296 (unused) and vsp-client.php.
+4. Notices/deprecations: `fgetcsv()` without `$escape` (8.5), ADOdb dynamic property / `(integer)` cast (pub/lib/adodb), undefined `gameversion` (vsp-q3a.php:724), array offset on bool/null (vsp.php:1311, 1472).
+5. composer.json requires `php ^7.4`.
+6. pub/themes/bismarck/all.inc.php suppresses warnings in the web path.

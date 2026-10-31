@@ -1,8 +1,8 @@
 <?php
-// Füllt den Composer-Dist-Cache aus composer.lock per `git fetch --depth 1` + `git archive`,
-// weil GitHub-Zipball/codeload in der Cloud-Sandbox 403 liefern und Composer sonst
-// volle Git-Mirrors klont (mehrere GB, phpstan bricht ab).
-// Aufruf: php composer-seed.php <composer.lock> [cache-files-dir] [parallel]
+// Seeds the Composer dist cache from composer.lock via `git fetch --depth 1` + `git archive`.
+// GitHub zipball/codeload return 403 in the cloud sandbox, so Composer would otherwise clone
+// full mirrors (many GB, phpstan fails).
+// Usage: php composer-seed.php <composer.lock> [cache-files-dir] [parallel]
 $lockFile = $argv[1] ?? 'composer.lock';
 $cacheDir = rtrim($argv[2] ?? (getenv('HOME') ?: '/root') . '/.cache/composer/files', '/');
 $parallel = (int) ($argv[3] ?? 16);
@@ -45,5 +45,5 @@ while ($jobs || $running) {
     }
     usleep(50000);
 }
-fwrite(STDERR, $failed ? 'composer-seed: nicht geseedet: ' . implode(', ', $failed) . "\n" : "composer-seed: ok\n");
+fwrite(STDERR, $failed ? 'composer-seed: not seeded: ' . implode(', ', $failed) . "\n" : "composer-seed: ok\n");
 exit(0);
