@@ -12,7 +12,7 @@ To run the provided Docker Compose stack, follow the instructions at <https://hu
 
 ## Manual Setup
 
-Follow the setup proceduere described in [readme.txt](./readme.txt).
+Follow the setup procedure described in [readme.txt](./readme.txt).
 
 ### Compatibility
 

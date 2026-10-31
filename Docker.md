@@ -51,7 +51,7 @@ services:
 
 ### VSP configuration
 
-The parser can be configured with the following ENV variabels. They need to be placed in _environment_ section of the _web_ service.
+The parser can be configured with the following ENV variables. They need to be placed in _environment_ section of the _web_ service.
 
 #### LOGTYPE
 
@@ -84,7 +84,7 @@ The table prefix used in the database
 #### DB_HOSTNAME
 
 default: _db_  
-This is the internal hostname of the dockerhost, no need to change that
+Hostname of the database. This is the name of the database service in the compose file, no need to change that
 
 #### DB_NAME
 
@@ -101,6 +101,31 @@ Should be the same as _MYSQL_USER_.
 
 Password used to connect to the database.  
 Should be the same as _MYSQL_PASSWORD_.
+
+#### GAMES_LIMIT
+
+default: _1000_  
+Limit of detailed game stats that will be stored in the database (negative number for unlimited).
+
+#### EXCLUDED_PLAYERS
+
+Comma-separated list of player names that are excluded from the stats (e.g. _Angel,Biker,Bitterman_).  
+The image default is only a placeholder text; set it explicitly.
+
+#### FTP_USERNAME / FTP_PASSWORD
+
+default: _anonymous_ / _anonymous_  
+Credentials used when the log file is downloaded from an FTP server.
+
+#### FTP_PASSIVE_MODE
+
+default: _1_  
+1 for passive mode, 0 for active mode.
+
+#### FTP_OVERWRITE
+
+default: _0_  
+1 to overwrite existing downloaded files, 0 to resume the log.
 
 #### VSP_WEB_PASSWORD
 
@@ -126,7 +151,7 @@ environment:
 
 ### VSP Stats page configuration
 
-The VSP Stats page can be configured with the following ENV variabels. They need to be placed in _environment_ section of the _web_ service.
+The VSP Stats page can be configured with the following ENV variables. They need to be placed in _environment_ section of the _web_ service.
 
 #### SERVER_TITLE
 
