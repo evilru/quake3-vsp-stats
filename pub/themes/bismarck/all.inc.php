@@ -107,7 +107,7 @@ function setSkin()
       setcookie('vsp_skin', $GLOBALS['settings']['display']['default_skin'],$cookie_expire_time);
       ob_end_flush();
       ?>
-      <HTML><HEAD></HEAD><BODY><SCRIPT>window.location="<?php print "$_SERVER[PHP_SELF]?config=$GLOBALS[config]"; if (isset($_GET['sort'])) print "&amp;sort=$_GET[sort]";?>"</SCRIPT></BODY></HTML>
+      <HTML><HEAD></HEAD><BODY><SCRIPT>window.location="<?php print "$_SERVER[PHP_SELF]?config=$GLOBALS[config]"; if (isset($_GET['sort'])) print "&amp;sort=".strtr($_GET['sort'],array('"'=>'%22',"'"=>'%27','<'=>'%3C','>'=>'%3E','\\'=>'%5C',' '=>'%20'));?>"</SCRIPT></BODY></HTML>
       <?php
     }
     exit();
