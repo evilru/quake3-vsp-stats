@@ -111,6 +111,19 @@ All VSP commands can be called from the commandline and from the browser. The do
 The webinterface is available under the following url: http://yourserver.com/vsp.php.
 Make sure to set a password in [password.inc.php].
 
+### PHP error handling
+
+Errors are controlled by the server, not by the application (see `docker/vsp.ini`). Set these in the _environment_
+section of the _web_ service:
+
+```yaml
+environment:
+  # show errors in the browser / on the console (default: Off, errors are only logged)
+  PHP_DISPLAY_ERRORS: "On"
+  # numeric error_reporting level (default 32767 = E_ALL, 30719 = E_ALL without deprecations)
+  PHP_ERROR_REPORTING: "32767"
+```
+
 ### VSP Stats page configuration
 
 The VSP Stats page can be configured with the following ENV variabels. They need to be placed in _environment_ section of the _web_ service.

@@ -6,8 +6,6 @@ function runAlways()
   define("cROOT_PATH",realpath(dirname(realpath(__FILE__))."/../../"));
 
   require("./settings.php");
-  // PHP 8 migration: report everything in the web path (decided to keep this on).
-  error_reporting(E_ALL);
 
   if (isset($GLOBALS['cfg']['db']['adodb_path']))
   {

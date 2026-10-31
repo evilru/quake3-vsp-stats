@@ -21,7 +21,7 @@ All repo content (code comments, docs, scripts, commits) is English. The branch 
 - Code must run on 7.4.33 and 8.5: no syntax or functions one of them lacks.
 - Smallest change that turns the test green; no refactoring or formatting.
 - Tests must be real unit tests that protect behavior against future breakage: assert observable behavior/results, not implementation details or log-output absence, so they do not block later refactoring.
-- `error_reporting(E_ALL)` in pub/configs/cfg-default.php is temporary: restore the commented original when the migration is done.
+- Error reporting is not set in the app any more: the server decides (php.ini; in Docker `PHP_DISPLAY_ERRORS` / `PHP_ERROR_REPORTING` via `docker/vsp.ini`). Tests pass `-d display_errors=1 -d error_reporting=-1` explicitly.
 
 ## Gotchas
 - Never run `composer install` unseeded: GitHub zipballs return 403, Composer clones full mirrors (>20 GB, disk full). Use `scripts/bootstrap.sh`; set `COMPOSER_ALLOW_SUPERUSER=1`.
@@ -37,4 +37,4 @@ All repo content (code comments, docs, scripts, commits) is English. The branch 
 
 ## Open findings (priority order)
 1. `LOG_READ_SIZE` is undefined in the unused `vsp-q3a.php` methods `saveShutdownState()`/`verifySavestate()` (and `vsp-client.php` defines it conditionally); would throw on 8.5 if ever called.
-2. Theme pages and all three CLI imports run without PHP messages on 8.5 (full error reporting is intentionally on in the web path). Not yet exercised: other configs/themes, Docker build, other MariaDB versions.
+2. Theme pages and all three CLI imports run without PHP messages on 8.5 (full error reporting is enabled by the server settings, not the app). Not yet exercised: other configs/themes, Docker build, other MariaDB versions.

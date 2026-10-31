@@ -11,7 +11,7 @@ class ImportCliTest extends TestCase
             $this->markTestSkipped('MariaDB not available (run vsp-db-start)');
         }
         $root = dirname(__DIR__);
-        $cmd = escapeshellarg(PHP_BINARY) . ' vsp.php -c pub/configs/cfg-default.php -l ' . $type . ' -p savestate 1 ' . $log . ' 2>&1 </dev/null';
+        $cmd = escapeshellarg(PHP_BINARY) . ' -d display_errors=1 -d error_reporting=-1 vsp.php -c pub/configs/cfg-default.php -l ' . $type . ' -p savestate 1 ' . $log . ' 2>&1 </dev/null';
         exec('cd ' . escapeshellarg($root) . ' && ' . $cmd, $lines, $rc);
         return implode("\n", $lines);
     }

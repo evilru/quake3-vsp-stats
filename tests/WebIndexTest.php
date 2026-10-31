@@ -19,7 +19,7 @@ class WebIndexTest extends TestCase
         $sock = stream_socket_server('tcp://127.0.0.1:0', $errno, $errstr);
         $port = (int) substr(strrchr(stream_socket_get_name($sock, false), ':'), 1);
         fclose($sock);
-        $cmd = [PHP_BINARY, '-S', '127.0.0.1:' . $port, '-t', dirname(__DIR__) . '/pub'];
+        $cmd = [PHP_BINARY, '-d', 'display_errors=1', '-d', 'error_reporting=-1', '-S', '127.0.0.1:' . $port, '-t', dirname(__DIR__) . '/pub'];
         $this->server = proc_open($cmd, [1 => ['file', '/dev/null', 'w'], 2 => ['file', '/dev/null', 'w']], $pipes);
         for ($i = 0; $i < 50; $i++) {
             if (@fsockopen('127.0.0.1', $port)) {
@@ -180,6 +180,6 @@ class WebIndexTest extends TestCase
             $this->markTestSkipped('MariaDB not available (run vsp-db-start)');
         }
         exec('cd ' . escapeshellarg($root) . ' && ' . escapeshellarg(PHP_BINARY)
-            . ' vsp.php -c pub/configs/cfg-default.php -l ' . $type . ' -p savestate 1 ' . $log . ' >/dev/null 2>&1 </dev/null');
+            . ' -d display_errors=1 -d error_reporting=-1 vsp.php -c pub/configs/cfg-default.php -l ' . $type . ' -p savestate 1 ' . $log . ' >/dev/null 2>&1 </dev/null');
     }
 }

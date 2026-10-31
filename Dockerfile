@@ -38,6 +38,10 @@ ENV FTP_USERNAME="anonymous" \
     FTP_OVERWRITE="0"
 
 # Additional Settings
+# PHP error handling (see docker/vsp.ini): display on screen yes/no and the error_reporting level
+ENV PHP_DISPLAY_ERRORS="Off" \
+    PHP_ERROR_REPORTING="32767"
+
 ENV EXCLUDED_PLAYERS="comma-separated list of players (e.g. Angel,Biker,Bitterman,Bones,Cadavre)" \
    # limit of detailed game stats that will be stored on the database (negative number for unlimited)
    GAMES_LIMIT="1000"
@@ -55,6 +59,8 @@ RUN docker-php-ext-install mysqli \
  && rm -rf /var/lib/apt/lists/*
 
 COPY . /vsp
+
+COPY docker/vsp.ini $PHP_INI_DIR/conf.d/vsp.ini
 
 WORKDIR /vsp
 
