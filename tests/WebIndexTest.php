@@ -164,6 +164,14 @@ class WebIndexTest extends TestCase
         $this->assertDoesNotMatchRegularExpression('/(?:Warning|Deprecated|Notice)(?:<\/b>)?:/', $body);
     }
 
+    public function testUnknownSkinRedirectsWithoutPhpMessages(): void
+    {
+        $body = $this->get('/themes/bismarck/index.php?skin=nonexistent&config=cfg-default.php');
+
+        $this->assertStringContainsString('window.location', $body);
+        $this->assertDoesNotMatchRegularExpression('/(?:Warning|Deprecated|Notice)(?:<\/b>)?:/', $body);
+    }
+
     private function importBaseq3Database(string $type = 'q3a', string $log = 'baseq3.log'): void
     {
         $root = dirname(__DIR__);
