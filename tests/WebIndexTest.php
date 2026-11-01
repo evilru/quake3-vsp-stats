@@ -536,6 +536,48 @@ class WebIndexTest extends TestCase
         $this->assertStringNotContainsString('alt="<>"', $body);
     }
 
+    public function testAwardListShowsTheCountryFlag(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+        $this->enableCountryFlags();
+
+        $body = $this->get('/themes/bismarck/awardstat.php?awardID=kr&config=cfg-default.php');
+
+        $this->assertStringContainsString('alt="XX" src="../../images/flags/xx.gif"', $body);
+    }
+
+    public function testAwardListDoesNotReflectMarkupFromTheCountryOfALog(): void
+    {
+        $this->importXpLogWith('\\tld\\\\country', '\\tld\\<>\\country');
+        $this->enableCountryFlags();
+
+        $body = $this->get('/themes/bismarck/awardstat.php?awardID=kr&config=cfg-default.php');
+
+        $this->assertStringContainsString('images/flags/', $body);
+        $this->assertStringNotContainsString('alt="<>"', $body);
+    }
+
+    public function testPlayerPageShowsTheCountryFlag(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+        $this->enableCountryFlags();
+
+        $body = $this->get('/themes/bismarck/playerstat.php?playerID=Bitterman&config=cfg-default.php');
+
+        $this->assertStringContainsString('alt="XX" src="../../images/flags/xx.gif"', $body);
+    }
+
+    public function testPlayerPageDoesNotReflectMarkupFromTheCountryOfALog(): void
+    {
+        $this->importXpLogWith('\\tld\\\\country', '\\tld\\<>\\country');
+        $this->enableCountryFlags();
+
+        $body = $this->get('/themes/bismarck/playerstat.php?playerID=Bitterman&config=cfg-default.php');
+
+        $this->assertStringContainsString('images/flags/', $body);
+        $this->assertStringNotContainsString('alt="<>"', $body);
+    }
+
     private function importBaseq3Database(string $type = 'q3a', string $log = 'baseq3.log'): void
     {
         $root = dirname(__DIR__);
