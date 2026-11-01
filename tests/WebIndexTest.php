@@ -451,6 +451,25 @@ class WebIndexTest extends TestCase
         $this->assertStringNotContainsString('<script>alert(1)</script>', $body);
     }
 
+    public function testGamePageShowsTheMod(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+
+        $body = $this->get('/themes/bismarck/gamestat.php?gameID=' . $this->firstGameId() . '&config=cfg-default.php');
+
+        $this->assertMatchesRegularExpression('/>Mod<\/TD><TD [^>]*>excessiveplus<\/TD>/', $body);
+    }
+
+    public function testGamePageDoesNotReflectMarkupFromTheModOfALog(): void
+    {
+        $this->importXpLogWith('gamename\\excessiveplus\\', 'gamename\\x<script>alert(1)</script>\\');
+
+        $body = $this->get('/themes/bismarck/gamestat.php?gameID=' . $this->firstGameId() . '&config=cfg-default.php');
+
+        $this->assertStringContainsString('>Mod</TD>', $body);
+        $this->assertStringNotContainsString('<script>alert(1)</script>', $body);
+    }
+
     private function importBaseq3Database(string $type = 'q3a', string $log = 'baseq3.log'): void
     {
         $root = dirname(__DIR__);
