@@ -307,6 +307,28 @@ class WebIndexTest extends TestCase
         $this->assertStringNotContainsString('<script>alert(1)</script>', $body);
     }
 
+    public function testKnownSkinIsAppliedToTheStylesheet(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+
+        $body = $this->get('/themes/bismarck/index.php?config=cfg-default.php&skin=xp');
+
+        $this->assertStringContainsString('skin : xp by ', $body);
+        $this->assertStringContainsString('./skins/xp/xp.css', $body);
+        $this->assertStringNotContainsString('window.location', $body);
+    }
+
+    public function testSkinWithPathTraversalFallsBackToTheDefaultSkin(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+
+        // ./skins/fest/../fest/fest/../fest.css resolves to the existing ./skins/fest/fest.css
+        $body = $this->get('/themes/bismarck/index.php?config=cfg-default.php&skin=' . rawurlencode('fest/../fest'));
+
+        $this->assertStringNotContainsString('fest/../fest', $body);
+        $this->assertStringContainsString('window.location', $body);
+    }
+
     private function importBaseq3Database(string $type = 'q3a', string $log = 'baseq3.log'): void
     {
         $root = dirname(__DIR__);
