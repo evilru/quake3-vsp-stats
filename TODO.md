@@ -61,7 +61,7 @@ Open findings after the PHP 8.5 migration. Resolved items are not listed (see th
   `playerstat.php:683,783`, `index.php:453`; `$GLOBALS['config']` in links/forms (must name an existing file in `pub/configs/`);
   hit location names in `playerstat.php:1476` (only mods that log hit locations; not reachable with the sample logs).
 - **Docker document root is the whole repository** (`Dockerfile`: `COPY . /vsp`, Apache root `/vsp`). Reachable over HTTP: `vsp.php`,
-  `sql/`, `docker/`, `scripts/`, `pub/include/`, `readme*.txt`; Debian's `apache2.conf` sets `Options Indexes` for the directory, so
+  `sql/`, `docker/`, `pub/include/` (`scripts/`, docs and readmes are now in `.dockerignore`); Debian's `apache2.conf` sets `Options Indexes` for the directory, so
   folders without an index file are listed (not verified in a running container). A mounted `games.log` (commented example in
   `docker-compose.yml`) or files in `logdata/` / `ftplogs/` would be downloadable and contain player IPs and GUIDs. Fix: document
   root `/vsp/pub` plus an alias for what is needed, or `Require all denied` for everything but `pub/`, and `Options -Indexes`.
