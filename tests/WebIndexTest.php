@@ -578,6 +578,25 @@ class WebIndexTest extends TestCase
         $this->assertStringNotContainsString('alt="<>"', $body);
     }
 
+    public function testGamePageShowsTheGameType(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+
+        $body = $this->get('/themes/bismarck/gamestat.php?gameID=' . $this->firstGameId() . '&config=cfg-default.php');
+
+        $this->assertMatchesRegularExpression('/>Game Type<\/TD><TD [^>]*>0<\/TD>/', $body);
+    }
+
+    public function testGamePageDoesNotReflectMarkupFromTheGameTypeOfALog(): void
+    {
+        $this->importXpLogWith('g_gametype\\0\\', 'g_gametype\\x<script>alert(1)</script>\\');
+
+        $body = $this->get('/themes/bismarck/gamestat.php?gameID=' . $this->firstGameId() . '&config=cfg-default.php');
+
+        $this->assertStringContainsString('>Game Type</TD>', $body);
+        $this->assertStringNotContainsString('<script>alert(1)</script>', $body);
+    }
+
     private function importBaseq3Database(string $type = 'q3a', string $log = 'baseq3.log'): void
     {
         $root = dirname(__DIR__);
