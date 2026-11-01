@@ -954,7 +954,7 @@ function drawPlayerGUIDs()
 
       ?>
       <TR CLASS="<?php print "$cell_class"?>" onMouseOver="this.className='rowHighlight';" onMouseOut="this.className='<?php print "$cell_class"?>';" >
-        <TD style="text-align: left"><A HREF="javascript:searchByGUID('<?php print $rs->fields[0];?>');" TITLE="<?php print $rs->fields[0];?>"><?php print $guid_display?></A></TD>
+        <TD style="text-align: left"><A HREF="javascript:searchByGUID('<?php print html_encode(addcslashes($rs->fields[0], "\\'"));?>');" TITLE="<?php print html_encode($rs->fields[0]);?>"><?php print html_encode($guid_display)?></A></TD>
         <TD><?php print fstr($rs->fields[1]);?></TD>
       </TR>
       <?php
