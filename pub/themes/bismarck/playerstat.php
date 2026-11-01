@@ -1376,7 +1376,7 @@ function drawProfile()
     <TR CLASS="cell1">
     <?php if (!$GLOBALS['settings']['display']['no_country_flags']) : ?>
     <TD style="text-align: center; vertical-align: top; ">
-        <img alt="<?php echo $player_data_0['country_code2']; ?>" src="../../images/flags/<?php echo strtolower((string) $player_data_0['country_code2']); ?>.gif" title="<?php echo html_encode($player_data_0['country_name']); ?>" />
+        <img alt="<?php echo html_encode($player_data_0['country_code2']); ?>" src="../../images/flags/<?php echo html_encode(strtolower((string) $player_data_0['country_code2'])); ?>.gif" title="<?php echo html_encode($player_data_0['country_name']); ?>" />
     </TD>
     <?php endif; ?>
     <TD WIDTH="100%" style="vertical-align: top; text-align: left"<?php if ($GLOBALS['settings']['display']['no_country_flags']) echo 'COLSPAN="2"'; ?>>
