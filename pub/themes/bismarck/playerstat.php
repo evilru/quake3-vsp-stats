@@ -1078,7 +1078,7 @@ function drawPlayerAliases()
       ?>
       <TR CLASS="<?php print "$cell_class"?>" onMouseOver="this.className='rowHighlight';" onMouseOut="this.className='<?php print "$cell_class"?>';" >
         <TD style="text-align: left">
-        <A href="javascript:searchByName('<?php print processColors(addslashes($rs->fields[0]),0,0);?>');"<?php print processColors(html_encode($rs->fields[0]),$GLOBALS['settings']['display']['color_names'],$GLOBALS['settings']['display']['max_char_length'],1);?></A></TD>
+        <A href="javascript:searchByName('<?php print processColors(html_encode(addslashes($rs->fields[0])),0,0);?>');"<?php print processColors(html_encode($rs->fields[0]),$GLOBALS['settings']['display']['color_names'],$GLOBALS['settings']['display']['max_char_length'],1);?></A></TD>
         <TD><?php print ($rs->fields[1]);?></TD>
       </TR>
       <?php
