@@ -250,7 +250,7 @@ function drawAwardList()
       <TD><?php print "$count"?></TD>
 
       <?php if (!$GLOBALS['settings']['display']['no_country_flags']) : ?>
-      <TD STYLE="text-align: center;"><img height="16" title="<?php echo html_encode($country_name); ?>" alt="<?php echo $rs->fields[1]; ?>" src="../../images/flags/<?php echo strtolower($rs->fields[1]); ?>.gif" /></TD>
+      <TD STYLE="text-align: center;"><img height="16" title="<?php echo html_encode($country_name); ?>" alt="<?php echo html_encode($rs->fields[1]); ?>" src="../../images/flags/<?php echo html_encode(strtolower($rs->fields[1])); ?>.gif" /></TD>
       <?php endif ?>
 
       <TD style="text-align: left" >
