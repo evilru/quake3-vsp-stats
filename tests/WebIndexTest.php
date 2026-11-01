@@ -419,6 +419,38 @@ class WebIndexTest extends TestCase
         $this->assertStringNotContainsString('<script>alert(1)</script>', $body);
     }
 
+    private function firstGameId(): string
+    {
+        return trim((string) shell_exec('mysql -N -e "SELECT MIN(gameID) FROM vsp.vsp_gamedata WHERE name=\'_v_map\'"'));
+    }
+
+    private function importXpLogWith(string $search, string $replace): void
+    {
+        $log = tempnam(sys_get_temp_dir(), 'vsp');
+        file_put_contents($log, str_replace($search, $replace, file_get_contents(dirname(__DIR__) . '/xp.log')));
+        $this->importBaseq3Database('q3a-xp', $log);
+        unlink($log);
+    }
+
+    public function testGamePageShowsTheMap(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+
+        $body = $this->get('/themes/bismarck/gamestat.php?gameID=' . $this->firstGameId() . '&config=cfg-default.php');
+
+        $this->assertMatchesRegularExpression('/>Map<\/TD>\s*<TD [^>]*>arenagate<\/TD>/', $body);
+    }
+
+    public function testGamePageDoesNotReflectMarkupFromTheMapOfALog(): void
+    {
+        $this->importXpLogWith('mapname\\arenagate\\', 'mapname\\x<script>alert(1)</script>\\');
+
+        $body = $this->get('/themes/bismarck/gamestat.php?gameID=' . $this->firstGameId() . '&config=cfg-default.php');
+
+        $this->assertStringContainsString('>Map</TD>', $body);
+        $this->assertStringNotContainsString('<script>alert(1)</script>', $body);
+    }
+
     private function importBaseq3Database(string $type = 'q3a', string $log = 'baseq3.log'): void
     {
         $root = dirname(__DIR__);
