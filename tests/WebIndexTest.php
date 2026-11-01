@@ -508,6 +508,34 @@ class WebIndexTest extends TestCase
         $this->assertStringNotContainsString('<script>alert(1)</script>', $body);
     }
 
+    private function enableCountryFlags(): void
+    {
+        $file = dirname(__DIR__) . '/pub/themes/bismarck/settings.php';
+        $this->settingsBackup = file_get_contents($file);
+        file_put_contents($file, str_replace("['no_country_flags']=1", "['no_country_flags']=0", $this->settingsBackup));
+    }
+
+    public function testPlayerListShowsTheCountryFlag(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+        $this->enableCountryFlags();
+
+        $body = $this->get('/themes/bismarck/index.php?config=cfg-default.php');
+
+        $this->assertStringContainsString('alt="XX" src="../../images/flags/xx.gif"', $body);
+    }
+
+    public function testPlayerListDoesNotReflectMarkupFromTheCountryOfALog(): void
+    {
+        $this->importXpLogWith('\\tld\\\\country', '\\tld\\<>\\country');
+        $this->enableCountryFlags();
+
+        $body = $this->get('/themes/bismarck/index.php?config=cfg-default.php');
+
+        $this->assertStringContainsString('images/flags/', $body);
+        $this->assertStringNotContainsString('alt="<>"', $body);
+    }
+
     private function importBaseq3Database(string $type = 'q3a', string $log = 'baseq3.log'): void
     {
         $root = dirname(__DIR__);
