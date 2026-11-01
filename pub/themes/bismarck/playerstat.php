@@ -1551,7 +1551,7 @@ function drawGamesList()
     <TR CLASS="<?php print "$cell_class"?>" onMouseOver="this.className='rowHighlight';" onMouseOut="this.className='<?php print "$cell_class"?>';" >
     <TD style="border-right-width: 0; "><?php print $count;?></TD>
     <TD style="text-align: left; border-left-width: 0;">
-    <A CLASS="tooltip" TITLE="<?php print "$time_start, $map"?>" HREF="gamestat.php?gameID=<?php print $gID."&amp;config=$GLOBALS[config]";?>">
+    <A CLASS="tooltip" TITLE="<?php print html_encode("$time_start, $map")?>" HREF="gamestat.php?gameID=<?php print $gID."&amp;config=$GLOBALS[config]";?>">
     <?php
       print substr($time_start,5,5).", ".processColors(html_encode($map),0,$GLOBALS['settings']['display']['max_char_length_small']);
     ?>
