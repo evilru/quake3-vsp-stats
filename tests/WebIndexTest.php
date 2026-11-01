@@ -359,6 +359,32 @@ class WebIndexTest extends TestCase
         $this->assertStringNotContainsString("');\"><script>", $body);
     }
 
+    public function testPlayerPageListsAliasesAsSearchLinks(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+
+        $body = $this->get('/themes/bismarck/playerstat.php?playerID=Bitterman&config=cfg-default.php');
+
+        $this->assertStringContainsString('<A href="javascript:searchByName(\'Bitterman\');"', $body);
+    }
+
+    public function testPlayerPageDoesNotReflectMarkupFromAPlayerNameInTheAliasLink(): void
+    {
+        $log = tempnam(sys_get_temp_dir(), 'vsp');
+        file_put_contents($log, str_replace(
+            'n\\Doom\\',
+            'n\\x"><script>alert(1)</script>\\',
+            file_get_contents(dirname(__DIR__) . '/xp.log')
+        ));
+        $this->importBaseq3Database('q3a-xp', $log);
+        unlink($log);
+
+        $body = $this->get('/themes/bismarck/playerstat.php?playerID=' . rawurlencode('x"><script>alert(1)</script>') . '&config=cfg-default.php');
+
+        $this->assertStringContainsString('searchByName(', $body);
+        $this->assertStringNotContainsString('<script>alert(1)</script>', $body);
+    }
+
     private function importBaseq3Database(string $type = 'q3a', string $log = 'baseq3.log'): void
     {
         $root = dirname(__DIR__);
