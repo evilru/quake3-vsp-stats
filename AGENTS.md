@@ -36,7 +36,7 @@ System properties that must always hold.
 - Every code change is verified by running the real thing (import, web page, compose stack), not only by tests. Command and output go into the PR. If a check cannot run (Dockerfile, workflow), say which one and why; never report it as done.
 - Do deterministically whatever can be: put a script in `scripts/`, reach it via `Taskfile.yml`, reuse it. Build only what the current work needs, never on spec. A correction from the maintainer must be needed only once.
 - Tell the maintainer when a request is missing something, impossible or unwise, always. Be devil's advocate in interviews.
-- Keep this file at most 250 lines; shorten it yourself.
+- You own this file. Keep it accurate, consistent and minimal. When work reveals a missing or wrong rule, invariant, gotcha, glossary term or workflow step, fix it in the same piece of work, unprompted; no mistake may happen twice. Add only what is useful beyond the current task; no one-off details, no duplicates. Max 250 lines.
 
 ## Workflow
 - Work comes from GitHub issues (cloud, chat possible) or the devcontainer (`task test`).
