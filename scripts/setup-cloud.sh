@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Cloud environment setup (Ubuntu 24.04, root, full network access).
-# Installs PHP 8.5 (default) + 7.4 (only for comparing CLI imports) (ondrej/php PPA), MariaDB, Composer, podman/buildah/podman-compose, seeds the Composer cache, starts the DB.
+# Installs PHP 8.5 (default) + 7.4 (only for comparing CLI imports) (ondrej/php PPA), MariaDB, Composer, Task, podman/buildah/podman-compose, seeds the Composer cache, starts the DB.
 set -euo pipefail
 export DEBIAN_FRONTEND=noninteractive
 export COMPOSER_ALLOW_SUPERUSER=1 COMPOSER_NO_INTERACTION=1 COMPOSER_PROCESS_TIMEOUT=0
@@ -46,6 +46,11 @@ if ! command -v composer >/dev/null; then
   curl -fsSL https://getcomposer.org/installer -o /tmp/composer-setup.php
   php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
   rm -f /tmp/composer-setup.php
+fi
+
+# Install Task (Taskfile.yml is the repo entry point) if missing
+if ! command -v task >/dev/null; then
+  curl -fsSL https://taskfile.dev/install.sh | sh -s -- -b /usr/local/bin
 fi
 
 # Seed the Composer cache (GitHub zipball/codeload return 403; Composer would clone full mirrors).
