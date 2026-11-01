@@ -4,6 +4,13 @@ PHP 8.5 web app + CLI importer (`vsp.php`, MariaDB) for Quake 3 VSP stats.
 Origin: obfuscated original, author unknown, later deobfuscated with AI. Hence the odd layout; legacy code stays.
 Merge to `master` builds and pushes the Docker image.
 
+## Intent
+The maintainer is not the crumple zone for AI mistakes. Work autonomously, but every claim is backed by evidence the maintainer can check: trust is engineered, not assumed. Work toward a goal with a clear done-criterion.
+
+## Modes
+- Interview or ideas: talk, challenge as devil's advocate, change only what is asked, stop when the answer is given. The maintainer keeps the modes apart.
+- Work ("work on issue X"): autonomous, per Workflow.
+
 ## Invariants
 System properties that must always hold.
 - Target is PHP 8.5; no 7.4 workarounds. Existing version gates stay.
@@ -17,17 +24,17 @@ System properties that must always hold.
 - `Taskfile.yml` is the single entry point to the repo; scripts are details behind it. Included taskfiles live in `tasks/` and their namespace equals the file name.
 
 ## Rules
-- Be concise: chat, comments, commits, docs, this file.
+- Chat, commits, code comments, docs and this file are concise. PR text is as long as plan, variants, critical points and evidence need.
 - Repo content is English; chat may be German.
 - KISS, YAGNI, DRY, clean code. Smallest change; no unrelated formatting.
 - Conventional Commits, atomic commits.
 - Bug or new behavior: red test commit first, fix in a separate commit.
 - Tests pass `-d display_errors=1 -d error_reporting=-1`.
-- Unclear or behavior-changing: ask.
+- Stop and ask (in chat; else in the issue) only if the goal or done-criterion is unclear, for breaking changes, and before outward-facing steps. Decide everything else yourself via three variants and record it. After asking, just stop.
 - One focus, one goal per piece of work; its done-criterion must be clear before starting.
-- Findings outside the focus (bugs, smells, new ideas from the maintainer) go to `TODO.md` (the inbox for not-yet-ticketed items; remove an entry once it has an issue) or as a `TODO` marker in the code. Never fixed silently, never leave the focus.
-- Every code change is verified by running the real thing (import, web page, compose stack), not only by tests. Command and output go into the PR.
-- Do deterministically whatever can be: build a task or script for it. A correction from the maintainer must be needed only once.
+- Findings outside the focus (bugs, smells, new ideas from the maintainer) go to `TODO.md` (the inbox for not-yet-ticketed items; remove an entry once it has an issue) or as a `TODO` marker in the code. Thinking is open (notice, name, note anything); acting stays on the focus. Never fix silently.
+- Every code change is verified by running the real thing (import, web page, compose stack), not only by tests. Command and output go into the PR. If a check cannot run (Dockerfile, workflow), say which one and why; never report it as done.
+- Do deterministically whatever can be: put a script in `scripts/`, reach it via `Taskfile.yml`, reuse it. Build only what the current work needs, never on spec. A correction from the maintainer must be needed only once.
 - Tell the maintainer when a request is missing something, impossible or unwise, always. Be devil's advocate in interviews.
 - Keep this file at most 250 lines; shorten it yourself.
 
@@ -37,12 +44,12 @@ System properties that must always hold.
 - Issues come from a JTBD interview: user story (`As`/`I want`/`So that`, each on a new line), Gherkin acceptance criteria with a general background, dependencies (parent, blocked by, blocking, relates to). Invariants or ADRs found go into Invariants (minimal ADR).
 - On "work on issue X": check blockers first; if anything is unclear, missing or blocked, ask in chat (else in the issue) before starting.
 - Start with a draft PR holding the plan; update it while working. At the end it states what was done, not the plan.
-- Per decision: three variants, pick the best, rate by blast radius. Critical points for the maintainer go into the PR.
-- Board `Quake3 VSP Stats` (Todo, In Progress, Done): move cards to In Progress at start; the maintainer sets Done.
+- Per decision: three variants, pick the best, rate by blast radius (low: local, reversible; medium: CI, image, shared state; high: operators, data, irreversible). Critical points for the maintainer go into the PR.
+- Board `Quake3 VSP Stats` (`gh project … 4 --owner evilru`; Todo, In Progress, Done): move cards to In Progress at start; the maintainer sets Done.
 - Labels: `bug`, `enhancement`, `chore`, `needs-clarification`, `breaking`. No milestones. Old-format issues stay as they are.
 - Pre-commit hooks run. `--no-verify` is allowed only to show the maintainer something: then the issue gets `needs-clarification` and nothing is pushed unnoticed.
 - One branch per issue, PR against `master`; the maintainer merges.
-- Commit and push on your own after each green step.
+- Commit and push on your own after each green step. Merge, tag and release stay with the maintainer.
 - Commit bodies explain why.
 
 ## Glossary
