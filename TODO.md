@@ -49,7 +49,7 @@ Open findings after the PHP 8.5 migration. Resolved items are not listed (see th
 - `error_reporting(E_ALL)` is gone from the app; `pub/configs/cfg-default.php` has no error settings any more. Production
   default in Docker is `display_errors=Off` (see `docker/vsp.ini`).
 
-## Security (open; fixed so far: sort whitelist, hist_rank, root-page query string, PHP_SELF, search heading, unknown-skin redirect, web login comparison, skin path, GUID/alias output, map/mod/game type/country output, game list start_from)
+## Security (open; fixed so far: sort whitelist, hist_rank, root-page query string, PHP_SELF, search heading, unknown-skin redirect, web login comparison, skin path, GUID/alias output, map/mod/game type/country output, game list start_from, FTP download path)
 
 - **Web login of `vsp.php`** still sends the password in clear text and compares plain text from `password.inc.php`; hashing the
   stored password would change the config format (ask first). In the Docker image Apache's document root is `/vsp`, so
@@ -60,9 +60,6 @@ Open findings after the PHP 8.5 migration. Resolved items are not listed (see th
 - **Raw prints of config-sourced values** (no log input, so only hardening): award names/categories in `awardstat.php:104`,
   `playerstat.php:683,783`, `index.php:453`; `$GLOBALS['config']` in links/forms (must name an existing file in `pub/configs/`);
   hit location names in `playerstat.php:1476` (only mods that log hit locations; not reachable with the sample logs).
-- **FTP download path** (`vsp.php:1989-1994`): file names from the remote `ftp_rawlist` are appended to the local log directory
-  without `basename()`, so a hostile FTP server can write outside `logs_path` (`../`). Not unit-testable without a fake FTP
-  server (`vsp.php` runs on include); fix with `basename($fileInfo["name"])`.
 - **Server settings list** in `gamestat.php:657` prints `$var: $val` raw; unreachable today (only `_v_*` keys are stored), encode it if
   other server variables are stored one day.
 - **`composer audit`:** dev-only advisories, no runtime impact: `phpunit/phpunit` < 9.6.33 (CVE-2026-24765, PHPT coverage) and
