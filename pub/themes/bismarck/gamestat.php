@@ -1760,7 +1760,7 @@ function setupVars()
   }
   else if (isset($_GET['start_from']))
   {
-    $start_from=$_GET['start_from'];
+    $start_from=(int)$_GET['start_from'];
   }
   
   //********
