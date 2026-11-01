@@ -23,7 +23,9 @@ System properties that must always hold.
 - Conventional Commits, atomic commits.
 - Bug or new behavior: red test commit first, fix in a separate commit.
 - Tests pass `-d display_errors=1 -d error_reporting=-1`.
-- Unclear or behavior-changing: ask. Extra findings go to `TODO.md` or a new issue, never fixed silently.
+- Unclear or behavior-changing: ask.
+- One focus, one goal per piece of work; its done-criterion must be clear before starting.
+- Findings outside the focus (bugs, smells, new ideas from the maintainer) go to `TODO.md` (the inbox for not-yet-ticketed items; remove an entry once it has an issue) or as a `TODO` marker in the code. Never fixed silently, never leave the focus.
 - Every code change is verified by running the real thing (import, web page, compose stack), not only by tests. Command and output go into the PR.
 - Do deterministically whatever can be: build a task or script for it. A correction from the maintainer must be needed only once.
 - Tell the maintainer when a request is missing something, impossible or unwise, always. Be devil's advocate in interviews.
@@ -31,13 +33,14 @@ System properties that must always hold.
 
 ## Workflow
 - Work comes from GitHub issues (cloud, chat possible) or the devcontainer (`task test`).
+- In every interview, check `TODO.md` for matching items and include them.
 - Issues come from a JTBD interview: user story (`As`/`I want`/`So that`, each on a new line), Gherkin acceptance criteria with a general background, dependencies (parent, blocked by, blocking, relates to). Invariants or ADRs found go into Invariants (minimal ADR).
 - On "work on issue X": check blockers first; if anything is unclear, missing or blocked, ask in chat (else in the issue) before starting.
 - Start with a draft PR holding the plan; update it while working. At the end it states what was done, not the plan.
 - Per decision: three variants, pick the best, rate by blast radius. Critical points for the maintainer go into the PR.
 - Board `Quake3 VSP Stats` (Todo, In Progress, Done): move cards to In Progress at start; the maintainer sets Done.
 - Labels: `bug`, `enhancement`, `chore`, `needs-clarification`, `breaking`. No milestones. Old-format issues stay as they are.
-- Pre-commit hooks run. `--no-verify` is allowed only to show the maintainer something: then the issue goes to blocked, nothing is pushed unnoticed.
+- Pre-commit hooks run. `--no-verify` is allowed only to show the maintainer something: then the issue gets `needs-clarification` and nothing is pushed unnoticed.
 - One branch per issue, PR against `master`; the maintainer merges.
 - Commit and push on your own after each green step.
 - Commit bodies explain why.
