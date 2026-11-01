@@ -642,7 +642,7 @@ function drawStatsGame()
     
     <TR>
     <TD CLASS="cellSubHeading" style="padding: 0px 5px 0px 5px; text-align: right">Game Type</TD>
-    <TD WIDTH="100%" CLASS="cell1" style="padding: 0px 5px 0px 5px; text-align: left"><?php  print $ggame['_v_game_type'];?></TD>
+    <TD WIDTH="100%" CLASS="cell1" style="padding: 0px 5px 0px 5px; text-align: left"><?php  print html_encode($ggame['_v_game_type']);?></TD>
     </TR>
 
     <TR>
