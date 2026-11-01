@@ -470,6 +470,25 @@ class WebIndexTest extends TestCase
         $this->assertStringNotContainsString('<script>alert(1)</script>', $body);
     }
 
+    public function testGameListPageShowsTheMapOfEachGame(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+
+        $body = $this->get('/themes/bismarck/gamestat.php?config=cfg-default.php');
+
+        $this->assertMatchesRegularExpression('/<TD style="text-align: center;">\s*arenagate\s*<\/TD>/', $body);
+    }
+
+    public function testGameListPageDoesNotReflectMarkupFromTheMapOfALog(): void
+    {
+        $this->importXpLogWith('mapname\\arenagate\\', 'mapname\\x<script>alert(1)</script>\\');
+
+        $body = $this->get('/themes/bismarck/gamestat.php?config=cfg-default.php');
+
+        $this->assertStringContainsString('>Details', $body);
+        $this->assertStringNotContainsString('<script>alert(1)</script>', $body);
+    }
+
     private function importBaseq3Database(string $type = 'q3a', string $log = 'baseq3.log'): void
     {
         $root = dirname(__DIR__);
