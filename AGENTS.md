@@ -11,6 +11,9 @@ System properties that must always hold.
 - The app sets no error reporting; the server decides (`docker/vsp.ini`).
 - The web container is unprivileged (www-data, Apache on 8080, read-only root fs).
 - Tests assert observable behavior, not implementation details.
+- `scripts/check.sh`, `scripts/variants.py` and `scripts/compose-test.sh` are never weakened; the cloud (Podman) setup keeps working.
+- Operator-facing interfaces (`vsp.php` CLI options, config/ENV variables, compose file, DB schema) change only deliberately and are flagged as critical in the PR.
+- `Taskfile.yml` is the single entry point to the repo; scripts are details behind it. Included taskfiles live in `tasks/` and their namespace equals the file name.
 
 ## Rules
 - Be concise: chat, comments, commits, docs, this file.
@@ -20,12 +23,24 @@ System properties that must always hold.
 - Bug or new behavior: red test commit first, fix in a separate commit.
 - Tests pass `-d display_errors=1 -d error_reporting=-1`.
 - Unclear or behavior-changing: ask. Extra findings go to `TODO.md` or a new issue, never fixed silently.
+- Every code change is verified by running the real thing (import, web page, compose stack), not only by tests. Command and output go into the PR.
+- Do deterministically whatever can be: build a task or script for it. A correction from the maintainer must be needed only once.
+- Tell the maintainer when a request is missing something, impossible or unwise, always. Be devil's advocate in interviews.
+- Keep this file at most 250 lines; shorten it yourself.
 
 ## Workflow
 - Work comes from GitHub issues (cloud, chat possible) or the devcontainer (`task test`).
+- Issues come from a JTBD interview: user story (`As`/`I want`/`So that`, each on a new line), Gherkin acceptance criteria with a general background, dependencies (parent, blocked by, blocking, relates to). Invariants or ADRs found go into Invariants (minimal ADR).
+- On "work on issue X": check blockers first; if anything is unclear, missing or blocked, ask in chat (else in the issue) before starting.
+- Start with a draft PR holding the plan; update it while working. At the end it states what was done, not the plan.
+- Per decision: three variants, pick the best, rate by blast radius. Critical points for the maintainer go into the PR.
+- Board `Quake3 VSP Stats` (Todo, In Progress, Done): move cards to In Progress at start; the maintainer sets Done.
+- Labels: `bug`, `enhancement`, `chore`, `needs-clarification`, `breaking`. No milestones. Old-format issues stay as they are.
+- Pre-commit hooks run. `--no-verify` is allowed only to show the maintainer something: then the issue goes to blocked, nothing is pushed unnoticed.
 - One branch per issue, PR against `master`; the maintainer merges.
 - Commit and push on your own after each green step.
 - Commit bodies explain why.
+- Goal now: release `php8` (#31) as is; then work through the open issues step by step.
 
 ## Glossary
 - q3a / q3a-xp / q3a-osp: log types. Import: `-l <type>` with `baseq3.log|xp.log|osp.log`.
