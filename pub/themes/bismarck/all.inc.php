@@ -94,7 +94,8 @@ function setSkin()
 
   $stylesheet="./skins/$skin/$skin.css";
 
-  $fp_skin = @fopen ($stylesheet, "rb");
+  // a skin is a directory name: reject path segments instead of opening ./skins/<path>/...
+  $fp_skin = $skin === basename($skin) ? @fopen ($stylesheet, "rb") : false;
   if (!$fp_skin)
   {
     if ($skin==$GLOBALS['settings']['display']['default_skin'])
