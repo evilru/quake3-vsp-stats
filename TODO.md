@@ -49,7 +49,7 @@ Open findings after the PHP 8.5 migration. Resolved items are not listed (see th
 - `error_reporting(E_ALL)` is gone from the app; `pub/configs/cfg-default.php` has no error settings any more. Production
   default in Docker is `display_errors=Off` (see `docker/vsp.ini`).
 
-## Security (open; fixed so far: sort whitelist, hist_rank, root-page query string, PHP_SELF, search heading, unknown-skin redirect, web login comparison, skin path, GUID/alias output, map/mod/game type/country output, game list start_from, FTP download path)
+## Security (open; fixed so far: sort whitelist, hist_rank, root-page query string, PHP_SELF, search heading, unknown-skin redirect, web login comparison, skin path, GUID/alias output, map/mod/game type/country output, game list start_from, FTP download path, repository root page query string)
 
 - **Web login of `vsp.php`** still sends the password in clear text and compares plain text from `password.inc.php`; hashing the
   stored password would change the config format (ask first). In the Docker image Apache's document root is `/vsp`, so
@@ -60,6 +60,14 @@ Open findings after the PHP 8.5 migration. Resolved items are not listed (see th
 - **Raw prints of config-sourced values** (no log input, so only hardening): award names/categories in `awardstat.php:104`,
   `playerstat.php:683,783`, `index.php:453`; `$GLOBALS['config']` in links/forms (must name an existing file in `pub/configs/`);
   hit location names in `playerstat.php:1476` (only mods that log hit locations; not reachable with the sample logs).
+- **Docker document root is the whole repository** (`Dockerfile`: `COPY . /vsp`, Apache root `/vsp`). Reachable over HTTP: `vsp.php`,
+  `sql/`, `docker/`, `scripts/`, `pub/include/`, `readme*.txt`; Debian's `apache2.conf` sets `Options Indexes` for the directory, so
+  folders without an index file are listed (not verified in a running container). A mounted `games.log` (commented example in
+  `docker-compose.yml`) or files in `logdata/` / `ftplogs/` would be downloadable and contain player IPs and GUIDs. Fix: document
+  root `/vsp/pub` plus an alias for what is needed, or `Require all denied` for everything but `pub/`, and `Options -Indexes`.
+- **`pub/info.php`** only contains a commented `phpinfo();` (harmless); remove the file or keep it commented.
+- **Name search cost:** `index.php` repeats ``(`#[0-9a-fA-F]{6})*`` before every character of the search text; a very long search text builds a very
+  long regular expression (no length limit). Not injectable; consider limiting the length.
 - **Server settings list** in `gamestat.php:657` prints `$var: $val` raw; unreachable today (only `_v_*` keys are stored), encode it if
   other server variables are stored one day.
 - **`composer audit`:** dev-only advisories, no runtime impact: `phpunit/phpunit` < 9.6.33 (CVE-2026-24765, PHPT coverage) and
