@@ -44,11 +44,11 @@ System properties that must always hold.
 - Issues come from a JTBD interview: user story (`As`/`I want`/`So that`, each on a new line), Gherkin acceptance criteria with a general background, dependencies (parent, blocked by, blocking, relates to). Invariants or ADRs found go into Invariants (minimal ADR).
 - On "work on issue X": check blockers first; if anything is unclear, missing or blocked, ask in chat (else in the issue) before starting.
 - Start with a draft PR holding the plan; update it while working. At the end it states what was done, not the plan.
-- Per decision: three variants, pick the best, rate by blast radius (low: local, reversible; medium: CI, image, shared state; high: operators, data, irreversible). Critical points for the maintainer go into the PR.
+- Per decision: three variants, pick the best, rate by blast radius: how costly and complicated it is to undo once live, and what an error does to users and data (e.g. a deleted log file, a broken DB). Critical points for the maintainer go into the PR.
 - Board `Quake3 VSP Stats` (`gh project … 4 --owner evilru`; Todo, In Progress, Done): move cards to In Progress at start; the maintainer sets Done.
 - Labels: `bug`, `enhancement`, `chore`, `needs-clarification`, `breaking`. No milestones. Old-format issues stay as they are.
 - Pre-commit hooks run. `--no-verify` is allowed only to show the maintainer something: then the issue gets `needs-clarification` and nothing is pushed unnoticed.
-- One branch per issue, PR against `master`; the maintainer merges.
+- One branch per issue, PR against `master`. Mark the PR ready when all criteria are met and verified; the maintainer then tests and merges.
 - Commit and push on your own after each green step. Merge, tag and release stay with the maintainer.
 - Commit bodies explain why.
 
