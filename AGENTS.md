@@ -5,15 +5,20 @@ Origin: obfuscated original, author unknown, later deobfuscated with AI. Hence t
 Merge to `master` builds and pushes the Docker image. No versioning yet (see release issues).
 
 ## Invariants
-- Be concise: chat, code comments, commits, docs, this file.
+System properties that must always hold.
+- Target is PHP 8.5; no 7.4 workarounds. Existing version gates stay.
+- Legacy code stays unchanged (no refactoring); behavior-changing bugs get `TODO(tech-debt)`, not a fix.
+- The app sets no error reporting; the server decides (`docker/vsp.ini`).
+- The web container is unprivileged (www-data, Apache on 8080, read-only root fs).
+- Tests assert observable behavior, not implementation details.
+
+## Rules
+- Be concise: chat, comments, commits, docs, this file.
 - Repo content is English; chat may be German.
-- Legacy code stays unchanged. Behavior-changing bugs are not fixed: keep behavior, leave `TODO(tech-debt)` with the intended fix.
-- KISS, YAGNI, DRY, clean code. Smallest change; no unrelated refactoring or formatting.
+- KISS, YAGNI, DRY, clean code. Smallest change; no unrelated formatting.
 - Conventional Commits, atomic commits.
 - Bug or new behavior: red test commit first, fix in a separate commit.
-- Tests assert observable behavior, not implementation details or log absence.
-- Target is PHP 8.5; no 7.4 workarounds. Existing version gates stay.
-- The app sets no error reporting; the server decides (`docker/vsp.ini`). Tests pass `-d display_errors=1 -d error_reporting=-1`.
+- Tests pass `-d display_errors=1 -d error_reporting=-1`.
 - Unclear or behavior-changing: ask. Extra findings go to `TODO.md` or a new issue, never fixed silently.
 
 ## Workflow
