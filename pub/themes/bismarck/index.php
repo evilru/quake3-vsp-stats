@@ -341,7 +341,7 @@ function drawPlayersList()
       <TD><?php print $GLOBALS['start_from']+$count;?></TD>
 
       <?php if (!$GLOBALS['settings']['display']['no_country_flags']) : ?>
-      <TD STYLE="text-align: center;"><img height="16" title="<?php echo html_encode($country_name); ?>" alt="<?php echo $rs->fields[8]; ?>" src="../../images/flags/<?php echo strtolower($rs->fields[8]); ?>.gif" /></TD>
+      <TD STYLE="text-align: center;"><img height="16" title="<?php echo html_encode($country_name); ?>" alt="<?php echo html_encode($rs->fields[8]); ?>" src="../../images/flags/<?php echo html_encode(strtolower($rs->fields[8])); ?>.gif" /></TD>
       <?php endif; ?>
 
       <?php
