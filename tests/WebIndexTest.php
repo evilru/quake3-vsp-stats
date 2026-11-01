@@ -329,6 +329,36 @@ class WebIndexTest extends TestCase
         $this->assertStringContainsString('window.location', $body);
     }
 
+    public function testPlayerPageListsGuidInLinkAndTitle(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+
+        $body = $this->get('/themes/bismarck/playerstat.php?playerID=ExcessivePlayer&config=cfg-default.php');
+
+        $this->assertStringContainsString(
+            '<A HREF="javascript:searchByGUID(\'09A452A4807B9C5E9213048814AF5982\');" TITLE="09A452A4807B9C5E9213048814AF5982">09A452A4807B9C5E9213048814AF5982</A>',
+            $body
+        );
+    }
+
+    public function testPlayerPageDoesNotReflectMarkupFromTheGuidOfALog(): void
+    {
+        $log = tempnam(sys_get_temp_dir(), 'vsp');
+        file_put_contents($log, str_replace(
+            '09A452A4807B9C5E9213048814AF5982',
+            '\');"><script>alert(1)</script>',
+            file_get_contents(dirname(__DIR__) . '/xp.log')
+        ));
+        $this->importBaseq3Database('q3a-xp', $log);
+        unlink($log);
+
+        $body = $this->get('/themes/bismarck/playerstat.php?playerID=ExcessivePlayer&config=cfg-default.php');
+
+        $this->assertStringContainsString('searchByGUID(', $body);
+        $this->assertStringNotContainsString('<script>alert(1)</script>', $body);
+        $this->assertStringNotContainsString("');\"><script>", $body);
+    }
+
     private function importBaseq3Database(string $type = 'q3a', string $log = 'baseq3.log'): void
     {
         $root = dirname(__DIR__);
