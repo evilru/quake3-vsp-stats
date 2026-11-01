@@ -1677,7 +1677,7 @@ function drawGamesList()
         ?>
         <TD style="text-align: center;">
         <?php
-          print $rs->fields[2];
+          print html_encode($rs->fields[2]);
         ?>
         </TD>
 
