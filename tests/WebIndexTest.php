@@ -597,6 +597,35 @@ class WebIndexTest extends TestCase
         $this->assertStringNotContainsString('<script>alert(1)</script>', $body);
     }
 
+    public function testPlayerListStartsAtTheGivenOffset(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+
+        $body = $this->get('/themes/bismarck/index.php?config=cfg-default.php&start_from=2');
+
+        $this->assertMatchesRegularExpression('/<TD>3<\/TD><TD style="text-align: left "><A HREF="playerstat\.php/', $body);
+        $this->assertDoesNotMatchRegularExpression('/<TD>[12]<\/TD><TD style="text-align: left "><A HREF="playerstat\.php/', $body);
+    }
+
+    public function testGameListPageStartsAtTheGivenOffset(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+
+        $body = $this->get('/themes/bismarck/gamestat.php?config=cfg-default.php&start_from=1');
+
+        $this->assertMatchesRegularExpression('/<TD>2\s*<\/TD><TD[^>]*>q3a\s*<\/TD><TD[^>]*>0\s*<\/TD><TD[^>]*>q3tourney1/', $body);
+    }
+
+    public function testGameListPageIgnoresTrailingGarbageInStartFromWithoutPhpMessages(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+
+        $body = $this->get('/themes/bismarck/gamestat.php?config=cfg-default.php&start_from=' . rawurlencode('1<b>x'));
+
+        $this->assertDoesNotMatchRegularExpression('/(?:Warning|Deprecated|Notice|Fatal error)(?:<\/b>)?:/', $body);
+        $this->assertMatchesRegularExpression('/<TD>2\s*<\/TD><TD[^>]*>q3a\s*<\/TD><TD[^>]*>0\s*<\/TD><TD[^>]*>q3tourney1/', $body);
+    }
+
     private function importBaseq3Database(string $type = 'q3a', string $log = 'baseq3.log'): void
     {
         $root = dirname(__DIR__);
