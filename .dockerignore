@@ -9,3 +9,10 @@ composer*
 tests
 vendor
 coverage
+scripts
+AGENTS.md
+TODO.md
+README.md
+Docker.md
+readme.txt
+readme-xp.txt

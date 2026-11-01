@@ -1983,7 +1983,7 @@ function downloadFtpLogs(string $ftpUrl): string
 
   // For each file in the list, attempt to download it.
   foreach ($fileList as $fileInfo) {
-    $localFilePath = $localDirectory . $fileInfo["name"];
+    $localFilePath = $localDirectory . basename($fileInfo["name"]);
     $localFileSize = file_exists($localFilePath)
       ? filesize($localFilePath) - 1
       : 0;
