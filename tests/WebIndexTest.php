@@ -385,6 +385,40 @@ class WebIndexTest extends TestCase
         $this->assertStringNotContainsString('<script>alert(1)</script>', $body);
     }
 
+    public function testGameListShowsTheMapInTheTitleOfTheGameLink(): void
+    {
+        $this->importBaseq3Database('q3a-xp', 'xp.log');
+        $file = dirname(__DIR__) . '/pub/themes/bismarck/settings.php';
+        $this->settingsBackup = file_get_contents($file);
+        file_put_contents($file, str_replace("['mini_gamestats_list']=0", "['mini_gamestats_list']=1", $this->settingsBackup));
+
+
+        $body = $this->get('/themes/bismarck/index.php?config=cfg-default.php');
+
+        $this->assertMatchesRegularExpression('/<A CLASS="tooltip" TITLE="[^"<>]*, arenagate" HREF="gamestat\.php\?gameID=\d+&amp;config=cfg-default\.php">/', $body);
+    }
+
+    public function testGameListDoesNotReflectMarkupFromTheMapOfALog(): void
+    {
+        $log = tempnam(sys_get_temp_dir(), 'vsp');
+        file_put_contents($log, str_replace(
+            'mapname\\arenagate\\',
+            'mapname\\x"><script>alert(1)</script>\\',
+            file_get_contents(dirname(__DIR__) . '/xp.log')
+        ));
+        $this->importBaseq3Database('q3a-xp', $log);
+        unlink($log);
+        $file = dirname(__DIR__) . '/pub/themes/bismarck/settings.php';
+        $this->settingsBackup = file_get_contents($file);
+        file_put_contents($file, str_replace("['mini_gamestats_list']=0", "['mini_gamestats_list']=1", $this->settingsBackup));
+
+
+        $body = $this->get('/themes/bismarck/index.php?config=cfg-default.php');
+
+        $this->assertStringContainsString('gamestat.php?gameID=', $body);
+        $this->assertStringNotContainsString('<script>alert(1)</script>', $body);
+    }
+
     private function importBaseq3Database(string $type = 'q3a', string $log = 'baseq3.log'): void
     {
         $root = dirname(__DIR__);
