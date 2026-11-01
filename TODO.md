@@ -1,6 +1,6 @@
 # TODO
 
-Open findings after the PHP 8.5 migration. Resolved items are not listed (see the commit history).
+Inbox: findings without a ticket yet. Remove an entry once it has an issue.
 
 ## Docker / Compose
 
