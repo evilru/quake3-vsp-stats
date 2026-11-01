@@ -49,16 +49,19 @@ Open findings after the PHP 8.5 migration. Resolved items are not listed (see th
 - `error_reporting(E_ALL)` is gone from the app; `pub/configs/cfg-default.php` has no error settings any more. Production
   default in Docker is `display_errors=Off` (see `docker/vsp.ini`).
 
-## Security (open; fixed so far: sort whitelist, hist_rank, root-page query string, PHP_SELF, search heading, unknown-skin redirect, web login comparison)
+## Security (open; fixed so far: sort whitelist, hist_rank, root-page query string, PHP_SELF, search heading, unknown-skin redirect, web login comparison, skin path, GUID/alias/map-title output)
 
-- **`$_GET['skin']` in the file path** (`all.inc.php`, `./skins/$skin/$skin.css`): path manipulation; `fopen` only probes existence and the
-  name is only printed when such a file exists. Fix with a whitelist of the skin directories.
 - **Web login of `vsp.php`** still sends the password in clear text and compares plain text from `password.inc.php`; hashing the
   stored password would change the config format (ask first). In the Docker image Apache's document root is `/vsp`, so
   `vsp.php`, `*.log` and `logdata/` are reachable over HTTP: check what should be served and restrict the rest.
 - **Name search:** `index.php` builds a `REGEXP` from user input (escaped with `preg_quote`); check the escaping for MariaDB
   regex and the cost of crafted patterns.
-- **Non-numeric `start_from`** (`?start_from=abc`) raises a TypeError on 8.x (`"abc" - int`); robustness, not injection
-  (`SelectLimit` casts to int).
-- **Not reviewed yet:** log parser (player names on their way into the database and into the pages), ADOdb, FTP code path,
-  `composer audit`, other output of player names (`html_encode` use in `playerstat.php`, `gamestat.php`, `awardstat.php`).
+- **Non-numeric `start_from`** (`index.php:713`, `gamestat.php:1763`): not a TypeError (a non-numeric string is compared as a
+  string and falls back to a numeric value); leading-numeric values (`5x`) only raise a warning. Robustness only: cast with `(int)`.
+- **Map name printed raw** in `gamestat.php:630` (`$ggame['_v_map']`, from the `InitGame` line of the log): same class as the fixed
+  `index.php` title. Other raw prints of DB values: `gamestat.php:1680`, `awardstat.php:104,268`, `playerstat.php:683,783`
+  (award texts come from the config, check before encoding), `index.php:453`.
+- **`composer audit`:** dev-only advisories, no runtime impact: `phpunit/phpunit` < 9.6.33 (CVE-2026-24765, PHPT coverage) and
+  `squizlabs/php_codesniffer` < 3.13.6 (CVE-2026-67434). Update the lock file (changes `composer.lock`, ask first).
+- **Not reviewed yet:** ADOdb, FTP code path, `vsp.php:232` (`getPlayerSkill()` uses `secureString()`, i.e. `qstr`, so it is quoted: looks fine).
+  Reviewed: the log parser quotes all values with `qstr()` on the way into the database; the output side was the problem (fixed above).
