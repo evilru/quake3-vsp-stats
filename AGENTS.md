@@ -2,7 +2,7 @@
 
 PHP 8.5 web app + CLI importer (`vsp.php`, MariaDB) for Quake 3 VSP stats.
 Origin: obfuscated original, author unknown, later deobfuscated with AI. Hence the odd layout; legacy code stays.
-Merge to `master` builds and pushes the Docker image. No versioning yet (see release issues).
+Merge to `master` builds and pushes the Docker image.
 
 ## Invariants
 System properties that must always hold.
@@ -13,6 +13,7 @@ System properties that must always hold.
 - Tests assert observable behavior, not implementation details.
 - `scripts/check.sh`, `scripts/variants.py` and `scripts/compose-test.sh` are never weakened; the cloud (Podman) setup keeps working.
 - Operator-facing interfaces (`vsp.php` CLI options, config/ENV variables, compose file, DB schema) change only deliberately and are flagged as critical in the PR.
+- No status tracking in the repo, anywhere. Status lives in commits and issues.
 - `Taskfile.yml` is the single entry point to the repo; scripts are details behind it. Included taskfiles live in `tasks/` and their namespace equals the file name.
 
 ## Rules
@@ -40,7 +41,6 @@ System properties that must always hold.
 - One branch per issue, PR against `master`; the maintainer merges.
 - Commit and push on your own after each green step.
 - Commit bodies explain why.
-- Goal now: release `php8` (#31) as is; then work through the open issues step by step.
 
 ## Glossary
 - q3a / q3a-xp / q3a-osp: log types. Import: `-l <type>` with `baseq3.log|xp.log|osp.log`.
