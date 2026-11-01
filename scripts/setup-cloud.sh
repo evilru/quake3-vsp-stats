@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Cloud environment setup (Ubuntu 24.04, root, full network access).
-# Installs PHP 7.4 + 8.5 (ondrej/php PPA), MariaDB, Composer, podman/buildah/podman-compose, seeds the Composer cache, starts the DB.
+# Installs PHP 8.5 (default) + 7.4 (only for comparing CLI imports) (ondrej/php PPA), MariaDB, Composer, podman/buildah/podman-compose, seeds the Composer cache, starts the DB.
 set -euo pipefail
 export DEBIAN_FRONTEND=noninteractive
 export COMPOSER_ALLOW_SUPERUSER=1 COMPOSER_NO_INTERACTION=1 COMPOSER_PROCESS_TIMEOUT=0
@@ -39,7 +39,7 @@ git clone -q --depth 1 --branch feature/php8 https://github.com/evilru/quake3-vs
   || git clone -q --depth 1 https://github.com/evilru/quake3-vsp-stats.git "$REPO"
 install -m 0755 "$REPO/scripts/php-use" "$REPO/scripts/vsp-db-start" /usr/local/bin/
 
-php-use 7.4
+php-use 8.5
 
 # Install Composer if missing
 if ! command -v composer >/dev/null; then
@@ -55,4 +55,4 @@ rm -rf "$REPO"
 # Start the DB now
 vsp-db-start </dev/null || echo "WARN: DB start failed"
 
-echo "Done. php-use 7.4|8.5, vsp-db-start, scripts/check.sh, scripts/variants.py, scripts/compose-test.sh"
+echo "Done (default PHP 8.5). php-use 7.4|8.5, vsp-db-start, scripts/check.sh, scripts/variants.py, scripts/compose-test.sh"
