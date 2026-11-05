@@ -1,73 +1,91 @@
 # AGENTS.md
 
 PHP 8.5 web app + CLI importer (`vsp.php`, MariaDB) for Quake 3 VSP stats.
-Origin: obfuscated original, author unknown, later deobfuscated with AI. Hence the odd layout; legacy code stays.
+Origin: obfuscated original, author unknown, later deobfuscated with AI. Hence the odd layout.
 Merge to `master` builds and pushes the Docker image.
 
 ## Intent
-The maintainer is not the crumple zone for AI mistakes. Work autonomously, but every claim is backed by evidence the maintainer can check: trust is engineered, not assumed. Work toward a goal with a clear done-criterion.
+The maintainer is not the crumple zone for AI mistakes. Work autonomously and back what you report with evidence the maintainer can check: trust is engineered, not assumed.
+Over time this repo should grow exactly the workspace you need: whatever proves reusable moves into it.
+
+## Roles
+You run the repo workflow end to end: branches, commits, pushes, PRs, issues, labels, board cards.
+The maintainer decides what is wanted and owns merge, tag, release and moving cards to Done.
+Operator: whoever runs the container or CLI.
 
 ## Modes
-- Interview or ideas: talk, challenge as devil's advocate, change only what is asked, stop when the answer is given. The maintainer keeps the modes apart.
-- Work ("work on issue X"): autonomous, per Workflow.
+The maintainer tells you which mode the session is in, Interview or Work. If it is not clear, ask.
+- **Interview:** a JTBD interview that ends in an issue. Challenge as devil's advocate, and check `TODO.md` for matching items and include them. The issue has a user story (`As`/`I want`/`So that`, each on a new line), Gherkin acceptance criteria with a general background, and dependencies (parent, blocked by, blocking, relates to).
+- **Work:** take an issue and carry it through, see Workflow.
 
 ## Invariants
-System properties that must always hold.
+System properties that hold at all times. Invariants or ADRs found along the way are added here as a minimal ADR: one line plus the reason.
 - Target is PHP 8.5; no 7.4 workarounds. Existing version gates stay.
-- Legacy code stays unchanged (no refactoring); behavior-changing bugs get `TODO(tech-debt)`, not a fix.
+- Legacy code stays unchanged (no refactoring).
 - The app sets no error reporting; the server decides (`docker/vsp.ini`).
 - The web container is unprivileged (www-data, Apache on 8080, read-only root fs).
 - Tests assert observable behavior, not implementation details.
-- `scripts/check.sh`, `scripts/variants.py` and `scripts/compose-test.sh` are never weakened; the cloud (Podman) setup keeps working.
-- Operator-facing interfaces (`vsp.php` CLI options, config/ENV variables, compose file, DB schema) change only deliberately and are flagged as critical in the PR.
-- No status tracking in the repo, anywhere. Status lives in commits and issues.
-- `Taskfile.yml` is the single entry point to the repo; scripts are details behind it. Included taskfiles live in `tasks/` and their namespace equals the file name.
+- The checks are never weakened: today `scripts/check.sh`, `scripts/variants.py`, `scripts/compose-test.sh` (see Task interface), planned as `task validate` and `task verify`. The cloud (Podman) setup keeps working.
+- **Operator-facing interfaces** (`vsp.php` CLI options, config/ENV variables, compose file, DB schema) change only deliberately and are flagged as **critical** in the PR.
+- No status tracking in the repo. Status lives in commits, issues and the board. (`TODO.md` is an inbox, not status.)
 
-## Rules
-- Chat, commits, code comments, docs and this file are concise. PR text is as long as plan, variants, critical points and evidence need.
-- Repo content is English; chat may be German.
-- KISS, YAGNI, DRY, clean code. Smallest change; no unrelated formatting.
-- Conventional Commits, atomic commits.
-- Bug or new behavior: red test commit first, fix in a separate commit.
-- Tests pass `-d display_errors=1 -d error_reporting=-1`.
-- Stop and ask (in chat; else in the issue) only if the goal or done-criterion is unclear, for breaking changes, and before outward-facing steps. Decide everything else yourself via three variants and record it. After asking, just stop.
-- One focus, one goal per piece of work; its done-criterion must be clear before starting.
-- Findings outside the focus (bugs, smells, new ideas from the maintainer) go to `TODO.md` (the inbox for not-yet-ticketed items; remove an entry once it has an issue) or as a `TODO` marker in the code. Thinking is open (notice, name, note anything); acting stays on the focus. Never fix silently.
-- Every code change is verified by running the real thing (import, web page, compose stack), not only by tests. Command and output go into the PR. If a check cannot run (Dockerfile, workflow), say which one and why; never report it as done.
-- Do deterministically whatever can be: put a script in `scripts/`, reach it via `Taskfile.yml`, reuse it. Build only what the current work needs, never on spec. A correction from the maintainer must be needed only once.
-- Tell the maintainer when a request is missing something, impossible or unwise, always. Be devil's advocate in interviews.
-- You own this file. Keep it accurate, consistent and minimal. When work reveals a missing or wrong rule, invariant, gotcha, glossary term or workflow step, fix it in the same piece of work, unprompted; no mistake may happen twice. Add only what is useful beyond the current task; no one-off details, no duplicates. Max 250 lines.
+## Task interface
+`Taskfile.yml` is the stable, deterministic interface to the repo, for you and for the maintainer: everything works the same way every time and nobody has to remember commands. Included taskfiles live in `tasks/`; the namespace equals the file name.
+- Look in `task --list` first. Every task has a `desc`, so the list is the directory.
+- If a task is missing, add it. Scripts are details behind tasks; existing scripts get their task when you first need them.
+- `git` and `gh` are used directly.
+- Scripts today: `check.sh` (tests + 3 imports), `import.sh <type> <log>`, `variants.py` (all must print OK), `compose-test.sh`.
+
+## What changes the repo
+Repo changes come from issues. Exceptions you may always make: `AGENTS.md`, `TODO.md`, and tooling, scripts and tasks. Each is a commit of its own. During an issue it goes into that issue's PR; without one (e.g. in an interview) it gets its own branch and PR.
+- **Tooling, scripts, tasks:** you work with the maintainer on an interview or an issue, and what that work needs is yours to provide. Install, build and use tools, write scripts, add tasks, on your own initiative and without being asked, and only what the current work needs. Whatever is reusable goes into the repo. Runtime dependencies, Dockerfile and compose file are product changes and need an issue.
+- **`AGENTS.md`:** you own it and may change it any time. Keep it accurate, consistent and minimal (max 250 lines): add only what helps beyond the current task. When work reveals a missing or wrong rule, invariant, gotcha, glossary term or workflow step, fix it there, so no mistake happens twice. A correction from the maintainer lands here or in a task right away. Flag changes to Intent or Invariants in the PR.
+
+## Working style
+- Language: repo content, issues and PRs are English; chat may be German.
+- Chat, commits, code comments and docs are concise. PR text is as long as plan, variants, critical points and evidence need.
+- **Smallest change:** KISS, YAGNI, DRY, clean code. No unrelated formatting.
+- **One focus, one goal** per piece of work.
+- Notice, name and note anything you find, and act on the focus. Findings outside it go to `TODO.md` (remove an entry once it has an issue) or as a `TODO` marker next to the code. Behavior-changing bugs in legacy code get `TODO(tech-debt)` and are left alone.
+- When the work is done and verified, stop and report. Leave out features, docs and refactors beyond what the work needs; if one would help, say so at the end.
+
+## Verification
+Every code change is verified by running the real thing (import, web page, compose stack), not only tests. Put the command and its output into the PR. A syntax-only check, or one that failed to start, does not count. If a check cannot run here (Dockerfile, workflow), say which one and why instead of reporting the change as done.
+Tests pass `-d display_errors=1 -d error_reporting=-1`.
+
+## Decisions
+Trivial and easy to undo: just decide. Otherwise, weigh three variants, pick the best and record it in the PR. Rate each by **blast radius**: how costly and complicated it is to undo once live, and what an error does to users and data (a deleted log file, a broken DB). Critical points for the maintainer go into the PR.
+
+## When to ask
+Autonomy carries until a step is hard to undo. Keep working until everything is done. Stop to ask when you cannot go on without the maintainer: the goal or done-criterion is unclear, the request is missing something, impossible or unwise (say so plainly), a breaking change is involved, or a step is hard to undo (see Decisions). Ask in chat if the session is interactive, otherwise as an issue comment with label `needs-clarification`. After asking, stop.
 
 ## Workflow
-- Work comes from GitHub issues (cloud, chat possible) or the devcontainer (`task test`).
-- In every interview, check `TODO.md` for matching items and include them.
-- Issues come from a JTBD interview: user story (`As`/`I want`/`So that`, each on a new line), Gherkin acceptance criteria with a general background, dependencies (parent, blocked by, blocking, relates to). Invariants or ADRs found go into Invariants (minimal ADR).
-- On "work on issue X": check blockers first; if anything is unclear, missing or blocked, ask in chat (else in the issue) before starting.
-- Start with a draft PR holding the plan; update it while working. At the end it states what was done, not the plan.
-- Per decision: three variants, pick the best, rate by blast radius: how costly and complicated it is to undo once live, and what an error does to users and data (e.g. a deleted log file, a broken DB). Critical points for the maintainer go into the PR.
-- Board `Quake3 VSP Stats` (`gh project … 4 --owner evilru`; Todo, In Progress, Done): move cards to In Progress at start; the maintainer sets Done.
-- Labels: `bug`, `enhancement`, `chore`, `needs-clarification`, `breaking`. No milestones. Old-format issues stay as they are.
-- Pre-commit hooks run. `--no-verify` is allowed only to show the maintainer something: then the issue gets `needs-clarification` and nothing is pushed unnoticed.
-- One branch per issue, PR against `master`. Mark the PR ready when all criteria are met and verified; the maintainer then tests and merges.
-- Commit and push on your own after each green step. Merge, tag and release stay with the maintainer.
-- Commit bodies explain why.
+Work comes from GitHub issues (cloud, chat possible) or the devcontainer (`task test`).
+1. **Before starting:** check blockers and make sure goal and done-criterion are clear. Old-format issues stay as they are; derive the done-criterion and confirm it if in doubt.
+2. **Branch and draft PR:** one branch per issue, PR against `master`. Open a draft PR with the plan first and update it while working; at the end it states what was done.
+3. **Board** `Quake3 VSP Stats` (`gh project … 4 --owner evilru`; Todo, In Progress, Done): move the card to In Progress at start.
+4. **Commit and push** after each green step. Conventional Commits, atomic, bodies explain why.
+5. **Red test first:** bug in scope or new behavior gets a red test commit, then the fix in a separate commit. The red commit is the one sanctioned non-green commit and goes up together with its fix.
+6. **Done:** mark the PR ready when all criteria are met and verified; the maintainer then tests and merges.
+
+- Labels: `bug`, `enhancement`, `chore`, `needs-clarification`, `breaking`. No milestones.
+- Pre-commit hooks do not exist yet; building them is part of the toolbox you grow, in a setup that works with the red test commit. `--no-verify` is allowed once while creating them. It is also allowed to show the maintainer work in progress; then the issue gets `needs-clarification` and nothing is pushed unnoticed.
 
 ## Glossary
-- q3a / q3a-xp / q3a-osp: log types. Import: `-l <type>` with `baseq3.log|xp.log|osp.log`.
-- savestate: resume marker for incremental imports.
+- **q3a / q3a-xp / q3a-osp:** log types. Import: `-l <type>` with `baseq3.log|xp.log|osp.log`.
+- **savestate:** resume marker for incremental imports.
 
 ## Gotchas
 - `vsp.php` runs on include: test via CLI (`tests/ImportCliTest.php`).
 - Reset the DB before each import, else games are "ignored".
-- Imports emit >100k `fgetcsv` deprecations: aggregate them.
+- Imports emit >100k `fgetcsv` deprecations: aggregate them in test and check output; they are legacy.
 
 ## Cloud only
 Locally, composer and Docker work normally.
-- Never `composer install` unseeded (403 on zipballs, >20 GB mirror clones). Use `scripts/bootstrap.sh` with `COMPOSER_ALLOW_SUPERUSER=1`.
+- Do not `composer install` unseeded (403 on zipballs, >20 GB mirror clones). Use `scripts/bootstrap.sh` with `COMPOSER_ALLOW_SUPERUSER=1`; `scripts/composer-seed.php` seeds it.
 - Podman, no Docker daemon: `podman build --isolation=chroot --network=host`; `podman-compose`.
 - Provisioned by `scripts/setup-cloud.sh`; `php-use`, `vsp-db-start` in `/usr/local/bin`.
-- Scripts: `check.sh` (tests + 3 imports), `import.sh <type> <log>`, `variants.py` (all must print OK), `compose-test.sh`, `composer-seed.php`. Add scripts for anything repeated.
-- `vsp-db-start`/mysqld: always `</dev/null`, never pipe to `tail`. `pkill -f` kills your own shell.
-- Other MariaDB: `podman run --network=host -v /run/mysqld:/run/mysqld -e MARIADB_ROOT_PASSWORD=secretPassword -e MARIADB_DATABASE=vsp mariadb:12.3 --bind-address=127.0.0.1` after `mysqladmin shutdown`; needs a temporary `~/.my.cnf`; restore with `vsp-db-start`.
+- `vsp-db-start`/mysqld: run with `</dev/null` and do not pipe to `tail`. `pkill -f` kills your own shell.
+- Other MariaDB: `podman run --network=host -v /run/mysqld:/run/mysqld -e MARIADB_ROOT_PASSWORD=secretPassword -e MARIADB_DATABASE=vsp mariadb:12.3 --bind-address=127.0.0.1` after `mysqladmin shutdown`; needs a temporary `~/.my.cnf`; restore with `vsp-db-start`. (`secretPassword` is a throwaway dev value.)
 - podman-compose 1.0.6: no `!override`, no `depends_on` conditions, use `${VAR}` not bare `VAR:`, `tmpfs` without `uid=`, no health checks without systemd.
-- Classifier blocks external apt repos and downloaded binaries/phars.
+- The sandbox classifier blocks external apt repos and downloaded binaries/phars.
