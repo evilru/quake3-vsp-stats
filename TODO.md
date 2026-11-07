@@ -49,8 +49,6 @@ Inbox: findings without a ticket yet. Remove an entry once it has an issue.
 - `error_reporting(E_ALL)` is gone from the app; `pub/configs/cfg-default.php` has no error settings any more. Production
   default in Docker is `display_errors=Off` (see `docker/vsp.ini`).
 
-- **Pre-commit hooks:** introduce `lefthook` (fast checks, commit message format) behind `task validate`; `task verify` is the full run.
-- **`task` in the cloud:** `scripts/setup-cloud.sh` does not install `task` yet; it must run after the clone.
 
 ## Security (open; fixed so far: sort whitelist, hist_rank, root-page query string, PHP_SELF, search heading, unknown-skin redirect, web login comparison, skin path, GUID/alias output, map/mod/game type/country output, game list start_from, FTP download path, repository root page query string)
 
