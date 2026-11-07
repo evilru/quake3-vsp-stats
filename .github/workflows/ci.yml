@@ -34,6 +34,9 @@ jobs:
           sudo scripts/vsp-db-start
           composer install --no-interaction --no-progress
 
+      - name: Allow rootless podman to publish port 80 (docker-compose.yml maps 80:8080)
+        run: sudo sysctl -w net.ipv4.ip_unprivileged_port_start=80
+
       - name: Everything (verify, tests, imports, variants, compose stack, audits)
         run: task ci
 
