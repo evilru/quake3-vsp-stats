@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# `docker` stand-in for the devcontainer CLI in the cloud (podman, no daemon): builds need chroot isolation and host network.
+# Usage: devcontainer build --workspace-folder . --docker-path scripts/docker-podman   (or: task devcontainer:build DOCKER=scripts/docker-podman)
+if [ "$1" = buildx ] && [ "$2" = build ]; then shift; fi
+if [ "$1" = build ]; then shift; exec podman build --isolation=chroot --network=host "$@"; fi
+exec podman "$@"

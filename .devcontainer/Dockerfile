@@ -14,6 +14,7 @@ RUN rm -f /etc/apt/sources.list.d/yarn.list* && \
         libjpeg-dev \
         libpng-dev \
         mariadb-client \
+        python3-pip \
         && \
     apt-get clean -y && \
     rm -rf /var/lib/apt/lists/* && \

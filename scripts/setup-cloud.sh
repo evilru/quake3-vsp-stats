@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Cloud environment setup (Ubuntu 24.04, root, full network access).
-# Installs PHP 8.5 (default) + 7.4 (only for comparing CLI imports) (ondrej/php PPA), MariaDB, Composer, Task, podman/buildah/podman-compose, seeds the Composer cache, starts the DB.
+# Installs PHP 8.5 (default) + 7.4 (only for comparing CLI imports) (ondrej/php PPA), MariaDB, Composer, Task, lefthook, devcontainer CLI, podman/buildah/podman-compose, seeds the Composer cache, starts the DB.
 set -euo pipefail
 export DEBIAN_FRONTEND=noninteractive
 export COMPOSER_ALLOW_SUPERUSER=1 COMPOSER_NO_INTERACTION=1 COMPOSER_PROCESS_TIMEOUT=0
@@ -48,10 +48,10 @@ if ! command -v composer >/dev/null; then
   rm -f /tmp/composer-setup.php
 fi
 
-# Install Task (Taskfile.yml is the repo entry point) if missing
-if ! command -v task >/dev/null; then
-  curl -fsSL https://taskfile.dev/install.sh | sh -s -- -b /usr/local/bin
-fi
+# Dev tools shared with the devcontainer (lefthook, linters), plus the devcontainer CLI (npm)
+command -v npm >/dev/null || apt-get install -y -qq nodejs npm
+npm install -g @devcontainers/cli @go-task/cli   # task via npm: taskfile.dev/install.sh (curl | sh) is blocked in the sandbox
+"$REPO/scripts/install-tools.sh" || echo "WARN: install-tools failed"
 
 # Seed the Composer cache (GitHub zipball/codeload return 403; Composer would clone full mirrors).
 php "$REPO/scripts/composer-seed.php" "$REPO/composer.lock" || echo "WARN: composer-seed failed"

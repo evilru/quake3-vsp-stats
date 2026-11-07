@@ -4,7 +4,7 @@
 # data survives a down/up. Exit 0 = all checks passed.
 # Usage: scripts/compose-test.sh [xp.log]      (needs: podman, podman-compose, network access to docker.io)
 set -u
-cd "$(dirname "$0")/.."
+cd "$(dirname "$0")/.." || exit 1
 LOG="${1:-xp.log}"
 T=$(mktemp -d); P=vspcheck; fail=0
 ok()  { echo "ok   $*"; }
@@ -54,4 +54,8 @@ games() { podman exec ${P}_db_1 mariadb -uvspuser -p"$pw" vsp -N -e "select coun
 before=$(games); [ "${before:-0}" -gt 0 ] && ok "games imported ($before)" || bad "no games imported"
 (cd "$T" && podman-compose -p $P down >/dev/null 2>&1); up; wait_import
 [ "$(games)" = "$before" ] && ok "data survives down/up" || bad "data lost after down/up"
+if [ "$fail" -ne 0 ]; then
+  echo "--- diagnostics"; tail -n 40 "$T/up.log"; podman ps -a
+  for c in ${P}_db_1 ${P}_web_1; do echo "--- logs $c"; podman logs --tail 40 $c 2>&1; done
+fi
 exit $fail

@@ -57,6 +57,57 @@ tasks:
       - "{{.PHP}} vsp.php -c pub/configs/cfg-default.php -l q3a-osp -p savestate 1 osp.log"
 
 
+  # Hooks: verify = fast (pre-commit), validate = tests (pre-push), ci = everything (GitHub Actions)
+  verify:
+    desc: Fast checks (whitespace, EditorConfig, PHP syntax, shell, Dockerfiles, workflows, composer.json)
+    cmds:
+      - git diff HEAD --check
+      - ec
+      - task: test:lint
+      - shellcheck -S warning scripts/*.sh scripts/php-use scripts/vsp-db-start docker/*.sh
+      - hadolint --failure-threshold error Dockerfile .devcontainer/Dockerfile
+      - actionlint
+      - "{{.COMPOSER}} validate --no-check-lock --no-check-publish"
+
+  validate:
+    desc: PHPUnit and the 3 CLI imports (needs the DB, ~30 s)
+    cmds:
+      - scripts/check.sh
+
+  ci:
+    desc: Everything incl. the slow checks (variants, compose stack, audits); runs in CI
+    cmds:
+      - task: verify
+      - task: validate
+      - scripts/variants.py
+      - scripts/compose-test.sh
+      - "{{.COMPOSER}} audit --locked"
+      - task: audit:secrets
+      - task: audit:image
+
+  # DOCKER=docker|podman|scripts/docker-podman, RUN_ARGS = extra `run` args (e.g. proxy CA in the cloud sandbox)
+  audit:secrets:
+    desc: Scan the git history for secrets (gitleaks container)
+    cmds:
+      - "{{.DOCKER | default \"docker\"}} run --rm {{.RUN_ARGS}} -v \"$PWD\":/repo:ro docker.io/zricethezav/gitleaks:v8.21.2 detect --source /repo --no-banner --redact"
+
+  audit:image:
+    desc: Build the image and scan it for HIGH/CRITICAL fixable vulnerabilities (trivy container)
+    cmds:
+      - "{{.DOCKER | default \"docker\"}} build -t vsp-audit ."
+      - "{{.DOCKER | default \"docker\"}} save -o /tmp/vsp-audit.tar vsp-audit"
+      - "{{.DOCKER | default \"docker\"}} run --rm {{.RUN_ARGS}} -v /tmp/vsp-audit.tar:/img.tar:ro docker.io/aquasec/trivy:0.58.0 image --input /img.tar --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1 --no-progress"
+
+  devcontainer:build:
+    desc: Build the devcontainer (devcontainer CLI; cloud sandbox DOCKER=scripts/docker-podman)
+    cmds:
+      - devcontainer build --workspace-folder . --docker-path {{.DOCKER | default "docker"}} --image-name vsp-devcontainer-test
+
+  hooks:install:
+    desc: Install the git hooks (lefthook)
+    cmds:
+      - lefthook install
+
   # Testing and quality tasks
   test:
     desc: Run all quality checks
