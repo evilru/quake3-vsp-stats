@@ -25,7 +25,7 @@ System properties that hold at all times. Invariants or ADRs found along the way
 - The app sets no error reporting; the server decides (`docker/vsp.ini`).
 - The web container is unprivileged (www-data, Apache on 8080, read-only root fs).
 - Tests assert observable behavior, not implementation details.
-- The checks are never weakened: today `scripts/check.sh`, `scripts/variants.py`, `scripts/compose-test.sh` (see Task interface), planned as `task validate` and `task verify`. The cloud (Podman) setup keeps working.
+- The checks are never weakened: `task verify` (fast, pre-commit) and `task validate` (slow, pre-push; runs `scripts/check.sh`, `scripts/variants.py`, `scripts/compose-test.sh`). The cloud (Podman) setup keeps working.
 - **Operator-facing interfaces** (`vsp.php` CLI options, config/ENV variables, compose file, DB schema) change only deliberately and are flagged as **critical** in the PR.
 - No status tracking in the repo. Status lives in commits, issues and the board. (`TODO.md` is an inbox, not status.)
 
@@ -64,12 +64,12 @@ Work comes from GitHub issues (cloud, chat possible) or the devcontainer (`task 
 1. **Before starting:** check blockers and make sure goal and done-criterion are clear. Old-format issues stay as they are; derive the done-criterion and confirm it if in doubt.
 2. **Branch and draft PR:** one branch per issue, PR against `master`. Open a draft PR with the plan first and update it while working; at the end it states what was done.
 3. **Board** `Quake3 VSP Stats` (`gh project … 4 --owner evilru`; Todo, In Progress, Done): move the card to In Progress at start.
-4. **Commit and push** after each green step. Conventional Commits, atomic, bodies explain why.
+4. **Commit** after each green step. Conventional Commits, atomic, bodies explain why.
 5. **Red test first:** bug in scope or new behavior gets a red test commit, then the fix in a separate commit. The red commit is the one sanctioned non-green commit and goes up together with its fix.
 6. **Done:** mark the PR ready when all criteria are met and verified; the maintainer then tests and merges.
 
 - Labels: `bug`, `enhancement`, `chore`, `needs-clarification`, `breaking`. No milestones.
-- Pre-commit hooks do not exist yet; building them is part of the toolbox you grow, in a setup that works with the red test commit. `--no-verify` is allowed once while creating them. It is also allowed to show the maintainer work in progress; then the issue gets `needs-clarification` and nothing is pushed unnoticed.
+- Hooks: `lefthook.yml` (commit-msg: Conventional Commits, pre-commit: `task verify`, pre-push: `task validate`); install per clone with `task hooks:install`. Pre-commit has no tests, so the red test commit works. `--no-verify` is allowed to show the maintainer work in progress; then the issue gets `needs-clarification` and nothing is pushed unnoticed.
 
 ## Glossary
 - **q3a / q3a-xp / q3a-osp:** log types. Import: `-l <type>` with `baseq3.log|xp.log|osp.log`.
