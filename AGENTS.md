@@ -25,7 +25,7 @@ System properties that hold at all times. Invariants or ADRs found along the way
 - The app sets no error reporting; the server decides (`docker/vsp.ini`).
 - The web container is unprivileged (www-data, Apache on 8080, read-only root fs).
 - Tests assert observable behavior, not implementation details.
-- The checks are never weakened: `task verify` (fast, pre-commit) and `task validate` (slow, pre-push; runs `scripts/check.sh`, `scripts/variants.py`, `scripts/compose-test.sh`). The cloud (Podman) setup keeps working.
+- The checks are never weakened: `task verify` (fast lint, pre-commit), `task validate` (tests + imports, pre-push), `task ci` (all incl. `scripts/variants.py`, `scripts/compose-test.sh`, `composer audit`; GitHub Actions). The cloud (Podman) setup keeps working.
 - **Operator-facing interfaces** (`vsp.php` CLI options, config/ENV variables, compose file, DB schema) change only deliberately and are flagged as **critical** in the PR.
 - No status tracking in the repo. Status lives in commits, issues and the board. (`TODO.md` is an inbox, not status.)
 
@@ -34,7 +34,7 @@ System properties that hold at all times. Invariants or ADRs found along the way
 - Look in `task --list` first. Every task has a `desc`, so the list is the directory.
 - If a task is missing, add it. Scripts are details behind tasks; existing scripts get their task when you first need them.
 - `git` and `gh` are used directly.
-- Scripts today: `check.sh` (tests + 3 imports), `import.sh <type> <log>`, `variants.py` (all must print OK), `compose-test.sh`.
+- Scripts today: `install-tools.sh`, `check.sh` (tests + 3 imports), `import.sh <type> <log>`, `variants.py` (all must print OK), `compose-test.sh`.
 
 ## What changes the repo
 Repo changes come from issues. Exceptions you may always make: `AGENTS.md`, `TODO.md`, and tooling, scripts and tasks. Each is a commit of its own. During an issue it goes into that issue's PR; without one (e.g. in an interview) it gets its own branch and PR.
@@ -69,7 +69,7 @@ Work comes from GitHub issues (cloud, chat possible) or the devcontainer (`task 
 6. **Done:** mark the PR ready when all criteria are met and verified; the maintainer then tests and merges.
 
 - Labels: `bug`, `enhancement`, `chore`, `needs-clarification`, `breaking`. No milestones.
-- Hooks: `lefthook.yml` (commit-msg: Conventional Commits, pre-commit: `task verify`, pre-push: `task validate`); install per clone with `task hooks:install`. Pre-commit has no tests, so the red test commit works. `--no-verify` is allowed to show the maintainer work in progress; then the issue gets `needs-clarification` and nothing is pushed unnoticed.
+- Hooks: `lefthook.yml` (commit-msg: Conventional Commits, pre-commit: `task verify`, pre-push: `task validate`); install per clone with `task hooks:install`. Tools (lefthook, `ec`, shellcheck, hadolint, actionlint) come from `scripts/install-tools.sh` (npm + pip, shared by devcontainer and `setup-cloud.sh`); legacy files are excluded in `.editorconfig-checker.json`. Pre-commit has no tests, so the red test commit works. `--no-verify` is allowed to show the maintainer work in progress; then the issue gets `needs-clarification` and nothing is pushed unnoticed.
 
 ## Glossary
 - **q3a / q3a-xp / q3a-osp:** log types. Import: `-l <type>` with `baseq3.log|xp.log|osp.log`.
