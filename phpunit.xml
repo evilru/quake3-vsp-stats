@@ -1,7 +1,7 @@
 <!-- filepath: /workspace/phpunit.xml -->
 <phpunit bootstrap="vendor/autoload.php"
-         colors="true"
-         stopOnFailure="false">
+  colors="true"
+  stopOnFailure="false">
     <testsuites>
         <testsuite name="My Test Suite">
             <directory>./tests</directory>

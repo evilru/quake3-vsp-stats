@@ -1,0 +1,15 @@
+{
+  "Exclude": [
+    "^pub/lib/",
+    "^pub/themes/",
+    "^pub/include/",
+    "^pub/games/",
+    "^pub/configs/",
+    "^(vsp|vsp-q3a|vsp-client|xp103_compat\\.inc|password\\.inc)\\.php$",
+    "^sql/mysqli\\.inc\\.php$",
+    "^readme(-xp)?\\.txt$",
+    "^(ftplogs|logdata|vendor)/",
+    "\\.log$",
+    "^composer\\.lock$"
+  ]
+}

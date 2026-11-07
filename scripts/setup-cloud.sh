@@ -53,9 +53,10 @@ if ! command -v task >/dev/null; then
   curl -fsSL https://taskfile.dev/install.sh | sh -s -- -b /usr/local/bin
 fi
 
-# Git hooks (lefthook) and the devcontainer CLI come from npm
+# Dev tools shared with the devcontainer (lefthook, linters), plus the devcontainer CLI (npm)
 command -v npm >/dev/null || apt-get install -y -qq nodejs npm
-npm install -g lefthook @devcontainers/cli
+npm install -g @devcontainers/cli
+"$REPO/scripts/install-tools.sh" || echo "WARN: install-tools failed"
 
 # Seed the Composer cache (GitHub zipball/codeload return 403; Composer would clone full mirrors).
 php "$REPO/scripts/composer-seed.php" "$REPO/composer.lock" || echo "WARN: composer-seed failed"

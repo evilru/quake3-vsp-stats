@@ -57,20 +57,31 @@ tasks:
       - "{{.PHP}} vsp.php -c pub/configs/cfg-default.php -l q3a-osp -p savestate 1 osp.log"
 
 
-  # Hooks: verify = fast (pre-commit), validate = slow (pre-push)
+  # Hooks: verify = fast (pre-commit), validate = tests (pre-push), ci = everything (GitHub Actions)
   verify:
-    desc: Fast checks (whitespace/EditorConfig on changes, PHP syntax, composer.json)
+    desc: Fast checks (whitespace, EditorConfig, PHP syntax, shell, Dockerfiles, workflows, composer.json)
     cmds:
       - git diff HEAD --check
+      - ec
       - task: test:lint
+      - shellcheck -S warning scripts/*.sh scripts/php-use scripts/vsp-db-start docker/*.sh
+      - hadolint --failure-threshold error Dockerfile .devcontainer/Dockerfile
+      - actionlint
       - "{{.COMPOSER}} validate --no-check-lock --no-check-publish"
 
   validate:
-    desc: Slow checks (PHPUnit, 3 CLI imports, compose stack)
+    desc: PHPUnit and the 3 CLI imports (needs the DB, ~30 s)
     cmds:
       - scripts/check.sh
+
+  ci:
+    desc: Everything incl. the slow checks (variants, compose stack, composer audit); runs in CI
+    cmds:
+      - task: verify
+      - task: validate
       - scripts/variants.py
       - scripts/compose-test.sh
+      - "{{.COMPOSER}} audit --locked"
 
   hooks:install:
     desc: Install the git hooks (lefthook)

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Tests and the three CLI imports on 8.5. Exit 0 = clean.
 # Usage: scripts/check.sh [8.5]   (PHPUnit no longer starts on 7.4: composer requires ^8.5)
-cd "$(dirname "$0")/.."
+cd "$(dirname "$0")/.." || exit 1
 rc=0
 scripts/bootstrap.sh >/dev/null 2>&1 || { echo "bootstrap failed"; exit 2; }
 for v in ${1:-8.5}; do

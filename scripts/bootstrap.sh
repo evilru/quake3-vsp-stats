@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Prepare the workspace: start DB, install vendor/ from the seeded composer cache (PHP 8.5).
-cd "$(dirname "$0")/.."
+cd "$(dirname "$0")/.." || exit 1
 export COMPOSER_ALLOW_SUPERUSER=1
 scripts/vsp-db-start </dev/null
 if [ ! -f vendor/autoload.php ]; then

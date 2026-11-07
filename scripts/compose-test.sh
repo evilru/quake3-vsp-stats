@@ -4,7 +4,7 @@
 # data survives a down/up. Exit 0 = all checks passed.
 # Usage: scripts/compose-test.sh [xp.log]      (needs: podman, podman-compose, network access to docker.io)
 set -u
-cd "$(dirname "$0")/.."
+cd "$(dirname "$0")/.." || exit 1
 LOG="${1:-xp.log}"
 T=$(mktemp -d); P=vspcheck; fail=0
 ok()  { echo "ok   $*"; }
