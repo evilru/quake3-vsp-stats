@@ -71,7 +71,5 @@ Inbox: findings without a ticket yet. Remove an entry once it has an issue.
   long regular expression (no length limit). Not injectable; consider limiting the length.
 - **Server settings list** in `gamestat.php:657` prints `$var: $val` raw; unreachable today (only `_v_*` keys are stored), encode it if
   other server variables are stored one day.
-- **`composer audit`:** dev-only advisories, no runtime impact: `phpunit/phpunit` < 9.6.33 (CVE-2026-24765, PHPT coverage) and
-  `squizlabs/php_codesniffer` < 3.13.6 (CVE-2026-67434). Update the lock file (changes `composer.lock`, ask first).
 - **Not reviewed yet:** ADOdb, FTP code path, `vsp.php:232` (`getPlayerSkill()` uses `secureString()`, i.e. `qstr`, so it is quoted: looks fine).
   Reviewed: the log parser quotes all values with `qstr()` on the way into the database; the output side was the problem (fixed above).
