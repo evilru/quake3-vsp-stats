@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Cloud environment setup (Ubuntu 24.04, root, full network access).
-# Installs PHP 8.5 (default) + 7.4 (only for comparing CLI imports) (ondrej/php PPA), MariaDB, Composer, Task, podman/buildah/podman-compose, seeds the Composer cache, starts the DB.
+# Installs PHP 8.5 (default) + 7.4 (only for comparing CLI imports) (ondrej/php PPA), MariaDB, Composer, Task, lefthook, devcontainer CLI, podman/buildah/podman-compose, seeds the Composer cache, starts the DB.
 set -euo pipefail
 export DEBIAN_FRONTEND=noninteractive
 export COMPOSER_ALLOW_SUPERUSER=1 COMPOSER_NO_INTERACTION=1 COMPOSER_PROCESS_TIMEOUT=0
@@ -52,6 +52,10 @@ fi
 if ! command -v task >/dev/null; then
   curl -fsSL https://taskfile.dev/install.sh | sh -s -- -b /usr/local/bin
 fi
+
+# Git hooks (lefthook) and the devcontainer CLI come from npm
+command -v npm >/dev/null || apt-get install -y -qq nodejs npm
+npm install -g lefthook @devcontainers/cli
 
 # Seed the Composer cache (GitHub zipball/codeload return 403; Composer would clone full mirrors).
 php "$REPO/scripts/composer-seed.php" "$REPO/composer.lock" || echo "WARN: composer-seed failed"

@@ -1,0 +1,18 @@
+# Git hooks. Install: `task hooks:install`. Bypass once: `git commit --no-verify` / `git push --no-verify`.
+# pre-commit stays fast and has no tests, so the red test commit can be made. Tests run on push (the tip).
+commit-msg:
+  commands:
+    conventional:
+      run: |
+        head -n1 {1} | grep -qE '^(Merge |Revert |fixup! |squash! )|^(feat|fix|docs|style|refactor|perf|test|build|ci|chore)(\([a-z0-9._-]+\))?!?: .+' \
+          || { echo "Conventional Commits required: type(scope): subject"; exit 1; }
+
+pre-commit:
+  commands:
+    verify:
+      run: task verify
+
+pre-push:
+  commands:
+    validate:
+      run: task validate

@@ -57,6 +57,26 @@ tasks:
       - "{{.PHP}} vsp.php -c pub/configs/cfg-default.php -l q3a-osp -p savestate 1 osp.log"
 
 
+  # Hooks: verify = fast (pre-commit), validate = slow (pre-push)
+  verify:
+    desc: Fast checks (whitespace/EditorConfig on changes, PHP syntax, composer.json)
+    cmds:
+      - git diff HEAD --check
+      - task: test:lint
+      - "{{.COMPOSER}} validate --no-check-lock --no-check-publish"
+
+  validate:
+    desc: Slow checks (PHPUnit, 3 CLI imports, compose stack)
+    cmds:
+      - scripts/check.sh
+      - scripts/variants.py
+      - scripts/compose-test.sh
+
+  hooks:install:
+    desc: Install the git hooks (lefthook)
+    cmds:
+      - lefthook install
+
   # Testing and quality tasks
   test:
     desc: Run all quality checks

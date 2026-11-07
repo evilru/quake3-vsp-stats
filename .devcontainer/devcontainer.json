@@ -53,7 +53,7 @@
     8000
   ],
   // allows the container to access the host's Docker socket
-  "postCreateCommand": "sudo chmod 666 /var/run/docker.sock && composer install",
+  "postCreateCommand": "sudo chmod 666 /var/run/docker.sock && composer install && npm install -g lefthook && lefthook install",
   "features": {
     "ghcr.io/devcontainers/features/git:1": {},
     "ghcr.io/devcontainers/features/github-cli:1": {},
