@@ -83,7 +83,7 @@ Work comes from GitHub issues (cloud, chat possible) or the devcontainer (`task 
 ## Cloud only
 Locally, composer and Docker work normally.
 - Do not `composer install` unseeded (403 on zipballs, >20 GB mirror clones). Use `scripts/bootstrap.sh` with `COMPOSER_ALLOW_SUPERUSER=1`; `scripts/composer-seed.php` seeds it.
-- Podman, no Docker daemon: `podman build --isolation=chroot --network=host`; `podman-compose`.
+- Podman, no Docker daemon: `podman build --isolation=chroot --network=host`; `podman-compose`; devcontainer CLI via `task devcontainer:build DOCKER=scripts/docker-podman` (builds up to the feature step; features download from GitHub, which the sandbox proxy blocks inside builds).
 - Provisioned by `scripts/setup-cloud.sh`; `php-use`, `vsp-db-start` in `/usr/local/bin`.
 - `vsp-db-start`/mysqld: run with `</dev/null` and do not pipe to `tail`. `pkill -f` kills your own shell.
 - Other MariaDB: `podman run --network=host -v /run/mysqld:/run/mysqld -e MARIADB_ROOT_PASSWORD=secretPassword -e MARIADB_DATABASE=vsp mariadb:12.3 --bind-address=127.0.0.1` after `mysqladmin shutdown`; needs a temporary `~/.my.cnf`; restore with `vsp-db-start`. (`secretPassword` is a throwaway dev value.)
