@@ -2,8 +2,7 @@ name: CI
 
 on:
   pull_request:
-  push:
-    branches-ignore: [ master ]
+  workflow_dispatch:
 
 jobs:
   # Same tools and tasks as the git hooks: scripts/install-tools.sh + Taskfile.yml
@@ -43,6 +42,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+      - name: Host paths the devcontainer mounts
+        run: mkdir -p ~/.ssh
       - uses: devcontainers/ci@v0.3
         with:
           push: never
