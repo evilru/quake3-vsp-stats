@@ -48,14 +48,9 @@ if ! command -v composer >/dev/null; then
   rm -f /tmp/composer-setup.php
 fi
 
-# Install Task (Taskfile.yml is the repo entry point) if missing
-if ! command -v task >/dev/null; then
-  curl -fsSL https://taskfile.dev/install.sh | sh -s -- -b /usr/local/bin
-fi
-
 # Dev tools shared with the devcontainer (lefthook, linters), plus the devcontainer CLI (npm)
 command -v npm >/dev/null || apt-get install -y -qq nodejs npm
-npm install -g @devcontainers/cli
+npm install -g @devcontainers/cli @go-task/cli   # task via npm: taskfile.dev/install.sh (curl | sh) is blocked in the sandbox
 "$REPO/scripts/install-tools.sh" || echo "WARN: install-tools failed"
 
 # Seed the Composer cache (GitHub zipball/codeload return 403; Composer would clone full mirrors).

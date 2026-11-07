@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0   # gitleaks scans the history
 
       - uses: shivammathur/setup-php@v2
         with:
@@ -33,7 +35,7 @@ jobs:
           sudo scripts/vsp-db-start
           composer install --no-interaction --no-progress
 
-      - name: Everything (verify, tests, imports, variants, compose stack, audit)
+      - name: Everything (verify, tests, imports, variants, compose stack, audits)
         run: task ci
 
   # Does the devcontainer build, and does the toolchain in it work?
