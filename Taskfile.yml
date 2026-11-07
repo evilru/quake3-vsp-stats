@@ -83,6 +83,11 @@ tasks:
       - scripts/compose-test.sh
       - "{{.COMPOSER}} audit --locked"
 
+  devcontainer:build:
+    desc: Build the devcontainer (devcontainer CLI; cloud sandbox DOCKER=scripts/docker-podman)
+    cmds:
+      - devcontainer build --workspace-folder . --docker-path {{.DOCKER | default "docker"}} --image-name vsp-devcontainer-test
+
   hooks:install:
     desc: Install the git hooks (lefthook)
     cmds:
